@@ -1,0 +1,85 @@
+% \documentclass[pdflatex,11pt]{aghdpl}
+\documentclass{aghdpl}               % przy kompilacji programem latex
+% \documentclass[pdflatex,en]{aghdpl}  % praca w jêzyku angielskim
+\usepackage[polish]{babel}
+\usepackage[latin2]{inputenc}
+
+% dodatkowe pakiety
+\usepackage{enumerate}
+\usepackage{listings}
+\lstloadlanguages{TeX}
+
+%---------------------------------------------------------------------------
+
+\author{Marta Ry³ko, Anna Skiba}
+\shortauthor{M. Ry³ko, A. Skiba}
+
+\titlePL{Równoleg³e algorytmy optymalizacji toru przejazdu w narciarstwie alpejskim}
+\titleEN{Parallel algorithms for ski-line optimisation in alpine ski racing}
+
+\shorttitlePL{Równoleg³e algorytmy optymalizacji toru przejazdu w narciarstwie alpejskim} % skrócona wersja tytu³u je¶li jest bardzo d³ugi
+\shorttitleEN{Parallel algorithms for ski-line optimisation in alpine ski racing}
+
+\thesistypePL{Praca magisterska}
+\thesistypeEN{Master of Science Thesis}
+
+\supervisorPL{dr in¿. Roman Dêbski}
+\supervisorEN{Roman Dêbski Ph.D}
+
+\date{2013}
+
+\departmentPL{Katedra Informatyki}
+\departmentEN{Department of Computer Science}
+
+\facultyPL{Wydzia³ Informatyki, Elektroniki i Telekomunikacji}
+\facultyEN{Faculty of Computer Science, Electronics and Telecommunication}
+
+\acknowledgements{Serdecznie dziêkujê \dots}
+
+
+
+\setlength{\cftsecnumwidth}{10mm}
+
+%---------------------------------------------------------------------------
+
+\begin{document}
+
+\titlepages
+
+\tableofcontents
+\clearpage
+
+\include{rozdzial1}
+\include{rozdzial2}
+
+
+
+% itd.
+% \appendix
+% \include{dodatekA}
+% \include{dodatekB}
+% itd.
+
+\bibliographystyle{phjcp}
+\bibliography{bibliografia}
+%\begin{thebibliography}{1}
+%
+%\bibitem{Dil00}
+%A.~Diller.
+%\newblock {\em LaTeX wiersz po wierszu}.
+%\newblock Wydawnictwo Helion, Gliwice, 2000.
+%
+%\bibitem{Lam92}
+%L.~Lamport.
+%\newblock {\em LaTeX system przygotowywania dokumentów}.
+%\newblock Wydawnictwo Ariel, Krakow, 1992.
+%
+%\bibitem{Alvis2011}
+%M.~Szpyrka.
+%\newblock {\em {On Line Alvis Manual}}.
+%\newblock AGH University of Science and Technology, 2011.cccccc
+%\newblock \\\texttt{http://fm.ia.agh.edu.pl/alvis:manual}.
+%
+%\end{thebibliography}
+
+\end{document}
