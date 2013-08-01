@@ -8,19 +8,88 @@ W rozdziale tym przedstawiono informacje .
 \section{Model narciarza i ¶rodowiska}
 \label{sec:model}
 
-
-
+W zaproponowanym rozwi±zaniu trzeba by³a podj±æ pewne decyzje odno¶nie reprezentacji ¶rodowiska oraz narciarza.
+Zosta³o przyjête, ¿e stok traktowany jest jako p³aszczyzna, która jest nachylona pod okre¶lonym przez sta³± $\alpha$ k±tem do powierzchni ziemi. Za³o¿enie co do p³askiej powierzchni jest tylko ograniczeniem przyjêtym do testów. Umo¿liwia to ³atwiejsz± analizê wyników niezaburzonych zmianami nachylenia terenu. Jednak stworzony program mo¿e zostaæ zmodyfikowany tak, aby zamodelowaæ bardziej skomplikowan± powierzchniê. 
+Narciarz traktowany jest jako punkt materialny o masie m. 
 %---------------------------------------------------------------------------
 
 \section{Opis matematyczny modelu}
 \label{sec:matematycznyModel}
 
+m - masa\\
+g - wspó³czynnik grawitacji\\
+$\alpha$ - k±t nachylenia powierzchni stoku do powierzchni ziemi\\
 
+Si³a grawitacji dzia³aj±ca na obiekt o masie m:\\
+$Q = mg$
+
+Si³a ta mo¿e zostaæ roz³o¿ona na dwie si³y sk³adowe wzglêdem powierzchni stoku. Narciarz poruszaj±cy siê w dó³ stoku przypomina klasyczny przyk³ad punktu materialnego staczaj±cego siê po równi pochy³ej.\\
+Sk³adowa si³y grawitacji równoleg³a do powierzchni stoku:\\
+$mg\sin\alpha$\\
+jest to si³a ¶ci±gaj±ca narciarza w dó³ stoku
+
+Sk³adowa si³y grawitacji prostopad³a do powierzchni stoku:\\
+$ F_{n} = mg\cos\alpha $
+
+Warto¶æ tej si³y wp³ywa na warto¶æ si³y tarcia dzia³aj±cej na narciarza:\\
+$ F_{f} = \mu F_{n} = \mu mg\cos\alpha $
+
+Oprócz si³y tarcia uwzglêdniamy równie¿ inn± si³ê oporu jak± jest si³a oporu powietrza:\\
+$ F_{d} = k_{1}v + k_{2}v^2 $
+
+Za³o¿enia, które narzucane s± na sta³e $ k_{1} $ oraz $ k_{2} $:\\
+$$
+\left\{ \begin{array}{rl}
+ k_{2} = 0  &\mbox{ $v \le B$} \\ 
+ k_{1} = 0 &\mbox{ $v \geq  B$} 
+\end{array} \right. 
+$$\\
+gdzie $ B $:\\
+$ B = 4 \frac{m}{s} $
+
+Ograniczenie to zosta³o zaczerpniête z pracy ???? (Aerodynamic-Drag) i opisane w rozdziale ????
+
+Wspó³czynnik $ k_1 $ ....\\
+$ k_1 = ... $
+
+Wspó³czynnik $ k_2 $ zosta³ opisany w ????\\
+$ k_2 = \frac{1}{2} C \rho A $
+
+gdzie:\\
+$ C $ - wspó³czynnik oporu\\
+$ \rho $ - gêsto¶æ powietrza\\
+$ A $ - powierzchnia przednia narciarza prostopad³a do kieruku przep³ywu, a zatem prostopad³a do wektora prêdko¶ci narciarza
 
 %---------------------------------------------------------------------------
 
 \section{Numeryczne rozwi±zanie problemu}
 \label{sec:numeryczneRozwiazanie}
+
+$ m\ddot{x}=mgsin\alpha-\mu mgcos\alpha-k_{1}\dot{x} - k_{2}\dot{x}^{2} $
+
+Zatem po podzieleniu przez m:
+
+$ \ddot{x}=gsin\alpha-\mu gcos\alpha-\frac{k_{1}}{m}\dot{x} - \frac{k_{2}}{m}\dot{x}^{2} $
+
+Aby rozwi±zaæ to równanie numerycznie, wprowadzamy now± zmienn± v:
+
+$ v = \dot{x} $
+
+Otrzymujemy nastêpuj±ce równania:\\
+$$
+\left\{ \begin{array}{rl}
+&\dot{v} = gsin\alpha-\mu gcos\alpha-\frac{k_{1}}{m}v - \frac{k_{2}}{m}v^{2} \\
+&v = \dot{x}
+\end{array} \right. 
+$$\\
+
+Pamiêtamy przy tym, ¿e:\\
+$$
+\left\{ \begin{array}{rl}
+ k_{2} = 0  &\mbox{ $v \le B$} \\ 
+ k_{1} = 0 &\mbox{ $v \geq  B$} 
+\end{array} \right. 
+$$\\
 
 
 %---------------------------------------------------------------------------
