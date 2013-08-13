@@ -19,6 +19,16 @@ W rozdziale tym przedstawiono informacje .
 \section{Optymalizacja}
 \label{sec:optymalizacja}
 
+W tym podrozdziale opisane s± metody optymalizacji u¿yte w zaproponowanym rozwi±zaniu, czyli algorytm ewolucyjny oraz algorytm optymalizacji lokalnej - Hill up climbing.
+
+% czym jest optymalizacja
+Zadaniem optymalizacji jest przeszukanie przestrzeni rozwi±zañ w celu znalezenia takiego, które jest najlepsze. Zatem maj±c dan± funkcjê nazywan± funkcj± celu, która ka¿demu punktowi reprezentuj±cemu rozwi±zanie problemu, poszukujemy takiego, dla którego warto¶æ tej funkcji bêdzie jak najmniejsza (b±d¼ jak najwiêksza). Trudno¶æ w znalezieniu takiego rozwi±zania zale¿y od charakteru funkcji celu, a czasem tak¿e od nieznajomo¶ci jej analitycznej postaci.
+
+% optymalizacja lokalna a globalna
+W przypadku funkcji z jednym optimum 
+
+Je¶li natomiast funkcja celu posiada wiele optimów lokalnych (tzw. funkcja wielomodalna) to optymalizacjê nazywamy optymalizacj± globaln±. Je¶li zadanie jest ci±g³e, a wiêc niemo¿liwe jest przeszukanie ca³ej przestrzeni rozwi±zañ, nigdy nie mo¿emy byæ pewni, ¿e zastosowany algorytm optymalizacji da nam rozwi±zanie najlepsze - byæ mo¿e bêdzie to tylko minimum lokalne a nie globalne. Nie maj±c takiej pewno¶ci nie wiemy kiedy nale¿y zatrzymaæ algorytm. Z tego powodu stosuje siê parametr steruj±cy czasem trwania obliczeñ, kosztem mniejszej pewno¶ci co do poprawno¶ci rozwi±zania mo¿emy otrzymaæ krótszy czas optymalizacji i odwrotnie.
+
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjny}
 
