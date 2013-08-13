@@ -21,39 +21,56 @@ g - wspó³czynnik grawitacji\\
 $\alpha$ - k±t nachylenia powierzchni stoku do powierzchni ziemi\\
 
 Si³a grawitacji dzia³aj±ca na obiekt o masie m:\\
-$$Q = mg$$
+\begin{equation}
+Q = mg
+\end{equation}
 
 Si³a ta mo¿e zostaæ roz³o¿ona na dwie si³y sk³adowe wzglêdem powierzchni stoku. Narciarz poruszaj±cy siê w dó³ stoku przypomina klasyczny przyk³ad punktu materialnego staczaj±cego siê po równi pochy³ej.\\
 Sk³adowa si³y grawitacji równoleg³a do powierzchni stoku:\\
-$$mg\sin\alpha$$
-jest to si³a ¶ci±gaj±ca narciarza w dó³ stoku
+\begin{equation}
+Q_a = mg\sin\alpha
+\end{equation}
+
+jest to si³a ¶ci±gaj±ca narciarza w dó³ stoku.
 
 Sk³adowa si³y grawitacji prostopad³a do powierzchni stoku:\\
-$$ F_{n} = mg\cos\alpha $$
+\begin{equation}
+F_n = mg\cos\alpha
+\end{equation}
 
 Warto¶æ tej si³y wp³ywa na warto¶æ si³y tarcia dzia³aj±cej na narciarza:\\
-$$ F_{f} = \mu F_{n} = \mu mg\cos\alpha $$
+\begin{equation}
+F_f = \mu F_n = \mu mg\cos\alpha
+\end{equation}
 
 Oprócz si³y tarcia uwzglêdniamy równie¿ inn± si³ê oporu jak± jest si³a oporu powietrza. Zale¿y ona od prêdko¶ci poruszania siê obiektu. Prêdko¶æ bêdziemy wyra¿aæ jako pierwsz± pochodn± po³o¿enia - $ \dot{x} $:\\
-$$ F_{d} = k_{1}\dot{x} + k_{2}\dot{x}^2 $$
+\begin{equation}
+F_{d} = k_{1}\dot{x} + k_{2}\dot{x}^2
+\end{equation}
 
 Za³o¿enia, które narzucane s± na sta³e $ k_{1} $ oraz $ k_{2} $:\\
-$$
-\left\{ \begin{array}{rl}
+\begin{equation}
+\left\{ \begin{array}{ll}
  k_{2} = 0  &\mbox{ $v \le B$} \\ 
  k_{1} = 0 &\mbox{ $v \geq  B$} 
 \end{array} \right. 
-$$\\
+\end{equation}\\
 gdzie $ B $:\\
-$$ B = 4 \frac{m}{s} $$
+\begin{equation}
+B = 4 \frac{m}{s}
+\end{equation}
 
 Ograniczenie to zosta³o zaczerpniête z pracy ???? (Aerodynamic-Drag) i opisane w rozdziale ????
 
 Wspó³czynnik $ k_1 $ ....\\
-$$ k_1 = ... $$
+\begin{equation}
+k_1 = ... 
+\end{equation}
 
 Wspó³czynnik $ k_2 $ zosta³ opisany w ????\\
-$$ k_2 = \frac{1}{2} C \rho A $$
+\begin{equation}
+k_2 = \frac{1}{2} C \rho A
+\end{equation}
 
 gdzie:\\
 $ C $ - wspó³czynnik oporu\\
@@ -67,39 +84,49 @@ $ A $ - powierzchnia przednia narciarza prostopad³a do kieruku przep³ywu, a zate
 
 Rozpatruj±c wszystkie si³y dzia³aj±ce na narciarza równoleg³e do powierzchni stoku, a wiêc powoduj±ce jego ruch w dó³, otrzymujemy nastêpuj±ce równanie:
 
-$$ ma=mgsin\alpha-\mu mgcos\alpha-k_{1}\dot{x} - k_{2}\dot{x}^{2} $$
+\begin{equation}
+ma=mgsin\alpha-\mu mgcos\alpha-k_{1}\dot{x} - k_{2}\dot{x}^{2}
+\end{equation}
 
 Wyra¼my teraz przyspieszenie jako drug± pochodn± po³o¿enia:
 
-$$ a = \ddot{x} $$
+\begin{equation}
+a = \ddot{x} 
+\end{equation}
 
 Podstawiaj±c do równania:
 
-$$ m\ddot{x}=mgsin\alpha-\mu mgcos\alpha-k_{1}\dot{x} - k_{2}\dot{x}^{2} $$
+\begin{equation}
+m\ddot{x}=mgsin\alpha-\mu mgcos\alpha-k_{1}\dot{x} - k_{2}\dot{x}^{2}
+\end{equation}
 
 Zatem po podzieleniu przez m:
 
-$$ \ddot{x}=gsin\alpha-\mu gcos\alpha-\frac{k_{1}}{m}\dot{x} - \frac{k_{2}}{m}\dot{x}^{2} $$
+\begin{equation}
+\ddot{x}=gsin\alpha-\mu gcos\alpha-\frac{k_{1}}{m}\dot{x} - \frac{k_{2}}{m}\dot{x}^{2}
+\end{equation}
 
 Aby rozwi±zaæ to równanie numerycznie, wprowadzamy now± zmienn± v (odpowiadaj±c± prêdko¶ci):
 
-$$ v = \dot{x} $$
+\begin{equation}
+v = \dot{x}
+\end{equation}
 
 Otrzymujemy nastêpuj±ce równania:\\
-$$
-\left\{ \begin{array}{rl}
-\dot{v} = &gsin\alpha-\mu gcos\alpha-\frac{k_{1}}{m}v - \frac{k_{2}}{m}v^{2} \\
-v = &\dot{x}
+\begin{equation}
+\left\{ \begin{array}{ll}
+\dot{v} = gsin\alpha-\mu gcos\alpha-\frac{k_{1}}{m}v - \frac{k_{2}}{m}v^{2} \\
+v = \dot{x}
 \end{array} \right. 
-$$\\
+\end{equation}
 
 Pamiêtamy przy tym, ¿e:\\
-$$
-\left\{ \begin{array}{rl}
+\begin{equation}
+\left\{ \begin{array}{ll}
  k_{2} = 0  &\mbox{ $v \le B$} \\ 
  k_{1} = 0 &\mbox{ $v \geq  B$} 
 \end{array} \right. 
-$$\\
+\end{equation}
 
 Powy¿szy uk³ad równañ wystarczy wykorzystaæ w dostêpnych w wielu jêzykach funkcjach bibliotecznych do rozwi±zywania równañ ró¿niczkowych zwyczajnych. W naszym przypadku wykorzysta³y¶my funkcjê dopri (Numerical integration of ODE using Dormand-Prince RK method) z biblioteki Numeric Javascript.
 
@@ -112,9 +139,9 @@ Rozpatrzmy teraz jak bêdzie wygl±da³ uk³ad si³ dzia³aj±cych na narciarza:\\
 
 Na naszego narciarza dzia³aj± si³y: grawitacji - w kierunku pionowym oraz si³y oporu - w kierunku linii jazdy narciarza. Je¶li rozpatrzymy teraz uk³ad wspó³rzêdnych zorientowany wzglêdem kierunku jazdy, musimy najpierw zrzutowaæ si³ê grawitacji otrzymuj±c si³ê ¶ci±gaj±ca narciarza:
 
-$$
+\begin{equation}
 g\sin\alpha*sinus
-$$
+\end{equation}
 
 gdzie sinus to:
 
@@ -122,53 +149,53 @@ gdzie sinus to:
 
 Zatem nasze równanie ruchu bêdzie wygl±da³o nastêpuj±co:
 
-$$
-\ddot{x} = g\sin\alpha*sinus - (\mu N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2 )
-$$
+\begin{equation}
+\ddot{x} = g\sin\alpha*sinus - (\mu F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2 )
+\end{equation}
 
-gdzie N to si³a nacisku narciarza, która pozostaje taka sama jak w przypadku 2D:
+gdzie $F_n$ to si³a nacisku narciarza, która pozostaje taka sama jak w przypadku 2D:
 
-$$
-N = gcos\alpha
-$$
+\begin{equation}
+F_n = gcos\alpha
+\end{equation}
 
 Transformuj±c powy¿sze równanie na uk³ad wspó³rzêdnych zorientowany wzd³u¿ i wszerz stoku otrzymamy nastêpj±ce równania:
 
 % sprawdzic x i y 
 
-$$
-\left\{ \begin{array}{rl}
-\ddot{x_x} = &(g*\sin\alpha*sinus - (\mu*N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*sinus\\
-\ddot{x_y} = &(g*\sin\alpha*sinus - (\mu*N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*cosinus
-\end{array} \right. 
-$$\\
+\begin{equation}
+\left\{ \begin{array}{ll}
+\ddot{x_x} = (g*\sin\alpha*sinus - (\mu*F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*sinus\\
+\ddot{x_y} = (g*\sin\alpha*sinus - (\mu*F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*cosinus
+\end{array} \right.
+\end{equation}
 
 Po wprowadzeniu jak poprzednio dodatkowych zmiennych, w tym wypadku prêdko¶ci $v_x$ i $v_y$ oraz pamiêtaniu o zale¿no¶ci miêdzy nimi a pochodn± przemieszczenia:
 
-$$
-\left\{ \begin{array}{rl}
-v_x = &\dot{x_x}\\
-v_y = &\dot{x_y}\\
-\dot{x} = &\sqrt{v_x^2 +v_y^2}
+\begin{equation}
+\left\{ \begin{array}{ll}
+v_x = \dot{x_x}\\
+v_y = \dot{x_y}\\
+\dot{x} = \sqrt{v_x^2 +v_y^2}
 \end{array} \right.
-$$
+\end{equation}
 
 otrzymujemy:
 
-$$
-\left\{ \begin{array}{rl}
-v_x = &\dot{x_x}\\
-v_y = &\dot{x_y}\\
-\dot{v_x} = &(g*\sin\alpha*sinus - (\mu*N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*sinus\\
-\dot{v_y} = &(g*\sin\alpha*sinus - (\mu*N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*cosinus
+\begin{equation}
+\left\{ \begin{array}{ll}
+v_x = \dot{x_x}\\
+v_y = \dot{x_y}\\
+\dot{v_x} = (g*\sin\alpha*sinus - (\mu*N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*sinus\\
+\dot{v_y} = (g*\sin\alpha*sinus - (\mu*N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*cosinus
 \end{array} \right. 
-$$\\
+\end{equation}\\
 
 
 %---------------wzory razem z zakrêtami - gdzie?--------
 
 $$
-\left\{\begin{array}{rl} 
+\left\{\begin{array}{ll} 
   v_x=\dot{x_x} \\
   v_y=\dot{x_y} \\
  \dot{v_x} = gsin\alpha - (\dot{x_x}^2 +\dot{x_y}^2)^{\frac{1}{2}} \kappa \dot{x_y} sgn(\dot{\varphi}) - gsin\alpha \frac{\dot{x_y}^2}{\dot{x_x}^2 +\dot{x_y}^2} - \frac{(F_f + F_d) }{m}\frac{\dot{x_x}}{(\dot{x_x}^2 +\dot{x_y}^2)^{\frac{1}{2}}} \\
