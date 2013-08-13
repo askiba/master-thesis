@@ -65,7 +65,7 @@ $ A $ - powierzchnia przednia narciarza prostopad³a do kieruku przep³ywu, a zate
 \section{Numeryczne rozwi±zanie problemu}
 \label{sec:numeryczneRozwiazanie}
 
-Rozpatruj±c wszystkie si³y dzia³aj±ce na narciarza równoleg³e do powierzchnii stoku, a wiêc powoduj±ce jego ruch w dó³, otrzymujemy nastêpuj±ce równanie:
+Rozpatruj±c wszystkie si³y dzia³aj±ce na narciarza równoleg³e do powierzchni stoku, a wiêc powoduj±ce jego ruch w dó³, otrzymujemy nastêpuj±ce równanie:
 
 $$ ma=mgsin\alpha-\mu mgcos\alpha-k_{1}\dot{x} - k_{2}\dot{x}^{2} $$
 
@@ -88,8 +88,8 @@ $$ v = \dot{x} $$
 Otrzymujemy nastêpuj±ce równania:\\
 $$
 \left\{ \begin{array}{rl}
-&\dot{v} = gsin\alpha-\mu gcos\alpha-\frac{k_{1}}{m}v - \frac{k_{2}}{m}v^{2} \\
-&v = \dot{x}
+\dot{v} = &gsin\alpha-\mu gcos\alpha-\frac{k_{1}}{m}v - \frac{k_{2}}{m}v^{2} \\
+v = &\dot{x}
 \end{array} \right. 
 $$\\
 
@@ -105,25 +105,76 @@ Powy¿szy uk³ad równañ wystarczy wykorzystaæ w dostêpnych w wielu jêzykach funkcj
 
 \subsection{Rozwi±zanie w 3D}
 Powy¿szy uk³ad równañ opisuje poruszanie siê punktu materialnego po równi pochy³ej. Jednak w przypadku narciarza przemieszczaj±cego siê po stoku musimy uwzglêdniæ równie¿ mo¿liwo¶æ poruszania siê w poprzek stoku, a nie tylko w dó³.\\
-Za³ó¿my, ¿e narciarz porusza siê tylko po liniach prostych. 
+Za³ó¿my, ¿e narciarz porusza siê tylko po liniach prostych. \\
+Rozpatrzmy teraz jak bêdzie wygl±da³ uk³ad si³ dzia³aj±cych na narciarza:\\
+
+% obrazek
+
+Na naszego narciarza dzia³aj± si³y: grawitacji - w kierunku pionowym oraz si³y oporu - w kierunku linii jazdy narciarza. Je¶li rozpatrzymy teraz uk³ad wspó³rzêdnych zorientowany wzglêdem kierunku jazdy, musimy najpierw zrzutowaæ si³ê grawitacji otrzymuj±c si³ê ¶ci±gaj±ca narciarza:
+
+$$
+g\sin\alpha*sinus
+$$
+
+gdzie sinus to:
+
+%-----------------------SINUS-------------------%
+
+Zatem nasze równanie ruchu bêdzie wygl±da³o nastêpuj±co:
+
+$$
+\ddot{x} = g\sin\alpha*sinus - (\mu N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2 )
+$$
+
+gdzie N to si³a nacisku narciarza, która pozostaje taka sama jak w przypadku 2D:
+
+$$
+N = gcos\alpha
+$$
+
+Transformuj±c powy¿sze równanie na uk³ad wspó³rzêdnych zorientowany wzd³u¿ i wszerz stoku otrzymamy nastêpj±ce równania:
+
+% sprawdzic x i y 
+
+$$
+\left\{ \begin{array}{rl}
+\ddot{x_x} = &(g*\sin\alpha*sinus - (\mu*N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*sinus\\
+\ddot{x_y} = &(g*\sin\alpha*sinus - (\mu*N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*cosinus
+\end{array} \right. 
+$$\\
+
+Po wprowadzeniu jak poprzednio dodatkowych zmiennych, w tym wypadku prêdko¶ci $v_x$ i $v_y$ oraz pamiêtaniu o zale¿no¶ci miêdzy nimi a pochodn± przemieszczenia:
+
+$$
+\left\{ \begin{array}{rl}
+v_x = &\dot{x_x}\\
+v_y = &\dot{x_y}\\
+\dot{x} = &\sqrt{v_x^2 +v_y^2}
+\end{array} \right.
+$$
+
+otrzymujemy:
+
+$$
+\left\{ \begin{array}{rl}
+v_x = &\dot{x_x}\\
+v_y = &\dot{x_y}\\
+\dot{v_x} = &(g*\sin\alpha*sinus - (\mu*N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*sinus\\
+\dot{v_y} = &(g*\sin\alpha*sinus - (\mu*N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*cosinus
+\end{array} \right. 
+$$\\
 
 
-f_R = (square(vl))*Math.abs(kappa)
-f_r = f_R + sign_omega*g*sin(alfa)*cosinus
-
-f = 
-[ vx, 
-vy, 
-f_r*sinus*sign_omega^2- (skier.mi*N + k1/skier.m*vl + square(skier.k2/skier.m*vl))*cosinus, 
-g*sin(alfa) - f_r*cosinus*sign_omega - (skier.mi*N + k1/skier.m*vl + skier.k2/skier.m*square(vl))*sinus
-]
 
 
-f = [ vx, 
-vy, 
-f_r*sinus*sign_omega- (skier.mi*N + k1/skier.m*vl + square(skier.k2/skier.m*vl))*cosinus, 
-g*sin(alfa) - f_r*cosinus*sign_omega - (skier.mi*N + k1/skier.m*vl + skier.k2/skier.m*square(vl))*sinus]
-
+$$
+\left\{\begin{array}{rl} 
+  v_x=\dot{x_x} \\
+  v_y=\dot{x_y} \\
+ \dot{v_x} = gsin\alpha - (\dot{x_x}^2 +\dot{x_y}^2)^{\frac{1}{2}} \kappa \dot{x_y} sgn(\dot{\varphi}) - gsin\alpha \frac{\dot{x_y}^2}{\dot{x_x}^2 +\dot{x_y}^2} - \frac{(F_f + F_d) }{m}\frac{\dot{x_x}}{(\dot{x_x}^2 +\dot{x_y}^2)^{\frac{1}{2}}} \\
+ \dot{v_y} = (\dot{x_x}^2 +\dot{x_y}^2)^{\frac{1}{2}} \kappa \dot{x_x} sgn(\dot{\varphi}) + gsin\alpha \frac{\dot{x_x}} {\dot{x_x}^2 +\dot{x_y}^2} - \frac{(F_f + F_d)}{m}\frac{\dot{x_y}}{(\dot{x_x}^2 +\dot{x_y}^2)^{\frac{1}{2}}} 
+\end{array}\right.
+$$\\
 %---------------------------------------------------------------------------
 
 \section{Optymalizacja toru przejazdu}
