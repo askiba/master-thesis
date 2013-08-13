@@ -21,21 +21,21 @@ g - wspó³czynnik grawitacji\\
 $\alpha$ - k±t nachylenia powierzchni stoku do powierzchni ziemi\\
 
 Si³a grawitacji dzia³aj±ca na obiekt o masie m:\\
-$Q = mg$
+$$Q = mg$$
 
 Si³a ta mo¿e zostaæ roz³o¿ona na dwie si³y sk³adowe wzglêdem powierzchni stoku. Narciarz poruszaj±cy siê w dó³ stoku przypomina klasyczny przyk³ad punktu materialnego staczaj±cego siê po równi pochy³ej.\\
 Sk³adowa si³y grawitacji równoleg³a do powierzchni stoku:\\
-$mg\sin\alpha$\\
+$$mg\sin\alpha$$
 jest to si³a ¶ci±gaj±ca narciarza w dó³ stoku
 
 Sk³adowa si³y grawitacji prostopad³a do powierzchni stoku:\\
-$ F_{n} = mg\cos\alpha $
+$$ F_{n} = mg\cos\alpha $$
 
 Warto¶æ tej si³y wp³ywa na warto¶æ si³y tarcia dzia³aj±cej na narciarza:\\
-$ F_{f} = \mu F_{n} = \mu mg\cos\alpha $
+$$ F_{f} = \mu F_{n} = \mu mg\cos\alpha $$
 
-Oprócz si³y tarcia uwzglêdniamy równie¿ inn± si³ê oporu jak± jest si³a oporu powietrza:\\
-$ F_{d} = k_{1}v + k_{2}v^2 $
+Oprócz si³y tarcia uwzglêdniamy równie¿ inn± si³ê oporu jak± jest si³a oporu powietrza. Zale¿y ona od prêdko¶ci poruszania siê obiektu. Prêdko¶æ bêdziemy wyra¿aæ jako pierwsz± pochodn± po³o¿enia - $ \dot{x} $:\\
+$$ F_{d} = k_{1}\dot{x} + k_{2}\dot{x}^2 $$
 
 Za³o¿enia, które narzucane s± na sta³e $ k_{1} $ oraz $ k_{2} $:\\
 $$
@@ -45,15 +45,15 @@ $$
 \end{array} \right. 
 $$\\
 gdzie $ B $:\\
-$ B = 4 \frac{m}{s} $
+$$ B = 4 \frac{m}{s} $$
 
 Ograniczenie to zosta³o zaczerpniête z pracy ???? (Aerodynamic-Drag) i opisane w rozdziale ????
 
 Wspó³czynnik $ k_1 $ ....\\
-$ k_1 = ... $
+$$ k_1 = ... $$
 
 Wspó³czynnik $ k_2 $ zosta³ opisany w ????\\
-$ k_2 = \frac{1}{2} C \rho A $
+$$ k_2 = \frac{1}{2} C \rho A $$
 
 gdzie:\\
 $ C $ - wspó³czynnik oporu\\
@@ -65,15 +65,25 @@ $ A $ - powierzchnia przednia narciarza prostopad³a do kieruku przep³ywu, a zate
 \section{Numeryczne rozwi±zanie problemu}
 \label{sec:numeryczneRozwiazanie}
 
-$ m\ddot{x}=mgsin\alpha-\mu mgcos\alpha-k_{1}\dot{x} - k_{2}\dot{x}^{2} $
+Rozpatruj±c wszystkie si³y dzia³aj±ce na narciarza równoleg³e do powierzchnii stoku, a wiêc powoduj±ce jego ruch w dó³, otrzymujemy nastêpuj±ce równanie:
+
+$$ ma=mgsin\alpha-\mu mgcos\alpha-k_{1}\dot{x} - k_{2}\dot{x}^{2} $$
+
+Wyra¼my teraz przyspieszenie jako drug± pochodn± po³o¿enia:
+
+$$ a = \ddot{x} $$
+
+Podstawiaj±c do równania:
+
+$$ m\ddot{x}=mgsin\alpha-\mu mgcos\alpha-k_{1}\dot{x} - k_{2}\dot{x}^{2} $$
 
 Zatem po podzieleniu przez m:
 
-$ \ddot{x}=gsin\alpha-\mu gcos\alpha-\frac{k_{1}}{m}\dot{x} - \frac{k_{2}}{m}\dot{x}^{2} $
+$$ \ddot{x}=gsin\alpha-\mu gcos\alpha-\frac{k_{1}}{m}\dot{x} - \frac{k_{2}}{m}\dot{x}^{2} $$
 
-Aby rozwi±zaæ to równanie numerycznie, wprowadzamy now± zmienn± v:
+Aby rozwi±zaæ to równanie numerycznie, wprowadzamy now± zmienn± v (odpowiadaj±c± prêdko¶ci):
 
-$ v = \dot{x} $
+$$ v = \dot{x} $$
 
 Otrzymujemy nastêpuj±ce równania:\\
 $$
@@ -91,6 +101,28 @@ $$
 \end{array} \right. 
 $$\\
 
+Powy¿szy uk³ad równañ wystarczy wykorzystaæ w dostêpnych w wielu jêzykach funkcjach bibliotecznych do rozwi±zywania równañ ró¿niczkowych zwyczajnych. W naszym przypadku wykorzysta³y¶my funkcjê dopri (Numerical integration of ODE using Dormand-Prince RK method) z biblioteki Numeric Javascript.
+
+\subsection{Rozwi±zanie w 3D}
+Powy¿szy uk³ad równañ opisuje poruszanie siê punktu materialnego po równi pochy³ej. Jednak w przypadku narciarza przemieszczaj±cego siê po stoku musimy uwzglêdniæ równie¿ mo¿liwo¶æ poruszania siê w poprzek stoku, a nie tylko w dó³.\\
+Za³ó¿my, ¿e narciarz porusza siê tylko po liniach prostych. 
+
+
+f_R = (square(vl))*Math.abs(kappa)
+f_r = f_R + sign_omega*g*sin(alfa)*cosinus
+
+f = 
+[ vx, 
+vy, 
+f_r*sinus*sign_omega^2- (skier.mi*N + k1/skier.m*vl + square(skier.k2/skier.m*vl))*cosinus, 
+g*sin(alfa) - f_r*cosinus*sign_omega - (skier.mi*N + k1/skier.m*vl + skier.k2/skier.m*square(vl))*sinus
+]
+
+
+f = [ vx, 
+vy, 
+f_r*sinus*sign_omega- (skier.mi*N + k1/skier.m*vl + square(skier.k2/skier.m*vl))*cosinus, 
+g*sin(alfa) - f_r*cosinus*sign_omega - (skier.mi*N + k1/skier.m*vl + skier.k2/skier.m*square(vl))*sinus]
 
 %---------------------------------------------------------------------------
 
