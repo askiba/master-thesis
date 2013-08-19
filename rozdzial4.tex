@@ -207,6 +207,22 @@ $$\\
 \section{Optymalizacja toru przejazdu}
 \label{sec:optymalizacja}
 
+
+\subsection{Algorytm ewolucyjny}
+Aby znale¼æ rozwi±zanie problemu, nale¿y przyj±æ jaki¶ sposób reprezentacji ka¿dego z rozwi±zañ. Tor przejazdu narciarza w rzeczywisto¶ci to ¶lad, który pozostawiaj± narty na ¶niegu w trakcie przemieszczania siê po stoku. Jak opisano w rozdziale \ref{sec:matematycznyModel} ????, w celu uproszczenia sposobu przemieszczania siê narciarza, zosta³o zdecydowane, ¿e jako przybli¿enie mo¿na przyj±æ poruszanie siê po ³amanej. Zatem do reprezentacji rozwi±zania mo¿na przyj±æ zbiór punktów, przez które kolejno przeje¿d¿a narciarz, poruszaj±c siê miêdzy tymi punktami wy³±cznie po linii prostej.\\
+Jednak wci±¿ takie podej¶ie jest zbyt ogólne, poniewa¿ w algorytmie ewolucyjnym potrzebujemy sta³ej liczby punktów, aby móc wykonywaæ np. krzy¿owanie dwóch osobników. Zatem w zaproponowonym rozwi±zaniu narzucamy z góry co ile metrów w pionie stoku ma pojawiæ siê punkt. Oprócz tego narzucone zosta³o, ¿e narciarz musi przejechaæ jak najbli¿ej wewnêtrznej bramki co indykuje do³o¿enie punktu w miejscu ka¿dej wewnêtrznej bramki.\\
+Punkty te, a ¶ci¶lej, ich po³o¿enie w pozycji poziomej jest reprezentacj± konkretnego rozwi±zania problemu i w ten sposób w³a¶nie okre¶lony jest genotyp ka¿dego osobnika. Nie wprowadzamy tu typowego dla algorytmów genetycznych kodowania binarnego, pozycja punktu jest zapamiêtana jako warto¶æ rzeczywista.\\
+Dodatkowo do genotypu wchodzi tak¿e parametr $\sigma$, który w strategiach ewolucyjnych u¿ywany jest podczas mutacji tak jak opisano w rozdziale \ref{cha:wstepTeoretyczny} w czêsci o strategiach.
+
+Zastosowany algorytm opiera siê na strategii ($\mu$ + $\lambda$) opisanej w rozdziale \ref{cha:wstepTeoretyczny}. Jako pocz±tkow± populacjê wybieramy losowe osobniki - poziome warto¶ci punktów s± ograniczone jedynie przez warto¶ci poziome po³o¿enia dwóch najbli¿szych bramek. Jest to kierowane konieczno¶ci± zadbania o szybsze znalezienie rozwi±zania - zbyt du¿e odleg³o¶ci mo¿na z góry odrzuciæ opieraj±c siê na do¶wiadczeniach z rzeczywistej jazdy narciarza po slalomie. Wielko¶æ populacji bazowej $\mu$ jest jednym z parametrów programu, ale najczê¶ciej warto¶æ ta wynosi 30. Warto¶æ parametru $\lambda$ tak¿e jest parametrem, jednak w testach przewa¿nie u¿yto wielko¶ci 100.\\
+Szkielet algorytmu zgodny jest z zastosowan± strategi±, po wylosowaniu z istniej±cej populacji populacji tymczasowej o wielko¶ci $\lambda$, dokonuje siê na jej osobnikach operacji genetycznych, najpierw krzy¿owania, a nastêpnie mutacji na osobnikach otrzymanych z krzy¿owania. Kolejnym krokiem jest ocenienie nowych osobników i wybranie spo¶ród nich oraz populacji pocz±tkowej osobników o najlepszym przystosowaniu i to one stanowi± now± populacjê bazow±.
+
+\subsubsection{Krzy¿owanie}
+Aby dokonaæ krzy¿owania potrzebne s± pary rodziców dla ka¿dego nowego osobnika. Aby utrzymaæ wielko¶æ populacji tymczasowej, losujemy (ze zwracaniem) $\lambda$ par spo¶ród populacji tymczasowej. Krzy¿owanie rodziców sprowadza siê do obliczenia ¶redniej warto¶ci po³o¿enia odpowiadaj±cych sobie punktów oraz parametrów $\sigma$.
+
+\subsubsection{Mutacja}
+
+
 %---------------------------------------------------------------------------
 
 \section{Architektura systemu}
