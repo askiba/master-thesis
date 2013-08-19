@@ -142,6 +142,9 @@ Algorytm ewolucyjny wybiera osobniki lepiej przystosowane, a wiêc te, które posi
 Krzy¿owanie wystêpuje w tym algorytmie pod nazw± rekombinacja. Najczê¶ciej sprowadza siê do u¶rednienia lub wymianie warto¶ci wektorów, tak¿e wektora $\sigma$.
 
 \paragraph{Strategia ($\mu$, $\lambda$)}
+Strategia ($\mu$ + $\lambda$) posiada pewne wady, które postanowiono spróbowaæ wyeliminowaæ za pomoc± nowej strategii ($\mu$, $\lambda$). Poprzedni algorytm sprawia problemy je¶li w populacji pojawia siê osobnik o wysokiej warto¶ci przystosowania, ale posiadaj±cy zbyt du¿e (albo zbyt ma³e) warto¶ci odchyleñ standardowych. Usuniêcie takiego osobnika z populacji czêsto nie jest procesem krótkotrwa³ym, gdy¿ wp³ywa on na powstaj±ce potomstwo, przekazuj±c mu podobne do jego, nieodpowiednie warto¶ci odchyleñ.
+W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie nie s± nigdy brane do kolejnej populacji bazowej. Podczas selekcji korzysta siê zatem tylko z powsta³ej populacji potomnej, z niej wybieraj±c osobniki do populacji bazowej w kolejnej iteracji.
+
 \subsection{Hill up climbing}
 \label{sec:hillUp}
 
