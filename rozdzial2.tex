@@ -65,7 +65,7 @@ Krzy¿owanie, zwane tak¿e rekombinacj± (ang. \textit{crossover}), dzia³a na conaj
 
 W wyniku operacji genetycznych powstaj± nowe osobniki, które wchodz± w sk³ad populacji potomnej. Ka¿dy z tych osobników jest oceniany za pomoc± funkcji przystosowania. Porównuj±c jako¶æ osobników z populacji bazowej oraz potomnej dokonuje siê sukcesji, czyli wyboru osobników z tych populacji (czasem wy³±cznie z populacji potomnej) i tworzy now± populacjê bazow±.
 
-Zakoñczenie dzia³ania algorytmu przewa¿nie opiera siê na badaniu funkcji przystosowania ca³ej populacji. Je¶li warto¶æ przystosowania populacji nie jest zró¿nicowana mówimy o stagnacji algorytmu i mo¿e byæ to wskazaniem do zakoñczenie algorytmu. Czasem jednak oczukuje siê a¿ przystosowanie to bêdzie wystarczaj±co du¿e, ¿eby stwierdziæ, ¿e znalezione rozwi±zanie jest bardzo dobre. Przewa¿nie jednak nie znamy nawet przybli¿onej warto¶ci jako¶ci rozwi±zania, wiêc nie mo¿emy stwierdziæ kiedy przystosowanie jest odpowiednie i czy nie mo¿e siê jeszcze znacznie poprawiæ.
+Zakoñczenie dzia³ania algorytmu przewa¿nie opiera siê na badaniu funkcji przystosowania ca³ej populacji. Je¶li warto¶æ przystosowania populacji nie jest zró¿nicowana mówimy o stagnacji algorytmu i mo¿e byæ to wskazaniem do zakoñczenia dzia³ania algorytmu. Czasem jednak oczekuje siê a¿ przystosowanie to bêdzie wystarczaj±co du¿e, ¿eby stwierdziæ, ¿e znalezione rozwi±zanie jest bardzo dobre. Przewa¿nie jednak nie znamy nawet przybli¿onej warto¶ci jako¶ci rozwi±zania, wiêc nie mo¿emy stwierdziæ kiedy przystosowanie jest odpowiednie i czy nie mo¿e siê jeszcze znacznie poprawiæ.
 
 \subsubsection{Kodowanie osobników}
 W przypadku algorytmów genetycznych, bêd±cych szczególnym przypadkiem algorytmów ewolucyjnych, do kodowania osobników stosuje siê kodowanie binarne chromosomów. Pojedynczy bit reprezentuje zatem gen nale¿±cy do chromosomu.\\
@@ -142,7 +142,7 @@ Algorytm ewolucyjny wybiera osobniki lepiej przystosowane, a wiêc te, które posi
 Krzy¿owanie wystêpuje w tym algorytmie pod nazw± rekombinacja. Najczê¶ciej sprowadza siê do u¶rednienia lub wymianie warto¶ci wektorów, tak¿e wektora $\sigma$.
 
 \paragraph{Strategia ($\mu$, $\lambda$)}
-Strategia ($\mu$ + $\lambda$) posiada pewne wady, które postanowiono spróbowaæ wyeliminowaæ za pomoc± nowej strategii ($\mu$, $\lambda$). Poprzedni algorytm sprawia problemy je¶li w populacji pojawia siê osobnik o wysokiej warto¶ci przystosowania, ale posiadaj±cy zbyt du¿e (albo zbyt ma³e) warto¶ci odchyleñ standardowych. Usuniêcie takiego osobnika z populacji czêsto nie jest procesem krótkotrwa³ym, gdy¿ wp³ywa on na powstaj±ce potomstwo, przekazuj±c mu podobne do jego, nieodpowiednie warto¶ci odchyleñ.
+Strategia ($\mu$ + $\lambda$) posiada pewne wady, które postanowiono spróbowaæ wyeliminowaæ za pomoc± nowej strategii ($\mu$, $\lambda$). Poprzedni algorytm sprawia problemy je¶li w populacji pojawia siê osobnik o wysokiej warto¶ci przystosowania, ale posiadaj±cy zbyt du¿e (albo zbyt ma³e) warto¶ci odchyleñ standardowych. Usuniêcie takiego osobnika z populacji czêsto nie jest procesem krótkotrwa³ym, gdy¿ wp³ywa on na powstaj±ce potomstwo, przekazuj±c mu podobne do jego, nieodpowiednie warto¶ci odchyleñ.\\
 W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie nie s± nigdy brane do kolejnej populacji bazowej. Podczas selekcji korzysta siê zatem tylko z powsta³ej populacji potomnej, z niej wybieraj±c osobniki do populacji bazowej w kolejnej iteracji.
 
 \subsection{Hill up climbing}
