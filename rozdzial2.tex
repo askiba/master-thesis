@@ -24,6 +24,7 @@ W tym podrozdziale opisane s± metody optymalizacji u¿yte w zaproponowanym rozwi±
 % czym jest optymalizacja
 Zadaniem optymalizacji jest przeszukanie przestrzeni rozwi±zañ w celu znalezenia takiego, które jest najlepsze. Zatem maj±c dan± funkcjê nazywan± funkcj± celu, która ka¿demu punktowi reprezentuj±cemu rozwi±zanie problemu, poszukujemy takiego, dla którego warto¶æ tej funkcji bêdzie jak najmniejsza (b±d¼ jak najwiêksza). Trudno¶æ w znalezieniu takiego rozwi±zania zale¿y od charakteru funkcji celu, a czasem tak¿e od nieznajomo¶ci jej analitycznej postaci.
 
+\subsubsection{Optymalizacja lokalna i globalna}
 % optymalizacja lokalna a globalna
 W przypadku funkcji z jednym optimum 
 
@@ -31,7 +32,116 @@ Je¶li natomiast funkcja celu posiada wiele optimów lokalnych (tzw. funkcja wielo
 
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjny}
+Algorytm ewolucyjny jest przyk³adem algorytmu optymalizacyjnego, przeszukuj±cego przestrzeñ rozwi±zañ w celu znalezienia najlepszego rozwi±zania problemu. Algorytm ten oparty jest na obserwacjach ¶rodowiska i przystosowywania siê organizmów do jego warunków. Wiele terminów zapo¿yczonych jest zatem z genetyki.
 
+Podstaw± ca³ego algorytmu jest populacja osobników, z których ka¿dy reprezentuje rozwi±zanie problemu. Populacja ta zmienia siê wraz z dzia³aniem algorytmu. Ewolucja zak³ada, ¿e populacja bêdzie siê sk³adaæ z coraz lepiej przystosowanych osobników. Przystosowanie to jest obliczane za pomoc± wcze¶niej okre¶lonej funkcji oceniaj±cej jako¶æ danego osobnika, czyli jak dobre jest rozwi±zanie reprezentowane przez niego. Przystosowanie jest warto¶ci± liczbow± obliczon± za pomoc± tej funkcji przystosowania.\\
+Funkcja przystosowania okre¶la warto¶æ przystosowania osobnika na podstawie jego fenotypu, który jest tworzony z genotypu. Genotyp okre¶la zestaw cech danego osobnika i sk³ada siê z chromosomów (najczê¶ciej z jednego). Natomiast ka¿dy z chromosomów sk³ada siê z elementarnych jednostek - genów.\\
+
+\subsubsection{Schemat dzia³a algorytmu ewolucyjnego}
+Algorytm ewolucyjny rozpoczyna siê poprzez wygenerowanie populacji bazowej oraz obliczenie przystosowania jej osobników. Przewa¿nie osobniki te generowane s± ca³kowicie losowo, ale mo¿na tak¿e wprowadziæ konkretne osobniki np. o znanym dobrym przystosowaniu do ¶rodowiska.
+
+G³ówna czê¶æ algorytmu opiera siê na powtarzaniu pêtli, w której wykonywane s± kolejno:
+
+\begin{itemize}
+\item reprodukcja
+\item operacje genetyczne
+\item ocena
+\item sukcesja
+\end{itemize}
+
+Czêsto reprodukcjê i sukcesjê ³±czy siê pod nazw± selekcja.
+
+Reprodukcja powoduje powielenie losowo wybranych osobników z populacji. Prawdopodobieñstwo wybrania osobnika do powielenia najczê¶ciej jest proporcjonalne do jego przystosowania. Mo¿e siê zdarzyæ, ¿e dany osobnik zostanie wybrany wiêcej ni¿ raz, a tak¿e, ¿e nie zostanie wybrany ani razu.\\
+Nastêpnie na tych kopiach przeprowadzane s± operacje genetyczne powoduj±ce zmiany w genotypie osobników. Wyró¿niamy dwie podstawowe operacje:
+
+\begin{itemize}
+\item mutacja
+\item krzy¿owanie
+\end{itemize}
+
+%---- WSTAWKA ANGIELSKA!!!!!!!!!!!!!!!!!--------
+Zadaniem mutacji jest losowe zmodyfikowanie genów w genotypie.\\
+Krzy¿owanie, zwane tak¿e rekombinacj± (ang. \textit{crossover}), dzia³a na conajmniej dwóch osobnikach i na podstawie ich genotypu tworzy jeden lub wiêcej osobników potomnych. Chromosomy rodzicielskie s± mieszane w celu otrzymania nowych genotypów dla osobników potomnych.
+
+W wyniku operacji genetycznych powstaj± nowe osobniki, które wchodz± w sk³ad populacji potomnej. Ka¿dy z tych osobników jest oceniany za pomoc± funkcji przystosowania. Porównuj±c jako¶æ osobników z populacji bazowej oraz potomnej dokonuje siê sukcesji, czyli wyboru osobników z tych populacji (czasem wy³±cznie z populacji potomnej) i tworzy now± populacjê bazow±.
+
+Zakoñczenie dzia³ania algorytmu przewa¿nie opiera siê na badaniu funkcji przystosowania ca³ej populacji. Je¶li warto¶æ przystosowania populacji nie jest zró¿nicowana mówimy o stagnacji algorytmu i mo¿e byæ to wskazaniem do zakoñczenie algorytmu. Czasem jednak oczukuje siê a¿ przystosowanie to bêdzie wystarczaj±co du¿e, ¿eby stwierdziæ, ¿e znalezione rozwi±zanie jest bardzo dobre. Przewa¿nie jednak nie znamy nawet przybli¿onej warto¶ci jako¶ci rozwi±zania, wiêc nie mo¿emy stwierdziæ kiedy przystosowanie jest odpowiednie i czy nie mo¿e siê jeszcze znacznie poprawiæ.
+
+\subsubsection{Kodowanie osobników}
+W przypadku algorytmów genetycznych, bêd±cych szczególnym przypadkiem algorytmów ewolucyjnych, do kodowania osobników stosuje siê kodowanie binarne chromosomów. Pojedynczy bit reprezentuje zatem gen nale¿±cy do chromosomu.\\
+W takim przypadku mutacja wykonywana jest na ka¿dym genie osobno z pewnym prawdopodobieñstwem, je¶li do niej dochodzi, zmienia siê warto¶æ bitu na przeciwn±. W krzy¿owaniu wybiera siê dwa osobniki rodzicielskie, których chromosomy rozcinane s± na dwie czê¶ci i ³±czone "na krzy¿". Miejsce przeciêcia jest losowane z rozk³adem równomiernym.
+
+W algorytmach ewolucyjnych porzuca siê kodowanie binarne - chromosom sk³ada siê z jednej lub wiêcej liczb stanowi±cych cechy osobnika.\\
+Mutacja takiego osobnika najczê¶ciej odbywa siê poprzez losow± zmianê ka¿dej z warto¶ci genów chromosomu. Do krzy¿owania wybiera siê dwa osobniki, z których dla ka¿dej pary odpowiadaj±cych genów wyci±gana jest ¶rednia i tak otrzymane warto¶ci genów tworz± genotyp nowego osobnika.
+
+\subsubsection{Typy algorytmów ewolucyjnych}
+Algorytmy ewolucyjne wywodz± siê z kilku osobnych nurtów zajmuj±cych siê t± tematyk±, wiêc istnieje wiele podobnych schematów. Najlepiej traktowaæ algorytmy ewolucyjne jako metaheurystykê - okre¶lony jest pewien szkic algorytmu, który mo¿na dostosowywaæ do konkretnego rozwi±zania. W tym podrozdziale opisane s± podstawowe i najbardziej popularne schematy postêpowania oparte o algorytmy ewolucyjne.
+
+\paragraph{Prosty algorytm genetyczny}
+
+Prosty algorytm genetyczny zosta³ zaproponawny w roku 1975 przez John'a Holland'a.
+
+Maj±c populacjê bazow± $P^t$ dokonujemy reprodukcji tej populacji, tworz±c populacjê tymczasow± $T^t$ sk³adaj±c± siê z takiej samej liczby osobników. Wybierani s± oni z prawdopodobieñstwem proporcjonalnym do ich przystosowania z populacji bazowej. Na populacji tymczasowej dokonujemy operacji genetycznych (mutacji i krzy¿owania). Do krzy¿owania wybierane s± roz³±czne pary osobników i z pewnym prawdopodobieñstwem $p_c$ zachodzi ich skrzy¿owanie. Je¶li dosz³o do powstania osobników potomnych zastêpuj± one osobniki rodzicielskie. Nastêpnie na tak otrzymanej populacji tymczasowej dochodzi do mutacji osobników i otrzymania populacji potomnej $O^t$. Ta populacja staje siê w nastêpnej iteracji algorytmu now± populacj± bazow±.\\
+Zatrzymanie algorytmu mo¿e byæ dokonane je¶li np.:
+
+\begin{itemize}
+\item wykonano okre¶lon± z góry liczbê iteracji
+\item znaleziono osobnika o wystarczaj±co wysokiej warto¶ci przystosowania
+\end{itemize}
+
+W tej wersji algorytmu czêsto pêtlê algorytmu nazywa siê generacj±, a ka¿d± populacjê $P^t$ w chwili t pokoleniem.\\
+
+\paragraph{Strategia (1+1)}
+
+Strategia (1+1) jest podstawow± strategii ewolucyjnych. W algorytmie tym mamy doczynienia z populacj± sk³adaj±c± siê z tylko jednego osobnika posiadaj±cego jeden chromosom. W ka¿dej pêtli algorytmu dokonuje siê mutacji tego chromosomu, co powoduje powstanie nowego osobnika. Osobnik ten jest poddawany ocenie, a nastêpnie dokonuje siê wyboru lepszego z dwóch istniej±cych osobników i tego pozostawia w populacji.\\
+W mutacji dodaje siê do ka¿dego genu chromosomu losow± modyfikacjê rozk³adem normalnym:
+\begin{equation}
+Y^t_i = X^t_i + \sigma\xi_{N(0,1),i}
+\end{equation}
+
+Warto¶æ $\sigma$ bêdzie powodowa³a wiêksze lub mniejsze zmiany w chromosomie. Je¶li chcemy przeszukaæ przestrzeñ, powinni¶my zwiêkszaæ jej warto¶æ, co jest po¿±dane zw³aszcza w pocz±tkowej fazie dzia³ania agorytmu. Natomiast, aby znale¼æ jak najlepsze rozwi±zanie, wiedz±c ¿e obecne rozwi±zanie jest ju¿ bardzo bliskie najlepszemu, mo¿emy zmniejszaæ warto¶æ $\sigma$ przeszukuj±c tylko najbli¿sz± przestrzeñ.\\
+Do wyznaczania $\sigma$ powsta³ nastêpuj±cy algorytm zwany regu³± 1/5 sukcesów:
+\begin{enumerate}
+\item Je¶li przez kolejnych k pêtli algorytmu mutacja powoduje powstanie lepszego osobnika w wiêcej ni¿ 1/5 wszystkich mutacji, to zwiêkszamy $\sigma$: $\sigma' = c_i \sigma$. Warto¶æ $c_i$ wyznaczona empirycznie wynosi $ \frac{1}{0.82} $
+\item Gdy dok³adnie 1/5 koñczy siê sukcesem, warto¶æ $\sigma$ pozostaje bez zmian.
+\item Je¶li nie zachodzi ¿adne z powy¿szych warto¶æ $\sigma$ jest zmniejszana: $\sigma' = c_d \sigma$. Gdzie $ c_d $ powinna wynosiæ $ 0.82 $
+\end{enumerate}
+
+\paragraph{Strategia ($\mu$ + $\lambda$)}
+
+Strategia ($\mu$ + $\lambda$) jest rozwiniêciem strategii (1+1). $\mu$ oznacza ilo¶æ osobników w populacji pocz±tkowej, a $\lambda$ ile osobników jest reprodukowanych i poddawanych operacjom genetycznym. Dodatkowo, zamiast regu³y 1/5 sukcesów wprowadzono mechanizm samoczynnej adaptacji zasiêgu mutacji, a tak¿e wprowadzono operator krzy¿owania.
+
+Oznaczenie $\mu$ + $\lambda$ oznacza, ¿e po wygenerowaniu populacji potomnej wybierane jest $\mu$ najlepszych osobników do nowej populacji bazowej - zarówno spo¶ród populacji potomnej, jak i starej populacji bazowej zawieraj±cej ³±cznie $\mu$ + $\lambda$ osobników.
+
+W strategii tej wa¿ne jest te¿ kodowanie, do którego dodatkowo do³o¿ono równie¿ chromosom przechowuj±cy wektor $\sigma$ zawieraj±cy warto¶ci odchyleñ standardowych, które wykorzystuje siê w trakcie mutacji.\\
+Po wylosowaniu warto¶ci zmiennej losowej o rozk³adzie normalnym ($\xi_{N(0,1)}$) dla ka¿dego elementu wektora $\sigma$ losujemy jeszcze jedn± zmienn± losow± o rozk³adzie normalnym ($\xi_{N(0,1),i}$) i oblicza nowe warto¶ci odchyleñ z wektora $\sigma$:
+
+\begin{equation}
+\sigma'_i = \sigma_i e^{(\tau'\xi_{N(0,1)} + \tau\xi_{N(0,1),i})}
+\end{equation}
+
+%--------CO Z K i n??-------
+Gdzie $\tau$ oraz $\tau'$ s± parametrami algorytmu, a ich warto¶ci powinny wynosiæ:
+\begin{equation}
+\tau = \frac{K}{\sqrt{2n}}
+\end{equation}
+
+\begin{equation}
+\tau' = \frac{K}{\sqrt{2\sqrt{n}}}
+\end{equation}
+
+Maj±c dane nowe warto¶ci odchyleñ standardowych mo¿emy obliczyæ nowe warto¶ci genów korzystaj±c ze wzoru:
+
+\begin{equation}
+X'_i = X_i + \sigma'_i\xi_{N(0,1),i}
+\end{equation}
+gdzie $\xi_{N(0,1),i}$ jest now± losow± warto¶ci±.
+
+Algorytm ewolucyjny wybiera osobniki lepiej przystosowane, a wiêc te, które posiadaj± tak¿e lepsze warto¶ci odchyleñ standardowych. Powoduje to naturaln± selekcjê, doprowadzaj±c± do samoczynnej adaptacji odchyleñ standardowych stosowanych w trakcie mutacji.
+
+Krzy¿owanie wystêpuje w tym algorytmie pod nazw± rekombinacja. Najczê¶ciej sprowadza siê do u¶rednienia lub wymianie warto¶ci wektorów, tak¿e wektora $\sigma$.
+
+\paragraph{Strategia ($\mu$, $\lambda$)}
 \subsection{Hill up climbing}
 \label{sec:hillUp}
 
