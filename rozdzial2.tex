@@ -158,3 +158,61 @@ W przestrzeni ci±g³ej konieczne jest dobranie kroku, który wyznacza punkty przes
 
 \section{Uczenie maszynowe}
 \label{sec:maszynowe}
+
+Uczeniem siê systemu jest ka¿da autonomiczna zmiana w systemie zachodz±ca na podstawie do¶wiadczeñ, która prowadzi do poprawy jako¶ci jego dzia³ania. (Cichosz)
+
+Program siê uczy z do¶wiadczenia E dla zadañ T i miary jako¶ci P je¶li jego efektywno¶æ w zadaniach z T mierzona P wzrasta z do¶wiadczeniem E. (Mitchell)
+
+Istnieje wiele rodzajów uczenia maszynowego. Podstawowy podzia³ wynika z rodzaju informacji trenuj±cej na:
+
+\begin{itemize}
+\item uczenie z nadzorem
+\item uczenie bez nadzoru
+\end{itemize}
+
+W uczeniu siê z nadzorem ¼ród³em informacji trenuj±cej jest nauczyciel. Od niego otrzymuje uczeñ informacjê jakie zachowanie jest po¿±dane. Natomiast w przypadku uczenia bez nadzoru uczeñ dowiaduje siê o skuteczno¶ci swojego dzia³ania obserwuj±c wyniki - nazywa siê to czasem wbudowanym nauczycielem.
+
+Istniej± jeszcze dwie grupy, które trudno zakwalifikowaæ do powy¿szych:
+
+\begin{itemize}
+\item uczenie siê na podstawie zapytañ
+\item uczenie siê przez eksperymentowanie
+\item uczenie siê ze wzmocnieniem
+\end{itemize}
+
+Do pierwszej z nich nale¿± algorytmy polegaj±ce na zadawaniu pytañ przez ucznia nauczycielowi. Natomiast do drugiej te, w których uczeñ gromadzi swoje do¶wiadczenia obserwuj±c konsekwencje swojego dzia³ania w ¶rodowisku. Uczenie siê ze wzmocnieniem jest podobne do tej metody, ale dodatkowo istnieje krytyk, który s³u¿y jako dodatkowe ¼ród³o informacji trenuj±cej. Jego zadaniem jest karanie b±d¼ nagradzanie ucznia za jego zachowanie. Uczeñ nie dowiaduje siê co ma robiæ, ale jak warto¶ciowe jest dane dzia³anie.
+
+Czasem granice pomiêdzy tymi grupami s± nieostre i przynale¿no¶æ algorytmu do jakiej¶ grupy mo¿e zale¿eæ wy³±cznie od punktu widzenia.
+
+\subsection{Uczenie siê ze wzmocnieniem}
+W przypadku uczenia siê ze wzmocnieniem zadaniem ucznia jest obserwacja stanów ¶rodowiska, wykonywanie akcji oraz obserwowanie efektów tych akcji poprzez warto¶æ otrzymywanego wzmocnienia jako rzeczywistoliczbowej nagrody. Tak jak zosta³o to napisane wcze¶niej, w tym przypadku nie mówimy o nauczycielu, ale o krytyku, który warto¶ciuje zachowanie poprzez dostarczanie wzmocnienia. Zadaniem ucznie jest odnalezienie takiego zachowania, które przyniesie mu jak najwiêksz± nagrodê. Najczê¶ciej uczeñ nie ma pojêcia o tym jakie jest ¶rodowisko, czêsto niedeterministyczne, dlatego musi wchodziæ w interakcjê z nim, aby je poznaæ.
+
+\begin{figure}[h]
+\centering
+\includegraphics{uczenie}
+\end{figure}
+
+W ka¿dym kroku uczeñ jest w okre¶lonym stanie ¶rodowiska. Decyduj±c siê na okre¶lon± akcjê otrzymuje informacjê o nowym stanie, w którym znajduje siê po wykonaniu tej akcji oraz o nagrodzie (wzmocnieniu) jak± otrzymuje za swoje dzia³anie. Uczeñ obserwuj±c nagrody otrzymywane za swoje zachowanie mo¿e uczyæ siê jak postêpowaæ, aby by³y one jak najwy¿sze.
+
+Schemat algorytmu przedstawia siê nastêpuj±co:\\
+Dla kolejnych kroków czasowych t: 
+\begin{enumerate}
+\item obserwujemy stan $x_t$
+\item wybieramy akcjê $a_t$ mo¿liw± do wykonania w stanie $x_t$
+\item wykonujemy akcjê $a_t$
+\item obserwujemy wzmocnienie $r_t$ i nastêpny stan $x_{t+1}$
+\item uczymy siê na podstawie do¶wiadczenia ($x_t,a_t,r_t,x_{t+1}$)
+\end{enumerate}
+Wybór akcji w kroku 2. dokonywany jest autonomicznie przez ucznia. Natomiast stan, do którego przechodzi po wykonaniu akcji jest okre¶lony przez ¶rodowisko na podstawie stanu poprzedniego oraz wykonanej akcji. Warto jednak zwróciæ uwagê na fakt, ¿e ¶rodowisko mo¿e byæ stochastyczne - wykonanie dwa razy tej samej akcji mo¿e dawaæ ró¿ne rezultaty. Poza tym, przewa¿nie ¶rodowisko jest nieznane uczniowi, st±d konieczno¶æ podejmowania prób i b³êdów poprzez wykonywanie ró¿nych akcji. Jednocze¶nie, uczeñ nie mo¿e wp³ywaæ na ¶rodowisko w ¿aden sposób.
+
+\subsubsection{Strategia maksymalizacji nagród}
+Nauka ucznia oparta jest na nagrodach, które otrzymuje za swoje dzia³ania. Musi znale¼æ on najlepsz± strategiê wyboru akcji, aby uzyskiwaæ jak najlepsze nagrody. Najczê¶ciej uczeñ próbuje maksymalizowaæ swoje nagrody d³ugoterminowo. Strategia ta polega na tym, ¿e nagrody za poprawne dzia³anie mog± przyj¶æ wiele kroków pó¼niej ni¿ wtedy gdy ono zosta³o wykonane. Strategia ta nazywana jest uczeniem siê z opó¼nionym wzmocnieniem. W uczeniu z natychmiastowym wzmocnieniem interesuje nas tylko maksymalizacja nagród tu¿ po danym zachowaniu. Nie jeste¶my wtedy w stanie braæ pod uwagê tego, jakie w przysz³o¶ci mog± byæ jego skutki.\\
+W przypadku opó¼nionego wzmocnienia wprowadza siê wspó³czynnik dyskontowania $\gamma \in [0,1]$. Zadaniem ucznia jest zmaksymalizowanie zdyskontowanej sumy nagród:
+
+\begin{equation}
+E[\sum_{t=0}^\infty \gamma^tr_t]
+\end{equation}
+
+Im wspó³czynnik $\gamma$ jest bli¿szy 0, tym bardziej maksymalizuje siê tylko natychmiastowe nagrody. Je¶li $\gamma = 1$ to maksymalizowana jest suma wszystkich otrzymanych nagród.
+
+\subsubsection{Zadania epizodyczne}
