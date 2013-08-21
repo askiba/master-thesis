@@ -22,7 +22,7 @@ W rozdziale tym przedstawiono informacje .
 W tym podrozdziale opisane s± metody optymalizacji u¿yte w zaproponowanym rozwi±zaniu, czyli algorytm ewolucyjny oraz algorytm optymalizacji lokalnej - Hill climbing.
 
 % czym jest optymalizacja
-Zadaniem optymalizacji jest przeszukanie przestrzeni rozwi±zañ w celu znalezenia takiego, które jest najlepsze. Zatem maj±c dan± funkcjê, nazywan± funkcj± celu, która ka¿demu punktowi reprezentuj±cemu rozwi±zanie problemu, poszukujemy takiego, dla którego warto¶æ tej funkcji bêdzie jak najmniejsza (b±d¼ jak najwiêksza). Trudno¶æ w znalezieniu takiego rozwi±zania zale¿y od charakteru funkcji celu, a czasem tak¿e od nieznajomo¶ci jej analitycznej postaci.
+Zadaniem optymalizacji jest przeszukanie przestrzeni rozwi±zañ w celu znalezienia takiego, które jest najlepsze. Zatem maj±c dan± funkcjê, nazywan± funkcj± celu, która ka¿demu punktowi reprezentuj±cemu rozwi±zanie problemu, poszukujemy takiego, dla którego warto¶æ tej funkcji bêdzie jak najmniejsza (b±d¼ jak najwiêksza). Trudno¶æ w znalezieniu takiego rozwi±zania zale¿y od charakteru funkcji celu, a czasem tak¿e od nieznajomo¶ci jej analitycznej postaci.
 
 \subsubsection{Optymalizacja lokalna i globalna}
 W przypadku funkcji z jednym optimum do znalezienia najlepszego rozwi±zania wystarczy przeszukiwanie lokalne. Polega ono na iteracyjnym sprawdzaniu rozwi±zañ w najbli¿szej przestrzeni i wprowadzaniu lokalnych zmian, aby w koñcu znale¼æ rozwi±zanie najlepsze w okolicy tzw. optimum lokalne. Je¶li wiemy, ¿e istnieje tylko jedno takie optimum, mo¿emy mieæ pewno¶æ, ¿e znalezione rozwi±zanie jest najlepszym w ca³ej przestrzeni rozwi±zañ. Przyk³adami optymalizacji lokalnych s±:
@@ -64,7 +64,7 @@ Nastêpnie na tych kopiach przeprowadzane s± operacje genetyczne powoduj±ce zmian
 
 %---- WSTAWKA ANGIELSKA!!!!!!!!!!!!!!!!!--------
 Zadaniem mutacji jest losowe zmodyfikowanie genów w genotypie.\\
-Krzy¿owanie, zwane tak¿e rekombinacj± (ang. \textit{crossover}), dzia³a na conajmniej dwóch osobnikach i na podstawie ich genotypu tworzy jeden lub wiêcej osobników potomnych. Chromosomy rodzicielskie s± mieszane w celu otrzymania nowych genotypów dla osobników potomnych.
+Krzy¿owanie, zwane tak¿e rekombinacj± (ang. \textit{crossover}), dzia³a na co najmniej dwóch osobnikach i na podstawie ich genotypu tworzy jeden lub wiêcej osobników potomnych. Chromosomy rodzicielskie s± mieszane w celu otrzymania nowych genotypów dla osobników potomnych.
 
 W wyniku operacji genetycznych powstaj± nowe osobniki, które wchodz± w sk³ad populacji potomnej. Ka¿dy z tych osobników jest oceniany za pomoc± funkcji przystosowania. Porównuj±c jako¶æ osobników z populacji bazowej oraz potomnej dokonuje siê sukcesji, czyli wyboru osobników z tych populacji (czasem wy³±cznie z populacji potomnej) i tworzy now± populacjê bazow±.
 
@@ -82,7 +82,7 @@ Algorytmy ewolucyjne wywodz± siê z kilku osobnych nurtów zajmuj±cych siê t± tema
 
 \paragraph{Prosty algorytm genetyczny}
 
-Prosty algorytm genetyczny zosta³ zaproponawny w roku 1975 przez John'a Holland'a.
+Prosty algorytm genetyczny zosta³ zaproponowany w roku 1975 przez John'a Holland'a.
 
 Maj±c populacjê bazow± $P^t$ dokonujemy reprodukcji tej populacji, tworz±c populacjê tymczasow± $T^t$ sk³adaj±c± siê z takiej samej liczby osobników. Wybierani s± oni z prawdopodobieñstwem proporcjonalnym do ich przystosowania z populacji bazowej. Na populacji tymczasowej dokonujemy operacji genetycznych (mutacji i krzy¿owania). Do krzy¿owania wybierane s± roz³±czne pary osobników i z pewnym prawdopodobieñstwem $p_c$ zachodzi ich skrzy¿owanie. Je¶li dosz³o do powstania osobników potomnych zastêpuj± one osobniki rodzicielskie. Nastêpnie na tak otrzymanej populacji tymczasowej dochodzi do mutacji osobników i otrzymania populacji potomnej $O^t$. Ta populacja staje siê w nastêpnej iteracji algorytmu now± populacj± bazow±.\\
 Zatrzymanie algorytmu mo¿e byæ dokonane je¶li np.:
@@ -96,13 +96,13 @@ W tej wersji algorytmu czêsto pêtlê algorytmu nazywa siê generacj±, a ka¿d± popu
 
 \paragraph{Strategia (1+1)}
 
-Strategia (1+1) jest podstawow± strategii ewolucyjnych. W algorytmie tym mamy doczynienia z populacj± sk³adaj±c± siê z tylko jednego osobnika posiadaj±cego jeden chromosom. W ka¿dej pêtli algorytmu dokonuje siê mutacji tego chromosomu, co powoduje powstanie nowego osobnika. Osobnik ten jest poddawany ocenie, a nastêpnie dokonuje siê wyboru lepszego z dwóch istniej±cych osobników i tego pozostawia w populacji.\\
+Strategia (1+1) jest podstawow± strategii ewolucyjnych. W algorytmie tym mamy do czynienia z populacj± sk³adaj±c± siê z tylko jednego osobnika posiadaj±cego jeden chromosom. W ka¿dej pêtli algorytmu dokonuje siê mutacji tego chromosomu, co powoduje powstanie nowego osobnika. Osobnik ten jest poddawany ocenie, a nastêpnie dokonuje siê wyboru lepszego z dwóch istniej±cych osobników i tego pozostawia w populacji.\\
 W mutacji dodaje siê do ka¿dego genu chromosomu losow± modyfikacjê rozk³adem normalnym:
 \begin{equation}
 Y^t_i = X^t_i + \sigma\xi_{N(0,1),i}
 \end{equation}
 
-Warto¶æ $\sigma$ bêdzie powodowa³a wiêksze lub mniejsze zmiany w chromosomie. Je¶li chcemy przeszukaæ przestrzeñ, powinni¶my zwiêkszaæ jej warto¶æ, co jest po¿±dane zw³aszcza w pocz±tkowej fazie dzia³ania agorytmu. Natomiast, aby znale¼æ jak najlepsze rozwi±zanie, wiedz±c ¿e obecne rozwi±zanie jest ju¿ bardzo bliskie najlepszemu, mo¿emy zmniejszaæ warto¶æ $\sigma$ przeszukuj±c tylko najbli¿sz± przestrzeñ.\\
+Warto¶æ $\sigma$ bêdzie powodowa³a wiêksze lub mniejsze zmiany w chromosomie. Je¶li chcemy przeszukaæ przestrzeñ, powinni¶my zwiêkszaæ jej warto¶æ, co jest po¿±dane zw³aszcza w pocz±tkowej fazie dzia³ania algorytmu. Natomiast, aby znale¼æ jak najlepsze rozwi±zanie, wiedz±c ¿e obecne rozwi±zanie jest ju¿ bardzo bliskie najlepszemu, mo¿emy zmniejszaæ warto¶æ $\sigma$ przeszukuj±c tylko najbli¿sz± przestrzeñ.\\
 Do wyznaczania $\sigma$ powsta³ nastêpuj±cy algorytm zwany regu³± 1/5 sukcesów:
 \begin{enumerate}
 \item Je¶li przez kolejnych k pêtli algorytmu mutacja powoduje powstanie lepszego osobnika w wiêcej ni¿ 1/5 wszystkich mutacji, to zwiêkszamy $\sigma$: $\sigma' = c_i \sigma$. Warto¶æ $c_i$ wyznaczona empirycznie wynosi $ \frac{1}{0.82} $
