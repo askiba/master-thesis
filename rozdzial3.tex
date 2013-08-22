@@ -1,10 +1,70 @@
 \chapter{Istniej±ce rozwi±zania}
 \label{cha:rozwiazania}
 
-W rozdziale tym przedstawiono informacje .
+W rozdziale tym przedstawimy istniej±ce rozwi±zania zarówno architektoniczne, które umo¿liwiaj± rozproszone obliczenia w modelu Volunteer Computing, jak i rozwi±zania dotykaj±ce problemu zwi±zanego z poszukiwaniem optymalnej trasy narciarza na slalomie. 
 
 %---------------------------------------------------------------------------
 
-\section{Rozwi±zanie 1}
-\label{sec:rozwiazanie}
+\section{Platformy do Volunteer Computing}
+\label{sec:platformyDoVolunteerComputing}
+W klasycznym modelu, architektura umo¿liwiaj±ca prowadzenie obliczeñ w modelu Volunteer Computing sk³ada³a siê z aplikacji klienckich, które musimusz± byæ pobrane oraz zainstalowane na  komputerze typu PC, oraz serwera, który zarz±dza wysy³aniem zadañ i odbieraniem rozwi±zañ. 
 
+Konieczno¶æ pobierania i instalowania aplikacji na urz±dzeniu implikuje wymóg tworzenia i utrzymywania wersji aplikacji pod ka¿dy znacz±cy system operacyjny. Proces wyboru odpowiedniej kompilacji programu klienckiego oraz jego instalacji jest pierwsz± barier± jak± napotyka przeciêtna osoba chc±ca kontrybuowaæ do naukowego projektu.
+
+Zleceniodawcy obliczeñ, zauwa¿yli, ¿e na ¶wiecie popularno¶æ zdobywaj± inne od komputerów osobistych urz±dzenia, które równie¿ dysponuj± nie wykorzystywan± moc± obliczeniow±. Konsola Play Station 3 by³a pierwszym urz±dzeniem tego typu, w³±czonych do projektów wykorzystuj±cych Volunteer Computing.
+
+
+W ostatnich latach, mo¿na zaobserwowaæ trend przenoszenia softwaru, który dotychczas zainstalowany by³ na komputerach jako natywna aplikacja, w model SAAS (Software As A Service). Programy pocztowe, funkcjonalne systemy CRM, czy odtwarzacze muzyczne coraz czê¶ciej dostêpne s± za po¶rednictwem przegl±darek internetowych. Taka zmiana mo¿liwa by³a dziêki rozwojowi silników Java Script w we wspó³czesnych przegl±darkach, oraz implementacja w przegl±darkach zaawansowanych elementów ze specyfikacji HTML5 oraz Web Workers.
+
+W tym rozdziale, zaprezentujemy przekrój obecnie najbardziej znacz±cych platform umo¿liwiaj±cych wykonywanie obliczeñ w modelu Volunteer Computing.
+
+\subsection{Great Internet Mersenne Prime Searchy}
+Pierwszym projektem wykorzystuj±cym Volunteer Computing jest rozpoczêty na pocz±tku 1996 roku a trwaj±cy do dzi¶ GIMPS (Great Internet Mersenne Prime Search), którego celem jest znalezienie jak najwiêkszej ilo¶ci specyficznych liczb pierwszych - tzn. Liczb Pierwszych Marsenne'a. Do tej pory kolaboracyjne wysi³ki doprowadzi³y do odnalezienia 14 takich liczb. Moc systemu da³a by teoretycznie, wg. danych na listopad 2012 roku - 330-ste miejsce w rankingu TOP500 - rankingu najmocniejszych komputerów na ¶wiecie. 
+
+System sk³ada siê z aplikacji klienckich stworzonych dla 9 platform i konfiguracji systemów. Twórcy zapewniaj±, ¿e kod programu jest wysoce zoptymalizowanym kodem asemblerowym Intela. Po uruchomieniu, program nawi±zuje kontakt z serwerem nazwanym PrimeNet aby otrzymaæ czê¶æ pracy.
+
+GIMPS jest ciekawym projektem, który ma swoje sukcesy i skale, co potwierdzaj± publikowane regularnie informacje o nowych znaleziskach oraz wielko¶ci sieci komputerów bior±cych udzia³ w obliczeniach. Interfejs i User Experience które oferuje platforma jest jednak bardzo s³aby i archaiczny i zupe³nie nie przystosowany do u¿ytkowników wspó³czesnego internetu, przez co  
+
+\subsection{Distributed.net}
+Kolejn± znacz±c± platform± do Volunteer Computing by³ stworzony w 1997 roku \textit{distributed.net}. Platforma to powsta³a oryginalnie w celu brania udzia³u w konkursach organizowanych przez RSA Laboratory, tzw. RSA Secret-Key Challenge. Konkursy te polega³y na uhonorowaniu pierwszej osoby, która znalaz³a klucz u¿yty do szyfrowania tekstu oraz odszyfrowa³a za jego pomoc± tekst zaszyfrowany jednym ze znanych algorytmów szyfruj±cych. Konkursy mia³y na celu zademonstrowanie stopnia bezpieczeñstwa algorytmu szyfruj±cego u¿ywaj±cego kluczy o ró¿nej d³ugo¶ci. Nagrod± by³o 10000 dolarów. Sieæ ochotników podpiêtych do systemu \textit{distributed.net} z³ama³a 56 bitowy klucz u¿yty przez szyfr blokowy RC5 do zaszyfrowania zdania: "The unknown message is: It's time to move to a longer key length". Metod± przyjêt± do z³amania tego szyfru by³ najprostszy brute-force, która to dziêki metodologi Volunteer Computing przynios³a pozytywne skutki po 250 dniach poszukiwañ ca³ej przestrzeni rozwi±zañ.
+
+Program \textit{distributed.ne}t trwa dalej mimo, ¿e RSA Laboratory wycofa³o siê ju¿ z fundowania nagród za ³amanie kolejnych coraz to d³u¿szych kluczy. Osoba chc±ca do³±czyæ do ochotników nie ma jednak bardzo ³atwego zadania i nie do³±czanie do programu nie nale¿y do przyjemnych, Nale¿y wej¶æ na stronê \textit{distributed.net} i wybraæ odpowiedni dla swojego systemu operacyjnego program kliencki. Wybór jest spory i mo¿e przysporzyæ problemy mniej obeznanym w komputerach osob± gdy¿ wyró¿nione s± nie tylko nazwy systemów ale i architektury (np. Windows x86/CUDA-2.2, x86/CUDA-3.1). Po zdecydowaniu  siê ju¿ na który¶ z programów i po zakoñczeniu pobierania, mo¿e  dostaæ gro¼nie wygl±daj±cy komunikat w którym jego system operacyjny ostrze¿e go ¿e program jest potencjalnie szkodliwy dla komputera - tak jak to widaæ na za³±czonym zdjêciu.
+
+\begin{figure}[h]
+\centering
+\includegraphics{distributedNet}
+\end{figure}
+
+Ufaj±c dostawcy, po zdecydowaniu siê na zainstalowanie programu, otwiera siê bardzo ma³o przyjazny interfejs konsolowy.
+
+\includegraphics{distributedNetConsole}
+
+Nasz wniosek jest taki, ¿e przestarza³e i nieatrakcyjne systemy do Volunteer Computing nie maj± racji bytu w dzisiejszym ¶wiecie i prêdzej czy pó¼niej wygin± na rzecz bardziej przyjaznych rozwi±zañ.
+
+
+\subsection{Berkeley Open Infrastructure for Network Computing}
+
+\subsection{Folding@home}
+Projekt wywodz±cy siê z Amerykañskiego Uniwersytetu Stanford, by³ pierwszym, który zauwa¿y³ ¿e potencja³ Volunteer Computing nie zamyka siê tylko na komputery osobiste i wykorzystanie jednostek CPU ale tak¿e coraz bardziej rozwijanych jednostek GPU, procesorów na PlayStation 3. Jako pierwszy du¿y projekt wykorzysta³ te¿ model Message Passing Interface. Pojedynczy klienci dostaj± z serwera czê¶æ symulacji, i po jej wykonaniu odsy³aj± j± z powrotem do serwera, w którym czê¶ci s± ³±czone i stwarzaj± ca³o¶ciow± symulacjê. Co ciekawe, ochotnicy bior±cy udzia³ w symulacjach, mog± ¶ledziæ swój wk³ad w projekt Folding@home poprzez stronê internetow±. Techniki grywalizacyjne zaczê³y byæ wprowadzane do projektów Volunteer Computing w celu utrzymania zainteresowania ochotników w braniu udzia³u w projekcie
+
+\begin{figure}[h]
+\centering
+\includegraphics{foldingStart}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics{foldingMonitor}
+\end{figure}
+
+Folding@home jest jednym z najwiêkszych systemów komputerowych na ¶wiecie. Jego szybko¶æ szacuje siê na oko³o 14 petaFLOPSów na sekundê, wiêcej ni¿ wszystkich projektów, które s± przetwarzane na wywodz±cej siê z Berkeley platformie BOINC. W 2007 zosta³ wpisany do ksiêgi rekordów Guinessa jako system rozproszonych obliczeñ o najwiêkszej mocy obliczeniowej. Stan na Czerwiec 2013 wskazuje prawie pó³ miliona aktywnych CPU oraz prawie 25 tysiêcy aktywnych GPU.
+
+Folding@home wprowadza elementy grywalizacyjne poprzez wprowadzenie systemu punktowego. Osoby udostêpniaj±ce swoje zasoby dostaj± punkty za ka¿de wykonane zadanie, dodatkowe punkty mo¿na zdobywaæ za szybkie i pewne wykonanie pewnych zadañ które s± szczególnie wymagaj±ce obliczeniowo albo maj± wiêkszy priorytet ze wzglêdu na warto¶æ naukow±. Gromadziæ wiêcej punków mo¿na dziêki w³±czeniu do programu, pod jednym loginem, wielu swoich maszyn. Ogólnym za³o¿eniem systemu punktowego jest motywowanie ochotników do coraz wiêkszego zaanga¿owania i w³±czania znajomych do daj±cych korzy¶ci nauce rywalizacji. Statystyki, zarówno poszczególnych dru¿yn jak i indywidualnych osób s± widoczne na stronie g³ównej projektu.
+
+Oprogramowanie Folding@Home jest przyjazne. ¦ci±gniêcie i instalacja nie powoduje ¿adnych niepokoj±cych ostrze¿eñ ze strony systemu operacyjnego. Interfejs kliencki jest interfejsem webowym, ³±cz±cym siê z nadaj±c± na lokalnej maszynie aplikacj± klienck± wykonuj±c± obliczenia. twórcy platformy staraj± siê u³atwiæ rozprzestrzenianie siê informacji o mo¿liwo¶ci kontrybuowania do naukowego projektu daj±c mo¿liwo¶æ udostêpniania informacji o programie poprzez portale spo³eczno¶ciowe takie jak Facebook czy Twitter
+
+
+\begin{figure}[h]
+\centering
+\includegraphics{foldingShare}
+\end{figure}
