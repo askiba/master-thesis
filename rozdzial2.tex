@@ -223,7 +223,7 @@ Algorytm ewolucyjny wybiera osobniki lepiej przystosowane, a wiêc te, które posi
 
 Krzy¿owanie wystêpuje w tym algorytmie pod nazw± rekombinacja. Najczê¶ciej sprowadza siê do u¶rednienia lub wymianie warto¶ci wektorów, tak¿e wektora $\sigma$.
 
-\paragraph{Strategia ($\mu$, $\lambda$)}
+\paragraph{Strategia ($\mu$, $\lambda$).}
 Strategia ($\mu$ + $\lambda$) posiada pewne wady, które postanowiono spróbowaæ wyeliminowaæ za pomoc± nowej strategii ($\mu$, $\lambda$). Poprzedni algorytm sprawia problemy je¶li w populacji pojawia siê osobnik o wysokiej warto¶ci przystosowania, ale posiadaj±cy zbyt du¿e (albo zbyt ma³e) warto¶ci odchyleñ standardowych. Usuniêcie takiego osobnika z populacji czêsto nie jest procesem krótkotrwa³ym, gdy¿ wp³ywa on na powstaj±ce potomstwo, przekazuj±c mu podobne do jego, nieodpowiednie warto¶ci odchyleñ.\\
 W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie nie s± nigdy brane do kolejnej populacji bazowej. Podczas selekcji korzysta siê zatem tylko z powsta³ej populacji potomnej, z niej wybieraj±c osobniki do populacji bazowej w kolejnej iteracji.
 
@@ -264,6 +264,7 @@ Do pierwszej z nich nale¿± algorytmy polegaj±ce na zadawaniu pytañ przez ucznia 
 Czasem granice pomiêdzy tymi grupami s± nieostre i przynale¿no¶æ algorytmu do jakiej¶ grupy mo¿e zale¿eæ wy³±cznie od punktu widzenia.
 
 \subsection{Uczenie siê ze wzmocnieniem}
+\label{subsec:wzmocnienie}
 W przypadku uczenia siê ze wzmocnieniem zadaniem ucznia jest obserwacja stanów ¶rodowiska, wykonywanie akcji oraz obserwowanie efektów tych akcji poprzez warto¶æ otrzymywanego wzmocnienia jako rzeczywistoliczbowej nagrody. Tak jak zosta³o to napisane wcze¶niej, w tym przypadku nie mówimy o nauczycielu, ale o krytyku, który warto¶ciuje zachowanie poprzez dostarczanie wzmocnienia. Zadaniem ucznie jest odnalezienie takiego zachowania, które przyniesie mu jak najwiêksz± nagrodê. Najczê¶ciej uczeñ nie ma pojêcia o tym jakie jest ¶rodowisko, czêsto niedeterministyczne, dlatego musi wchodziæ w interakcjê z nim, aby je poznaæ.
 
 \begin{figure}[h]
@@ -296,7 +297,7 @@ E[\sum_{t=0}^\infty \gamma^tr_t]
 Im wspó³czynnik $\gamma$ jest bli¿szy 0, tym bardziej maksymalizuje siê tylko natychmiastowe nagrody. Je¶li $\gamma = 1$ to maksymalizowana jest suma wszystkich otrzymanych nagród.
 
 \subsubsection{Zadania epizodyczne}
-W niektórych przypadkach dzia³ania ucznia mo¿na ³atwo wydzieliæ na niezale¿ne epizody, z których ka¿dy trwa najczê¶ciej skoñczon± liczbê kroków. Rozdzia³ ten jest kierowany tym, ¿e ka¿da z tych prób jest oceniania osobno. Zatem maksymalizujemy kryterium jako¶ci w ka¿dej próbie oddzielni. Zatem w równaniu \ref{dyskont} musimy zast±piæ sumê nieskoñczon± otrzymuj±c:
+W niektórych przypadkach dzia³ania ucznia mo¿na ³atwo wydzieliæ na niezale¿ne epizody, z których ka¿dy trwa najczê¶ciej skoñczon± liczbê kroków. Rozdzia³ ten jest kierowany tym, ¿e ka¿da z tych prób jest oceniania osobno. Zatem maksymalizujemy kryterium jako¶ci w ka¿dej próbie oddzielnie. Zatem w równaniu \ref{dyskont} musimy zast±piæ sumê nieskoñczon± otrzymuj±c:
 
 \begin{equation}
 E[\sum_{t=0}^{n-1} \gamma^tr_t]
@@ -349,7 +350,7 @@ W przypadku algorytmów takich jak Q-learning, w których mo¿na u¿yæ innej strateg
 
 % wg http://webdocs.cs.ualberta.ca/~sutton/book/ebook/node16.html 
 % http://webdocs.cs.ualberta.ca/~sutton/book/ebook/node17.html
-Najprostszym sposobem wyboru akcji jest wybranie najlepszej z mo¿liwych akcji, jednak metoda ta uniemo¿liwia eksploracjê. Aby to umo¿liwiæ, wprowadza siê modyfikacjê, która polega na tym, ¿e co jaki¶ czas z prawdopodobieñstwem $\epsilon$ stosuje siê wspomniany wcze¶niej jednostajnie losowy wybór akcji. Strategia ta nazywana jest strategi± $\epsilon$-zach³ann±. Metoda ta jest znana jako dobrze równowa¿±ca zadania eksploracji i eksploatacji.
+Najprostszym sposobem wyboru akcji jest wybranie najlepszej z mo¿liwych akcji, nazywane strategi± zach³ann±, jednak metoda ta uniemo¿liwia eksploracjê. Aby to umo¿liwiæ, wprowadza siê modyfikacjê, która polega na tym, ¿e co jaki¶ czas z prawdopodobieñstwem $\epsilon$ stosuje siê wspomniany wcze¶niej jednostajnie losowy wybór akcji. Strategia ta nazywana jest strategi± $\epsilon$-zach³ann±. Metoda ta jest znana jako dobrze równowa¿±ca zadania eksploracji i eksploatacji.
 
 Minusem strategii $\epsilon$-zach³annej jest to, ¿e w trakcie eksploracji ka¿da z akcji jest losowana z takim samym prawdopodobieñstwem. Aby wyeliminowaæ ten element, stosuje siê metody selekcji nazywane \textit{softmax}. Wszystkie akcje mog± zostaæ wylosowane, ale z prawdopodobieñstwem odpowiadaj±cym im dotychczasowej warto¶ci. Najczê¶ciej korzysta siê z rozk³adu Gibbs'a lub Boltzmann'a. Prawdopodobieñstwo wybrania akcji $a$ w próbie $t$ wynosi:
 

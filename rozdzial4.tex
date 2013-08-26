@@ -234,6 +234,37 @@ Zastosowanie algorytmu genetycznego sprawdzi³o siê w przypadku problemu narciarz
 Zatem zastosowanie algorytmu lokalnej optymalizacji powinno pomóc w koñcowej fazie poszukiwañ. Z tego powodu u¿yty zosta³ algorytm Hill climbing opisany w rozdziale \ref{cha:wstepTeoretyczny}. W ka¿dym kroku algorytmu sprawdzane jest czy zmiana pojedynczej zmiennej - w tym wypadku poziomej pozycji punktu przejazdu, daje poprawê wyniku. Je¶li zmiany te nie przynosz± rezultatów, s± mniejsze ni¿ narzucony parametr $\epsilon$ algorytm zatrzymuje swoje dzia³anie. Warto¶æ $\epsilon$ wynosi przewa¿nie 0.00001. W przypadku parametrów typowych dla tego algorytmu postanowiono wybraæ warto¶ci dla przyspieszenia standardowa - 1.2, natomiast dla kroku, mniejsz± ni¿ zwykle, bo wynosz±c± 0.5. Zmiana ta wynika z za³o¿enia, ¿e rozwi±zanie nie powinno potrzebowaæ wiêkszych zmian, aby znale¼æ rozwi±zanie jak najlepsze.
 %---------------------------------------------------------------------------
 
+\section{Uczenie maszynowe}
+\label{sec:maszynoweRozw}
+
+Oprócz u¿ycia algorytmu genetycznego oraz algorytmu Hill climbing warto by³oby sprawdziæ czy inne podej¶cie do problemu mo¿e dawaæ lepsze rozwi±zanie. Zamiast analizowaæ trasê jako ca³o¶æ, mo¿na spróbowaæ tak jak w rzeczywisto¶ci pozwoliæ narciarzowi decydowaæ o tym jak pojechaæ. Dobry narciarz korzysta z wiedzy o po³o¿eniu dwóch lub trzech kolejnych bramek i na tej podstawie podejmuje decyzjê o torze jazdy. W takim podej¶ciu mo¿na spróbowaæ zastosowaæ uczenie maszynowe.
+
+Je¶li chodzi o reprezentacjê problemu to zachowane zosta³o dotychczasowe za³o¿enie o poziomych liniach wyznaczaj±cych kolejne po³o¿enia w poziomie toru jazdy. Jednak w tym przypadku konieczne jest do³o¿enie równie¿ linii pionowych, a wiêc utworzenie siatki na stoku, której wêz³y wyznaczaj± mo¿liwe punkty tworz±ce tor przejazdu. Wci±¿ obowi±zuje zasada, ¿e kolejne punkty musz± znajdowaæ siê na kolejnych poziomych liniach, tak samo jak konieczno¶æ przejazdu przez punkty, które reprezentuj± bramki. Oczywi¶cie mo¿na powiedzieæ, ¿e takie rozwi±zanie jest mniej dok³adne, ale wszystko zale¿y od gêsto¶ci siatki.
+
+\subsection{Uczenie ze wzmocnieniem}
+Za³ó¿my na razie, ¿e nasz narciarz zna po³o¿enie tylko jednej bramki wprzód, a dok³adniej, w ka¿dym kroku wie w jakiej odleg³o¶ci w poziomie i pionie znajduje siê kolejna bramka. Jego zadaniem jest nauczenie siê jak na podstawie tej wiedzy zachowaæ siê, aby jak najszybciej dotrzeæ do celu.\\
+Niech slalom sk³ada siê tylko z jednej bramki. Opieraj±c siê na informacjach z rozdzia³u \ref{sec:wzmocnienie}, bardzo ³atwo przedstawiæ nasz problem w postaci uczenia siê ze wzmocnieniem. Narciarz jest uczniem, który poprzez seriê prób i b³êdów, stwierdza jakie zachowanie daje najlepsze efekty. Stanem w naszym ¶rodowisku bêdzie odleg³o¶æ narciarza (w poziomie i pionie) od najbli¿szej bramki. Akcja to wybór zmiany po³o¿enia poziomego na stoku, poruszanie siê w dó³ stoku jest okre¶lone poprzez parametr wej¶ciowy. Po wykonaniu akcji, zmienia siê po³o¿enie narciarza a zatem i jego stan. Poniewa¿ poziome linie wyznaczaj± ile punktów znajdzie siê pomiêdzy ka¿dymi dwiema bramkami, wiêc zawsze, bez wzglêdu na ilo¶æ bramek, dla konkretnego ich u³o¿enia nasze rozwi±zanie bêdzie sk³ada³o siê z okre¶lonej liczby punktów. Widzimy zatem, ¿e nasz algorytm bêdzie polega³ na wielokrotnym powtarzaniu przejazdu slalomu, a ilo¶æ kroków w ka¿dym powtórzeniu bêdzie sta³a. Oznacza to, ¿e naturalnym jest nazwanie tego problemu zadaniem epizodycznym opisanym w rozdziale \ref{subsec:epizodyczne}, jednak nie jest to zadanie do-sukcesu lub do-pora¿ki, gdy¿ narzucone jest, ¿e liczba kroków jest zawsze sta³a w epizodzie. Zatem w ka¿dym epizodzie narciarz musi otrzymywaæ wzmocnienie, które bêdzie wskazywa³o jak dobry jest tor, którym w³a¶nie siê porusza³. Najwa¿niejszy w tej kwestii jest oczywi¶cie czas, w jakim narciarz jest w stanie pokonaæ dany slalom. Zatem nagroda powinna zawsze byæ funkcj± tego czasu. Przyk³adowo, mo¿e byæ to funkcja liniowa: $a-t$, gdzie $a$ to pewna sta³a, a $t$ to czas przejazdu jaki uzyska³ uczeñ. Im krótszy czas, tym wy¿sza nagroda i odwrotnie. Prawid³owe dobranie funkcji nagrody, a tak¿e jej parametrów, tak jak $a$, mo¿e niestety wp³ywaæ na skuteczno¶æ rozwi±zania. Pozosta³e przyk³ady funkcji oraz ich wp³yw na jako¶æ rozwi±zania opisane s± w rozdziale z eksperymentami (\ref{cha:wyniki}). Gdyby slalom sk³ada³ siê z wiêkszej ilo¶ci bramek, nagrodê narciarz otrzyma³by przy ka¿dej bramce, a czas brany do obliczania by³by czasem potrzebnym na przejazd od poprzedniej bramki - w przypadku znajomo¶ci odleg³o¶ci do wiêkszej ilo¶ci bramek, brano by pod uwagê czas przejazdu takiej liczby bramek.
+
+\subsection{Q-learning}
+W zastosowanym rozwi±zaniu u¿yty zosta³ algorytm Q-learning opisany w rozdziale \ref{subsec:wzmocnienie}. W algorytmie tym stosowane s± dwa parametry: $\alpha$, $\gamma$, których warto¶æ trzeba dostosowaæ, aby otrzymaæ jak najlepsze rozwi±zanie. Testy przeprowadzone do znalezienia tych warto¶ci s± opisane w rozdziale \ref{cha:wyniki}.
+
+\subsection{Akcja}
+Przyjrzyjmy siê dok³adniej akcjom, które podejmowaæ bêdzie narciarz.\\
+Za ka¿dym razem otrzymywana jest lista akcji, które mo¿na wykonaæ bêd±c w danym stanie. Aby ograniczyæ liczbê mo¿liwo¶ci, a jednocze¶nie nie odrzucaæ najlepszego rozwi±zania, trzeba by³o zdecydowaæ jakie i ile akcji powinno byæ dostêpnych. Opieraj±c siê na do¶wiadczeniach rzeczywistych, wiadomo ¿e narciarz najczê¶ciej kieruje siê w stronê najbli¿szej bramki i nie wykonuje bardzo gwa³townych skrêtów. Dlatego zak³adaj±c, ¿e bramka jest po prawej stronie, narciarz ma dok³adnie cztery mo¿liwo¶ci: przesun±æ siê o krok w lewo, nie przemieszczaæ siê w poziomie w ogóle, o krok w prawo, lub dwa kroki w prawo. Symetryczna sytuacja jest dla bramki umieszczonej z lewej strony. Oczywi¶cie krok oznacza tu szeroko¶æ narzuconej siatki. W przypadku gêstej siatki, ilo¶æ mo¿liwo¶ci powinna byæ zwiêkszona, jednak zwiêksza to tak¿e z³o¿ono¶æ algorytmu.\\
+Z powodu na³o¿enia decyzji o przeje¿d¿aniu przez punkty reprezentuj±ce bramki, bêd±c tu¿ przed bramk±, jedyn± mo¿liwo¶ci± narciarza jest pojechanie prosto do tej bramki - zamiast czterech opcji dostêpna jest tylko jedna, która wymusza przejazd do punktu-bramki.
+
+Kolejn± wa¿n± decyzj± jest wybór sposobu w jaki narciarz decyduje o wybraniu akcji spo¶ród mo¿liwych do wykonania w danym stanie. W wykonanych testach wypróbowane zosta³y dwie mo¿liwo¶ci:
+
+\begin{itemize}
+\item strategia zach³anna - wybór pada zawsze na najlepsz± z mo¿liwo¶ci
+\item ...
+%  TODO  %
+\end{itemize}
+
+%paragraf o prêdko¶ci
+
+%---------------------------------------------------------------------------
+
 \section{Architektura systemu}
 \label{sec:architektura}
 
