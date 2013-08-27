@@ -3,7 +3,68 @@
 
 W rozdziale tym przedstawiono informacje .
 
+Je¿eli nie jest wskazane inaczej w eksperymencie, przyjmowane s± nastêpuj±ce warto¶ci sta³e:
+\begin{itemize}
+\item $\mu = 0.05$ - wspó³czynnik tarcia, typowa warto¶æ dla nasmarowanych nart %TODO odno¶nik
+\item $\rho = 1.17 kg*(m^{-3})$ - przybli¿ona warto¶æ gêsto¶ci powietrza dla temperatury $0^\circ C$
+i wilgotno¶ci 20\% na wysoko¶ci 800 m n.p.m
+\item $C = 0.6$ - wspó³czynnik oporu powietrza, typowe warto¶ci to 0.4 - 1
+\item $A = 0.2 m^2$ - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶ci narciarza
+\item $k_2 = 0.5 * C * roh * A$ - wspó³czynnik oporu powietrza
+\item $k_1 = 0.05 $ - wspó³czynnik oporu powietrza
+
+\end{itemize}
 %---------------------------------------------------------------------------
+
+\section{Weryfikacja modelu}
+\label{sec:weryfikacja}
+
+Chcia³y¶my sprawdziæ, ¿e model jest prawid³owy ...
+
+\subsection{Masa i nachylenie}
+Na pocz±tek zosta³y przeprowadzane proste eksperymenty, które dowodz±, ¿e przyjêty model jest poprawny. Dlatego dla celów pierwszego testu naj³atwiej by³o sprawdziæ jak zmienia siê czas przejazdu narciarza poruszaj±cego siê po prostej w dó³ stoku przy ró¿nych masach oraz nachyleniu stoku, dodatkowo sprawdzaj±c jaki wp³yw na wyniki ma równie¿ tarcie oraz opór powietrza.
+
+Analizuj±c równanie \ref{eq:rownRuchu}, które opisuje model poruszania siê narciarza zauwa¿amy, ¿e jego masa wp³ywa jedynie na warto¶æ si³y oporu powietrza. Natomiast k±t nachylenia $\alpha$ wp³ywa zarówno na si³ê ¶ci±gaj±c±, jak i na si³ê tarcia. W opisanym eksperymencie zostanie pokazane, ¿e:
+\begin{itemize}
+\item im wiêkszy k±t nachylenia stoku tym szybciej porusza siê narciarz, bez wzglêdu na rodzaj uwzglêdnionych si³ oporu
+\item je¶li uwzglêdnimy tylko si³ê ¶ci±gaj±c±, bez si³ oporu czas przejazdu narciarzy o ró¿nych masach na tej samej trasie jest identyczny
+\item taki sam wynik otrzymamy je¶li uwzglêdnimy dodatkowo si³ê tarcia
+\item przy uwzglêdnieniu si³y oporu powietrza otrzymujemy nastêpuj±c± zale¿no¶æ: im wiêksza jest masa narciarza, tym mniejsza jest si³a oporu powietrza co skutkuje szybszym przejazdem narciarza
+\end{itemize}
+
+\subsubsection{Opis eksperymentu}
+Eksperyment zosta³ przeprowadzony na dwóch modelach stoków narciarskich. Oba maj± 600 m d³ugo¶ci co odpowiada rzeczywistej d³ugo¶ci stoku Harenda w Zakopanem. Stoki modelujemy jako równie pochy³e o sta³ym nachyleniu. Aby zweryfikowaæ prawid³owo¶æ modelu, w eksperymencie zosta³y wprowadzone rzeczywiste warto¶ci nachyleñ stoków Harenda w Zakopanem oraz Kotelnica w Bia³ce Tatrzañskiej.
+\begin{itemize}
+\item Harenda - ok. $20^\circ$ (0.33667 radianów)
+\item Kotelnica - ok. $8^\circ$ (0.1470 radianów)
+\end{itemize}
+
+Aby zweryfikowaæ wszystkie za³o¿enia eksperymentu przeprowadzone zosta³y trzy próby, których wyniki mo¿na zobaczyæ odpowiednio na kolejnych wykresach \ref{fig:bezOporow}, \ref{fig:bezOporu}, \ref{fig:wszystkieOpory}. W pierwszej czê¶ci eksperymentu uwzglêdniamy tylko i wy³±cznie si³ê grawitacji, w drugiej dok³adamy wy³±cznie si³ê tarcia , natomiast w trzeciej uwzglêdniamy wszystkie si³y oporu, a wiêc tak¿e si³ê oporu powietrza.
+
+\subsubsection{Rezultaty eksperymentu}
+
+\begin{figure}[hp]
+\label{fig:bezOporow}
+\centering
+\includegraphics[scale=0.8]{experyment-masa-bez-oporow}
+\end{figure}
+
+\begin{figure}[hp]
+\label{fig:bezOporu}
+\centering
+\includegraphics[scale=0.8]{experyment-masa-bez-oporu}
+\end{figure}
+
+\begin{figure}[hp]
+\label{fig:wszystkieOpory}
+\centering
+\includegraphics[scale=0.8]{experyment-masa}
+\end{figure}
+
+Obserwujemy, ¿e w ka¿dym z trzech przypadków na stromym stoku narciarze przeje¿d¿aj± ten sam dystans w krótszym czasie. W pierwszej i drugiej czê¶ci eksperymentu nie ma znaczenia masa narciarza - czas przejazdu jest taki sam. Jednak na wykresie \ref{fig:bezOporow} czas przejazdu wynosi odpowiednio ok. 19 i 28 s., natomiast je¶li uwzglêdnimy si³ê tarcia, czasy te wyd³u¿aj± siê do ok. 21 i 35 s.\\
+Analizuj±c wykres \ref{fig:wszystkieOpory} zauwa¿amy, ¿e na bardziej stromym stoku ró¿nica w czasie przejazdu pomiêdzy ciê¿szym a l¿ejszym narciarzem wynosi 1.14 s na korzy¶æ ciê¿szego, a na ³agodniejszym 1.94 s równie¿ na korzy¶æ ciê¿szego. Zmierzone czasy przejazdu slalomu w rzeczywisto¶ci na stoku Harenda wynosz± ok. 40 s, a wiêc wydaje siê rozs±dne, ¿e przejazd na wprost mo¿e zajmowaæ ok. 22 s, które zosta³y otrzymane w eksperymencie. W porównaniu z poprzednimi czê¶ciami eksperymentu ³atwo spostrzec, ¿e czas przejazdu jest jeszcze d³u¿szy - 22-23 oraz 38-40 s.
+
+\subsection{Jazda po ³amanej}
 
 \section{Optymalizacja}
 \label{sec:optWyniki}
