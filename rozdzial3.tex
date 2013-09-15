@@ -7,28 +7,28 @@ W rozdziale tym przedstawimy istniej±ce rozwi±zania zarówno architektoniczne, kt
 
 \section{Platformy do Volunteer Computing}
 \label{sec:platformyDoVolunteerComputing}
-W klasycznym modelu, architektura umo¿liwiaj±ca prowadzenie obliczeñ w modelu Volunteer Computing sk³ada³a siê z aplikacji klienckich, które musimusz± byæ pobrane oraz zainstalowane na  komputerze typu PC, oraz serwera, który zarz±dza wysy³aniem zadañ i odbieraniem rozwi±zañ. 
+
+W klasycznym modelu, architektura umo¿liwiaj±ca prowadzenie obliczeñ w modelu Volunteer Computing sk³ada³a siê z aplikacji klienckich, które musz± byæ pobrane oraz zainstalowane na  komputerze typu PC, oraz serwera, który zarz±dza wysy³aniem zadañ i odbieraniem rozwi±zañ. 
 
 Konieczno¶æ pobierania i instalowania aplikacji na urz±dzeniu implikuje wymóg tworzenia i utrzymywania wersji aplikacji pod ka¿dy znacz±cy system operacyjny. Proces wyboru odpowiedniej kompilacji programu klienckiego oraz jego instalacji jest pierwsz± barier± jak± napotyka przeciêtna osoba chc±ca kontrybuowaæ do naukowego projektu.
 
-Zleceniodawcy obliczeñ, zauwa¿yli, ¿e na ¶wiecie popularno¶æ zdobywaj± inne od komputerów osobistych urz±dzenia, które równie¿ dysponuj± nie wykorzystywan± moc± obliczeniow±. Konsola Play Station 3 by³a pierwszym urz±dzeniem tego typu, w³±czonych do projektów wykorzystuj±cych Volunteer Computing.
+Zleceniodawcy obliczeñ, zauwa¿yli, ¿e na ¶wiecie popularno¶æ zdobywaj± inne od komputerów osobistych urz±dzenia, które równie¿ dysponuj± nie wykorzystywan± moc± obliczeniow±. Konsola Play Station 3 by³a pierwszym urz±dzeniem tego typu, w³±czonych do projektów wykorzystuj±cych Volunteer Computing. W sierpniu 2013 udostêpniono natomiast aplikacjê dziêki do naukowych projektów mo¿na kontrybuowaæ po¶wiêcaj±c zasoby obliczeniowe swojego urz±dzenia z systemem Android.
 
-
-W ostatnich latach, mo¿na zaobserwowaæ trend przenoszenia softwaru, który dotychczas zainstalowany by³ na komputerach jako natywna aplikacja, w model SAAS (Software As A Service). Programy pocztowe, funkcjonalne systemy CRM, czy odtwarzacze muzyczne coraz czê¶ciej dostêpne s± za po¶rednictwem przegl±darek internetowych. Taka zmiana mo¿liwa by³a dziêki rozwojowi silników Java Script w we wspó³czesnych przegl±darkach, oraz implementacja w przegl±darkach zaawansowanych elementów ze specyfikacji HTML5 oraz Web Workers.
+W ostatnich latach, mo¿na zaobserwowaæ trend przenoszenia softwaru, który dotychczas zainstalowany by³ na komputerach jako natywna aplikacja, w model SAAS (Software As A Service). Programy pocztowe, funkcjonalne systemy CRM, czy odtwarzacze muzyczne coraz czê¶ciej dostêpne s± za po¶rednictwem przegl±darek internetowych. Taka zmiana mo¿liwa by³a dziêki rozwojowi silników Java Script we wspó³czesnych przegl±darkach, oraz implementacja w przegl±darkach zaawansowanych elementów ze specyfikacji HTML5 oraz Web Workers.
 
 W tym rozdziale, zaprezentujemy przekrój obecnie najbardziej znacz±cych platform umo¿liwiaj±cych wykonywanie obliczeñ w modelu Volunteer Computing.
 
 \subsection{Great Internet Mersenne Prime Searchy}
-Pierwszym projektem wykorzystuj±cym Volunteer Computing jest rozpoczêty na pocz±tku 1996 roku a trwaj±cy do dzi¶ GIMPS (Great Internet Mersenne Prime Search), którego celem jest znalezienie jak najwiêkszej ilo¶ci specyficznych liczb pierwszych - tzn. Liczb Pierwszych Marsenne'a. Do tej pory kolaboracyjne wysi³ki doprowadzi³y do odnalezienia 14 takich liczb. Moc systemu da³a by teoretycznie, wg. danych na listopad 2012 roku - 330-ste miejsce w rankingu TOP500 - rankingu najmocniejszych komputerów na ¶wiecie. 
+Pierwszym projektem wykorzystuj±cym Volunteer Computing jest rozpoczêty na pocz±tku 1996 roku a trwaj±cy do dzi¶ \textit{GIMPS} (Great Internet Mersenne Prime Search), którego celem jest znalezienie jak najwiêkszej ilo¶ci specyficznych liczb pierwszych - tzn. Liczb Pierwszych Marsenne'a. Do tej pory kolaboracyjne wysi³ki doprowadzi³y do odnalezienia 14 takich liczb. Moc systemu da³a by teoretycznie, wg. danych na listopad 2012 roku - 330-ste miejsce w rankingu TOP500 - rankingu najmocniejszych komputerów na ¶wiecie. 
 
-System sk³ada siê z aplikacji klienckich stworzonych dla 9 platform i konfiguracji systemów. Twórcy zapewniaj±, ¿e kod programu jest wysoce zoptymalizowanym kodem asemblerowym Intela. Po uruchomieniu, program nawi±zuje kontakt z serwerem nazwanym PrimeNet aby otrzymaæ czê¶æ pracy.
+System sk³ada siê z aplikacji klienckich stworzonych dla 9 platform i konfiguracji systemów. Twórcy zapewniaj±, ¿e kod programu jest wysoce zoptymalizowanym kodem asemblerowym Intela. Po uruchomieniu, program nawi±zuje kontakt z serwerem nazwanym \textit{PrimeNet} aby otrzymaæ czê¶æ pracy.
 
-GIMPS jest ciekawym projektem, który ma swoje sukcesy i skale, co potwierdzaj± publikowane regularnie informacje o nowych znaleziskach oraz wielko¶ci sieci komputerów bior±cych udzia³ w obliczeniach. Interfejs i User Experience które oferuje platforma jest jednak bardzo s³aby i archaiczny i zupe³nie nie przystosowany do u¿ytkowników wspó³czesnego internetu, przez co  
+\textit{GIMPS} jest ciekawym projektem, który ma swoje sukcesy i skale, co potwierdzaj± publikowane regularnie informacje o nowych znaleziskach oraz wielko¶ci sieci komputerów bior±cych udzia³ w obliczeniach. Interfejs i User Experience które oferuje platforma jest jednak bardzo s³aby i archaiczny i zupe³nie nie przystosowany do u¿ytkowników wspó³czesnego internetu.  
 
 \subsection{Distributed.net}
-Kolejn± znacz±c± platform± do Volunteer Computing by³ stworzony w 1997 roku \textit{distributed.net}. Platforma to powsta³a oryginalnie w celu brania udzia³u w konkursach organizowanych przez RSA Laboratory, tzw. RSA Secret-Key Challenge. Konkursy te polega³y na uhonorowaniu pierwszej osoby, która znalaz³a klucz u¿yty do szyfrowania tekstu oraz odszyfrowa³a za jego pomoc± tekst zaszyfrowany jednym ze znanych algorytmów szyfruj±cych. Konkursy mia³y na celu zademonstrowanie stopnia bezpieczeñstwa algorytmu szyfruj±cego u¿ywaj±cego kluczy o ró¿nej d³ugo¶ci. Nagrod± by³o 10000 dolarów. Sieæ ochotników podpiêtych do systemu \textit{distributed.net} z³ama³a 56 bitowy klucz u¿yty przez szyfr blokowy RC5 do zaszyfrowania zdania: "The unknown message is: It's time to move to a longer key length". Metod± przyjêt± do z³amania tego szyfru by³ najprostszy brute-force, która to dziêki metodologi Volunteer Computing przynios³a pozytywne skutki po 250 dniach poszukiwañ ca³ej przestrzeni rozwi±zañ.
+Kolejn± znacz±c± platform± do Volunteer Computing jest stworzony w 1997 roku \textit{distributed.net}. Platforma to powsta³a oryginalnie w celu brania udzia³u w konkursach organizowanych przez RSA Laboratory, tzw. RSA Secret-Key Challenge. Konkursy te polega³y na uhonorowaniu pierwszej osoby, która znalaz³a klucz u¿yty do szyfrowania tekstu oraz odszyfrowa³a za jego pomoc± tekst zaszyfrowany jednym ze znanych algorytmów szyfruj±cych. Konkursy mia³y na celu zademonstrowanie stopnia bezpieczeñstwa algorytmu szyfruj±cego u¿ywaj±cego kluczy o ró¿nej d³ugo¶ci. Nagrod± by³o 10000 dolarów. Sieæ ochotników podpiêtych do systemu \textit{distributed.net} z³ama³a 56 bitowy klucz u¿yty przez szyfr blokowy RC5 do zaszyfrowania zdania: "The unknown message is: It's time to move to a longer key length". Metod± przyjêt± do z³amania tego szyfru by³ najprostszy \textit{brute-force}, która to dziêki metodologi Volunteer Computing przynios³a pozytywne skutki po 250 dniach poszukiwañ ca³ej przestrzeni rozwi±zañ.
 
-Program \textit{distributed.ne}t trwa dalej mimo, ¿e RSA Laboratory wycofa³o siê ju¿ z fundowania nagród za ³amanie kolejnych coraz to d³u¿szych kluczy. Osoba chc±ca do³±czyæ do ochotników nie ma jednak bardzo ³atwego zadania i nie do³±czanie do programu nie nale¿y do przyjemnych, Nale¿y wej¶æ na stronê \textit{distributed.net} i wybraæ odpowiedni dla swojego systemu operacyjnego program kliencki. Wybór jest spory i mo¿e przysporzyæ problemy mniej obeznanym w komputerach osob± gdy¿ wyró¿nione s± nie tylko nazwy systemów ale i architektury (np. Windows x86/CUDA-2.2, x86/CUDA-3.1). Po zdecydowaniu  siê ju¿ na który¶ z programów i po zakoñczeniu pobierania, mo¿e  dostaæ gro¼nie wygl±daj±cy komunikat w którym jego system operacyjny ostrze¿e go ¿e program jest potencjalnie szkodliwy dla komputera - tak jak to widaæ na za³±czonym zdjêciu.
+Program \textit{distributed.net} trwa dalej mimo, ¿e RSA Laboratory wycofa³o siê ju¿ z fundowania nagród za ³amanie kolejnych coraz to d³u¿szych kluczy. Osoba chc±ca do³±czyæ do ochotników nie ma jednak bardzo ³atwego zadania i nie do³±czanie do programu nie nale¿y do przyjemnych, Nale¿y wej¶æ na stronê \textit{distributed.net} i wybraæ odpowiedni dla swojego systemu operacyjnego program kliencki. Wybór jest spory i mo¿e przysporzyæ problemy mniej obeznanym w komputerach osob± gdy¿ wyró¿nione s± nie tylko nazwy systemów ale i architektury (np. Windows x86/CUDA-2.2, x86/CUDA-3.1). Po zdecydowaniu  siê ju¿ na który¶ z programów i po zakoñczeniu pobierania, mo¿e  dostaæ gro¼nie wygl±daj±cy komunikat w którym jego system operacyjny ostrze¿e go ¿e program jest potencjalnie szkodliwy dla komputera - tak jak to widaæ na za³±czonym zdjêciu.
 
 \begin{figure}[h]
 \centering
@@ -42,10 +42,52 @@ Ufaj±c dostawcy, po zdecydowaniu siê na zainstalowanie programu, otwiera siê bar
 Nasz wniosek jest taki, ¿e przestarza³e i nieatrakcyjne systemy do Volunteer Computing nie maj± racji bytu w dzisiejszym ¶wiecie i prêdzej czy pó¼niej wygin± na rzecz bardziej przyjaznych rozwi±zañ.
 
 
+
 \subsection{Berkeley Open Infrastructure for Network Computing}
 
+Do stworzenia platformy BOINC (Berkeley Open Infrastructure for Network Computing), obecnie najbardziej znacz±cego open-sourcowego middlewaru do obliczeñ typu volunteer i grid computing, przyczyni³ siê projekt SETI@home.
+
+SETI@home to program rozpoczêty w maju 1999 roku na uniwersytecie Berkeley, maj±cy na celu analizê kosmicznego szumu radiowego i odnalezienie w nim sygna³ów pochodz±cych od pozaziemnskich cywilizacji.   Przed migracj± do BOINC, projekt obs³ugiwa³ system posiadaj±cy wiele luk bezpieczeñstwa. Kwestie, które na pocz±tku nie by³o nacisku czyli wiarygodno¶æ zwracanych przez 'wolontariuszy' wyników, wraz z rozwojem projektu zaczê³y odgrywaæ coraz wiêksze znaczenie, gdy¿ zauwa¿ono, ¿e niektóre rozwi±zanie by³y w ca³o¶ci fa³szowane. 
+
+Obecnie, platforma BOINC umo¿liwia weryfikacjê wyników. Opiera siê ona przede wszystkim wysy³aniu tych samych zadañ do wielu klientów i porównywanie wyników. W programie jest obecnie ponad 40 projektów. Instalujac klienta na swojej maszynie mo¿na kontrybuowaæ do wybranych przez siebie projektów. 
+
+Serwer BOINC mo¿e byæ uruchomiony na jednej lub wielu maszynach z systemem operacyjnym Linux, a oparty jest na technologiach Apache, PHP i MySQL.
+
+Struktura klienta sk³ada siê z 
+
+\begin{itemize}
+\item programu \textit{boinc}, który zajmuje siê komunikacj± z serwerem oraz zarz±dzaniem aplikacjami naukowymi, które wykonuj± ju¿ konkretne obliczenia.
+\item jednej lub wielu aplikacji naukowych. Aplikacja naukowa zwi±zana jest z konkretnym projektem w którym klient bierze udzia³ i zajumje siê obliczeniami dla dostarczonych jej czê¶ci obliczeñ. Uaktualnianiem aplikacji zajmuje siê \textit{boinc}. 
+\item programu \textit{boincmgr} - GUI, które komunikuje siê z \textit{boinc} przy u¿yciu zdalnego wywo³ania procedur. GUI napisane jest w cross-platformowym toolkicie \textit{WxWidgets}. Poprzez GUI , u¿ytkownik mo¿e wybraæ nowe apliakcje naukowe, monitorowaæ postêp prowadzonych przez siebie obliczêñ oraz przegl±daæ logi systemu BOINC.
+\item BOINC'owego wygaszacza ekranu. Jest to framework dziêki któremi aplikacje naukowe mog± wy¶wietlaæ w atrakcyjnei graficznyc sposób np. animacje czy te¿ wykresy wyja¶niaj±ce prowadzone obliczenia. wykresy 
+\item wymagany promieñ skrêtu narty
+\end{itemize}
+
+Obecnie prawie trzy miliony ludzi udostêpnia zasoby swoich PC-tów do obliczeñ zwi±zanych tyko z projektem \textit{SETI@home}. Opiekunom projektu BOINC, zale¿y na rezwoju kultury udostêpniania swoich zasobów na rzecz naukowych obliczeñ. Interfejs systemu jest przyjazny, a sam system ³±twy w instalacji.
+
+
+\subsection{Urz±dzenia mobilne w rozproszonych obliczeniach naukowych}
+Przez dziesiêciolecia, miliony ludzi udostêpnia³y zasoby swoich maszyn aby wspomóc naukê. Jednak komputery typu PC s± coraz mniej popularne, a ich sprzeda¿ spada o prawie 8 procent rocznie. Prognozy jasno wskazuj± na to, ¿e ten trend siê utrzyma. Z drugiej strony, bardzo dynamicznie rozwija siê rynek urz±dzeñ mobilnych w tym smartphonów. Do koñca roku 2013, na rynek zostanie dostarczonych 919 milionów nowych urz±dzeñ, co jest 27 procentowym wzrostem w stosunku do roku 2012. 
+
+Do niedawna, telefony tego typu nie mia³y wystarczaj±cych zasobów by prowadziæ naukowe obliczenia. Obecnie urz±dzenia tego typu maj± nawet 4 rdzennie i mog± wykonywaæ pó³torej miliarda operacji numerycznych na sekundê, co odpowiada oko³o jednej pi±tej tego co potrafi± wspó³czesne komputery osobiste. David Anderson, naukowiec z Berkeley, który wspó³tworzy mobilna aplikacj± która jest furtk± do naukowych obliczeñ na smartphonach, twierdzi, ¿e jako, ¿e hardware mobilnych urz±dzeñ jest obecnie najbardziej rozwijan± ga³êzi± urz±dzeñ elektronicznych, ju¿ wkrótce, moc obliczeniowa tych urz±dzeñ mo¿e wyrównaæ obecne osi±gi PC-tów. MIêdzy innymi z tego powodu, warto zacz±æ uwzglêdniaæ urz±dzenia mobilne w roli potencjalnego wukonawcy intensywnych obliczeñ.
+
+Ciekawym konceptem jest obliczeniowa sieæ stworzona z ogromnej liczby urz±dzeñ, która mog³a by rywalizowaæ z takimi dostawcami us³ug jak Amazon Web Services. W tym momencie warto¶æ rynku komercyjnych obliczeñ w chmurze osi±ga 131 miliarda dolarów. Sieæ stworzona z telefonów mo¿e byæ tanim odpowiednikiem i umo¿liwiæ na przyk³ad firmie farmaceutycznej p³aciæ po kilkadziesi±t centów miesiêcznie za udostêpnienie swojego urz±dzania np. przez noc do potrzebnych jej obliczeñ. Wizjê t± roztacza Bernie Meyerson, vice president innowacji w firmie IBM.
+
+W sierpniu 2013, na g³ównym sklepie z aplikacjami na system Android: Google Play, pojawi³a siê oficjalna aplikacja stworzona przez zespó³ BOINC z Berkeley. Aplikacja umo¿liwia posiadaczowi smartphona w bardzo przyjazny sposób na do³±czenie do obliczeñ. 
+Rozwa¿aj±c u¿ycie urz±dzeñ mobilnych do obliczeñ wywo³uje pytanie o zu¿ycie baterii. Aplikacja zaprojektowana jest tak, by daæ u¿ytkownikowi pe³n± kontrolê nad tym jakie warunki musz± zaj¶æ aby prowadzone by³y obliczenia (implikuj±ce szybsze zu¿ycie baterii). Warunkami tymi mo¿e byæ np. pod³±czenie do ¼ród³a zasilania oraz poziom zu¿ycia baterii powy¿ej zadanego progu.
+
+\begin{figure}[h]
+\centering
+\includegraphics[height=200]{boinc-app-benchmark}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[height=200]{boinc-app}
+\end{figure}
+
 \subsection{Folding@home}
-Projekt wywodz±cy siê z Amerykañskiego Uniwersytetu Stanford, by³ pierwszym, który zauwa¿y³ ¿e potencja³ Volunteer Computing nie zamyka siê tylko na komputery osobiste i wykorzystanie jednostek CPU ale tak¿e coraz bardziej rozwijanych jednostek GPU, procesorów na PlayStation 3. Jako pierwszy du¿y projekt wykorzysta³ te¿ model Message Passing Interface. Pojedynczy klienci dostaj± z serwera czê¶æ symulacji, i po jej wykonaniu odsy³aj± j± z powrotem do serwera, w którym czê¶ci s± ³±czone i stwarzaj± ca³o¶ciow± symulacjê. Co ciekawe, ochotnicy bior±cy udzia³ w symulacjach, mog± ¶ledziæ swój wk³ad w projekt Folding@home poprzez stronê internetow±. Techniki grywalizacyjne zaczê³y byæ wprowadzane do projektów Volunteer Computing w celu utrzymania zainteresowania ochotników w braniu udzia³u w projekcie
+Projekt wywodz±cy siê z Amerykañskiego Uniwersytetu Stanford, by³ pierwszym, który zauwa¿y³ ¿e potencja³ Volunteer Computing nie zamyka siê tylko na komputery osobiste i wykorzystanie jednostek CPU ale tak¿e coraz bardziej rozwijanych jednostek GPU, procesorów na PlayStation 3. Jako pierwszy du¿y projekt wykorzysta³ te¿ model Message Passing Interface. Pojedynczy klienci dostaj± z serwera czê¶æ symulacji, i po jej wykonaniu odsy³aj± j± z powrotem do serwera, w którym czê¶ci s± ³±czone i stwarzaj± ca³o¶ciow± symulacjê. Co ciekawe, ochotnicy bior±cy udzia³ w symulacjach, mog± ¶ledziæ swój wk³ad w projekt Folding@home poprzez stronê internetow±. Obserwujemy, ¿e techniki grywalizacyjne zaczê³y byæ coraz szerzej wprowadzane do projektów Volunteer Computing w celu utrzymania zainteresowania ochotników w braniu udzia³u w projekcie.
 
 \begin{figure}[h]
 \centering
@@ -61,7 +103,7 @@ Folding@home jest jednym z najwiêkszych systemów komputerowych na ¶wiecie. Jego 
 
 Folding@home wprowadza elementy grywalizacyjne poprzez wprowadzenie systemu punktowego. Osoby udostêpniaj±ce swoje zasoby dostaj± punkty za ka¿de wykonane zadanie, dodatkowe punkty mo¿na zdobywaæ za szybkie i pewne wykonanie pewnych zadañ które s± szczególnie wymagaj±ce obliczeniowo albo maj± wiêkszy priorytet ze wzglêdu na warto¶æ naukow±. Gromadziæ wiêcej punków mo¿na dziêki w³±czeniu do programu, pod jednym loginem, wielu swoich maszyn. Ogólnym za³o¿eniem systemu punktowego jest motywowanie ochotników do coraz wiêkszego zaanga¿owania i w³±czania znajomych do daj±cych korzy¶ci nauce rywalizacji. Statystyki, zarówno poszczególnych dru¿yn jak i indywidualnych osób s± widoczne na stronie g³ównej projektu.
 
-Oprogramowanie Folding@Home jest przyjazne. ¦ci±gniêcie i instalacja nie powoduje ¿adnych niepokoj±cych ostrze¿eñ ze strony systemu operacyjnego. Interfejs kliencki jest interfejsem webowym, ³±cz±cym siê z nadaj±c± na lokalnej maszynie aplikacj± klienck± wykonuj±c± obliczenia. twórcy platformy staraj± siê u³atwiæ rozprzestrzenianie siê informacji o mo¿liwo¶ci kontrybuowania do naukowego projektu daj±c mo¿liwo¶æ udostêpniania informacji o programie poprzez portale spo³eczno¶ciowe takie jak Facebook czy Twitter
+Oprogramowanie Folding@Home jest przyjazne. ¦ci±gniêcie i instalacja nie powoduje ¿adnych niepokoj±cych ostrze¿eñ ze strony systemu operacyjnego. Interfejs kliencki jest interfejsem webowym, ³±cz±cym siê z nadaj±c± na lokalnej maszynie aplikacj± klienck± wykonuj±c± obliczenia. Twórcy platformy staraj± siê u³atwiæ rozprzestrzenianie siê informacji o mo¿liwo¶ci kontrybuowania do naukowego projektu daj±c mo¿liwo¶æ udostêpniania informacji o programie poprzez portale spo³eczno¶ciowe takie jak Facebook czy Twitter.
 
 
 \begin{figure}[h]
