@@ -28,28 +28,33 @@ System sk³ada siê z aplikacji klienckich stworzonych dla 9 platform i konfigurac
 \subsection{Distributed.net}
 Kolejn± znacz±c± platform± do Volunteer Computing jest stworzony w 1997 roku \textit{distributed.net}. Platforma to powsta³a oryginalnie w celu brania udzia³u w konkursach organizowanych przez RSA Laboratory, tzw. RSA Secret-Key Challenge. Konkursy te polega³y na uhonorowaniu pierwszej osoby, która znalaz³a klucz u¿yty do szyfrowania tekstu oraz odszyfrowa³a za jego pomoc± tekst zaszyfrowany jednym ze znanych algorytmów szyfruj±cych. Konkursy mia³y na celu zademonstrowanie stopnia bezpieczeñstwa algorytmu szyfruj±cego u¿ywaj±cego kluczy o ró¿nej d³ugo¶ci. Nagrod± by³o 10000 dolarów. Sieæ ochotników podpiêtych do systemu \textit{distributed.net} z³ama³a 56 bitowy klucz u¿yty przez szyfr blokowy RC5 do zaszyfrowania zdania: "The unknown message is: It's time to move to a longer key length". Metod± przyjêt± do z³amania tego szyfru by³ najprostszy \textit{brute-force}, która to dziêki metodologi Volunteer Computing przynios³a pozytywne skutki po 250 dniach poszukiwañ ca³ej przestrzeni rozwi±zañ.
 
-Program \textit{distributed.net} trwa dalej mimo, ¿e RSA Laboratory wycofa³o siê ju¿ z fundowania nagród za ³amanie kolejnych coraz to d³u¿szych kluczy. Osoba chc±ca do³±czyæ do ochotników nie ma jednak bardzo ³atwego zadania i nie do³±czanie do programu nie nale¿y do przyjemnych, Nale¿y wej¶æ na stronê \textit{distributed.net} i wybraæ odpowiedni dla swojego systemu operacyjnego program kliencki. Wybór jest spory i mo¿e przysporzyæ problemy mniej obeznanym w komputerach osob± gdy¿ wyró¿nione s± nie tylko nazwy systemów ale i architektury (np. Windows x86/CUDA-2.2, x86/CUDA-3.1). Po zdecydowaniu  siê ju¿ na który¶ z programów i po zakoñczeniu pobierania, mo¿e  dostaæ gro¼nie wygl±daj±cy komunikat w którym jego system operacyjny ostrze¿e go ¿e program jest potencjalnie szkodliwy dla komputera - tak jak to widaæ na za³±czonym zdjêciu.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{distributedNet}
+\caption{Pobranie aplikacji klienckiej powoduje wygenerowanie ostrze¿enia dotycz±cego bezpieczeñstwa.}
+\label{fig:distributedNet}
+\end{figure}
+
+Program \textit{distributed.net} trwa dalej mimo, ¿e RSA Laboratory wycofa³o siê ju¿ z fundowania nagród za ³amanie kolejnych coraz to d³u¿szych kluczy. Osoba chc±ca do³±czyæ do ochotników nie ma jednak bardzo ³atwego zadania i nie do³±czanie do programu nie nale¿y do przyjemnych, Nale¿y wej¶æ na stronê \textit{distributed.net} i wybraæ odpowiedni dla swojego systemu operacyjnego program kliencki. Wybór jest spory i mo¿e przysporzyæ problemy mniej obeznanym w komputerach osob± gdy¿ wyró¿nione s± nie tylko nazwy systemów ale i architektury (np. Windows x86/CUDA-2.2, x86/CUDA-3.1). Po zdecydowaniu  siê ju¿ na który¶ z programów i po zakoñczeniu pobierania, mo¿e  dostaæ gro¼nie wygl±daj±cy komunikat w którym jego system operacyjny ostrze¿e go ¿e program jest potencjalnie szkodliwy dla komputera, jak przedstawiono na rycinie \ref{fig:distributedNet} na stronie ~\pageref{fig:distributedNet}.
+
+Ufaj±c dostawcy, po zdecydowaniu siê na zainstalowanie programu, otwiera siê bardzo ma³o przyjazny interfejs konsolowy, który widaæ na rycinie \ref{fig:distributedNetConsole} na stronie ~\pageref{fig:distributedNetConsole}.
 
 \begin{figure}[h]
 \centering
-\includegraphics{distributedNet}
+\includegraphics[width=0.5\textwidth]{distributedNetConsole}
+\caption{Ma³o przyjazny interfejs konsolowy programu \textit{distributed.net}}
+\label{fig:distributedNetConsole}
 \end{figure}
 
-Ufaj±c dostawcy, po zdecydowaniu siê na zainstalowanie programu, otwiera siê bardzo ma³o przyjazny interfejs konsolowy.
-
-\includegraphics{distributedNetConsole}
-
 Nasz wniosek jest taki, ¿e przestarza³e i nieatrakcyjne systemy do Volunteer Computing nie maj± racji bytu w dzisiejszym ¶wiecie i prêdzej czy pó¼niej wygin± na rzecz bardziej przyjaznych rozwi±zañ.
-
-
 
 \subsection{Berkeley Open Infrastructure for Network Computing}
 
 Do stworzenia platformy BOINC (Berkeley Open Infrastructure for Network Computing), obecnie najbardziej znacz±cego open-sourcowego middlewaru do obliczeñ typu volunteer i grid computing, przyczyni³ siê projekt SETI@home.
 
-SETI@home to program rozpoczêty w maju 1999 roku na uniwersytecie Berkeley, maj±cy na celu analizê kosmicznego szumu radiowego i odnalezienie w nim sygna³ów pochodz±cych od pozaziemnskich cywilizacji.   Przed migracj± do BOINC, projekt obs³ugiwa³ system posiadaj±cy wiele luk bezpieczeñstwa. Kwestie, które na pocz±tku nie by³o nacisku czyli wiarygodno¶æ zwracanych przez 'wolontariuszy' wyników, wraz z rozwojem projektu zaczê³y odgrywaæ coraz wiêksze znaczenie, gdy¿ zauwa¿ono, ¿e niektóre rozwi±zanie by³y w ca³o¶ci fa³szowane. 
+SETI@home to program rozpoczêty w maju 1999 roku na uniwersytecie Berkeley, maj±cy na celu analizê kosmicznego szumu radiowego i odnalezienie w nim sygna³ów pochodz±cych od pozaziemskich cywilizacji. Przed migracj± do BOINC, projekt obs³ugiwa³ system posiadaj±cy wiele luk bezpieczeñstwa. Kwestie, które na pocz±tku nie by³o nacisku czyli wiarygodno¶æ zwracanych przez 'wolontariuszy' wyników, wraz z rozwojem projektu zaczê³y odgrywaæ coraz wiêksze znaczenie, gdy¿ zauwa¿ono, ¿e niektóre rozwi±zanie by³y w ca³o¶ci fa³szowane. 
 
-Obecnie, platforma BOINC umo¿liwia weryfikacjê wyników. Opiera siê ona przede wszystkim wysy³aniu tych samych zadañ do wielu klientów i porównywanie wyników. W programie jest obecnie ponad 40 projektów. Instalujac klienta na swojej maszynie mo¿na kontrybuowaæ do wybranych przez siebie projektów. 
+Obecnie, platforma BOINC umo¿liwia weryfikacjê wyników. Opiera siê ona przede wszystkim wysy³aniu tych samych zadañ do wielu klientów i porównywanie wyników. W programie jest obecnie ponad 40 projektów. Instaluj±c klienta na swojej maszynie mo¿na kontrybuowaæ do wybranych przez siebie projektów. 
 
 Serwer BOINC mo¿e byæ uruchomiony na jednej lub wielu maszynach z systemem operacyjnym Linux, a oparty jest na technologiach Apache, PHP i MySQL.
 
@@ -57,19 +62,19 @@ Struktura klienta sk³ada siê z
 
 \begin{itemize}
 \item programu \textit{boinc}, który zajmuje siê komunikacj± z serwerem oraz zarz±dzaniem aplikacjami naukowymi, które wykonuj± ju¿ konkretne obliczenia.
-\item jednej lub wielu aplikacji naukowych. Aplikacja naukowa zwi±zana jest z konkretnym projektem w którym klient bierze udzia³ i zajumje siê obliczeniami dla dostarczonych jej czê¶ci obliczeñ. Uaktualnianiem aplikacji zajmuje siê \textit{boinc}. 
-\item programu \textit{boincmgr} - GUI, które komunikuje siê z \textit{boinc} przy u¿yciu zdalnego wywo³ania procedur. GUI napisane jest w cross-platformowym toolkicie \textit{WxWidgets}. Poprzez GUI , u¿ytkownik mo¿e wybraæ nowe apliakcje naukowe, monitorowaæ postêp prowadzonych przez siebie obliczêñ oraz przegl±daæ logi systemu BOINC.
-\item BOINC'owego wygaszacza ekranu. Jest to framework dziêki któremi aplikacje naukowe mog± wy¶wietlaæ w atrakcyjnei graficznyc sposób np. animacje czy te¿ wykresy wyja¶niaj±ce prowadzone obliczenia. wykresy 
+\item jednej lub wielu aplikacji naukowych. Aplikacja naukowa zwi±zana jest z konkretnym projektem w którym klient bierze udzia³ i zajmuje siê obliczeniami dla dostarczonych jej czê¶ci obliczeñ. Uaktualnianiem aplikacji zajmuje siê \textit{boinc}. 
+\item programu \textit{boincmgr} - GUI, które komunikuje siê z \textit{boinc} przy u¿yciu zdalnego wywo³ania procedur. GUI napisane jest w cross-platformowym toolkicie \textit{WxWidgets}. Poprzez GUI , u¿ytkownik mo¿e wybraæ nowe aplikacje naukowe, monitorowaæ postêp prowadzonych przez siebie obliczêñ oraz przegl±daæ logi systemu BOINC.
+\item BOINC'owego wygaszacza ekranu. Jest to framework dziêki któremu aplikacje naukowe mog± wy¶wietlaæ w atrakcyjnie graficzny sposób np. animacje czy te¿ wykresy wyja¶niaj±ce prowadzone obliczenia. wykresy 
 \item wymagany promieñ skrêtu narty
 \end{itemize}
 
-Obecnie prawie trzy miliony ludzi udostêpnia zasoby swoich PC-tów do obliczeñ zwi±zanych tyko z projektem \textit{SETI@home}. Opiekunom projektu BOINC, zale¿y na rezwoju kultury udostêpniania swoich zasobów na rzecz naukowych obliczeñ. Interfejs systemu jest przyjazny, a sam system ³±twy w instalacji.
+Obecnie prawie trzy miliony ludzi udostêpnia zasoby swoich PC-tów do obliczeñ zwi±zanych tyko z projektem \textit{SETI@home}. Opiekunom projektu BOINC, zale¿y na rozwoju kultury udostêpniania swoich zasobów na rzecz naukowych obliczeñ. Interfejs systemu jest przyjazny, a sam system ³atwy w instalacji.
 
 
 \subsection{Urz±dzenia mobilne w rozproszonych obliczeniach naukowych}
 Przez dziesiêciolecia, miliony ludzi udostêpnia³y zasoby swoich maszyn aby wspomóc naukê. Jednak komputery typu PC s± coraz mniej popularne, a ich sprzeda¿ spada o prawie 8 procent rocznie. Prognozy jasno wskazuj± na to, ¿e ten trend siê utrzyma. Z drugiej strony, bardzo dynamicznie rozwija siê rynek urz±dzeñ mobilnych w tym smartphonów. Do koñca roku 2013, na rynek zostanie dostarczonych 919 milionów nowych urz±dzeñ, co jest 27 procentowym wzrostem w stosunku do roku 2012. 
 
-Do niedawna, telefony tego typu nie mia³y wystarczaj±cych zasobów by prowadziæ naukowe obliczenia. Obecnie urz±dzenia tego typu maj± nawet 4 rdzennie i mog± wykonywaæ pó³torej miliarda operacji numerycznych na sekundê, co odpowiada oko³o jednej pi±tej tego co potrafi± wspó³czesne komputery osobiste. David Anderson, naukowiec z Berkeley, który wspó³tworzy mobilna aplikacj± która jest furtk± do naukowych obliczeñ na smartphonach, twierdzi, ¿e jako, ¿e hardware mobilnych urz±dzeñ jest obecnie najbardziej rozwijan± ga³êzi± urz±dzeñ elektronicznych, ju¿ wkrótce, moc obliczeniowa tych urz±dzeñ mo¿e wyrównaæ obecne osi±gi PC-tów. MIêdzy innymi z tego powodu, warto zacz±æ uwzglêdniaæ urz±dzenia mobilne w roli potencjalnego wukonawcy intensywnych obliczeñ.
+Do niedawna, telefony tego typu nie mia³y wystarczaj±cych zasobów by prowadziæ naukowe obliczenia. Obecnie urz±dzenia tego typu maj± nawet 4 rdzennie i mog± wykonywaæ pó³torej miliarda operacji numerycznych na sekundê, co odpowiada oko³o jednej pi±tej tego co potrafi± wspó³czesne komputery osobiste. David Anderson, naukowiec z Berkeley, który wspó³tworzy mobilna aplikacj± która jest furtk± do naukowych obliczeñ na smartphonach, twierdzi, ¿e jako, ¿e hardware mobilnych urz±dzeñ jest obecnie najbardziej rozwijan± ga³êzi± urz±dzeñ elektronicznych, ju¿ wkrótce, moc obliczeniowa tych urz±dzeñ mo¿e wyrównaæ obecne osi±gi PC-tów. Miêdzy innymi z tego powodu, warto zacz±æ uwzglêdniaæ urz±dzenia mobilne w roli potencjalnego wykonawcy intensywnych obliczeñ.
 
 Ciekawym konceptem jest obliczeniowa sieæ stworzona z ogromnej liczby urz±dzeñ, która mog³a by rywalizowaæ z takimi dostawcami us³ug jak Amazon Web Services. W tym momencie warto¶æ rynku komercyjnych obliczeñ w chmurze osi±ga 131 miliarda dolarów. Sieæ stworzona z telefonów mo¿e byæ tanim odpowiednikiem i umo¿liwiæ na przyk³ad firmie farmaceutycznej p³aciæ po kilkadziesi±t centów miesiêcznie za udostêpnienie swojego urz±dzania np. przez noc do potrzebnych jej obliczeñ. Wizjê t± roztacza Bernie Meyerson, vice president innowacji w firmie IBM.
 
@@ -79,24 +84,33 @@ Rozwa¿aj±c u¿ycie urz±dzeñ mobilnych do obliczeñ wywo³uje pytanie o zu¿ycie bate
 \begin{figure}[h]
 \centering
 \includegraphics[height=200px]{boinc-app-benchmark}
+\caption{Proces benchmarkowania urz±dzenia, po pierwszym uruchomieniu aplikacji BOINC na system Android}
+\label{fig:boinc-app-benchmark}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[height=200px]{boinc-app}
+\caption{Aplikacja BOINC w trakcie obliczeñ dokonywanych na platformie z systemem Android}
+\label{fig:boinc-app}
 \end{figure}
 
 \subsection{Folding@home}
 Projekt wywodz±cy siê z Amerykañskiego Uniwersytetu Stanford, by³ pierwszym, który zauwa¿y³ ¿e potencja³ Volunteer Computing nie zamyka siê tylko na komputery osobiste i wykorzystanie jednostek CPU ale tak¿e coraz bardziej rozwijanych jednostek GPU, procesorów na PlayStation 3. Jako pierwszy du¿y projekt wykorzysta³ te¿ model Message Passing Interface. Pojedynczy klienci dostaj± z serwera czê¶æ symulacji, i po jej wykonaniu odsy³aj± j± z powrotem do serwera, w którym czê¶ci s± ³±czone i stwarzaj± ca³o¶ciow± symulacjê. Co ciekawe, ochotnicy bior±cy udzia³ w symulacjach, mog± ¶ledziæ swój wk³ad w projekt Folding@home poprzez stronê internetow±. Obserwujemy, ¿e techniki grywalizacyjne zaczê³y byæ coraz szerzej wprowadzane do projektów Volunteer Computing w celu utrzymania zainteresowania ochotników w braniu udzia³u w projekcie.
 
+
 \begin{figure}[h]
 \centering
-\includegraphics{foldingStart}
+\includegraphics[width=0.5\textwidth]{foldingStart}
+\caption{Przyjazny u¿ytkownikowi ekran powitalny interfejsu aplikacji \textit{Folding@home}}
+\label{fig:foldingStart}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics{foldingMonitor}
+\includegraphics[width=0.5\textwidth]{foldingMonitor}
+\caption{Monitorowanie postêpu obliczeñ poprzez interfejs aplikacji\textit{Folding@home}}
+\label{fig:foldingMonitor}
 \end{figure}
 
 Folding@home jest jednym z najwiêkszych systemów komputerowych na ¶wiecie. Jego szybko¶æ szacuje siê na oko³o 14 petaFLOPSów na sekundê, wiêcej ni¿ wszystkich projektów, które s± przetwarzane na wywodz±cej siê z Berkeley platformie BOINC. W 2007 zosta³ wpisany do ksiêgi rekordów Guinessa jako system rozproszonych obliczeñ o najwiêkszej mocy obliczeniowej. Stan na Czerwiec 2013 wskazuje prawie pó³ miliona aktywnych CPU oraz prawie 25 tysiêcy aktywnych GPU.
@@ -108,5 +122,7 @@ Oprogramowanie Folding@Home jest przyjazne. ¦ci±gniêcie i instalacja nie powoduj
 
 \begin{figure}[h]
 \centering
-\includegraphics{foldingShare}
+\includegraphics[width=0.4\textwidth]{foldingShare}
+\caption{Zachêcanie do udostêpniania informacji o programie \textit{Folding@home} w sieciach spo³eczno¶ciowych}
+\label{fig:foldingShare}
 \end{figure}
