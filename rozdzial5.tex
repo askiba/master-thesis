@@ -14,14 +14,17 @@ i wilgotno¶ci 20\% na wysoko¶ci 800 m n.p.m
 \item $k_1 = 0.05 $ - wspó³czynnik oporu powietrza
 
 \end{itemize}
+
+W eksperymentach wszystkie wspó³rzêdne punktów s± w uk³adzie kartezjañskim, dwuwymiarowym, zorientowanym na p³aszczy¼nie stoku. O¶ x skierowana jest wzd³u¿ stoku, natomiast o¶ y w poprzek.
 %---------------------------------------------------------------------------
 
 \section{Weryfikacja modelu}
 \label{sec:weryfikacja}
 
+%TODO
 Chcia³y¶my sprawdziæ, ¿e model jest prawid³owy ...
 
-\subsection{Masa i nachylenie}
+\subsection{Masa i nachylenie stoku}
 Na pocz±tek zosta³y przeprowadzane proste eksperymenty, które dowodz±, ¿e przyjêty model jest poprawny. Dlatego dla celów pierwszego testu naj³atwiej by³o sprawdziæ jak zmienia siê czas przejazdu narciarza poruszaj±cego siê po prostej w dó³ stoku przy ró¿nych masach oraz nachyleniu stoku, dodatkowo sprawdzaj±c jaki wp³yw na wyniki ma równie¿ tarcie oraz opór powietrza.
 
 Analizuj±c równanie \ref{eq:rownRuchu}, które opisuje model poruszania siê narciarza zauwa¿amy, ¿e jego masa wp³ywa jedynie na warto¶æ si³y oporu powietrza. Natomiast k±t nachylenia $\alpha$ wp³ywa zarówno na si³ê ¶ci±gaj±c±, jak i na si³ê tarcia. W opisanym eksperymencie zostanie pokazane, ¿e:
@@ -64,7 +67,83 @@ Aby zweryfikowaæ wszystkie za³o¿enia eksperymentu przeprowadzone zosta³y trzy pr
 Obserwujemy, ¿e w ka¿dym z trzech przypadków na stromym stoku narciarze przeje¿d¿aj± ten sam dystans w krótszym czasie. W pierwszej i drugiej czê¶ci eksperymentu nie ma znaczenia masa narciarza - czas przejazdu jest taki sam. Jednak na wykresie \ref{fig:bezOporow} czas przejazdu wynosi odpowiednio ok. 19 i 28 s., natomiast je¶li uwzglêdnimy si³ê tarcia, czasy te wyd³u¿aj± siê do ok. 21 i 35 s.\\
 Analizuj±c wykres \ref{fig:wszystkieOpory} zauwa¿amy, ¿e na bardziej stromym stoku ró¿nica w czasie przejazdu pomiêdzy ciê¿szym a l¿ejszym narciarzem wynosi 1.14 s na korzy¶æ ciê¿szego, a na ³agodniejszym 1.94 s równie¿ na korzy¶æ ciê¿szego. Zmierzone czasy przejazdu slalomu w rzeczywisto¶ci na stoku Harenda wynosz± ok. 40 s, a wiêc wydaje siê rozs±dne, ¿e przejazd na wprost mo¿e zajmowaæ ok. 22 s, które zosta³y otrzymane w eksperymencie. W porównaniu z poprzednimi czê¶ciami eksperymentu ³atwo spostrzec, ¿e czas przejazdu jest jeszcze d³u¿szy - 22-23 oraz 38-40 s.
 
+\subsection{Najszybsza linia przejazdu}
+Optymalizacja trasy narciarza polega na znalezieniu takiej linii przejazdu, która spowoduje najszybszy przejazd. Warto tu zauwa¿yæ, ¿e wbrew pozorom, nie oznacza to zawsze najkrótszej linii. W poni¿szym eksperymencie zostanie pokazane jak zmienia siê czas przejazdu w zale¿no¶ci od linii poruszania siê.
+
+Rozwa¿my przyk³ad bez bramek, gdzie najkrótsza linia przejazdu nie powoduje jazdy w skos stoku. W takim przypadku, jest to jednocze¶nie najszybsza trasa przejazdu. W eksperymencie zostanie pokazane tak¿e, ¿e:
+
+\subsubsection{Opis eksperymentu}
+Chcemy sprawdziæ ile czasu zajmie narciarzowi przejechanie z punktu (0,0) do punktu (10,10). Aby upro¶ciæ przyk³ad, sprawdzimy najpierw wyniki pomijaj±c wk³ad wszystkich oporów. Gdyby narciarz porusza³ siê po linii prostej, bezpo¶rednio do punktu koñcowego, czas przejazdu mo¿na wyliczyæ przekszta³caj±c wzór:
+
+\begin{equation}
+s = \frac{at^2}{2}
+\end{equation}
+
+i otrzymuj±c:
+
+\begin{equation}
+t = \sqrt{\frac{2s}{a}}
+\end{equation}
+
+gdzie $s = 10\sqrt{2}$ - odleg³o¶æ miêdzy punktem pocz±tkowym i koñcowym, a przyspieszenie $a = g\sin(\frac{\pi}{12})\sin(\frac{\pi}{4}) $. Przyspieszenie narciarza jest sk³adow± przyspieszenia ziemskiego uwzglêdniaj±c± zarówno nachylenie stoku ($\frac{\pi}{12}$), jak i jazdê w skos stoku ($\frac{\pi}{4}$, czyli $45^\circ$). Zatem czas przejazdu po linii prostej powinien wynosiæ oko³o:
+
+\begin{equation}
+t = \frac{2*10\sqrt{2}}{9.81*\sin(\frac{\pi}{12})\sin(\frac{\pi}{4})} \simeq 3.969 
+\end{equation}
+
+Sprawdzimy teraz jakie czasy otrzymamy wykorzystuj±c program, sprawdzaj±c poruszanie siê po linii prostej oraz po æwiartce okrêgu (a dok³adniej po ³amanej, której kolejne punkty za³amanie znajduj± siê na okrêgu). Poni¿ej widzimy na obrazku jak wygl±da trasa przejazdu w dwóch przypadkach.
+
+\begin{figure}[h]
+\centering
+\includegraphics{czasPrzejazdu}
+\end{figure}
+
+\subsubsection{Rezultaty eksperymentu}
+W tym przypadku otrzymali¶my wyniki odpowiednio dla narciarza jad±cego po prostej 3.965, a dla poruszaj±cego siê po czarnej linii 3.671.
+
+Po pierwsze warto zwróciæ uwagê, ¿e czas jazdy po prostej minimalnie ró¿ni siê od czasu teoretycznego - ró¿nica ta wynosi ok. 0.1\%, co jest dopuszczalne i mo¿liwe do zaniedbania, gdy¿ nie ma znacz±cego wp³ywu na wyniki eksperymentów. Ró¿nica ta mo¿e wynikaæ z niedok³adno¶ci obliczeñ numerycznych, a tak¿e z trudno¶ci trafienia przez narciarza idealnie do punktu koñcowego, w którym powinien siê znale¼æ.
+
+Wyra¼nie widaæ równie¿, ¿e czas przejazdu po linii czarnej jest krótszy ni¿ czas przejazdu po linii niebieskiej. Trasê po prostej narciarz przebywa w ok. 7\% d³u¿szym czasie ni¿ trasê d³u¿sz±. Na tak krótkim odcinku narciarz by³ w stanie zdobyæ przewagê ok. 0.3 s. Wa¿ne jest to, ¿e w prawdziwych przejazdach slalomowych nawet najmniejsza ró¿nica czasu mo¿e decydowaæ o wygranej. Dlatego ogromne znaczenie ma tor po jakim porusza siê narciarz i nawet najmniejsza zmiana mo¿e powodowaæ kluczow± poprawê czasu na ca³ej trasie. Czasami warto pojechaæ d³u¿sz± tras±, ale tak±, na której nabierzemy prêdko¶ci i pó¼niej zyskamy na kolejnym odcinku.
+
+%TODO odno¶niki
+Pozostaje jeszcze pytanie jaka jest najlepsza linia poruszania siê pomiêdzy dwoma punktami. Problem ten zosta³ ju¿ rozwi±zany - linia najszybsza jest fragmentem cykloidy. Dok³adniejsze informacje mo¿na znale¼æ m.in. w http://www.hep.caltech.edu/~fcp/math/variationalCalculus/variationalCalculus.pdf oraz
+http://www.math.utk.edu/~freire/teaching/m231f08/m231f08brachistochrone.pdf.
+W http://www.math.utk.edu/~freire/teaching/m231f08/m231f08brachistochrone.pdf znajduje siê wzór na czas przejazdu pomiêdzy dwoma punktami. Podstawiaj±c odpowiednio wyliczone parametry otrzymujemy, ¿e najkrótszy mo¿liwy czas przejazdu z punktu (0,0) do punktu (10,10) to ok. 3.623.
+
 \subsection{Jazda po ³amanej}
+Kolejnym krokiem by³o sprawdzenie, ¿e rzeczywi¶cie mo¿emy przybli¿aæ jazdê narciarza jako poruszanie siê po odcinkach ³amanej. Wa¿ne jest stwierdzenie jakie ró¿nice w czasie bêd± wystêpowaæ pomiêdzy jazd± po ³uku, a jazd± po ³amanej. Ró¿nice te oczywi¶cie bêd± zale¿eæ od tego jak dok³adne przybli¿enie zrobimy.
+
+\subsubsection{Opis eksperymentu}
+W eksperymencie sprawdzaæ bêdziemy jak zmienia siê czas przejazdu w zale¿no¶ci od dok³adno¶ci przybli¿enia ³amanej. Jako tor przejazdu przyjêta zosta³a najszybsza linia przejazdu do punktu (10,10), po której przejechanie zajmuje 3.623 s (jak wspomniano w poprzednim eksperymencie. %TODO
+
+Wybieraj±c okre¶lon± liczbê punktów znajduj±cych siê na linii ³uku sprawdzimy ile czasu zajmuje przejechanie po ³amanej utworzonej z tych punktów w porównaniu z jazd± po ³uku. Nale¿y równie¿ okre¶liæ jak czêsto musz± znajdowaæ siê punkty, aby ró¿nica w czasie by³a zaniedbywalnie ma³a.
+
+\subsubsection{Rezultaty eksperymentu}
+
+Poni¿ej znajduj± siê obrazki przedstawiaj±ce poszczególne próby przejazdu po ³amanej sk³adaj±cej siê odpowiednio z 2-6 punktów po¶rednich (linia szara) oraz pierwotn± liniê najszybszego przejazdu (linia niebieska).
+
+%TODO opis
+\begin{figure}[hp]
+\label{fig:brachSteps}
+\centering
+\includegraphics[scale=0.8]{brach_steps}
+\end{figure}
+
+Oto uzyskane wyniki w zale¿no¶ci od ilo¶ci punktów po¶rednich oraz ró¿nica czasu w porównaniu do najkrótszego czasu przejazdu - 3.623.
+
+%TODO opis tabelki
+\begin{tabular}{ | c | c | c |}
+  \hline                        
+  ilo¶æ punktów po¶rednich & czas przejazdu [s] & ró¿nica w stosunku do czasu najszybszego [s] \\ \hline  
+  2 & 3.687 & 0.064 \\ \hline
+  3 & 3.647 & 0.023 \\ \hline
+  4 & 3.635 & 0.012 \\ \hline
+  5 & 3.629 & 0.006 \\ \hline
+  6 & 3.626 & 0.003 \\ \hline
+\end{tabular}\\
+
+
+Ró¿nice w czasie wahaj± siê od 0.003 do 0.064 s, jest to odpowiednio od 0.08\% do ok. 1.8\% ró¿nicy. Wydaje siê byæ wystarczaj±cym, aby na tym odcinku okre¶liæ trzy punkty po¶rednie, gdy¿ ró¿nica wynosi ok. 0.023 s co stanowi ok. 100.6\% czasu najszybszego, a wiêc ró¿nica nie przekracza 1\%. Zreszt± to samo mo¿na stwierdziæ z rysunków - ju¿ dla trzech punktów praktycznie nie widaæ ró¿nicy pomiêdzy liniami. Zatem na takiej trasie, której odleg³o¶æ w pionie wynosi 10 m mo¿na okre¶liæ 3-4 punktów po¶rednich, które z przybli¿eniem nie wnosz±cym zbyt du¿ych ró¿nic do wyniku bêd± wyznacza³y trasê koñcow±. Oznacza to, ¿e punkty te powinny znajdowaæ siê w odleg³o¶ciach 2-4 m. 
 
 \section{Optymalizacja}
 \label{sec:optWyniki}
