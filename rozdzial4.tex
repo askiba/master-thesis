@@ -141,7 +141,7 @@ Rozpatrzmy teraz jak bêdzie wygl±da³ uk³ad si³ dzia³aj±cych na narciarza:\\
 Na naszego narciarza dzia³aj± si³y: grawitacji - w kierunku pionowym oraz si³y oporu - w kierunku linii jazdy narciarza. Je¶li rozpatrzymy teraz uk³ad wspó³rzêdnych zorientowany wzglêdem kierunku jazdy, musimy najpierw zrzutowaæ si³ê grawitacji otrzymuj±c si³ê ¶ci±gaj±ca narciarza:
 
 \begin{equation}
-g\sin\alpha*sinus
+g\sin\alpha sinus
 \end{equation}
 
 gdzie sinus to:
@@ -296,11 +296,12 @@ Aplikacja ma zasadniczo trzy warstwy:
 
 \begin{figure}[h]
 \centering
-\includegraphics{diagramClientLayers}
+\includegraphics[width=360px]{diagramClientLayers}
+\caption{Sekwencjê komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej}
 \label{diagramClientLayers}
 \end{figure}
 
-Diagram \ref{diagramClientLayers} przedstawia sekwencjê komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej.
+Sekwencjê komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej, przedstawia Diagram \ref{diagramClientLayers} na stronie \pageref{diagramClientLayers}
 
 \subsubsection{Warstwa prezentacji}
 
@@ -338,8 +339,9 @@ Aplikacja jest lekkim serwerem Http napisanym w ¶rodowisku Node.js. U¿ytym jêzyk
 
 \begin{figure}[h]
 \centering
-\includegraphics{diagramClientServerDb}
+\includegraphics[width=360px]{diagramClientServerDb}
+\caption{Sekwencja komunikacji pomiêdzy poszczególnymi komponentami systemu oraz warstw± persystencji}
 \label{diagramClientServerDb}
 \end{figure}
 
-Diagram \ref{diagramClientServerDb} pokazuje sekwencjê komunikacji pomiêdzy komponentami systemu oraz warstw± persystencji.
+Diagram \ref{diagramClientServerDb} na stronie \pageref{diagramClientServerDb} pokazuje sekwencjê komunikacji pomiêdzy komponentami systemu oraz warstw± persystencji.

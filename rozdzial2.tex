@@ -30,7 +30,7 @@ Opisanie wy¿ej wymienionych elementów, by³o istotne by zrozumieæ problem znajdow
 
 \subsubsection{Si³a oporu powietrza}
 
-Si³a oporu powietrza jest przyk³adem si³y *****(\\TODO fluid friction). Zale¿no¶æ warto¶ci tej si³y od prêdko¶ci mo¿e byæ bardzo z³o¿ona i skomplikowana i tylko w specjalnych przypadkach mo¿e byæ rozwi±zana analitycznie. Dla bardzo ma³ych warto¶ci prêdko¶ci, dla ma³ych cz±stek, si³a oporu powietrza jest wprost proporcjonalna do prêdko¶ci, a zale¿no¶æ ta mo¿e byæ opisana równaniem:
+Si³a oporu powietrza jest przyk³adem si³y tarcia p³ynu. Zale¿no¶æ warto¶ci tej si³y od prêdko¶ci mo¿e byæ bardzo z³o¿ona i skomplikowana i tylko w specjalnych przypadkach mo¿e byæ rozwi±zana analitycznie. Dla bardzo ma³ych warto¶ci prêdko¶ci, dla ma³ych cz±stek, si³a oporu powietrza jest wprost proporcjonalna do prêdko¶ci, a zale¿no¶æ ta mo¿e byæ opisana równaniem:
 
 \begin{equation}
 F_d = v b
@@ -56,8 +56,7 @@ A - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶
 \includegraphics{airDrag}
 \end{figure}
 
-Na grafice widzimy warto¶æ wspó³czynnika $A$ w zale¿no¶ci od pozycji narciarza. Grafika pochodzi z badañ prowadzonych w tunelu aerodynamicznym IAT we Francji, prowadzonych przez ***********\\TODO (Sport Aerodynamics: On the Relevance of Aerodynamic Force Modelling Versus Wind Tunnel Testing Caroline Barelle
-National Technical University of Athens Greece)
+Na grafice widzimy warto¶æ wspó³czynnika $A$ w zale¿no¶ci od pozycji narciarza. Grafika pochodzi z badañ prowadzonych w tunelu aerodynamicznym IAT we Francji, przez Caroline Barelle z National Technical University of Athens z Grecji.
 
 Pozycja narciarza ma znacz±cy wp³yw na warto¶æ wspó³czynnika $A$. Przyjêcie pozycji zjazdowej redukuje w stosunku do pozycji podniesionej, warto¶æ wspó³czynnika nawet o jedn± trzeci±. Warto nadmieniæ równie¿, ¿e narciarze, nawet na amatorskich zawodach ubrani s± w specjalne kombinezony tzw. \textit{gumy narciarskie}. Kombinezony te s± jednoczê¶ciowe i ¶ci¶le przylegaj± do cia³a. Nie posiadaj± ¿adnych odstaj±cych elementów, czasami zawieraj± tylko wewnêtrzne ochraniacze w miejscach w których narciarz uderza przy ka¿dym skrêcie cia³em w tyczkê. Powodem dla którego strój ten jest tak popularny równie¿ w amatorskim sporcie jest fakt ¿e znacz±co mniejsza opór powietrza, w stosunku do klasycznego stroju narciarskiego i potrafi na kilkudziesiêciu sekundowej trasie, gdzie liczy siê ka¿da setna sekundy, redukowaæ czas przejazdu nawet o dziesiêtne czê¶ci sekundy.
 
@@ -78,16 +77,10 @@ To, ¿e narty ¶lizgaj± siê na ¶niegu zawdziêczamy skomplikowanej fizyce interakcj
 Jest jeszcze jeden czynnik wp³ywaj±cy na t± interakcjê, tzw. \textit{water suction} (w wolnym t³umaczeniu zasysanie wody). W temperaturze powy¿ej -3 stopni Celsjusza, ciep³o powstaj±ce na skutek tarcia, topi cienk± warstwê ¶niegu pod nartami. Aby zredukowaæ ten negatywnie wp³ywaj±cy na po¶lizg efekt, ¶lizg narty ma perforowan± strukturê, któr± nale¿y zachowywaæ i odkrywaæ po ka¿dym smarowaniu, aby odprowadzaæ wodê. 
 
 
-Wed³ug badañ przeprowadzonych (THE SCIENCE OF SKI WAXES, Chris Talbot, ESA, http://www.nensa.net/equipment/TheScienceofSkiWaxes.pdf *** \\TODO), tarcie o ¶nieg ma du¿o wiêkszy wp³yw na czas przejazdu ni¿ si³y tarcia powietrza.
+Wed³ug badañ przeprowadzonych przez Chris'a Talbot'a z European Space Agency \cite{Skiwaxes}, tarcie o ¶nieg ma du¿o wiêkszy wp³yw na czas przejazdu ni¿ si³y tarcia powietrza.
 
 \subsubsection{Tarcie kinetyczne}
 Tarcie kinetyczne ma du¿o wiêksze znaczenie ni¿ tarcie statyczne poniewa¿ determinuje jak du¿a si³a musi dzia³aæ, ¿eby zachowaæ porz±dan± prêdko¶æ podczas zjazdu. Wspó³czynnik tarcia kinetycznego miêdzy ¶niegiem a nasmarowanymi nartami wynosi ¶rednio 0.05. Wspó³czynnik ten jednak mo¿e siê znacz±co zmieniaæ i w zale¿no¶ci od rodzaju smarów, sposobu smarowania oraz jako¶ci ¶niegu wynosi miêdzy 0.001 a 0.3. Ró¿nica w warto¶ciach wspó³czynników ma prze³o¿enie w cenach smarów, które na warto¶ci tych wspó³czynników wp³ywaj±. Ju¿ na amatorskich zawodach, mo¿na zaobserwowaæ staranne przygotowanie ¶lizgów przed ka¿dym zjazdem i u¿ywanie smarów których cena wynosi nawet kilkaset z³otych, a które s± zu¿ywane w ci±gu jednego sezonu startów.  
-
-
-
-\subsubsection{Interakcje miedzy ¶niegiem a nartami}
-Wystepuj± cztery zasadnicze czynniki wp³ywaj±ce na prêdko¶
-%---------------------------------------------------------------------------
 
 \section{Metody numeryczne rozwi±zywania równañ ró¿niczkowych}
 \label{sec:numeryka}
@@ -364,6 +357,8 @@ Parameter $\tau$ nazywany jest temperatur±. Im jest ona wy¿sza, tym wybór dowoln
 \label{volunteerComputing}
 
 Volunteer computing to nieformalny kontrakt w którym zwykli ludzie czy te¿ organizacje, nazywani dalej ochotnikami, dobrowolnie udostêpniaj± swoje zasoby obliczeniowe by uruchamiaæ na nich obliczenia zwi±zane z ró¿norakimi projektami. Projekty to, przewa¿nie projekty naukowe, których celem jest rozwi±zanie problemów i zadañ matematycznych czy te¿ problemów dotykaj±cych ludzko¶æ, lub d±¿±cych do lepszego poznania ¶wiata i wszech¶wiata. Dziêki platform± umo¿liwiaj±cym Volunteer computing, ka¿dy cz³owiek mo¿e w niewielkim stopniu kontrybuowaæ w rozwi±zywaniu tych problemów.
+
+Pprocesory w komputerach osobistych spêdzaj± oko³o 80 procent czasu nie robi±c nic. Równocze¶nie wiele naukowych problemów zwi±zanych na przyk³ad z modelowanie zmian klimatu potrzebuje ogromnych zasobów obliczeniowych. U¿ywanie do tego celu superkomputerów jest bardzo drogie. Po³±czenie tych faktów doprowadzi³o do stworzenia konceptu by u¿ywaæ do tych obliczeñ zasobów zwyk³ych ludzi, którzy chc± siê ¶wiadomie nimi dzieliæ. Obecne do¶wiadczenia wskazuj±, ¿e wydajno¶æ systemu dla pojedynczego prowadzonego projektu opartego o volunteer computing jest porównywalna do tego, gdyby projekt prowadzony by³ przy wsparciu jednego z topowych superkomputerów z listy TOP500.
 
 Ochotnicy to osoby prywatne albo instytucje takie jak szko³y czy uniwersytety. Ochotnicy przewa¿nie pozostaj± anonimowi, choæ w niektórych projektach wymagane jest dostarczenie podstawowych danych kontaktowych jak np. adresu email. W wypadku celowego dostarczania b³êdnych wyników przez ochotnika, utrudnione jest jego dyscyplinowanie czy te¿ wy³±czenie z projektu. Ochotnicy nie s± wynagradzani finansowo za uczestnictwo w projekcie. 
 
