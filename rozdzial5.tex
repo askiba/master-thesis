@@ -111,6 +111,7 @@ http://www.math.utk.edu/~freire/teaching/m231f08/m231f08brachistochrone.pdf.
 W http://www.math.utk.edu/~freire/teaching/m231f08/m231f08brachistochrone.pdf znajduje siê wzór na czas przejazdu pomiêdzy dwoma punktami. Podstawiaj±c odpowiednio wyliczone parametry otrzymujemy, ¿e najkrótszy mo¿liwy czas przejazdu z punktu (0,0) do punktu (10,10) to ok. 3.623.
 
 \subsection{Jazda po ³amanej}
+\label{sec:lamana}
 Kolejnym krokiem by³o sprawdzenie, ¿e rzeczywi¶cie mo¿emy przybli¿aæ jazdê narciarza jako poruszanie siê po odcinkach ³amanej. Wa¿ne jest stwierdzenie jakie ró¿nice w czasie bêd± wystêpowaæ pomiêdzy jazd± po ³uku, a jazd± po ³amanej. Ró¿nice te oczywi¶cie bêd± zale¿eæ od tego jak dok³adne przybli¿enie zrobimy.
 
 \subsubsection{Opis eksperymentu}
@@ -150,6 +151,152 @@ Ró¿nice w czasie wahaj± siê od 0.003 do 0.064 s, jest to odpowiednio od 0.08\% d
 
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjnyWyniki}
+Wiedz±c, ¿e za³o¿enia dotycz±ce modelu oraz sposób poruszania siê narciarza mo¿na uznaæ za poprawne i zbli¿one do tego co rzeczywi¶cie dzieje siê podczas jazdy na stoku, przetestujemy teraz jak sprawdza siê algorytm genetyczny do celów optymalizacji trasy slalomu.
+
+W poni¿szych eksperymentach wykorzystane zostanie nastêpuj±ce ustawienie bramek: (5,13), (0,26), (5,39), (4,44), (11,57), (0,70). Ustawienie to jest podobne do tych, które s± wybierane w rzeczywisto¶ci. Posiada tak¿e wertikal, czêsto stosowany w slalomie, który ma wymuszaæ zmianê rytmu, a wiêc bêdzie dobrym sprawdzianem dla zastosowanego algorytmu.
+
+Zak³adamy, ¿e narciarz startuj±c ma prêdko¶æ pocz±tkow± $1\frac{m}{s}$. Jest to kierowane tym, ¿e przy starcie zawodnicy zaczynaj± od odepchniêcia siê kijami od ¶niegu nadaj±c sobie prêdko¶æ pocz±tkow±. Najwa¿niejsze jest to, ¿e warto¶æ ta bêdzie sta³a dla wszystkich eksperymentów.
+
+W eksperymencie \ref{sec:lamana} zosta³o stwierdzone, ¿e odleg³o¶ci w pionie pomiêdzy kolejnymi punktami wyznaczaj±cymi trasê powinna wynosiæ 2-4 m. Zatem przyjmijmy, ¿e bêd± to 3 m.
+
+Warto¶ci parametrów algorytmu genetycznego s± takie jak wymienione wcze¶niej w rozdziale \ref{sec:ewolucyjnyRozw}. Korzystamy z algorytmu $(\mu + \lambda)$, gdzie $\mu = 30$, a $\lambda = 100$. W ka¿dej iteracji najpierw krzy¿ujemy osobniki z populacji tymczasowej, losuj±c pary rodzicielskie, a w wyniku krzy¿owania powstaje znów 100 osobników. Nastêpnie mutacji podlegaj± wszystkie z tych osobników. Jedynym zastrze¿eniem jest nie zmienianie pozycji punktów przejazdu przez bramki - chcemy, aby narciarz przejecha³ zawsze jak najbli¿ej bramki. Je¶li która¶ z warto¶ci lub zastosowanych algorytmów zmienia siê, jest to zaznaczone w eksperymencie.
+
+
+\subsubsection{Warunek zakoñczenia}
+Warunkiem stopu w zastosowanym algorytmie genetycznym jest sprawdzenie czy populacja, na której dzia³amy przesta³a byæ ju¿ zró¿nicowana. Dodatkowo, je¶li ró¿nica pomiêdzy najlepszym, a najgorszym osobnikiem jest ma³a, czekamy przez okre¶lon± liczbê iteracji, aby sprawdziæ czy uzyskujemy jeszcze jak±¶ poprawê najlepszego osobnika, ale wiêksz± ni¿ zadana granica. Je¶li taka sytuacja nie zachodzi, oznacza to, ¿e szanse na poprawê wyniku s± niewielkie i mo¿na zakoñczyæ dzia³anie algorytmu. W rozwi±zaniu tym istniej± jednak trzy parametry, których wp³yw na ostateczny wynik zbadamy w tym eksperymencie. 
+
+\paragraph{Eksperyment 1.} W pierwszym eksperymencie parametry zakoñczenia algorytmu wynosz±:
+\begin{itemize}
+\item dla zró¿nicowania populacji przyjmujemy na pocz±tek warto¶æ 0.1, czyli 10\%, gdzie warto¶æ ta obliczana jest na podstawie najlepszej i najgorszej warto¶ci fitness w populacji, a nastêpnie dzielona przez warto¶æ najlepsz± (aby uzyskaæ warto¶æ w \% mno¿ymy przez 100\%)
+\item zmiana najlepszego osobnika jest uznawana za wystarczaj±co du¿± je¶li wyniesie przynajmniej 0.3 s
+\item ilo¶æ iteracji przez które czekamy na zmianê najlepszego osobnika to na pocz±tek 7
+\end{itemize}
+
+W zwi±zku z tym, ¿e zachowanie algorytmu jest niedeterministyczne, dla ka¿dego zestawu parametrów zosta³y przeprowadzone po trzy eksperymenty, aby mo¿na by³o u¶redniæ wyniki i porównaæ eksperymenty miêdzy sob±.
+
+Poni¿ej znajduj± siê wyniki wizualne przeprowadzonego eksperymentu. Na ka¿dym obrazku widoczna jest znaleziona najlepsza trasa oraz wykres zmian warto¶ci fitness odpowiednio: najlepszego osobnika w ka¿dej iteracji (kolor czerwony), najgorszego osobnika (kolor zielony) oraz ¶rednia warto¶æ fitness ca³ej populacji.
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w1s}
+\centering
+\includegraphics[scale=0.8]{wyniki/wynik1-s}
+\end{figure}
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w1w}
+\centering
+\includegraphics[scale=0.5]{wyniki/wynik1-w}
+\end{figure}
+
+Kolejno¶æ slalomów odpowiada kolejno¶ci wykresów. Ilo¶æ iteracji w przypadku tych wyników wynios³a 7-9, czas dzia³ania algorytmu to ok. 20 s.
+
+Przyk³adowe wyniki:
+1) 7.968 s
+2) 8.039 s
+3) 7.917 s
+
+Jak widaæ wyra¼nie na obrazkach, wyniki nie s± satysfakcjonuj±ce - trasa przejazdu nie jest g³adka i z pewno¶ci± istnieje lepsze rozwi±zanie. Jednak skoro zosta³o wykonanych tylko kilka iteracji algorytmu, oznacza to, ¿e mo¿na spróbowaæ uzyskaæ lepsze wyniki poprzez wyd³u¿enie czasu dzia³ania algorytmu.
+
+\paragraph{Eksperyment 2.} Wprowadzamy teraz zmianê w warto¶ci parametru oznaczaj±cego ró¿nicê w fitness najlepszego osobnika. Zamiast warto¶ci 0.3 s teraz bêdzie to 0.1 s.
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w2s}
+\centering
+\includegraphics[scale=1]{wyniki/wynik2-s}
+\end{figure}
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w2w}
+\centering
+\includegraphics[scale=0.7]{wyniki/wynik2-w}
+\end{figure}
+
+
+1) 7.916 s (15, 49s)
+2) 7.809 s (14, 46)
+3) 7.777 s (16, 51)
+
+Wyniki poprawi³y siê, linia przejazdu jest du¿o g³adsza, a czasy poprawi³y siê o ok. 0.2 s, czyli o ok. kilka \%. Jednak czas dzia³ania algorytmu wyd³u¿y³ siê do 45-50 s, a ilo¶æ iteracji wynios³a 14-16.
+
+Spróbujmy w takim razie zmieniæ równie¿ parametr dotycz±cy zró¿nicowania populacji - niech bêdzie to teraz nie 10\%, a 1\%.
+
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w3s}
+\centering
+\includegraphics[scale=1]{wyniki/wynik2-s}
+\end{figure}
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w3w}
+\centering
+\includegraphics[scale=0.7]{wyniki/wynik2-w}
+\end{figure}
+
+7.8180694580078125 (17, 55)
+7.822418212890625  (14, 45)
+7.8166961669921875  (14, 47)
+
+Jak widaæ wyniki nie s± lepsze ni¿ te poprzednie. Zatem ten warunek nie zmieni³ zachowania. Pozosta³ natomiast jeszcze warunek ilo¶ci iteracji przez które sprawdzamy czy poprawia siê fitness najlepszego osobnika.
+
+Zmieniamy teraz warto¶æ ilo¶ci iteracji z 7 na 10.
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w4s}
+\centering
+\includegraphics[scale=1]{wyniki/wynik4-s}
+\end{figure}
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w4w}
+\centering
+\includegraphics[scale=0.7]{wyniki/wynik4-w}
+\end{figure}
+
+
+7.891693115234375 (13, 41)
+7.74322509765625 (19, 60)
+7.836456298828125 (13, 41)
+
+I to niewiele zmienia, choæ uda³o siê otrzymaæ dotychczas najlepszy wynik. Poniewa¿ algorytm ten jest niedeterministyczny trudno oceniæ jakie warto¶ci parametrów s± optymalne. Oczywi¶cie mo¿na dalej zmniejszaæ ich warto¶ci w poszukiwaniu lepszego wyniku.
+
+Drug± opcj±, która pomog³aby rozwi±zaæ problem zbyt szybkiej zbie¿no¶ci populacji by³oby wprowadzenie w chwili pojawienia siê takiej sytuacji nowych osobników, aby wprowadziæ wiêksz± ró¿norodno¶æ i umo¿liwiæ dalsze poszukiwania. Jednak w trakcie szczegó³owej analizy wyników z kolejnych iteracji (widocznych na wykresach), ³atwo zauwa¿yæ, ¿e na pocz±tku poprawa jest znacz±ca z ka¿d± iteracj±, a pod koniec zmiany s± niewielkie. Mo¿na zatem pomy¶leæ o wprowadzeniu innego algorytmu kiedy zmiany s± ju¿ s³abo widoczne, który skuteczniej znajdzie lepsze rozwi±zanie. Wprowadzeniem takiego rozwi±zania jest zastosowanie lokalnej optymalizacji. Wyniki tego podej¶cia opisane s± w sekcji \ref{sec:lokalnaWyniki}.
+
+Pozostaj± jednak jeszcze pozosta³e parametry algorytmu jak $\mu$ i $\lambda$.
+
+\subsubsection{Parametry $\mu$ i $\lambda$}
+50 150
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w3s}
+\centering
+\includegraphics[scale=1]{wyniki/wynik2-s}
+\end{figure}
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w3w}
+\centering
+\includegraphics[scale=0.7]{wyniki/wynik2-w}
+\end{figure}
+
+
+7.7803802490234375 (17, 81)
+7.8143310546875		(21, 109)
+7.8043365478515625	(17, 88)
+
+50 200
+
+
 
 \subsection{Lokalna optymalizacja}
 \label{sec:lokalnaWyniki}
@@ -163,12 +310,6 @@ Ró¿nice w czasie wahaj± siê od 0.003 do 0.064 s, jest to odpowiednio od 0.08\% d
 
 \section{Podsumowanie}
 \label{sec:podsumowanieWyniki}
-
-
-%---------------------------------------------------------------------------
-
-\section{Optymalizacja toru przejazdu}
-\label{sec:optymalizacja}
 
 %---------------------------------------------------------------------------
 
