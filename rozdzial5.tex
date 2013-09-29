@@ -316,10 +316,47 @@ Pozostaj± jednak jeszcze pozosta³e parametry algorytmu jak $\mu$ i $\lambda$.
 \section{Architektura systemu}
 \label{sec:architektura-podsumownanie}
 
-Projektuj±c architekturê dla naszego systemy 
-Aby zweryfikowaæ funkcjonalno¶æ zapropnowanej architektury 
-\subsection{Rekrutowanie ochotników}
 
+Aby zweryfikowaæ funkcjonalno¶æ zaproponowanej architektury zaplanowany zosta³ szereg eksperymentów, maj±cym na celu zbadaæ:
+
+\begin{itemize}
+\item wydajno¶æ poszczególnych przegl±darek dla intensywnych obliczeñ (Chrome, Firefox, Internet Explorer)
+\item wydajno¶æ równoleg³ego wykonywania obliczeñ przez kilka instancji danej przegl±darki uruchomionej na tej samej maszynie
+\item skuteczno¶æ rekrutowania ochotników do obliczeñ typu Volunteer Computing w przegl±darce, poprzez internetowe  media spo³eczno¶ciowe
+\end{itemize}
+
+\subsection{Wydajno¶æ przegl±darek dla intensywnych obliczeñ}
+
+u¶rednione wyniki dla kilkakrotnie przeprowadzonych eksperymentów:
+
+Chrome (v. 29.0.1547.76)
+70 sec - jedno okno przegl±darki na raz
+155 sec - trzy okna przegl±darki na raz
+200 sec - dziesiêæ okien na raz
+
+Internet Explorer (v. 10)
+97 sec - jedno okno
+153 sec - trzy okna
+555 sec - dziesiêæ okien przegl±darki naraz
+
+Firefox (v. 23.01)
+285 sec - jedno okno przegl±darki
+500 sec - trzy okna przegl±darki
+
+\subsection{Wydajno¶æ równoleg³ego prowadzenia obliczeñ przez wiele instancji przegl±darek}
+
+\subsection{Skuteczno¶æ rekrutowania ochotników do obliczeñ w przegl±darkowym modelu Volunteer Computing}
+
+Celem eksperymentu by³o sprawdzenie ile rozwi±zañ uda siê zebraæ udostêpniaj±c link prowadz±cy do strony internetowej dziêki, której mo¿na do³±czyæ do obliczeñ. Link zosta³ udostêpniony poprzez kilka internetowych kana³ów spo³eczno¶ciowych:
+
+\begin{itemize}
+\item na prywatnej tablicy w serwisie Facebook (520 znajomych)
+\item na tablicy Studenckiego Klubu Narciarskiego FIRN AGH w serwisie Facebook (180 obserwuj±cych)
+\item w serwisie Wykop.pl
+\item z prywatnego konta w serwisie Twitter  (120 obserwuj±cych)
+\end{itemize}
+
+Przez 6 h od udostêpnienia linku, stronê odwiedzi³o 221 unikatowych odwiedzaj±cych podczas 259 wizyt. W tym czasie do naszej bazy danych wp³ynê³o ponad 2000 rozwi±zañ. Przy najbardziej efektywnym u¿yciu zasobów ¶redniej klasy komputera typu laptop (porcesor Core i5, 4 rdzenie) 6h obliczeñ w najbardziej wydajnym modelu (równolegle puszczone 3 instancje przegl±darki Chrome / IE) przyniesie oko³o 430 rozwi±zañ. Ten sam efekt uda³o siê, dziêki zaprzêgniêciu do obliczeñ ochotników, w nieca³e 1.5 godziny.
 
 
 %---------------------------------------------------------------------------

@@ -346,3 +346,31 @@ Aplikacja jest lekkim serwerem Http napisanym w ¶rodowisku Node.js. U¿ytym jêzyk
 \end{figure}
 
 Diagram \ref{diagramClientServerDb} na stronie \pageref{diagramClientServerDb} pokazuje sekwencjê komunikacji pomiêdzy komponentami systemu oraz warstw± persystencji.
+
+\subsection{Efekt koñcowy}
+
+Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tego projektu aplikacji jest strona www, dostêpna pod dobrze znanym adresem URL - http://giant-client.herokuapp.com/. Na stronie jest krótko wyt³umaczone o co chodzi w projekcie i w jaki sposób ka¿dy odwiedzaj±cy mo¿e pomóc w obliczeniach. Na stronie znajduje siê jedno wyra¼ne tzn. "call to action" - du¿y przycisk zachêcaj±cy do rozpoczêcia obliczeñ.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=400px]{interfejs-1}
+\caption{Nasza strona zachêcaj±c± do uruchomienia obliczeñ}
+\label{fig:interfejs-1}
+\end{figure}
+
+Po uruchomieniu obliczeñ, osoba odwiedzaj±ca stronê dostaje na bie¿±co informacje zwrotne dotycz±ce efektów jej wspó³pracy. Na stronie:
+
+\begin{itemize}
+\item rysowana jest ca³y czas aktualnie rozwa¿ana trasa przejazdu
+\item wy¶wietla siê obliczony czas przejazdu po aktualnie rozwa¿anym torze przejazdu
+\item wy¶wietla siê najlepszy, dotychczas znaleziony, czas przejazdu dla aktualnie rozwa¿anej konfiguracji trasy
+\item rysowane s± wykresy przedstawiaj±ce parametry algorytmu genetycznego (aktualny Fitness populacji) 
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=400px]{interfejs-2}
+\caption{Nasza strona, podczas prowadzonych obliczeñ}
+\label{fig:interfejs-1}
+\end{figure}
