@@ -322,28 +322,46 @@ Aby zweryfikowaæ funkcjonalno¶æ zaproponowanej architektury zaplanowany zosta³ s
 \begin{itemize}
 \item wydajno¶æ poszczególnych przegl±darek dla intensywnych obliczeñ (Chrome, Firefox, Internet Explorer)
 \item wydajno¶æ równoleg³ego wykonywania obliczeñ przez kilka instancji danej przegl±darki uruchomionej na tej samej maszynie
-\item skuteczno¶æ rekrutowania ochotników do obliczeñ typu Volunteer Computing w przegl±darce, poprzez internetowe  media spo³eczno¶ciowe
+\item skuteczno¶æ rekrutowania ochotników do obliczeñ typu Volunteer Computing w przegl±darce, poprzez internetowe media spo³eczno¶ciowe
 \end{itemize}
 
 \subsection{Wydajno¶æ przegl±darek dla intensywnych obliczeñ}
 
-u¶rednione wyniki dla kilkakrotnie przeprowadzonych eksperymentów:
+W celu zbadania wydajno¶ci silników java script dla rozwi±zywania naszego problemu zosta³ przeprowadzony nastêpuj±cy eksperyment. W jak najbardziej zbli¿onych warunkach, tzn na tej samej maszynie, przy bardzo zbli¿onym obci±¿eniu procesowa przez inne procesy zosta³y kilkakrotnie uruchomione obliczenia tego samego problemu, tylko na ró¿nych przegl±darkach. Podczas eksperymentu, dana przegl±darka mia³a uruchomion± tylko jedn± instancjê, a instancja ta mia³a otwart± tylko jedn± kartê.
 
-Chrome (v. 29.0.1547.76)
+Chrome (v. 29)
 70 sec - jedno okno przegl±darki na raz
-155 sec - trzy okna przegl±darki na raz
-200 sec - dziesiêæ okien na raz
 
 Internet Explorer (v. 10)
 97 sec - jedno okno
-153 sec - trzy okna
-555 sec - dziesiêæ okien przegl±darki naraz
 
 Firefox (v. 23.01)
 285 sec - jedno okno przegl±darki
-500 sec - trzy okna przegl±darki
+
 
 \subsection{Wydajno¶æ równoleg³ego prowadzenia obliczeñ przez wiele instancji przegl±darek}
+
+Chrome (v. 29)
+\begin{itemize}
+\item 70 sec - jedno okno przegl±darki na raz
+\item 155 sec - trzy okna przegl±darki na raz
+\item 200 sec - dziesiêæ okien na raz
+\end{itemize}
+
+Internet Explorer (v. 10)
+\begin{itemize}
+\item 97 sec - jedno okno przegl±darki na raz
+\item 153 sec - trzy okna przegl±darki na raz
+\item 555 sec - dziesiêæ okien na raz
+\end{itemize}
+
+Firefox (v. 23.01)
+\begin{itemize}
+\item 285 sec - jedno okno przegl±darki na raz
+\item 500 sec - trzy okna przegl±darki na raz
+\item 800 sec - dziesiêæ okien na raz
+\end{itemize}
+
 
 \subsection{Skuteczno¶æ rekrutowania ochotników do obliczeñ w przegl±darkowym modelu Volunteer Computing}
 
@@ -356,7 +374,12 @@ Celem eksperymentu by³o sprawdzenie ile rozwi±zañ uda siê zebraæ udostêpniaj±c l
 \item z prywatnego konta w serwisie Twitter  (120 obserwuj±cych)
 \end{itemize}
 
-Przez 6 h od udostêpnienia linku, stronê odwiedzi³o 221 unikatowych odwiedzaj±cych podczas 259 wizyt. W tym czasie do naszej bazy danych wp³ynê³o ponad 2000 rozwi±zañ. Przy najbardziej efektywnym u¿yciu zasobów ¶redniej klasy komputera typu laptop (porcesor Core i5, 4 rdzenie) 6h obliczeñ w najbardziej wydajnym modelu (równolegle puszczone 3 instancje przegl±darki Chrome / IE) przyniesie oko³o 430 rozwi±zañ. Ten sam efekt uda³o siê, dziêki zaprzêgniêciu do obliczeñ ochotników, w nieca³e 1.5 godziny.
+Przez 6 h od udostêpnienia linku, stronê odwiedzi³o 221 unikatowych odwiedzaj±cych podczas 259 wizyt. W tym czasie do naszej bazy danych wp³ynê³o ponad 2000 rozwi±zañ. W ci±gu kolejnych 24 godzin, do bazy sp³ynê³o jeszcze ponad 2500 rozwi±zañ, co pokazuje, ¿e czê¶æ ludzi raz zarekrutowani do obliczeñ, zosta³o wierna eksperymentowi przez nastêpny dzieñ.
+
+ Przy najbardziej efektywnym u¿yciu zasobów ¶redniej klasy komputera typu laptop (porcesor Intel Core i5, 4 rdzenie) 6h obliczeñ w najbardziej wydajnym modelu (równolegle puszczone 3 instancje przegl±darki Chrome / IE) przyniesie oko³o 430 rozwi±zañ. Ten sam efekt uda³o siê, dziêki zaprzêgniêciu do obliczeñ ochotników, w nieca³e 1.5 godziny.
+
+-------
+Przemy¶lenie: brak zarz±dzania, automatycznego uruchomiania obliczeñ, ryje procek ca³y czas bez wzglêdu na to jak potrznuje go zwyk³y u¿ytkownik komputera
 
 
 %---------------------------------------------------------------------------
