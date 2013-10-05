@@ -229,14 +229,14 @@ Spróbujmy w takim razie zmieniæ równie¿ parametr dotycz±cy zró¿nicowania populac
 \begin{figure}[h]
 \label{fig:w3s}
 \centering
-\includegraphics[scale=1]{wyniki/wynik2-s}
+\includegraphics[scale=1]{wyniki/wynik3-s}
 \end{figure}
 
 %TODO opis
 \begin{figure}[h]
 \label{fig:w3w}
 \centering
-\includegraphics[scale=0.7]{wyniki/wynik2-w}
+\includegraphics[scale=0.7]{wyniki/wynik3-w}
 \end{figure}
 
 7.8180694580078125 (17, 55)
@@ -266,7 +266,7 @@ Zmieniamy teraz warto¶æ ilo¶ci iteracji z 7 na 10.
 7.74322509765625 (19, 60)
 7.836456298828125 (13, 41)
 
-I to niewiele zmienia, choæ uda³o siê otrzymaæ dotychczas najlepszy wynik. Poniewa¿ algorytm ten jest niedeterministyczny trudno oceniæ jakie warto¶ci parametrów s± optymalne. Oczywi¶cie mo¿na dalej zmniejszaæ ich warto¶ci w poszukiwaniu lepszego wyniku.
+Jak widaæ, równie¿ zmiana tego parametru niewiele zmienia, choæ uda³o siê otrzymaæ dotychczas najlepszy wynik. Poniewa¿ algorytm ten jest niedeterministyczny trudno oceniæ jakie warto¶ci parametrów s± optymalne. Oczywi¶cie mo¿na dalej zmniejszaæ ich warto¶ci w poszukiwaniu lepszego wyniku.
 
 Drug± opcj±, która pomog³aby rozwi±zaæ problem zbyt szybkiej zbie¿no¶ci populacji by³oby wprowadzenie w chwili pojawienia siê takiej sytuacji nowych osobników, aby wprowadziæ wiêksz± ró¿norodno¶æ i umo¿liwiæ dalsze poszukiwania. Jednak w trakcie szczegó³owej analizy wyników z kolejnych iteracji (widocznych na wykresach), ³atwo zauwa¿yæ, ¿e na pocz±tku poprawa jest znacz±ca z ka¿d± iteracj±, a pod koniec zmiany s± niewielkie. Mo¿na zatem pomy¶leæ o wprowadzeniu innego algorytmu kiedy zmiany s± ju¿ s³abo widoczne, który skuteczniej znajdzie lepsze rozwi±zanie. Wprowadzeniem takiego rozwi±zania jest zastosowanie lokalnej optymalizacji. Wyniki tego podej¶cia opisane s± w sekcji \ref{sec:lokalnaWyniki}.
 
@@ -277,16 +277,16 @@ Pozostaj± jednak jeszcze pozosta³e parametry algorytmu jak $\mu$ i $\lambda$.
 
 %TODO opis
 \begin{figure}[h]
-\label{fig:w3s}
+\label{fig:w5s}
 \centering
-\includegraphics[scale=1]{wyniki/wynik2-s}
+\includegraphics[scale=1]{wyniki/wynik5-s}
 \end{figure}
 
 %TODO opis
 \begin{figure}[h]
-\label{fig:w3w}
+\label{fig:w5w}
 \centering
-\includegraphics[scale=0.7]{wyniki/wynik2-w}
+\includegraphics[scale=0.7]{wyniki/wynik5-w}
 \end{figure}
 
 
@@ -295,11 +295,86 @@ Pozostaj± jednak jeszcze pozosta³e parametry algorytmu jak $\mu$ i $\lambda$.
 7.8043365478515625	(17, 88)
 
 50 200
+%TODO eksperyment + zmieniæ wykresy
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w6s}
+\centering
+\includegraphics[scale=1]{wyniki/wynik6-s}
+\end{figure}
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w6w}
+\centering
+\includegraphics[scale=0.7]{wyniki/wynik6-w}
+\end{figure}
 
 
+\subsubsection{Gêsto¶æ siatki}
+Aby uzyskaæ dok³adniejsze rozwi±zania zawsze mo¿na spróbowaæ zagê¶ciæ pionowe linie wyznaczaj±ce ile punktów stanowi reprezentacjê trasy. Do tej pory linie te by³y w odleg³o¶ci 3 m. Po zmianie na 2 m czas dzia³ania algorytmu powinien siê znacznie wyd³u¿yæ ze wzglêdu na wiêksz± ilo¶æ mo¿liwych rozwi±zañ.
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w7s}
+\centering
+\includegraphics[scale=0.8]{wyniki/wynik7-s}
+\end{figure}
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w7w}
+\centering
+\includegraphics[scale=0.5]{wyniki/wynik7-w}
+\end{figure}
+
+Czas wykonania wyd³u¿y³ siê do 100-150 s., a ilo¶æ iteracji zwiêkszy³a siê do ok. 20. Mimo zwiêkszenia dok³adno¶ci, wci±¿ istniej± na trasie zbyt ostre zmiany kierunku, które w rzeczywisto¶ci s± niemo¿liwe do wykonania bez dodatkowego czasu oraz zmniejszenia prêdko¶ci. Z tego powodu obliczona trasa jest miejscami zbyt kanciasta. Powstaje pytanie czy nie nale¿a³oby dodaæ pewnego mechanizmu, które eliminowa³oby zbyt ostre zmiany kierunku np. poprzez uwzglêdnienie konieczno¶ci zmniejszenia prêdko¶ci w takich miejscach. W dalszej czê¶ci pracy zostanie pokazane jak takie rozwi±zanie wp³ywa na otrzymywane wyniki.
+
+\subsubsection{D³uga trasa}
+\label{dlugaTrasa}
+Dotychczas rozpatrywany slalom by³ jedynie fragmentem standardowego slalomu, czas przejazdu wynosi³ mniej ni¿ 8 s. Pozostaje pytanie, czy dla wiêkszej ilo¶ci bramek algorytm nadal bêdzie w stanie znale¼æ rozwi±zanie zbli¿one do optymalnego oraz jak du¿o czasu bêdzie potrzebne do jego znalezienia. Mo¿liwe te¿, ¿e algorytm bêdzie potrzebowa³ zmiany parametrów, aby znale¼æ rozwi±zanie.
+
+Sprawdzone zostanie teraz jakie wyniki otrzymamy dla d³u¿szego slalomu: (19,10),(11,30),(20,50),(12,65),(0,80),(10,100),(3,120),(6,135)). Parametry $\mu$ i $\lambda$ pozostaj± ustawione na 30 i 100. Parametry zatrzymania algorytmu zostawiamy, aby algorytm dzia³a³ d³u¿ej:
+
+\begin{itemize}
+\item dla zró¿nicowania populacji przyjmujemy na warto¶æ 0.01, czyli 1\%
+\item zmiana najlepszego osobnika jest uznawana za wystarczaj±co du¿± je¶li wyniesie przynajmniej 0.05 s
+\item ilo¶æ iteracji przez które czekamy na zmianê najlepszego osobnika - 10
+\end{itemize}
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w8ws}
+\centering
+\includegraphics[scale=1]{wyniki/wynik8-ws}
+\end{figure}	
+
+Otrzymany wynik to 11.087 s. Obliczenia trwa³y 170 s., a algorytm potrzebowa³ 23 iteracje do zakoñczenia obliczeñ. Znów mo¿na powiedzieæ, ¿e wynik nie jest wynikiem z³ym, jednak pozostawia wiele do ¿yczenia - istnieje wiele ostrych zakrêtów, zw³aszcza w okolicach bramek, rozwi±zanie jest niedobre. 
 
 \subsection{Lokalna optymalizacja}
 \label{sec:lokalnaWyniki}
+Poniewa¿ algorytm genetyczny mia³ problem ze znalezieniem lepszych rozwi±zañ zw³aszcza kiedy dotychczas znalezione rozwi±zanie dawa³o ju¿ dosyæ dobry wynik, ale wci±¿ istnia³y miejsca, które go³ym okiem mo¿na by³o zobaczyæ jako wp³ywaj±ce negatywnie na jako¶æ wyniku. Skoro algorytm nie radzi³ sobie bêd±c blisko rozwi±zania, mo¿na spróbowaæ dodaæ jaki¶ rodzaj algorytmu optymalizacji lokalnej, bazuj±c na rozwi±zaniu znalezionym przez algorytm genetyczny. Mamy wtedy pewno¶æ, ¿e znajdziemy rozwi±zanie niegorsze od tego, na którym bazujemy i dodatkowo, ¿e bêdzie ono najlepszym lokalnym rozwi±zaniem. Mo¿emy mieæ tak¿e nadziejê, ¿e bêdzie to równie¿ rozwi±zanie globalnie optymalne, ale pewno¶ci mieæ nie mo¿emy.
+
+Spróbujmy zatem, bazuj±c na eksperymencie D³uga trasa w sekcji \ref{sec:ewolucyjnyWyniki} porównaæ jak poprawi siê otrzymany wynik dodaj±c na koniec obliczeñ optymalizacjê lokaln± algorytmem Hill climbing. Wszystkie parametry oraz trasa przejazdu pozostaj± takie same jak w eksperymencie, do którego siê odwo³ujemy.
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w9ws}
+\centering
+\includegraphics[scale=1]{wyniki/wynik9-ws}
+\end{figure}
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w9wyk}
+\centering
+\includegraphics[scale=1]{wyniki/wynik9-wyk}
+\end{figure}
+
+Na wykresie \ref{fig:w9ws} wci±¿ znajduj± siê zmiany wy³±cznie dotycz±ce algorytmu genetycznego. Czarna linia trasy jest rezultatem otrzymanym po dzia³aniu samego algorytmu genetycznego, czas przejazdu po takiej trasie wynosi 11.060 s., a wiêc jest to czas zbli¿ony do otrzymanego w eksperymencie bazowym. Algorytm genetyczny dzia³a³ przez 21 iteracji.
+Czerwona linia stanowi trasê uzyskan± po zaaplikowaniu algorytmu optymalizacji lokalnej na trasie znalezionej przez algorytm genetyczny. Na wykresie \ref{fig:w9wyk} mo¿emy zobaczyæ jak dok³adnie zmienia³ siê czas przejazdu w ka¿dej iteracji algorytmu lokalnego. Iteracja numer 0 to wynik otrzymany przez algorytm genetyczny. Po 7 iteracjach otrzymali¶my wynik 10.825 s., co stanowi poprawê o  0.235 s., czyli ok. 2\%. Poprawa ta jest zdecydowanie zauwa¿alna tak¿e w kszta³cie slalomu i na tyle znacz±ca, ¿e decyduje o zwyciêstwie zawodnika.
+
 
 %---------------------------------------------------------------------------
 
