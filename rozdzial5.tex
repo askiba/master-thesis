@@ -157,7 +157,7 @@ W poni¿szych eksperymentach wykorzystane zostanie nastêpuj±ce ustawienie bramek:
 
 Zak³adamy, ¿e narciarz startuj±c ma prêdko¶æ pocz±tkow± $1\frac{m}{s}$. Jest to kierowane tym, ¿e przy starcie zawodnicy zaczynaj± od odepchniêcia siê kijami od ¶niegu nadaj±c sobie prêdko¶æ pocz±tkow±. Najwa¿niejsze jest to, ¿e warto¶æ ta bêdzie sta³a dla wszystkich eksperymentów.
 
-W eksperymencie \ref{sec:lamana} zosta³o stwierdzone, ¿e odleg³o¶ci w pionie pomiêdzy kolejnymi punktami wyznaczaj±cymi trasê powinna wynosiæ 2-4 m. Zatem przyjmijmy, ¿e bêd± to 3 m.
+W eksperymencie \ref{sec:lamana} zosta³o stwierdzone, ¿e odleg³o¶ci w pionie pomiêdzy kolejnymi punktami wyznaczaj±cymi trasê powinna wynosiæ 2-4 m. Zatem przyjmijmy, ¿e bêd± to 3 m, co dla wy¿ej podanego slalomu daje nam nieca³e 30 punktów do optymalizacji.
 
 Warto¶ci parametrów algorytmu genetycznego s± takie jak wymienione wcze¶niej w rozdziale \ref{sec:ewolucyjnyRozw}. Korzystamy z algorytmu $(\mu + \lambda)$, gdzie $\mu = 30$, a $\lambda = 100$. W ka¿dej iteracji najpierw krzy¿ujemy osobniki z populacji tymczasowej, losuj±c pary rodzicielskie, a w wyniku krzy¿owania powstaje znów 100 osobników. Nastêpnie mutacji podlegaj± wszystkie z tych osobników. Jedynym zastrze¿eniem jest nie zmienianie pozycji punktów przejazdu przez bramki - chcemy, aby narciarz przejecha³ zawsze jak najbli¿ej bramki. Je¶li która¶ z warto¶ci lub zastosowanych algorytmów zmienia siê, jest to zaznaczone w eksperymencie.
 
@@ -294,26 +294,40 @@ Pozostaj± jednak jeszcze pozosta³e parametry algorytmu jak $\mu$ i $\lambda$.
 7.8143310546875		(21, 109)
 7.8043365478515625	(17, 88)
 
-50 200
+60 200
 %TODO eksperyment + zmieniæ wykresy
 
 %TODO opis
 \begin{figure}[h]
 \label{fig:w6s}
 \centering
-\includegraphics[scale=1]{wyniki/wynik6-s}
+\includegraphics[scale=0.8]{wyniki/wynik6-s}
 \end{figure}
 
 %TODO opis
 \begin{figure}[h]
 \label{fig:w6w}
 \centering
-\includegraphics[scale=0.7]{wyniki/wynik6-w}
+\includegraphics[scale=0.5]{wyniki/wynik6-w}
 \end{figure}
 
+7.7288818359375 (19,127)
+7.78289794921875 (15,118)
+7.7739715576171875 (20,170)
+
+W tym przypadku wszystkie otrzymane czasy s± mniejsze ni¿ 7,8 s., a otrzymane linie przejazdu wygl±daj± bardzo dobrze. Warto równie¿ zauwa¿yæ, ¿e w pierwszym przypadku otrzymali¶my najlepszy czas - 7,729 s.
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w6wyk}
+\centering
+\includegraphics[scale=0.5]{wyniki/wynik6-wyk}
+\end{figure}
+
+Powy¿szy wykres pokazuje jak zmieni³ siê ¶redni czas uzyskanych wyników odpowiednio dla kolejnych warto¶ci parametrów $\mu$ i $\lambda$. Widaæ, ¿e choæ poprawa jest niewielka, bo o oko³o 0,05 s, to jednak widoczny jest trend wskazuj±cy, ¿e zwiêkszenie populacji wp³ywa pozytywnie na znajdowane rozwi±zanie.
 
 \subsubsection{Gêsto¶æ siatki}
-Aby uzyskaæ dok³adniejsze rozwi±zania zawsze mo¿na spróbowaæ zagê¶ciæ pionowe linie wyznaczaj±ce ile punktów stanowi reprezentacjê trasy. Do tej pory linie te by³y w odleg³o¶ci 3 m. Po zmianie na 2 m czas dzia³ania algorytmu powinien siê znacznie wyd³u¿yæ ze wzglêdu na wiêksz± ilo¶æ mo¿liwych rozwi±zañ.
+Aby uzyskaæ dok³adniejsze rozwi±zania zawsze mo¿na spróbowaæ zagê¶ciæ pionowe linie wyznaczaj±ce ile punktów stanowi reprezentacjê trasy. Do tej pory linie te by³y w odleg³o¶ci 3 m. Po zmianie na 2 m czas dzia³ania algorytmu powinien siê znacznie wyd³u¿yæ ze wzglêdu na wiêksz± ilo¶æ rozpatrywanych punktów.
 
 %TODO opis
 \begin{figure}[h]
@@ -375,7 +389,7 @@ Spróbujmy zatem, bazuj±c na eksperymencie D³uga trasa w sekcji \ref{sec:ewolucyj
 Na wykresie \ref{fig:w9ws} wci±¿ znajduj± siê zmiany wy³±cznie dotycz±ce algorytmu genetycznego. Czarna linia trasy jest rezultatem otrzymanym po dzia³aniu samego algorytmu genetycznego, czas przejazdu po takiej trasie wynosi 11.060 s., a wiêc jest to czas zbli¿ony do otrzymanego w eksperymencie bazowym. Algorytm genetyczny dzia³a³ przez 21 iteracji.
 Czerwona linia stanowi trasê uzyskan± po zaaplikowaniu algorytmu optymalizacji lokalnej na trasie znalezionej przez algorytm genetyczny. Na wykresie \ref{fig:w9wyk} mo¿emy zobaczyæ jak dok³adnie zmienia³ siê czas przejazdu w ka¿dej iteracji algorytmu lokalnego. Iteracja numer 0 to wynik otrzymany przez algorytm genetyczny. Po 7 iteracjach otrzymali¶my wynik 10.825 s., co stanowi poprawê o  0.235 s., czyli ok. 2\%. Poprawa ta jest zdecydowanie zauwa¿alna tak¿e w kszta³cie slalomu i na tyle znacz±ca, ¿e decyduje o zwyciêstwie zawodnika.
 
-
+%na pocz±tku: {b: 13.529281616210938, w: 16.819839477539062} 48 punktów optymalizowanych
 %---------------------------------------------------------------------------
 
 \section{Uczenie maszynowe}
