@@ -430,9 +430,12 @@ Firefox (v. 23.01)
 
 \subsection{Wydajno¶æ równoleg³ego prowadzenia obliczeñ przez wiele instancji przegl±darek}
 
+Przeprowadzenie eksperymentu okaza³o siê utrudnione przez fakt, ¿e przegl±darki optymalizuj± zu¿ycie procesora i nie rozdzielaj± mocy obliczeniowej równo pomiêdzy wszystkie otwarte w jednym czasie okna przegl±darki. Maj±c to na uwadze, zosta³y przeprowadzone dodatkowe eksperymenty maj±ce na celu zbadaæ wydajno¶æ obliczeñ gdy karta przegl±darki w której prowadzone s± obliczenia jest nie aktywna.
+
 Chrome (v. 29)
 \begin{itemize}
-\item 70 sec - jedno okno przegl±darki na raz
+\item 55 sec - jedno okno przegl±darki na raz aktywna
+\item 60 sec - jedno okno przegl±darki na raz, nieaktywne
 \item 155 sec - trzy okna przegl±darki na raz
 \item 200 sec - dziesiêæ okien na raz
 \end{itemize}
@@ -446,11 +449,10 @@ Internet Explorer (v. 10)
 
 Firefox (v. 23.01)
 \begin{itemize}
-\item 285 sec - jedno okno przegl±darki na raz
+\item 242 sec - jedno okno przegl±darki na raz - aktywne
 \item 500 sec - trzy okna przegl±darki na raz
 \item 800 sec - dziesiêæ okien na raz
 \end{itemize}
-
 
 \subsection{Skuteczno¶æ rekrutowania ochotników do obliczeñ w przegl±darkowym modelu Volunteer Computing}
 
@@ -464,8 +466,9 @@ Celem eksperymentu by³o sprawdzenie ile rozwi±zañ uda siê zebraæ udostêpniaj±c l
 \end{itemize}
 
 Przez 6 h od udostêpnienia linku, stronê odwiedzi³o 221 unikatowych odwiedzaj±cych podczas 259 wizyt. W tym czasie do naszej bazy danych wp³ynê³o ponad 2000 rozwi±zañ. W ci±gu kolejnych 24 godzin, do bazy sp³ynê³o jeszcze ponad 2500 rozwi±zañ, co pokazuje, ¿e czê¶æ ludzi raz zarekrutowani do obliczeñ, zosta³o wierna eksperymentowi przez nastêpny dzieñ.
+Po tygodniu od akcji promuj±cej, w bazie by³o ponad 6 tysiêcy nowych rozwi±zañ.
 
- Przy najbardziej efektywnym u¿yciu zasobów ¶redniej klasy komputera typu laptop (porcesor Intel Core i5, 4 rdzenie) 6h obliczeñ w najbardziej wydajnym modelu (równolegle puszczone 3 instancje przegl±darki Chrome / IE) przyniesie oko³o 430 rozwi±zañ. Ten sam efekt uda³o siê, dziêki zaprzêgniêciu do obliczeñ ochotników, w nieca³e 1.5 godziny.
+ Przy najbardziej efektywnym u¿yciu zasobów ¶redniej klasy komputera typu laptop (procesor Intel Core i5, 4 rdzenie) 6h obliczeñ w najbardziej wydajnym modelu (równolegle puszczone 3 instancje przegl±darki Chrome / IE) przyniesie oko³o 430 rozwi±zañ. Ten sam efekt uda³o siê, dziêki zaprzêgniêciu do obliczeñ ochotników, w nieca³e 1.5 godziny.
 
 -------
 Przemy¶lenie: brak zarz±dzania, automatycznego uruchomiania obliczeñ, ryje procek ca³y czas bez wzglêdu na to jak potrznuje go zwyk³y u¿ytkownik komputera
