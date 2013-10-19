@@ -1,16 +1,17 @@
 \chapter{Wyniki}
 \label{cha:wyniki}
 
+%TODO
 W rozdziale tym przedstawiono informacje .
 
 Je¿eli nie jest wskazane inaczej w eksperymencie, przyjmowane s± nastêpuj±ce warto¶ci sta³e:
 \begin{itemize}
 \item $\mu = 0.05$ - wspó³czynnik tarcia, typowa warto¶æ dla nasmarowanych nart %TODO odno¶nik
-\item $\rho = 1.17 kg*(m^{-3})$ - przybli¿ona warto¶æ gêsto¶ci powietrza dla temperatury $0^\circ C$
+\item $\rho = 1.17 \frac{kg}{m^3}$ - przybli¿ona warto¶æ gêsto¶ci powietrza dla temperatury $0^\circ C$
 i wilgotno¶ci 20\% na wysoko¶ci 800 m n.p.m
 \item $C = 0.6$ - wspó³czynnik oporu powietrza, typowe warto¶ci to 0.4 - 1
 \item $A = 0.2 m^2$ - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶ci narciarza
-\item $k_2 = 0.5 * C * roh * A$ - wspó³czynnik oporu powietrza
+\item $k_2 = 0.5 * C \rho A$ - wspó³czynnik oporu powietrza
 \item $k_1 = 0.05 $ - wspó³czynnik oporu powietrza
 
 \end{itemize}
@@ -21,8 +22,7 @@ W eksperymentach wszystkie wspó³rzêdne punktów s± w uk³adzie kartezjañskim, dwuw
 \section{Weryfikacja modelu}
 \label{sec:weryfikacja}
 
-%TODO
-Chcia³y¶my sprawdziæ, ¿e model jest prawid³owy ...
+W tej sekcji chcia³y¶my pokazaæ, ¿e model, który zosta³ przyjêty jest prawid³owy. W poni¿szych eksperymentach zostanie pokazane, ¿e zale¿no¶ci pomiêdzy zmian± poszczególnych zmiennych modelu, takich jak masa czy nachylenie stoku, a otrzymywanym czasem przejazdu, jest zgodne z prawami fizyki. Kolejne eksperymenty uka¿± równie¿, ¿e czas przejazdu po teoretycznie najszybciej trasie jest praktycznie identyczny z tym, który mo¿na wyliczyæ ze wzorów przedstawionych w artyku³ach naukowych. Na koniec sprawdzimy czy mo¿liwe jest przybli¿anie jazdy narciarza jazd± po ³amanej, jak gêsto bêd± musia³y byæ rozmieszczane punkty przegiêcia, ¿eby nie straciæ na dok³adno¶ci.
 
 \subsection{Masa i nachylenie stoku}
 Na pocz±tek zosta³y przeprowadzane proste eksperymenty, które dowodz±, ¿e przyjêty model jest poprawny. Dlatego dla celów pierwszego testu naj³atwiej by³o sprawdziæ jak zmienia siê czas przejazdu narciarza poruszaj±cego siê po prostej w dó³ stoku przy ró¿nych masach oraz nachyleniu stoku, dodatkowo sprawdzaj±c jaki wp³yw na wyniki ma równie¿ tarcie oraz opór powietrza.
@@ -364,12 +364,13 @@ Sprawdzone zostanie teraz jakie wyniki otrzymamy dla d³u¿szego slalomu: (19,10),
 \includegraphics[scale=1]{wyniki/wynik8-ws}
 \end{figure}	
 
-Otrzymany wynik to 11.087 s. Obliczenia trwa³y 170 s., a algorytm potrzebowa³ 23 iteracje do zakoñczenia obliczeñ. Znów mo¿na powiedzieæ, ¿e wynik nie jest wynikiem z³ym, jednak pozostawia wiele do ¿yczenia - istnieje wiele ostrych zakrêtów, zw³aszcza w okolicach bramek, rozwi±zanie jest niedobre. 
+Otrzymany wynik to 11.087 s. Obliczenia trwa³y 170 s., a algorytm potrzebowa³ 23 iteracje do zakoñczenia obliczeñ. Znów mo¿na powiedzieæ, ¿e wynik nie jest wynikiem z³ym, jednak pozostawia wiele do ¿yczenia - istnieje wiele ostrych zakrêtów, zw³aszcza w okolicach bramek, rozwi±zanie nie jest idealne. 
 
 \subsection{Lokalna optymalizacja}
 \label{sec:lokalnaWyniki}
 Poniewa¿ algorytm genetyczny mia³ problem ze znalezieniem lepszych rozwi±zañ zw³aszcza kiedy dotychczas znalezione rozwi±zanie dawa³o ju¿ dosyæ dobry wynik, ale wci±¿ istnia³y miejsca, które go³ym okiem mo¿na by³o zobaczyæ jako wp³ywaj±ce negatywnie na jako¶æ wyniku. Skoro algorytm nie radzi³ sobie bêd±c blisko rozwi±zania, mo¿na spróbowaæ dodaæ jaki¶ rodzaj algorytmu optymalizacji lokalnej, bazuj±c na rozwi±zaniu znalezionym przez algorytm genetyczny. Mamy wtedy pewno¶æ, ¿e znajdziemy rozwi±zanie niegorsze od tego, na którym bazujemy i dodatkowo, ¿e bêdzie ono najlepszym lokalnym rozwi±zaniem. Mo¿emy mieæ tak¿e nadziejê, ¿e bêdzie to równie¿ rozwi±zanie globalnie optymalne, ale pewno¶ci mieæ nie mo¿emy.
 
+\paragraph{Eksperyment 1.}
 Spróbujmy zatem, bazuj±c na eksperymencie D³uga trasa w sekcji \ref{sec:ewolucyjnyWyniki} porównaæ jak poprawi siê otrzymany wynik dodaj±c na koniec obliczeñ optymalizacjê lokaln± algorytmem Hill climbing. Wszystkie parametry oraz trasa przejazdu pozostaj± takie same jak w eksperymencie, do którego siê odwo³ujemy.
 
 %TODO opis
@@ -383,13 +384,107 @@ Spróbujmy zatem, bazuj±c na eksperymencie D³uga trasa w sekcji \ref{sec:ewolucyj
 \begin{figure}[h]
 \label{fig:w9wyk}
 \centering
-\includegraphics[scale=1]{wyniki/wynik9-wyk}
+\includegraphics[scale=0.7]{wyniki/wynik9-wyk}
 \end{figure}
 
 Na wykresie \ref{fig:w9ws} wci±¿ znajduj± siê zmiany wy³±cznie dotycz±ce algorytmu genetycznego. Czarna linia trasy jest rezultatem otrzymanym po dzia³aniu samego algorytmu genetycznego, czas przejazdu po takiej trasie wynosi 11.060 s., a wiêc jest to czas zbli¿ony do otrzymanego w eksperymencie bazowym. Algorytm genetyczny dzia³a³ przez 21 iteracji.
 Czerwona linia stanowi trasê uzyskan± po zaaplikowaniu algorytmu optymalizacji lokalnej na trasie znalezionej przez algorytm genetyczny. Na wykresie \ref{fig:w9wyk} mo¿emy zobaczyæ jak dok³adnie zmienia³ siê czas przejazdu w ka¿dej iteracji algorytmu lokalnego. Iteracja numer 0 to wynik otrzymany przez algorytm genetyczny. Po 7 iteracjach otrzymali¶my wynik 10.825 s., co stanowi poprawê o  0.235 s., czyli ok. 2\%. Poprawa ta jest zdecydowanie zauwa¿alna tak¿e w kszta³cie slalomu i na tyle znacz±ca, ¿e decyduje o zwyciêstwie zawodnika.
 
 %na pocz±tku: {b: 13.529281616210938, w: 16.819839477539062} 48 punktów optymalizowanych
+
+
+\paragraph{Eksperyment 2.}
+%TODO to jest z karaniem!!
+W eksperymencie pierwszym sprawdzili¶my dzia³anie algorytmu lokalnego dla domy¶lnie ustawionych parametrów. W zastosowanym algorytmie Hill Climbing mamy mo¿liwo¶æ zmiany dwóch parametrów:
+
+\begin{itemize}
+\item rozmiar kroku
+\item tzw. przyspieszenie (ang. \textit{acceleration}) 
+\end{itemize}
+
+Szczegó³owy opis parametrów mo¿na znale¼æ w podrozdziale \ref{sec:hill}. W domy¶lnym ustawieniu warto¶ci tych parametrów wynosz± odpowiednio 0.5 (odpowiadaj±ca 0.5 metrom na rzeczywistej trasie) oraz 1.2 dla przyspieszenia. W przeprowadzonym eksperymencie poka¿emy jak te parametry wp³ywaj± na ostateczne rozwi±zanie. Na rezultacie dzia³ania algorytmu genetycznego uruchomimy trzy razy algorytm lokalnej optymalizacji ale z nastêpuj±cymi zestawami parametrów:
+
+%TODO opis tabelki
+\begin{tabular}{ | c | c | c |}
+  \hline                        
+  nr & wielko¶æ kroku [m] & przyspieszenie \\ \hline  
+  1 & 0.5 & 1.2 \\ \hline
+  2 & 0.3 & 1.2 \\ \hline
+  3 & 0.3 & 1.1 \\ \hline
+\end{tabular}\\
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w11ws}
+\centering
+\includegraphics[scale=0.7]{wyniki/wynik11-ws1}
+\end{figure}
+
+%TODO opis
+\begin{figure}[h]
+\label{fig:w11ws2}
+\centering
+\includegraphics[scale=0.7]{wyniki/wynik11-ws2}
+\end{figure}
+
+Powy¿sze wykresy pokazuj± otrzymane trasy dla poszczególnych instancji algorytmów:
+\begin{itemize}
+\item trasa czarna - trasa uzyskana w wyniki dzia³ania algorytmu genetycznego
+\item trasa czerwona - optymalizacja lokalna z parametrami domy¶lnymi
+\item trasa niebieska - optymalizacja lokalna z krokiem 0.3 m
+\item trasa zielona - optymalizacja lokalna z krokiem 0.3 m oraz przyspieszeniem 1.1
+\end{itemize}
+
+%TODO pierwszy  i drugi wykres +-karanie
+
+Trasy otrzymane w wyniku dzia³ania algorytmu optymalizacji lokalnej ró¿ni± siê miejscami od siebie, choæ w niewielkim stopniu. Niewielkie zró¿nicowanie wynika z tego, ¿e pocz±tkowa trasa, któr± nale¿a³o zoptymalizowaæ by³a w ka¿dym przypadku taka sama. Algorytm Hill Climbing jest algorytmem deterministycznym, ale zmiana parametrów tego algorytmu wp³ywa na otrzymywany wynik koñcowy. Jednak w przypadku pierwszym zmiany s± minimalne, a otrzymywany wynik tak naprawdê mo¿na sprowadziæ do jazdy od bramki do bramki po liniach prostych. W drugim te¶cie wyniki ró¿ni± siê zw³aszcza w okolicach bramek, gdzie podejmowane s± decyzje o wcze¶niejszym lub pó¼niejszym skrêcie - to tam mo¿na najwiêcej zyskaæ lub straciæ. 
+
+Wyniki:
+
+eksperyment 1. bez karania \\
+Czas dzia³ania programu: 181 s. \\
+Czas uzyskany w wyniku dzia³ania algorytmu genetycznego: 10.974 \\
+ 
+%TODO
+\begin{tabular}{ | c | c | c |}
+  \hline                        
+  nr & otrzymany czas przejazdu [s] & ilo¶æ iteracji\\ \hline  
+  1 & 10.829 & 6 \\ \hline
+  2 & 10.819 & 8 \\ \hline
+  3 & 10.824 & 8 \\ \hline
+\end{tabular}\\
+
+
+eksperyment 2. z karaniem \\
+Czas dzia³ania programu: 253 s. \\
+Czas uzyskany w wyniku dzia³ania algorytmu genetycznego: 10.895 \\
+
+%TODO
+\begin{tabular}{ | c | c | c |}
+  \hline                        
+  nr &  otrzymany czas przejazdu [s] & ilo¶æ iteracji\\ \hline  
+  1 & 11.036 & 11 \\ \hline
+  2 & 11.050 & 14 \\ \hline
+  3 & 11.024 & 10 \\ \hline
+\end{tabular}\\
+
+%10.828910174398331 (6)
+%10.818552975659884 (8)
+%10.824364225106574 (8)
+
+%czas 181 s, przed lokalna 10.974349975585938
+
+%11.035537719726562(11)
+%11.04949951171875(14)
+%11.023712158203125(10)
+
+%czas 253 s., przed 10.894622802734375
+
+W pierwszej czê¶ci eksperymentu najlepszy czas otrzymany zosta³ dla drugiego przypadku, a wiêc przy zmniejszeniu wy³±cznie kroku. Poprawa w stosunku do pozosta³ych przypadków to 0.005-0.01 s czyli mniej ni¿ 0.1\%, ale widzimy, ¿e nawet tak niewielkie zmiany na trasie przejazdu mog± wp³ywaæ na koñcowy wynik.
+
+Drugi przypadek jest trudniejszy do analizy, poniewa¿ wprowadzenie karania powoduje, ¿e nie jeste¶my w stanie przenie¶æ uzyskiwanych ocen do rzeczywisto¶ci. Wed³ug nich, znów najlepszy okazuje siê byæ zestaw parametrów z drugiego przypadku, kiedy jednak sprawdzimy uzyskiwane czasy, widzimy, ¿e s± one gorsze ni¿ najlepszy uzyskany wynik z algorytmu genetycznego, a w dodatku
+kolejno¶æ rezultatów nie pokrywa siê z kolejno¶ci± ocen - najlepszy czas uzyskany zosta³ w ostatnim przypadku. Uzasadnieniem tego zachowania jest fakt uwzglêdniania w karaniu zbyt ostrych zakrêtów, które fizycznie nie s± mo¿liwe do wykonania lub musia³yby zabraæ dodatkowy czas. W rzeczywisto¶ci wyniki z pierwszego eksperymentu s± niemo¿liwe do otrzymania - przy ka¿dej bramce musieliby¶my straciæ dodatkowy czas na przestawienie nart poprzez konieczno¶æ przyhamowania.
+
 %---------------------------------------------------------------------------
 
 \section{Uczenie maszynowe}
