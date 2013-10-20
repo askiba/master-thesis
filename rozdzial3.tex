@@ -16,9 +16,10 @@ Zleceniodawcy obliczeñ, zauwa¿yli, ¿e na ¶wiecie popularno¶æ zdobywaj± inne od k
 
 W ostatnich latach, mo¿na zaobserwowaæ trend przenoszenia softwaru, który dotychczas zainstalowany by³ na komputerach jako natywna aplikacja, w model SAAS (Software As A Service). Programy pocztowe, funkcjonalne systemy CRM, czy odtwarzacze muzyczne coraz czê¶ciej dostêpne s± za po¶rednictwem przegl±darek internetowych. Taka zmiana mo¿liwa by³a dziêki rozwojowi silników Java Script we wspó³czesnych przegl±darkach, oraz implementacja w przegl±darkach zaawansowanych elementów ze specyfikacji HTML5 oraz Web Workers.
 
-W tym rozdziale, zaprezentujemy przekrój obecnie najbardziej znacz±cych platform umo¿liwiaj±cych wykonywanie obliczeñ w modelu Volunteer Computing.
+W tym rozdziale, zaprezentujemy przekrój obecnie najbardziej znacz±cych projektów korzystaj±cych z modelu Voluneteer Computing, oraz platform które te projekty wykorzystuj±.
 
 \subsection{Great Internet Mersenne Prime Searchy}
+\label{sec:gimps}
 Pierwszym projektem wykorzystuj±cym Volunteer Computing jest rozpoczêty na pocz±tku 1996 roku a trwaj±cy do dzi¶ \textit{GIMPS} (Great Internet Mersenne Prime Search), którego celem jest znalezienie jak najwiêkszej ilo¶ci specyficznych liczb pierwszych - tzn. Liczb Pierwszych Marsenne'a. Do tej pory kolaboracyjne wysi³ki doprowadzi³y do odnalezienia 14 takich liczb. Moc systemu da³a by teoretycznie, wg. danych na listopad 2012 roku - 330-ste miejsce w rankingu TOP500 - rankingu najmocniejszych komputerów na ¶wiecie. 
 
 System sk³ada siê z aplikacji klienckich stworzonych dla 9 platform i konfiguracji systemów. Twórcy zapewniaj±, ¿e kod programu jest wysoce zoptymalizowanym kodem asemblerowym Intela. Po uruchomieniu, program nawi±zuje kontakt z serwerem nazwanym \textit{PrimeNet} aby otrzymaæ czê¶æ pracy.
@@ -26,6 +27,7 @@ System sk³ada siê z aplikacji klienckich stworzonych dla 9 platform i konfigurac
 \textit{GIMPS} jest ciekawym projektem, który ma swoje sukcesy i skale, co potwierdzaj± publikowane regularnie informacje o nowych znaleziskach oraz wielko¶ci sieci komputerów bior±cych udzia³ w obliczeniach. Interfejs i User Experience które oferuje platforma jest jednak bardzo s³aby i archaiczny i zupe³nie nie przystosowany do u¿ytkowników wspó³czesnego internetu.  
 
 \subsection{Distributed.net}
+\label{sec:DistributedNet}
 Kolejn± znacz±c± platform± do Volunteer Computing jest stworzony w 1997 roku \textit{distributed.net}. Platforma to powsta³a oryginalnie w celu brania udzia³u w konkursach organizowanych przez RSA Laboratory, tzw. RSA Secret-Key Challenge. Konkursy te polega³y na uhonorowaniu pierwszej osoby, która znalaz³a klucz u¿yty do szyfrowania tekstu oraz odszyfrowa³a za jego pomoc± tekst zaszyfrowany jednym ze znanych algorytmów szyfruj±cych. Konkursy mia³y na celu zademonstrowanie stopnia bezpieczeñstwa algorytmu szyfruj±cego u¿ywaj±cego kluczy o ró¿nej d³ugo¶ci. Nagrod± by³o 10000 dolarów. Sieæ ochotników podpiêtych do systemu \textit{distributed.net} z³ama³a 56 bitowy klucz u¿yty przez szyfr blokowy RC5 do zaszyfrowania zdania: "The unknown message is: It's time to move to a longer key length". Metod± przyjêt± do z³amania tego szyfru by³ najprostszy \textit{brute-force}, która to dziêki metodologi Volunteer Computing przynios³a pozytywne skutki po 250 dniach poszukiwañ ca³ej przestrzeni rozwi±zañ.
 
 \begin{figure}[h]
@@ -49,7 +51,7 @@ Ufaj±c dostawcy, po zdecydowaniu siê na zainstalowanie programu, otwiera siê bar
 Nasz wniosek jest taki, ¿e przestarza³e i nieatrakcyjne systemy do Volunteer Computing nie maj± racji bytu w dzisiejszym ¶wiecie i prêdzej czy pó¼niej wygin± na rzecz bardziej przyjaznych rozwi±zañ.
 
 \subsection{Berkeley Open Infrastructure for Network Computing}
-
+\label{sec:BOINC}
 Do stworzenia platformy BOINC (Berkeley Open Infrastructure for Network Computing), obecnie najbardziej znacz±cego open-sourcowego middlewaru do obliczeñ typu volunteer i grid computing, przyczyni³ siê projekt SETI@home.
 
 SETI@home to program rozpoczêty w maju 1999 roku na uniwersytecie Berkeley, maj±cy na celu analizê kosmicznego szumu radiowego i odnalezienie w nim sygna³ów pochodz±cych od pozaziemskich cywilizacji. Przed migracj± do BOINC, projekt obs³ugiwa³ system posiadaj±cy wiele luk bezpieczeñstwa. Kwestie, które na pocz±tku nie by³o nacisku czyli wiarygodno¶æ zwracanych przez 'wolontariuszy' wyników, wraz z rozwojem projektu zaczê³y odgrywaæ coraz wiêksze znaczenie, gdy¿ zauwa¿ono, ¿e niektóre rozwi±zanie by³y w ca³o¶ci fa³szowane. 
@@ -72,6 +74,7 @@ Obecnie prawie trzy miliony ludzi udostêpnia zasoby swoich PC-tów do obliczeñ zw
 
 
 \subsection{Urz±dzenia mobilne w rozproszonych obliczeniach naukowych}
+\label{sec:mobilne}
 Przez dziesiêciolecia, miliony ludzi udostêpnia³y zasoby swoich maszyn aby wspomóc naukê. Jednak komputery typu PC s± coraz mniej popularne, a ich sprzeda¿ spada o prawie 8 procent rocznie. Prognozy jasno wskazuj± na to, ¿e ten trend siê utrzyma. Z drugiej strony, bardzo dynamicznie rozwija siê rynek urz±dzeñ mobilnych w tym smartphonów. Do koñca roku 2013, na rynek zostanie dostarczonych 919 milionów nowych urz±dzeñ, co jest 27 procentowym wzrostem w stosunku do roku 2012. 
 
 Do niedawna, telefony tego typu nie mia³y wystarczaj±cych zasobów by prowadziæ naukowe obliczenia. Obecnie urz±dzenia tego typu maj± nawet 4 rdzennie i mog± wykonywaæ pó³torej miliarda operacji numerycznych na sekundê, co odpowiada oko³o jednej pi±tej tego co potrafi± wspó³czesne komputery osobiste. David Anderson, naukowiec z Berkeley, który wspó³tworzy mobilna aplikacj± która jest furtk± do naukowych obliczeñ na smartphonach, twierdzi, ¿e jako, ¿e hardware mobilnych urz±dzeñ jest obecnie najbardziej rozwijan± ga³êzi± urz±dzeñ elektronicznych, ju¿ wkrótce, moc obliczeniowa tych urz±dzeñ mo¿e wyrównaæ obecne osi±gi PC-tów. Miêdzy innymi z tego powodu, warto zacz±æ uwzglêdniaæ urz±dzenia mobilne w roli potencjalnego wykonawcy intensywnych obliczeñ.
@@ -96,6 +99,7 @@ Rozwa¿aj±c u¿ycie urz±dzeñ mobilnych do obliczeñ wywo³uje pytanie o zu¿ycie bate
 \end{figure}
 
 \subsection{Folding@home}
+\label{sec:folfingathome}
 Projekt wywodz±cy siê z Amerykañskiego Uniwersytetu Stanford, by³ pierwszym, który zauwa¿y³ ¿e potencja³ Volunteer Computing nie zamyka siê tylko na komputery osobiste i wykorzystanie jednostek CPU ale tak¿e coraz bardziej rozwijanych jednostek GPU, procesorów na PlayStation 3. Jako pierwszy du¿y projekt wykorzysta³ te¿ model Message Passing Interface. Pojedynczy klienci dostaj± z serwera czê¶æ symulacji, i po jej wykonaniu odsy³aj± j± z powrotem do serwera, w którym czê¶ci s± ³±czone i stwarzaj± ca³o¶ciow± symulacjê. Co ciekawe, ochotnicy bior±cy udzia³ w symulacjach, mog± ¶ledziæ swój wk³ad w projekt Folding@home poprzez stronê internetow±. Obserwujemy, ¿e techniki grywalizacyjne zaczê³y byæ coraz szerzej wprowadzane do projektów Volunteer Computing w celu utrzymania zainteresowania ochotników w braniu udzia³u w projekcie.
 
 

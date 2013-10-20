@@ -23,7 +23,7 @@ W eksperymentach wszystkie wspó³rzêdne punktów s± w uk³adzie kartezjañskim, dwuw
 \section{Weryfikacja modelu}
 \label{sec:weryfikacja}
 
-W tej sekcji chcia³y¶my pokazaæ, ¿e model, który zosta³ przyjêty jest prawid³owy. W poni¿szych eksperymentach zostanie pokazane, ¿e zale¿no¶ci pomiêdzy zmian± poszczególnych zmiennych modelu, takich jak masa, nachylenie stoku oraz opory ruchu, a otrzymywanym czasem przejazdu, jest zgodne z prawami fizyki. Kolejne eksperymenty uka¿± równie¿, ¿e czas przejazdu po teoretycznie najszybciej trasie jest praktycznie identyczny z tym, który mo¿na wyliczyæ ze wzorów przedstawionych w artyku³ach naukowych. Na koniec sprawdzimy czy mo¿liwe jest przybli¿anie jazdy narciarza jazd± po ³amanej, jak gêsto bêd± musia³y byæ rozmieszczane punkty przegiêcia, ¿eby nie straciæ na dok³adno¶ci.
+W tej sekcji chcia³y¶my pokazaæ, ¿e model, który zosta³ przyjêty jest prawid³owy. W poni¿szych eksperymentach zostanie pokazane, ¿e zale¿no¶ci pomiêdzy zmian± poszczególnych zmiennych modelu, takich jak masa, nachylenie stoku oraz opory ruchu, a otrzymywanym czasem przejazdu, jest zgodne z prawami fizyki. Kolejne eksperymenty uka¿± równie¿, ¿e czas przejazdu po teoretycznie najszybciej trasie jest praktycznie identyczny z tym, który mo¿na wyliczyæ ze wzorów przedstawionych w artyku³ach naukowych. Na koniec sprawdzimy czy mo¿liwe jest przybli¿anie jazdy narciarza jazd± po ³amanej i jak gêsto bêd± musia³y byæ rozmieszczane punkty przegiêcia, ¿eby nie straciæ na dok³adno¶ci.
 
 \subsection{Masa i nachylenie stoku}
 Na pocz±tek zosta³y przeprowadzane proste eksperymenty, które dowodz±, ¿e przyjêty model jest poprawny. Dlatego dla celów pierwszego testu naj³atwiej by³o sprawdziæ jak zmienia siê czas przejazdu narciarza poruszaj±cego siê po prostej w dó³ stoku przy ró¿nych masach narciarza oraz zmianach nachylenia stoku, dodatkowo sprawdzaj±c jaki wp³yw na wyniki ma równie¿ tarcie oraz opór powietrza.
@@ -167,9 +167,9 @@ W tej czê¶ci zostan± pokazane wyniki jakie zosta³y otrzymane jako efekt dzia³ani
 
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjnyWyniki}
-Wiedz±c, ¿e za³o¿enia dotycz±ce modelu oraz sposób poruszania siê narciarza mo¿na uznaæ za poprawne i zbli¿one do tego co rzeczywi¶cie dzieje siê podczas jazdy na stoku, przetestujemy teraz jak sprawdza siê algorytm genetyczny do celów optymalizacji trasy slalomu.
+Wiedz±c, ¿e za³o¿enia dotycz±ce modelu oraz sposób poruszania siê narciarza mo¿na uznaæ za poprawne i zbli¿one do tego co rzeczywi¶cie dzieje siê podczas jazdy na stoku, zostanie przetestowane to, jak sprawdza siê algorytm genetyczny do celów optymalizacji trasy slalomu.
 
-W poni¿szych eksperymentach wykorzystane zostanie nastêpuj±ce ustawienie bramek: (5,13), (0,26), (5,39), (4,44), (11,57), (0,70). Ustawienie to jest podobne do tych, które s± wybierane w rzeczywisto¶ci. Posiada tak¿e wertikal, czêsto stosowany w slalomie, który ma wymuszaæ zmianê rytmu, a wiêc bêdzie dobrym sprawdzianem dla zastosowanego algorytmu.
+W poni¿szych eksperymentach wykorzystane zostanie nastêpuj±ce ustawienie bramek: (5,13), (0,26), (5,39), (4,44), (11,57), (0,70). Ustawienie to jest podobne do tych, które s± wybierane w rzeczywisto¶ci. Posiada tak¿e wertikal, figurê slalomow±, szerzej opisan± w sekcji \ref{sec:alpineSkiing}, czêsto stosowany w slalomie, który ma wymuszaæ zmianê rytmu, a wiêc bêdzie dobrym sprawdzianem dla zastosowanego algorytmu.
 
 Zak³adamy, ¿e narciarz startuj±c ma prêdko¶æ pocz±tkow± $1\frac{m}{s}$. Jest to kierowane tym, ¿e przy starcie zawodnicy zaczynaj± od odepchniêcia siê kijami od ¶niegu nadaj±c sobie prêdko¶æ pocz±tkow±. Najwa¿niejsze jest to, ¿e warto¶æ ta bêdzie sta³a dla wszystkich eksperymentów.
 
@@ -376,7 +376,7 @@ Aby uzyskaæ dok³adniejsze rozwi±zania zawsze mo¿na spróbowaæ zagê¶ciæ pionowe li
 \includegraphics[scale=0.5]{wyniki/wynik7-w}
 \end{figure}
 
-Czas wykonania wyd³u¿y³ siê do 100-150 s., a ilo¶æ iteracji zwiêkszy³a siê do ok. 20. Mimo zwiêkszenia dok³adno¶ci, wci±¿ istniej± na trasie zbyt ostre zmiany kierunku, które w rzeczywisto¶ci s± niemo¿liwe do wykonania bez dodatkowego czasu oraz zmniejszenia prêdko¶ci. Z tego powodu obliczona trasa jest miejscami zbyt kanciasta. Powstaje pytanie czy nie nale¿a³oby dodaæ pewnego mechanizmu, które eliminowa³oby zbyt ostre zmiany kierunku np. poprzez uwzglêdnienie konieczno¶ci zmniejszenia prêdko¶ci w takich miejscach. W dalszej czê¶ci pracy zostanie pokazane jak takie rozwi±zanie wp³ywa na otrzymywane wyniki.
+Czas wykonania wyd³u¿y³ siê do 100-150 s., a ilo¶æ iteracji zwiêkszy³a siê do ok. 20. Mimo zwiêkszenia dok³adno¶ci, wci±¿ istniej± na trasie zbyt ostre zmiany kierunku, które w rzeczywisto¶ci s± niemo¿liwe do wykonania bez dodatkowego czasu oraz zmniejszenia prêdko¶ci. Z tego powodu obliczona trasa jest miejscami zbyt kanciasta. Wychodzi zatem konieczno¶æ wprowadzenia mechanizmu, które eliminuje zbyt ostre zmiany kierunku np. poprzez uwzglêdnienie konieczno¶ci zmniejszenia prêdko¶ci w takich miejscach. Szczegó³owo, mechanizm ten opisany jest w sekcji \ref{sec:karanie} na stronie \pageref{sec:karanie}.
 
 \subsubsection{D³uga trasa}
 \label{dlugaTrasa}
@@ -587,7 +587,7 @@ $P=\frac{T_{MAX}}{A}[\frac{s}{rozwiazanie}]$
 
 \begin{table}[h]
 \caption{Niezale¿nie uruchomione obliczenia na ka¿dej z przegl±darek. W ka¿dej z przegl±darek obliczenia prowadzone w jednej zak³adce.}
-\label{jednaZakladka}
+\label{tab:jednaZakladka}
 \begin{tabular}{|l|l|l|l|}
 \multicolumn{4}{c}{} \\ \hline
                                                                                                                                & \textbf{Chrome}        & \textbf{Firefox}        & \textbf{IE}       \\ \hline
@@ -612,7 +612,7 @@ Numer zak³adki                                                                  
 
 \begin{table}[h]
 \caption{Uruchomienie obliczeñ w 6 zak³adkach przegl±darki Chrome równocze¶nie.}
-\label{szescZakladekCh}
+\label{tab:szescZakladekCh}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \multicolumn{7}{c}{}                                                                                          \\ \hline
 \multicolumn{7}{|l|}{\textbf{Chrome}}                                                                                                                                                \\ \hline
@@ -631,7 +631,7 @@ Numer zak³adki                                                                  
 
 \begin{table}[h]
 \caption{Uruchomienie obliczeñ w 6 zak³adkach przegl±darki Firefox równocze¶nie.}
-\label{szescZakladekFF}
+\label{tab:szescZakladekFF}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \multicolumn{7}{c}{}                                                                                                                                     \\ \hline
 \textbf{Firefox}                                                                                                                                              &          &          &          &          &          &          \\ \hline
@@ -649,7 +649,7 @@ Numer zak³adki                                                                  
 
 \begin{table}[h]
 \caption{Uruchomienie obliczeñ w 6 zak³adkach przegl±darki Internet Explorer równocze¶nie.}
-\label{szescZakladekIE}
+\label{tab:szescZakladekIE}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \multicolumn{7}{c}{}                                                                                            \\ \hline
 \multicolumn{7}{|l|}{\textbf{Internet Explorer}}                                                                                                                                       \\ \hline
@@ -675,9 +675,9 @@ Numer zak³adki                                                                  
 
 \paragraph{Wnioski}
 
-Eksperyment wykaza³, ¿e wydajno¶æ obliczeñ drastycznie ró¿ni siê w zale¿no¶ci od modelu przegl±darki, a wiêc od u¿ytego silnika JavaScript. Najlepiej wypad³a przegl±darka Chrome, ponad dwa razy wolniejsza okaza³a siê najnowsza przegl±darka Internet Explorer, a ponad 4 razy gorsza przegl±darka Firefox. Ciekawe wyniki dotycz± wydajno¶ci dla obliczeñ prowadzonych w wielu kartach przegl±darki jednocze¶nie. Dla ka¿dej z przegl±darek, zdecydowanie wydajniej jest uruchamiaæ obliczenia w dwóch zamiast w jednej zak³adce jednocze¶nie. Równoleg³e obliczenia w dwóch oknach, prawie, ¿e nie wp³ywaj± na spowolnienie obliczeñ w którym¶ z nich, przez co uzyskuje siê prawie dwukrotny skok w tempie rozwi±zania problemów. Replikowanie obliczeñ na kolejne zak³adki nie przynosi ju¿ jednak istotnego przyspieszenia. W Przypadku przegl±darki Chrome, najlepsze tempo uzyskuje siê przy 9-14 otwartych równolegle zak³adkach. Przy 15 otwartych instancjach prowadz±cych obliczenia, wyniki zaczynaj± siê ju¿ pogarszaæ. W przypadku Internet Explorera, optymalna ilo¶æ zak³adek, to miêdzy 6 a 8. Przy 9 zak³adkach, tempo istotnie spad³o- bo o prawie 80 procent, w stosunku do 8 okien. Najgorzej poradzi³ sobie z równoleg³ym przetwarzaniem Firefox. Najbardziej optymaln± dla tego silnika konfiguracj± s± 4 zak³adki dokonuj±ce równolegle obliczeñ. Ju¿ przy 5,6 zak³adkach ca³o¶ciowe tempo spada. Uruchomienie obliczeñ w 9 zak³adkach równocze¶nie okaza³o siê na testowej maszynie niemo¿liwe, gdy¿ powodowa³o awaryjne zakoñczenie dzia³ania programy Firefox. 
+Eksperyment wykaza³, ¿e wydajno¶æ obliczeñ drastycznie ró¿ni siê w zale¿no¶ci od modelu przegl±darki, a wiêc od u¿ytego silnika JavaScript. Ca³o¶ciowe wyniki eksperymentu dobrze obrazuje wykres \ref{fig:wydajnoscZakladki} na stronie \pageref{fig:wydajnoscZakladki}. Najlepiej wypad³a przegl±darka Chrome, ponad dwa razy wolniejsza okaza³a siê najnowsza przegl±darka Internet Explorer, a ponad 4 razy gorsza przegl±darka Firefox. Ciekawe wyniki dotycz± wydajno¶ci dla obliczeñ prowadzonych w wielu kartach przegl±darki jednocze¶nie. Dla ka¿dej z przegl±darek, zdecydowanie wydajniej jest uruchamiaæ obliczenia w dwóch zamiast w jednej zak³adce jednocze¶nie. Równoleg³e obliczenia w dwóch oknach, prawie, ¿e nie wp³ywaj± na spowolnienie obliczeñ w którym¶ z nich, przez co uzyskuje siê prawie dwukrotny skok w tempie rozwi±zania problemów. Replikowanie obliczeñ na kolejne zak³adki nie przynosi ju¿ jednak istotnego przyspieszenia. W Przypadku przegl±darki Chrome, najlepsze tempo uzyskuje siê przy 9-14 otwartych równolegle zak³adkach. Przy 15 otwartych instancjach prowadz±cych obliczenia, wyniki zaczynaj± siê ju¿ pogarszaæ. W przypadku Internet Explorera, optymalna ilo¶æ zak³adek, to miêdzy 6 a 8. Przy 9 zak³adkach, tempo istotnie spad³o- bo o prawie 80 procent, w stosunku do 8 okien. Najgorzej poradzi³ sobie z równoleg³ym przetwarzaniem Firefox. Najbardziej optymaln± dla tego silnika konfiguracj± s± 4 zak³adki dokonuj±ce równolegle obliczeñ. Ju¿ przy 5,6 zak³adkach ca³o¶ciowe tempo spada. Uruchomienie obliczeñ w 9 zak³adkach równocze¶nie okaza³o siê na testowej maszynie niemo¿liwe, gdy¿ powodowa³o awaryjne zakoñczenie dzia³ania programy Firefox. 
 
-Ciekawym wnioskiem jest te¿ fakt, ¿e przegl±darki przydzielaj± podobne zasoby do obliczeñ w tle, prowadzonych przez wiele kart równocze¶nie, i nie ma istotnego znaczenia, która z kart jest kart± otwart±. Obserwacjê t± ilustruj± zrzuty ekranu z managera zadañ systemu podczas prowadzenia obliczeñ oraz wyniki w tabelach, na których widaæ ¿e czas rozwi±zywania problemu jest zbli¿ony dla ka¿dej z kart.
+Ciekawym wnioskiem jest te¿ fakt, ¿e przegl±darki przydzielaj± podobne zasoby do obliczeñ w tle, prowadzonych przez wiele kart równocze¶nie, i nie ma istotnego znaczenia, która z kart jest kart± otwart±. Obserwacjê t± ilustruj± zrzuty ekranu \ref{fig:taskManager4} i \ref{fig:taskManager15} na stronie \pageref{fig:taskManager4} z managera zadañ systemu podczas prowadzenia obliczeñ oraz wyniki w tabelach \ref{tab:szescZakladekCh}, \ref{tab:szescZakladekIE} i \ref{tab:szescZakladekFF} na stronie \pageref{tab:szescZakladekCh} na których widaæ ¿e czas rozwi±zywania problemu jest zbli¿ony dla ka¿dej z kart.
 
 \begin{figure}[h]
 \centering
@@ -718,14 +718,15 @@ Ciekawym efektem by³o to, ¿e osoby bior±ce udzia³ w obliczeniach, poczu³y nutkê 
 
 %---------------------------------------------------------------------------
 
-Podsumowuj±c zaproponowane przez nas rozwi±zanie architektoniczne, czyli platforma volunteer computing dostêpna i wykonuj±ca obliczenia wewn±trz przegl±darki internetowe wymienimy zalety i wady tego rozwi±zania.
+Podsumowuj±c zaproponowane przez nas rozwi±zanie architektoniczne, czyli platforma Volunteer Computing dostêpna i wykonuj±ca obliczenia wewn±trz przegl±darki internetowe wymienimy zalety i wady tego rozwi±zania.
 
 Zalety
 
 \begin{itemize}
 \item ³atwa dostêpno¶æ
 \begin{itemize}
-\item brak konieczno¶ci instalacji
+\item brak konieczno¶ci instalacji dodatkowego oprogramowania po stronie ochotników
+\item brak bariery wej¶cia do u¿ywania nowego oprogramowania - wszystko dzieje siê z znanym ¶rodowisku przegl±darki i wygl±da jak standardowa strona internetowa
 \item prostota promowania platformy w portalach spo³eczno¶ciowych
 \end{itemize}
 
@@ -734,11 +735,10 @@ Zalety
 \item ³atwa do zaimplementowania wizualizacja zjawisk/ obliczeñ
 \item wieloplatformowo¶æ
 \end{itemize}
-\item 9
-\item 15
 \end{itemize}
 
-Dziêki tym zalet± technicznym,
+Dziêki tym zalet± technicznym, zosta³y uwidocznione fakty przemawiaj±ce za stosowaniem zaproponowanej architektury do analogicznych obliczeñ. Jest to przede wszystkim propagowanie wiedzy o problemach naukowych - ³atwy dostêp i atrakcyjna wizualizacja, która pozwala na wyt³umaczenie istoty rozwi±zywanego problemu. 
+
 
 
 \begin{itemize}
