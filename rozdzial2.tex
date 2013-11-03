@@ -109,7 +109,7 @@ Je¶li natomiast funkcja celu posiada wiele optimów lokalnych (tzw. funkcja wielo
 \label{sec:ewolucyjny}
 Algorytm ewolucyjny jest przyk³adem algorytmu optymalizacyjnego, przeszukuj±cego przestrzeñ rozwi±zañ w celu znalezienia najlepszego rozwi±zania problemu. Algorytm ten oparty jest na obserwacjach ¶rodowiska i przystosowywania siê organizmów do jego warunków. Wiele terminów zapo¿yczonych jest zatem z genetyki.
 
-Podstaw± ca³ego algorytmu jest populacja osobników, z których ka¿dy reprezentuje rozwi±zanie problemu. Populacja ta zmienia siê wraz z dzia³aniem algorytmu. Ewolucja zak³ada, ¿e populacja bêdzie siê sk³adaæ z coraz lepiej przystosowanych osobników. Przystosowanie to jest obliczane za pomoc± wcze¶niej okre¶lonej funkcji oceniaj±cej jako¶æ danego osobnika, czyli jak dobre jest rozwi±zanie reprezentowane przez niego. Przystosowanie jest warto¶ci± liczbow± obliczon± za pomoc± tej funkcji przystosowania.\\
+Podstaw± ca³ego algorytmu jest populacja osobników, z których ka¿dy reprezentuje rozwi±zanie problemu. Populacja ta zmienia siê wraz z dzia³aniem algorytmu. Ewolucja zak³ada, ¿e populacja bêdzie siê sk³adaæ z coraz lepiej przystosowanych osobników. Przystosowanie to jest obliczane za pomoc± wcze¶niej okre¶lonej funkcji oceniaj±cej jako¶æ danego osobnika, czyli wyznaczenie jak dobre jest rozwi±zanie reprezentowane przez niego. Przystosowanie jest warto¶ci± liczbow± obliczon± za pomoc± tej funkcji przystosowania.\\
 Funkcja przystosowania okre¶la warto¶æ przystosowania osobnika na podstawie jego fenotypu, który jest tworzony z genotypu. Genotyp okre¶la zestaw cech danego osobnika i sk³ada siê z chromosomów (najczê¶ciej z jednego). Natomiast ka¿dy z chromosomów sk³ada siê z elementarnych jednostek - genów.\\
 
 \subsubsection{Schemat dzia³a algorytmu ewolucyjnego}
@@ -134,7 +134,7 @@ Nastêpnie na tych kopiach przeprowadzane s± operacje genetyczne powoduj±ce zmian
 \item krzy¿owanie
 \end{itemize}
 
-%---- WSTAWKA ANGIELSKA!!!!!!!!!!!!!!!!!--------
+%TODO ---- WSTAWKA ANGIELSKA!!!!!!!!!!!!!!!!!--------
 Zadaniem mutacji jest losowe zmodyfikowanie genów w genotypie.\\
 Krzy¿owanie, zwane tak¿e rekombinacj± (ang. \textit{crossover}), dzia³a na co najmniej dwóch osobnikach i na podstawie ich genotypu tworzy jeden lub wiêcej osobników potomnych. Chromosomy rodzicielskie s± mieszane w celu otrzymania nowych genotypów dla osobników potomnych.
 
@@ -156,6 +156,22 @@ Algorytmy ewolucyjne wywodz± siê z kilku osobnych nurtów zajmuj±cych siê t± tema
 
 Prosty algorytm genetyczny zosta³ zaproponowany w roku 1975 przez John'a Holland'a.
 
+
+\begin{algorithm}
+\begin{algorithmic}
+\STATE	$t = 0$
+\STATE	$P^0 = createInitPop() $
+\WHILE {$stopCondition == false$}
+\STATE	$T^t = createTempPop(P^t) $
+\STATE	$T^t = crossPop(T^t) $
+\STATE	$O^t = mutatePop(T^t) $
+\STATE	$P^{t+1} = O^t$
+\STATE	$t=t+1$
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+
+
 Maj±c populacjê bazow± $P^t$ dokonujemy reprodukcji tej populacji, tworz±c populacjê tymczasow± $T^t$ sk³adaj±c± siê z takiej samej liczby osobników. Wybierani s± oni z prawdopodobieñstwem proporcjonalnym do ich przystosowania z populacji bazowej. Na populacji tymczasowej dokonujemy operacji genetycznych (mutacji i krzy¿owania). Do krzy¿owania wybierane s± roz³±czne pary osobników i z pewnym prawdopodobieñstwem $p_c$ zachodzi ich skrzy¿owanie. Je¶li dosz³o do powstania osobników potomnych zastêpuj± one osobniki rodzicielskie. Nastêpnie na tak otrzymanej populacji tymczasowej dochodzi do mutacji osobników i otrzymania populacji potomnej $O^t$. Ta populacja staje siê w nastêpnej iteracji algorytmu now± populacj± bazow±.\\
 Zatrzymanie algorytmu mo¿e byæ dokonane je¶li np.:
 
@@ -168,13 +184,13 @@ W tej wersji algorytmu czêsto pêtlê algorytmu nazywa siê generacj±, a ka¿d± popu
 
 \paragraph{Strategia (1+1).}
 
-Strategia (1+1) jest podstawow± strategii ewolucyjnych. W algorytmie tym mamy do czynienia z populacj± sk³adaj±c± siê z tylko jednego osobnika posiadaj±cego jeden chromosom. W ka¿dej pêtli algorytmu dokonuje siê mutacji tego chromosomu, co powoduje powstanie nowego osobnika. Osobnik ten jest poddawany ocenie, a nastêpnie dokonuje siê wyboru lepszego z dwóch istniej±cych osobników i tego pozostawia w populacji.\\
+Strategia (1+1) jest podstawow± strategi± ewolucyjn±. W algorytmie tym mamy do czynienia z populacj± sk³adaj±c± siê z tylko jednego osobnika posiadaj±cego jeden chromosom. W ka¿dej pêtli algorytmu dokonuje siê mutacji tego chromosomu, co powoduje powstanie nowego osobnika. Osobnik ten jest poddawany ocenie, a nastêpnie dokonuje siê wyboru lepszego z dwóch istniej±cych osobników i tego pozostawia w populacji.\\
 W mutacji dodaje siê do ka¿dego genu chromosomu losow± modyfikacjê rozk³adem normalnym:
 \begin{equation}
 Y^t_i = X^t_i + \sigma\xi_{N(0,1),i}
 \end{equation}
 
-Warto¶æ $\sigma$ bêdzie powodowa³a wiêksze lub mniejsze zmiany w chromosomie. Je¶li chcemy przeszukaæ przestrzeñ, powinni¶my zwiêkszaæ jej warto¶æ, co jest po¿±dane zw³aszcza w pocz±tkowej fazie dzia³ania algorytmu. Natomiast, aby znale¼æ jak najlepsze rozwi±zanie, wiedz±c ¿e obecne rozwi±zanie jest ju¿ bardzo bliskie najlepszemu, mo¿emy zmniejszaæ warto¶æ $\sigma$ przeszukuj±c tylko najbli¿sz± przestrzeñ.\\
+Warto¶æ $\sigma$ bêdzie powodowa³a wiêksze lub mniejsze zmiany w chromosomie. Je¶li chcemy przeszukaæ przestrzeñ rozwi±zañ, powinni¶my zwiêkszaæ jej warto¶æ, co jest po¿±dane zw³aszcza w pocz±tkowej fazie dzia³ania algorytmu. Natomiast, aby znale¼æ jak najlepsze rozwi±zanie, wiedz±c ¿e obecne rozwi±zanie jest ju¿ bardzo bliskie najlepszemu, mo¿emy zmniejszaæ warto¶æ $\sigma$ przeszukuj±c tylko najbli¿sz± przestrzeñ.\\
 Do wyznaczania $\sigma$ powsta³ nastêpuj±cy algorytm zwany regu³± 1/5 sukcesów:
 \begin{enumerate}
 \item Je¶li przez kolejnych k pêtli algorytmu mutacja powoduje powstanie lepszego osobnika w wiêcej ni¿ 1/5 wszystkich mutacji, to zwiêkszamy $\sigma$: $\sigma' = c_i \sigma$. Warto¶æ $c_i$ wyznaczona empirycznie wynosi $ \frac{1}{0.82} $
@@ -186,10 +202,25 @@ Do wyznaczania $\sigma$ powsta³ nastêpuj±cy algorytm zwany regu³± 1/5 sukcesów:
 
 Strategia ($\mu$ + $\lambda$) jest rozwiniêciem strategii (1+1). $\mu$ oznacza ilo¶æ osobników w populacji pocz±tkowej, a $\lambda$ ile osobników jest reprodukowanych i poddawanych operacjom genetycznym. Dodatkowo, zamiast regu³y 1/5 sukcesów wprowadzono mechanizm samoczynnej adaptacji zasiêgu mutacji, a tak¿e wprowadzono operator krzy¿owania.
 
-Oznaczenie $\mu$ + $\lambda$ oznacza, ¿e po wygenerowaniu populacji potomnej wybierane jest $\mu$ najlepszych osobników do nowej populacji bazowej - zarówno spo¶ród populacji potomnej, jak i starej populacji bazowej zawieraj±cej ³±cznie $\mu$ + $\lambda$ osobników.
+Oznaczenie $\mu$ + $\lambda$ oznacza, ¿e po wygenerowaniu populacji potomnej wybierane jest $\mu$ najlepszych osobników do nowej populacji bazowej - zarówno spo¶ród populacji potomnej, jak i starej populacji bazowej zawieraj±cych ³±cznie $\mu$ + $\lambda$ osobników.
+
+\begin{algorithm}
+\begin{algorithmic}
+\STATE	$t = 0$
+\STATE	$P^0 = createInitPop(\mu) $
+\WHILE {$stopCondition == false$}
+\STATE	$T^t = createTempPop(P^t,\lambda) $
+\STATE	$T^t = crossPop(T^t) $
+\STATE	$O^t = mutatePop(T^t) $
+\STATE	$P^{t+1} = select(O^t \cup P^t,\mu)$
+\STATE	$t=t+1$
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+
 
 W strategii tej wa¿ne jest te¿ kodowanie, do którego dodatkowo do³o¿ono równie¿ chromosom przechowuj±cy wektor $\sigma$ zawieraj±cy warto¶ci odchyleñ standardowych, które wykorzystuje siê w trakcie mutacji.\\
-Po wylosowaniu warto¶ci zmiennej losowej o rozk³adzie normalnym ($\xi_{N(0,1)}$) dla ka¿dego elementu wektora $\sigma$ losujemy jeszcze jedn± zmienn± losow± o rozk³adzie normalnym ($\xi_{N(0,1),i}$) i oblicza nowe warto¶ci odchyleñ z wektora $\sigma$:
+Po wylosowaniu warto¶ci zmiennej losowej o rozk³adzie normalnym ($\xi_{N(0,1)}$) dla ka¿dego elementu wektora $\sigma$ losujemy jeszcze jedn± zmienn± losow± o rozk³adzie normalnym ($\xi_{N(0,1),i}$) i obliczamy nowe warto¶ci odchyleñ z wektora $\sigma$:
 
 \begin{equation}
 \sigma'_i = \sigma_i e^{(\tau'\xi_{N(0,1)} + \tau\xi_{N(0,1),i})}
@@ -220,11 +251,76 @@ Krzy¿owanie wystêpuje w tym algorytmie pod nazw± rekombinacja. Najczê¶ciej sprow
 Strategia ($\mu$ + $\lambda$) posiada pewne wady, które postanowiono spróbowaæ wyeliminowaæ za pomoc± nowej strategii ($\mu$, $\lambda$). Poprzedni algorytm sprawia problemy je¶li w populacji pojawia siê osobnik o wysokiej warto¶ci przystosowania, ale posiadaj±cy zbyt du¿e (albo zbyt ma³e) warto¶ci odchyleñ standardowych. Usuniêcie takiego osobnika z populacji czêsto nie jest procesem krótkotrwa³ym, gdy¿ wp³ywa on na powstaj±ce potomstwo, przekazuj±c mu podobne do jego, nieodpowiednie warto¶ci odchyleñ.\\
 W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie nie s± nigdy brane do kolejnej populacji bazowej. Podczas selekcji korzysta siê zatem tylko z powsta³ej populacji potomnej, z niej wybieraj±c osobniki do populacji bazowej w kolejnej iteracji.
 
+\begin{algorithm}
+\begin{algorithmic}
+\STATE	$t = 0$
+\STATE	$P^0 = createInitPop(\mu) $
+\WHILE {$stopCondition == false$}
+\STATE	$T^t = createTempPop(P^t,\lambda) $
+\STATE	$T^t = crossPop(T^t) $
+\STATE	$O^t = mutatePop(T^t) $
+\STATE	$P^{t+1} = select(O^t,\mu)$
+\STATE	$t=t+1$
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+
 \subsection{Hill climbing}
 \label{sec:hill}
 Algorytm hill climbing jest jedn± z metod przeszukiwania lokalnego. W ka¿dej iteracji zmieniaj±c warto¶æ jednej ze zmiennych rozwi±zania sprawdzana jest warto¶æ funkcji celu dla nowego rozwi±zania i je¶li warto¶æ ta jest lepsza od dotychczas najlepszej znalezionej, zapamiêtujemy zmienione rozwi±zanie. Dopóki zmiany powoduj± poprawê rozwi±zania, algorytm nie jest zatrzymywany. Na koñcu wiemy, ¿e znalezione rozwi±zanie jest rozwi±zaniem lokalnie optymalnym.\\
 Przeszukiwanie przestrzeni dyskretnej sprowadza siê do sprawdzenia rozwi±zañ najbli¿szych obecnemu i wybieranie tego rozwi±zania, którego warto¶æ obliczona za pomoc± funkcji celu jest najlepsza. Je¶li w¶ród s±siadów nie ma ju¿ lepszego rozwi±zania, mo¿emy zakoñczyæ przeszukiwanie.\\
+
+\begin{algorithm}
+\begin{algorithmic}
+\STATE $current = startPoint$
+\STATE $foundBetter = true $
+\WHILE {$ foundBetter == true $}
+  \STATE $ foundBetter = false $
+  \STATE $ neighbours = getNeighbours(current) $
+  \FORALL {$neighbour$ $in$ $neighbours$}
+    \IF {$ neighbour.getValue() < current.getValue() $}
+      \STATE $ current = neighbour $
+      \STATE $ foundBetter = true $
+    \ENDIF
+  \ENDFOR
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+
+
 W przestrzeni ci±g³ej konieczne jest dobranie kroku, który wyznacza punkty przeszukiwane w okolicy w trakcie ka¿dej iteracji. Dodatkowo wykorzystywane jest tzw. przyspieszenie (ang. \textit{acceleration}), które wyznacza piêciu mo¿liwych kandydatów na lepsze rozwi±zania. Najczê¶ciej przyspieszenie to wynosi 1.2, a warto¶æ kroku jest osobna dla ka¿dej zmiennej rozwi±zania i czêsto wynosi na pocz±tku 1. Zatem za ka¿dym razem obliczane s± nastêpuj±ce wspó³czynniki: -acceleration, -1/acceleration, 0, 1/acceleration, acceleration. Nastêpnie wspó³czynniki mno¿one s± przez krok (step) i dodawane do obecnie analizowanej zmiennej i wybierane jest najlepsze z piêciu rozwi±zañ. Warto¶æ kroku jest indywidualna dla ka¿dej zmiennej. Po wybraniu najlepszego rozwi±zania uaktualniana jest warto¶æ tego kroku - krok mno¿ony jest przez odpowiedni wspó³czynnik, ten który by³ dobrany wcze¶niej do znalezienia tego najlepszego rozwi±zania. Algorytm zatrzymywany jest je¶li zmiana ¿adnej ze zmiennych nie przynosi ju¿ poprawy rozwi±zania, czasem równie¿ je¶li ta zmiana jest ju¿ bardzo ma³a - wprowadzany jest parametr $\epsilon$ wyznaczaj±cy tê ró¿nicê.
+
+\begin{algorithm}
+\begin{algorithmic}
+\STATE $ currentResult = startPoint$
+\STATE $ steps = initialSteps $ \COMMENT {for each dimension of the solution}
+\STATE $ candidates = [-acc, -\frac{1}{acc}, 0, \frac{1}{acc}, acc] $
+\STATE $ currentValue = currentResult.getValue() $
+\STATE $ beforeValue = MAX\_VALUE $
+\STATE $ \epsilon = EPSILON $
+\WHILE {$ beforeValue - currentValue > \epsilon $}
+  \STATE $ beforeValue = currentValue $
+  \FOR {$i$ $in$ $dimensions$}
+    \STATE $ bestIndex = -1 $
+	\STATE $ bestScore = MAX\_VALUE $\
+	\FOR {$j$ $in$ $candidatesNrs$} 
+	  \STATE $ currentResult[i] = currentResult[i] + stepSize[i] * candidates[j] $
+	  \STATE $ tempValue = currentResult.getValue() $
+	  \STATE $ currentResult[i] = currentResult[i] - stepSize[i] * candidates[j] $
+	  \IF {$tempValue < bestScore$}
+	    \STATE $ bestScore = tempValue $
+	    \STATE $ bestIndex = j $
+	  \ENDIF
+	\ENDFOR
+	\IF {$ candidates[bestIndex]!=0 $}
+   	  \STATE $ currentResult[i] = currentResult[i] + stepSize[i] * candidates[bestIndex] $
+	  \STATE $ stepSize[i] = stepSize[i] * candidates[bestIndex] $    	  \COMMENT {accelerate}
+	\ENDIF
+  \ENDFOR
+  \STATE $ currentValue = bestScore $
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
 
 %---------------------------------------------------------------------------
 
