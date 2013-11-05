@@ -739,15 +739,19 @@ Zalety
 
 Dziêki tym zalet± technicznym, zosta³y uwidocznione fakty przemawiaj±ce za stosowaniem zaproponowanej architektury do analogicznych obliczeñ. Jest to przede wszystkim propagowanie wiedzy o problemach naukowych - ³atwy dostêp i atrakcyjna wizualizacja, która pozwala na wyt³umaczenie istoty rozwi±zywanego problemu. 
 
-
+Wady
 
 \begin{itemize}
-\item 1
-\item 3
-\item 6
-\item 9
-\item 15
+\item brak mo¿liwo¶ci automatycznego uruchamiania i przerywania obliczeñ w zale¿no¶ci od aktualnego zu¿ycia procesora
+\item brak mo¿liwo¶ci programowania konfiguracji przeprowadzanych obliczeñ (np. równoczesnego uruchamiania obliczeñ w X zak³adkach przegl±darki)
+\item nie optymalna pod wzglêdem wydajno¶ci implementacja obliczeñ - implementacja w jêzyku JavaScript
+\item niewielka ilo¶æ bibliotek numerycznych i naukowych do obliczeñ w ¶rodowisku JavaScript
 \end{itemize}
+
+Podsumowuj±c, dochodzimy do wniosku, ¿e zaproponowana przez nas architektura nie jest w tym momencie konkurencyjna dla obecnie funkcjonuj±cych platform ze wzglêdu na wydajno¶æ i ograniczon± konfigurowalno¶æ. Jest natomiast ciekawym, komplementarnym do tradycyjnego podej¶cia rozwi±zaniem, które, dziêki ³atwej dostêpno¶ci i braku bariery wej¶cia mo¿e byæ u¿ywane chocia¿by do promowania koncepcji Volunteer Computing czy te¿ faktycznego prowadzenia obliczeñ dla ma³ych, amatorskich projektów.
+
+Rozwa¿my mo¿liwy scenariusz promowania idei Volunteer Computing na przyk³adzie projektu fightAIDS@home, którego celem jest znalezienie lekarstwa na AIDS. Aby przyst±piæ do obliczeñ nale¿y ¶ci±gn±æ specjaln± aplikacjê klienck±, analogiczn± do aplikacji opisywanych w rozdziale \ref{sec:boinc} na stronie \pageref{sec:boinc}. Dziêki niej mo¿emy nie tylko kontrybuowaæ swoimi zasobami, ale równie¿ na bie¿±co ¶ledziæ wizualizowane w 3D postêpy obliczeñ. Najwiêksz± barier± jest w³a¶nie bariera wej¶cia. Proponujemy zatem, by stworzyæ prosty prototyp, który bêdzie symulowa³ przyst±pienie do obliczeñ za po¶rednictwem przegl±darki internetowej, oraz wykonywa³ i wizualizowa³ - najprostsze choæby operacja w jakikolwiek sposób zwi±zane z projektem fightAIDS@home. Osoba, która trafi na stronê internetow± z takim "lekkim" klientem Volunteer Computing odczuje - choæby przez to, ¿e us³yszy, ¿e procesor jej PC-ta zacz±³ intensywnie pracowaæ - jak to jest kontrybuowaæ do projektu w szczytnym celu. Taka osoba, powinna dostaæ bardzo szybki feedback dotycz±cy postêpu i tego w jak niewielkim stopniu przyczyni³a siê do realizacji celu projektu. Nastêpnie powinna dostaæ zestawienie, jak du¿o bardziej mo¿e pomóc, ¶ci±gaj±c specjalistyczne oprogramowanie i do³±czaj±c do ju¿ prawdziwej wersji obliczeñ. Oczywi¶cie mo¿na sobie wyobra¿iæ, ¿e w tej wersji demonstracyjnej, po stronie klienta nie s± wykonywane ¿adne konkretne obliczenia a ca³o¶æ ma tylko za zadanie zachêciæ do ¶ci±gniêcia oprogramowania do prawdziwych obliczeñ.
+
 
 Przemy¶lenie: brak zarz±dzania, automatycznego uruchomiania obliczeñ, ryje procek ca³y czas bez wzglêdu na to jak potrznuje go zwyk³y u¿ytkownik komputera
 
