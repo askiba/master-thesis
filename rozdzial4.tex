@@ -257,17 +257,16 @@ Pierwsza strategia opiera siê na obliczanie kolejno drugich pochodnych funkcji w
 
 \[ k =  \sum\limits_{i=1}^{n-1} |\ddot{d_i}|^{3}  \]   
 
-Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna warto¶æ oznacza bardzo ³agodne k±ty przej¶cia na ca³ej trasie natomiast im wiêksz± kanciasto¶æ trasy to implikuje. Aby wzmocniæ efektywno¶æ wspó³czynnika, dodatkowo, przed zsumowaniem, warto¶æ bezwzglêdna drugiej pochodnej jest podnoszona do trzeciej potêgi. Wyliczony wspó³czynnik dla ka¿dej z rozwa¿anych w algorytmie tras jest mno¿ony przez obliczony czas przejazdu tej trasy. Dopiero taka liczba jest traktowana jako funkcji celu algorytmu genetycznego. Minusem tej strategi jest kompletne zniekszta³cenie wyników tj. d³ugo¶ci przejazdu.
-
+Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna warto¶æ oznacza bardzo ³agodne k±ty przej¶cia na ca³ej trasie natomiast im wiêksz± kanciasto¶æ trasy tym implikuje ona wiêksz± warto¶æ tego wspó³czynnika. Aby wzmocniæ efektywno¶æ wspó³czynnika, dodatkowo, przed zsumowaniem, warto¶æ bezwzglêdna drugiej pochodnej jest podnoszona do trzeciej potêgi. Wyliczony wspó³czynnik dla ka¿dej z rozwa¿anych w algorytmie tras jest mno¿ony przez obliczony czas przejazdu tej trasy. Dopiero taka liczba jest traktowana jako funkcji celu algorytmu genetycznego. Minusem tej strategi jest kompletne zniekszta³cenie wyników tj. realnego czasu przejazdu narciarza po zadanym torze.
 
 \subsection{Strategia proporcjonalnego zmniejszania warto¶ci wektora prêdko¶ci}
 \label{sec:strategiaZmniejszania}
 
-W tej strategii, dla ka¿dego prze³amania ³amanej, obliczamy indywidualny wspó³czynnik kary $m$ z zakresu od 0 do 1. D³ugo¶æ wektora prêdko¶ci w ka¿dym kolejnym punkcie bêdzie mno¿ona przez wspó³czynnik dla tego punktu. Modelowane bêdzie zatem przyhamowywanie - tym wiêksze, im wiêkszy jest k±t pomiêdzy kolejnymi punktami ³amanej. Wspó³czynnik w danym punkcie zale¿y od k±ta ABC z ryciny \ref{fig:punish} poprzednim a nastêpuj±cym punktem. Testowane zosta³o kilka funkcji, modeluj±cy wspó³czynnik na podstawie k±ta, tak by funkcja zmierza³a do zera dla k±ta 90 stopni, i zmierza³a do jedynki dla 180 stopni. Zaproponowana zosta³a nastêpuj±ca funkcja:
+W tej strategii, dla ka¿dego prze³amania ³amanej, obliczamy indywidualny wspó³czynnik kary $m$ z zakresu od 0 do 1. D³ugo¶æ wektora prêdko¶ci w ka¿dym kolejnym punkcie bêdzie mno¿ona przez wspó³czynnik dla tego punktu. Modelowane bêdzie zatem przyhamowywanie - tym wiêksze, im wiêkszy jest k±t pomiêdzy kolejnymi punktami ³amanej. Wspó³czynnik w danym punkcie zale¿y od k±ta ABC z ryciny \ref{fig:punish} pomiêdzy poprzednim a nastêpuj±cym punktem. Zaproponowana zosta³a nastêpuj±ca funkcja, zmierzaj±ca do zera dla k±ta 90 stopni i mniejszego, i zmierzaj±ca do jedynki dla 180 stopni.
 
  
-\[f\left(\alpha\right) = \left \{ {{0.01, \alpha \in \left( 0, 90\right)} \atop {1- \left(  \frac{\alpha}{180} - 1.5  \right)^{6}, \alpha \in \left( 90, 180\right) }} \right.\]
- 
+\[m\left(\alpha\right) = \left \{ {{0.01, \alpha \in \left( 0, 90\right)} \atop {1- \left(  \frac{\alpha}{180} - 1.5  \right)^{6}, \alpha \in \left( 90, 180\right) }} \right.\]
+  
  
 \begin{figure}[h]
 \centering
@@ -276,19 +275,10 @@ W tej strategii, dla ka¿dego prze³amania ³amanej, obliczamy indywidualny wspó³cz
 \label{fig:punish} 
 \end{figure}
 
- 
+\subsection{Strategia karania za ka¿d± zmianê krawêdzi}
+\label{sec:strategiaKrawedzi}
 
-\subsection{Porównanie strategii}
-\label{sec:porownanie strategii}
-
-
-
-\begin{figure}[h]
-\centering
-\includegraphics[height=300px]{punish-test}
-\caption{Tor A przedstawia trasê obliczon± przy u¿yciu strategi sumowania pochodnych, Tor B przy strategi zmniejszania wektorów}
-\label{fig:punish}
-\end{figure}
+Ostatnia strategi± polega na zliczaniu ilo¶ci zmian kierunku jazdy na testowanym torze i porównanie jej z ilo¶ci± bramek wymuszaj±cych skrêt na trasie. Otrzymujemy zatem ilo¶æ nadprogramowych zmian krawêdzi, które w ka¿dym przypadku powoduj± gorszy czas przejazdu ni¿ gdyby ich nie by³o. Aby to zatem zamodelowaæ, w tej strategi dodajemy do wyliczonego czasu przejazdu sta³± ilo¶ci sekund kary za ka¿d± nadprogramow± zmianê krawêdzi i to traktujemy jako warto¶æ funkcji celu algorytmu genetycznego.
 
 \section{Uczenie maszynowe}
 \label{sec:maszynoweRozw}
