@@ -207,34 +207,58 @@ Jako, ¿e zauwa¿ony zosta³a podczas eksperymentu ogromny wp³yw wilgotno¶ci ¶lizgu
 
 \paragraph{Wyniki i Wnioski}
 
-Wyniki okaza³y siê byæ zgodne z przewidywaniami. Jako¶æ ¶lizgu, stan jego przegotowania oraz rodzaj smaru maj± znaczne znaczenie w wysoko¶ci wspó³czynnika tarcia, a w konsekwencji w szybko¶ci poruszania siê na nartach. Ciekawym wnioskiem by³o to, ¿e mokry ¶lizg ma znacznie wiêkszy wspó³czynnik tarcia ni¿ sychy ¶lizg. Wychodzi równie¿ jak wazna jest odpowiednio na³o¿ona na ¶lizg struktura umo¿liwiaj±ca odp³yw wody. Narta B mia³a ¶wie¿± strukturê, podczas gdy narta D prawie jej nie mia³a. 
+\begin{figure}[H]  
+\label{fig:rownia}
+\centering
+\includegraphics[height=160px]{rownia} 
+\caption{S - ¶rodek ciê¿ko¶ci narty; a - odleg³o¶æ miêdzy ¶rodkiem ciê¿ko¶ci narty a punktem podparcia deski; h - zmierzona eksperymentalnie wysoko¶æ graniczna, po przekroczeniu której narta zaczê³a siê zsuwaæ }
+\end{figure}
+
+Aby obliczyæ wspó³czynnik tarcia wykorzystana zosta³a nastêpuj±ca zale¿no¶æ: skoro narta jest na granicy zsuwania siê, oznacza to, ¿e si³a tarcia równowa¿y si³ê ¶ci±gaj±c± dzia³aj±c± na cia³o. Zatem:
+
+\[T = F_s\] 
+\[ \mu Q\cos\alpha = Q\sin\alpha\]
+\[ \mu\cos\alpha = \sin\alpha\]
+\[ \mu = \tan\alpha\]  
+\[ \tan\alpha = \frac{\sin\alpha}{\sqrt{1-\sin\alpha}}\]
+\[ \sin\alpha = \frac{h}{a} \]
+\[ \mu = \frac{ \frac{h}{a}}{\sqrt{1- \frac{h}{a}}}\]
+
+W eksperymencie d³ugo¶æ $a$ by³a sta³a i zawsze wynosi³a 2 metry. Wyniki pomiarów oraz obliczone warto¶ci znajduj± siê w tabeli \ref{tab:wspolczynnikTarcia}. 
+
+Wyniki okaza³y siê byæ zgodne z przewidywaniami. Jako¶æ ¶lizgu, stan jego przegotowania oraz rodzaj smaru maj± znaczne znaczenie w wysoko¶ci wspó³czynnika tarcia, a w konsekwencji w szybko¶ci poruszania siê na nartach. Ciekawym wnioskiem by³o to, ¿e mokry ¶lizg ma znacznie wiêkszy wspó³czynnik tarcia ni¿ suchy ¶lizg. Wychodzi równie¿ jak wa¿na jest odpowiednio na³o¿ona na ¶lizg struktura umo¿liwiaj±ca odp³yw wody. Narta B mia³a ¶wie¿± strukturê, podczas gdy narta D prawie jej nie mia³a. 
+
+Jak widaæ, wyliczone eksperymentalne wspó³czynniki tarcia dla niezawilgoconych ¶lizgów mieszcz± siê w przedziale 0.125 - 0.193, przedzia³ ten zawiera siê w przedziale 0.001 - 0.3 podanym we wstêpie teoretycznym w sekcji \ref{sec:tarcieKinetyczne} na stronie \pageref{sec:tarcieKinetyczne}.
 
 \begin{table}[h]
 \caption{Wyniki eksperymentu na wspó³czynnik tarcia w zale¿no¶ci od rodzaju ¶lizgu} 
 \label{tab:wspolczynnikTarcia} 
 \begin{tabular}{|c|c|c|c|c|c|}
-\hline
+\hline 
                                                                                                                          &                                                                    & \textbf{Narta A}                               & \textbf{Narta B} & \textbf{Narta C} & \textbf{Narta D} \\ \hline
 \multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}wysoko¶æ\\ na której zaczê³o siê\\  osuwanie w metrach\end{tabular}}} & \textbf{\begin{tabular}[c]{@{}c@{}}osuszony \\ ¶lizg\end{tabular}} & 0.35& 0.26             & 0.235            & 0.28             \\ \cline{2-6} 
 \multicolumn{1}{|l|}{\textbf{}}                                                                                          & \textbf{\begin{tabular}[c]{@{}c@{}}wilgotny \\ ¶lizg\end{tabular}} & ---                                            & 0.54             & ---              & 0.66             \\ \hline
-\multirow{2}{*}{\textbf{wspó³czynnik tarcia}}                                                                            & \textbf{\begin{tabular}[c]{@{}c@{}}osuszony \\ ¶lizg\end{tabular}} & A-suchy                                        & B-suchy          & C-suchy          & D-suchy          \\ \cline{2-6} 
-\multicolumn{1}{|l|}{\textbf{}}                                                                                          & \textbf{\begin{tabular}[c]{@{}c@{}}wilgotny\\  ¶lizg\end{tabular}} & ---                                            & B-mokry          & ---              & B-mokry          \\ \hline
+\multirow{2}{*}{\textbf{wspó³czynnik tarcia}}                                                                            & \textbf{\begin{tabular}[c]{@{}c@{}}osuszony \\ ¶lizg\end{tabular}} & 0.193                                        & 0.139          & 0.125          & 0.151          \\ \cline{2-6} 
+\multicolumn{1}{|l|}{\textbf{}}                                                                                          & \textbf{\begin{tabular}[c]{@{}c@{}}wilgotny\\  ¶lizg\end{tabular}} & ---                                            & 0.316          & ---              & 0.403         \\ \hline
 \end{tabular}
 \end{table}
  
-\begin{figure}[H] 
+\begin{figure}[H]  
 \label{fig:eksp-1}
 \centering
 \includegraphics[height=220px]{eksp-1}
-\caption{masa i stok}
+\caption{Warunki przeprowadzania eksperymentu. Widaæ deskê z ubit± warstw± ¶niegu oraz u³o¿on± na niej nartê}
 \end{figure}
 
-\begin{figure}[H]
-\label{fig:eksp-2}
-\centering
-\includegraphics[height=220px]{eksp-2}
-\caption{masa i stok}
-\end{figure}
+
+\subsection{Si³a oporu powietrza}
+\label{silaOporuEksperymnet}
+
+\paragraph{Za³o¿enia i warunki eksperymentu} 
+Kolejny eksperyment przeprowadzany by³ ju¿ na stoku narciarskim - Siepraw Ski w pobli¿u Krakowa. Eksperyment mia³ na celu sprawdzenie zale¿no¶ci pomiêdzy powierzchni± narciarza a szybko¶ci± jego przejazdu. Poniewa¿ za zmienn± eksperymentu przyjmujemy tylko powierzchniê narciarza, sprawdzamy de facto zale¿no¶æ pomiêdzy powierzchni± a warto¶ci± si³ oporu powietrza. Przygotowane zosta³y nastêpuj±ce scenariusze:
+\begin{itemize}
+\item narciarz ubrany jest w specjaln± tzw. gumê narciarsk± przylegaj±c± do cia³a. Strój ten opisany jest szerzej w sekcji \ref{sec:oporPowietrza} na stronie \pageref{sec:oporPowietrza}. 
+\end{itemize}
 
 \begin{figure}[H]
 \label{fig:eksp-3}
