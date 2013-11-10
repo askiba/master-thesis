@@ -268,8 +268,10 @@ W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie 
 
 \subsection{Hill climbing}
 \label{sec:hill}
+% ksiazka Stuart Russell, Peter Norvig - Artificial Inteligence A Modern Approach
+
 Algorytm hill climbing jest jedn± z metod przeszukiwania lokalnego. W ka¿dej iteracji zmieniaj±c warto¶æ jednej ze zmiennych rozwi±zania sprawdzana jest warto¶æ funkcji celu dla nowego rozwi±zania i je¶li warto¶æ ta jest lepsza od dotychczas najlepszej znalezionej, zapamiêtujemy zmienione rozwi±zanie. Dopóki zmiany powoduj± poprawê rozwi±zania, algorytm nie jest zatrzymywany. Na koñcu wiemy, ¿e znalezione rozwi±zanie jest rozwi±zaniem lokalnie optymalnym.\\
-Przeszukiwanie przestrzeni dyskretnej sprowadza siê do sprawdzenia rozwi±zañ najbli¿szych obecnemu i wybieranie tego rozwi±zania, którego warto¶æ obliczona za pomoc± funkcji celu jest najlepsza. Je¶li w¶ród s±siadów nie ma ju¿ lepszego rozwi±zania, mo¿emy zakoñczyæ przeszukiwanie.\\
+Przeszukiwanie przestrzeni dyskretnej sprowadza siê do sprawdzania rozwi±zañ najbli¿szych obecnemu i wybieranie tego rozwi±zania, którego warto¶æ obliczona za pomoc± funkcji celu jest najlepsza. Je¶li w¶ród s±siadów nie ma ju¿ lepszego rozwi±zania, mo¿emy zakoñczyæ przeszukiwanie.\\
 
 \begin{algorithm}
 \begin{algorithmic}
@@ -324,131 +326,6 @@ W przestrzeni ci±g³ej konieczne jest dobranie kroku, który wyznacza punkty przes
 \end{algorithm}
 
 %---------------------------------------------------------------------------
-
-\section{Uczenie maszynowe}
-\label{sec:maszynowe}
-
-Uczeniem siê systemu jest ka¿da autonomiczna zmiana w systemie zachodz±ca na podstawie do¶wiadczeñ, która prowadzi do poprawy jako¶ci jego dzia³ania. (Cichosz)
-
-Program siê uczy z do¶wiadczenia E dla zadañ T i miary jako¶ci P je¶li jego efektywno¶æ w zadaniach z T mierzona P wzrasta z do¶wiadczeniem E. (Mitchell)
-
-Istnieje wiele rodzajów uczenia maszynowego. Podstawowy podzia³ wynika z rodzaju informacji trenuj±cej na:
-
-\begin{itemize}
-\item uczenie z nadzorem
-\item uczenie bez nadzoru
-\end{itemize}
-
-W uczeniu siê z nadzorem ¼ród³em informacji trenuj±cej jest nauczyciel. Od niego otrzymuje uczeñ informacjê jakie zachowanie jest po¿±dane. Natomiast w przypadku uczenia bez nadzoru uczeñ dowiaduje siê o skuteczno¶ci swojego dzia³ania obserwuj±c wyniki - nazywa siê to czasem wbudowanym nauczycielem.
-
-Istniej± jeszcze dwie grupy, które trudno zakwalifikowaæ do powy¿szych:
-
-\begin{itemize}
-\item uczenie siê na podstawie zapytañ
-\item uczenie siê przez eksperymentowanie
-\item uczenie siê ze wzmocnieniem
-\end{itemize}
-
-Do pierwszej z nich nale¿± algorytmy polegaj±ce na zadawaniu pytañ przez ucznia nauczycielowi. Natomiast do drugiej te, w których uczeñ gromadzi swoje do¶wiadczenia obserwuj±c konsekwencje swojego dzia³ania w ¶rodowisku. Uczenie siê ze wzmocnieniem jest podobne do tej metody, ale dodatkowo istnieje krytyk, który s³u¿y jako dodatkowe ¼ród³o informacji trenuj±cej. Jego zadaniem jest karanie b±d¼ nagradzanie ucznia za jego zachowanie. Uczeñ nie dowiaduje siê co ma robiæ, ale jak warto¶ciowe jest dane dzia³anie.
-
-Czasem granice pomiêdzy tymi grupami s± nieostre i przynale¿no¶æ algorytmu do jakiej¶ grupy mo¿e zale¿eæ wy³±cznie od punktu widzenia.
-
-\subsection{Uczenie siê ze wzmocnieniem}
-\label{subsec:wzmocnienie}
-W przypadku uczenia siê ze wzmocnieniem zadaniem ucznia jest obserwacja stanów ¶rodowiska, wykonywanie akcji oraz obserwowanie efektów tych akcji poprzez warto¶æ otrzymywanego wzmocnienia jako rzeczywistoliczbowej nagrody. Tak jak zosta³o to napisane wcze¶niej, w tym przypadku nie mówimy o nauczycielu, ale o krytyku, który warto¶ciuje zachowanie poprzez dostarczanie wzmocnienia. Zadaniem ucznie jest odnalezienie takiego zachowania, które przyniesie mu jak najwiêksz± nagrodê. Najczê¶ciej uczeñ nie ma pojêcia o tym jakie jest ¶rodowisko, czêsto niedeterministyczne, dlatego musi wchodziæ w interakcjê z nim, aby je poznaæ.
-
-\begin{figure}[h]
-\centering
-\includegraphics{uczenie}
-\end{figure}
-
-W ka¿dym kroku uczeñ jest w okre¶lonym stanie ¶rodowiska. Decyduj±c siê na okre¶lon± akcjê otrzymuje informacjê o nowym stanie, w którym znajduje siê po wykonaniu tej akcji oraz o nagrodzie (wzmocnieniu) jak± otrzymuje za swoje dzia³anie. Uczeñ obserwuj±c nagrody otrzymywane za swoje zachowanie mo¿e uczyæ siê jak postêpowaæ, aby by³y one jak najwy¿sze.
-
-Schemat algorytmu przedstawia siê nastêpuj±co:\\
-Dla kolejnych kroków czasowych t: 
-\begin{enumerate}
-\item obserwujemy stan $x_t$
-\item wybieramy akcjê $a_t$ mo¿liw± do wykonania w stanie $x_t$
-\item wykonujemy akcjê $a_t$
-\item obserwujemy wzmocnienie $r_t$ i nastêpny stan $x_{t+1}$
-\item uczymy siê na podstawie do¶wiadczenia ($x_t,a_t,r_t,x_{t+1}$)
-\end{enumerate}
-Wybór akcji w kroku 2. dokonywany jest autonomicznie przez ucznia. Natomiast stan, do którego przechodzi po wykonaniu akcji jest okre¶lony przez ¶rodowisko na podstawie stanu poprzedniego oraz wykonanej akcji. Warto jednak zwróciæ uwagê na fakt, ¿e ¶rodowisko mo¿e byæ stochastyczne - wykonanie dwa razy tej samej akcji mo¿e dawaæ ró¿ne rezultaty. Poza tym, przewa¿nie ¶rodowisko jest nieznane uczniowi, st±d konieczno¶æ podejmowania prób i b³êdów poprzez wykonywanie ró¿nych akcji. Jednocze¶nie, uczeñ nie mo¿e wp³ywaæ na ¶rodowisko w ¿aden sposób.
-
-\subsubsection{Strategia maksymalizacji nagród}
-Nauka ucznia oparta jest na nagrodach, które otrzymuje za swoje dzia³ania. Musi znale¼æ on najlepsz± strategiê wyboru akcji, aby uzyskiwaæ jak najlepsze nagrody. Najczê¶ciej uczeñ próbuje maksymalizowaæ swoje nagrody d³ugoterminowo. Strategia ta polega na tym, ¿e nagrody za poprawne dzia³anie mog± przyj¶æ wiele kroków pó¼niej ni¿ wtedy gdy ono zosta³o wykonane. Strategia ta nazywana jest uczeniem siê z opó¼nionym wzmocnieniem. W uczeniu z natychmiastowym wzmocnieniem interesuje nas tylko maksymalizacja nagród tu¿ po danym zachowaniu. Nie jeste¶my wtedy w stanie braæ pod uwagê tego, jakie w przysz³o¶ci mog± byæ jego skutki.\\
-W przypadku opó¼nionego wzmocnienia wprowadza siê wspó³czynnik dyskontowania $\gamma \in [0,1]$. Zadaniem ucznia jest zmaksymalizowanie zdyskontowanej sumy nagród:
-
-\begin{equation}
-\label{dyskont}
-E[\sum_{t=0}^\infty \gamma^tr_t]
-\end{equation}
-
-Im wspó³czynnik $\gamma$ jest bli¿szy 0, tym bardziej maksymalizuje siê tylko natychmiastowe nagrody. Je¶li $\gamma = 1$ to maksymalizowana jest suma wszystkich otrzymanych nagród.
-
-\subsubsection{Zadania epizodyczne}
-W niektórych przypadkach dzia³ania ucznia mo¿na ³atwo wydzieliæ na niezale¿ne epizody, z których ka¿dy trwa najczê¶ciej skoñczon± liczbê kroków. Rozdzia³ ten jest kierowany tym, ¿e ka¿da z tych prób jest oceniania osobno. Zatem maksymalizujemy kryterium jako¶ci w ka¿dej próbie oddzielnie. Zatem w równaniu \ref{dyskont} musimy zast±piæ sumê nieskoñczon± otrzymuj±c:
-
-\begin{equation}
-E[\sum_{t=0}^{n-1} \gamma^tr_t]
-\end{equation}
-
-Warto¶æ $n$ to liczba kroków epizodu. Powy¿sze równanie mo¿na traktowaæ tak naprawdê jako szczególny przypadek równania \ref{dyskont}. Zak³adaj±c, ¿e w ostatnim kroku wchodzimy do stanu, w którym jedyna mo¿liwa akcja prowadzi z powrotem do niego, a nagroda w tym stanie wynosi 0, otrzymujemy dok³adnie powy¿sze równanie. W równaniu tym zmienna $r_t$ powinna byæ dla u¶ci¶lenia zast±piona przez $r_{i,t}$, poniewa¿ warto¶ci wzmocnienia mog± byæ ró¿ne w ka¿dej próbie $i$.
-
-Istniej± tak¿e dwa szczególnego rodzaju typy zadañ epizodycznych, które nazywane s± zadaniami do-sukcesu lub do-pora¿ki. Zakoñczenie ka¿dej próby koñczy siê odpowiednio w ka¿dym typie sukcesem lub pora¿k±. W przypadku zadañ do-sukcesu chcemy, aby w ka¿dym epizodzie w jak najmniejszej liczbie kroków osi±gn±æ pewien po¿±dany stan, co powoduje osi±gniêcie sukcesu i zakoñczenie tej próby. Odpowiednio dla zadañ do-pora¿ki jak najbardziej chcemy odwlec moment przej¶cie do niepo¿±danego stanu, który oznacza pora¿kê.
-
-\subsubsection{Algorytm uczenia siê strategii}
-\paragraph{Q-learning.}
-Algorytm Q-learning jest najczê¶ciej stosowanym algorytmem do uczenia siê optymalnej strategii. Uczenie siê polega na oszacowaniu optymalnej funkcji warto¶ci akcji. W ka¿dy kroku czasowym obliczana jest warto¶æ nastêpuj±cego wyra¿enia, które nazywane jest b³êdem:
-
-\begin{equation}
-\Delta = r_t + \gamma\max_aQ_t(x_{t+1},a) - Q_t(x_t,a_t);
-\end{equation}
-
-$r_t$ to warto¶æ wzmocnienia w tym kroku czasowym, nastêpny cz³on okre¶la maksymaln± warto¶æ funkcji $Q$ dla stanu, w którym znajdzie siê uczeñ po wykonaniu wybranej wcze¶niej przez siebie akcji. Tê warto¶æ mno¿ymy przez wspó³czynnik dyskontowania $\gamma$ i od tak obliczonej liczby odejmujemy obecn± warto¶æ funkcji dla obecnego stanu i wybranej akcji.\\
-Aktualizacja warto¶ci funkcji odbywa siê w nastêpuj±cy sposób:
-
-\begin{equation}
-Q_{t+1}(x_t,a_t) = Q_t(x_t,a_t) + \alpha\Delta
-\end{equation}
-
-Dwa warunki dotycz±ce warto¶ci $\alpha$ powinny byæ spe³nione:
-
-\begin{equation}
-\sum_{i=1}^\infty\frac{1}{\alpha_i(x,a)} = \infty
-\end{equation}
-\begin{equation}
-\sum_{i=1}^\infty\frac{1}{\alpha_i^2(x,a)} < \infty
-\end{equation}
-
-Jednak najczê¶ciej w praktyce rzadko stosuje siê do tych warunków.
-
-Warto zwróciæ uwagê na fakt, ¿e nie okre¶lono tu w jaki sposób uczeñ rzeczywi¶cie wybiera akcjê. Nie musi to byæ wcale strategia, w której zawsze wybierana jest najlepsza z akcji.
-
-\paragraph{Algorytm Sarsa.}
-Algorytm Sarsa niewiele ró¿ni siê od algorytmu Q-learning. Jedyn± ró¿nic± jest modyfikacja wyra¿enia na b³±d:
-
-\begin{equation}
-\Delta = r_t + \gamma Q_t(x_{t+1},a_{t+1}) - Q_t(x_t,a_t);
-\end{equation}
-
-Zamiast wykorzystywaæ maksymaln± warto¶æ funkcji w przysz³ym stanie, korzystamy z warto¶ci, która faktycznie zostanie wybrana. Poniewa¿ wybór ten dokonywany jest dopiero w nastêpnym kroku, ogólny schemat musi byæ lekko zmodyfikowany. Ró¿nica ta powoduje, ¿e algorytm Sarsa nie posiada w³asno¶ci algorytmu Q-learning dotycz±cego wyboru akcji. Maksymalizacja dokonywana jest z u¿yciem tej samej strategii, z której korzysta algorytm.
-
-\subsubsection{Wybór akcji}
-Tak jak w przypadku algorytmów ewolucyjnych konieczna jest eksploracja ¶rodowiska, w którym znajduje siê uczeñ. Z drugiej jednak strony chcemy jak najszybciej znale¼æ optymalne zachowanie, czyli dokonaæ eksploatacji wiedzy, któr± ju¿ posiadamy. Pojawia siê pytanie w jaki sposób wybieraæ akcjê, aby dobrze poznaæ ¶rodowisko, a jednocze¶nie nie zmarnowaæ zbyt du¿o czasu na bezcelowe przeszukiwanie opcji, które nie daj± korzystnego rozwi±zania.\\
-W przypadku algorytmów takich jak Q-learning, w których mo¿na u¿yæ innej strategii wyboru akcji ni¿ ta, która jest u¿ywana w trakcie maksymalizacji funkcji $Q$, zapewnienie eksploracji mo¿na zapewniæ stosuj±c jednostajnie losowy wybór akcji.
-
-% wg http://webdocs.cs.ualberta.ca/~sutton/book/ebook/node16.html 
-% http://webdocs.cs.ualberta.ca/~sutton/book/ebook/node17.html
-Najprostszym sposobem wyboru akcji jest wybranie najlepszej z mo¿liwych akcji, nazywane strategi± zach³ann±, jednak metoda ta uniemo¿liwia eksploracjê. Aby to umo¿liwiæ, wprowadza siê modyfikacjê, która polega na tym, ¿e co jaki¶ czas z prawdopodobieñstwem $\epsilon$ stosuje siê wspomniany wcze¶niej jednostajnie losowy wybór akcji. Strategia ta nazywana jest strategi± $\epsilon$-zach³ann±. Metoda ta jest znana jako dobrze równowa¿±ca zadania eksploracji i eksploatacji.
-
-Minusem strategii $\epsilon$-zach³annej jest to, ¿e w trakcie eksploracji ka¿da z akcji jest losowana z takim samym prawdopodobieñstwem. Aby wyeliminowaæ ten element, stosuje siê metody selekcji nazywane \textit{softmax}. Wszystkie akcje mog± zostaæ wylosowane, ale z prawdopodobieñstwem odpowiadaj±cym im dotychczasowej warto¶ci. Najczê¶ciej korzysta siê z rozk³adu Gibbs'a lub Boltzmann'a. Prawdopodobieñstwo wybrania akcji $a$ w próbie $t$ wynosi:
-
-\begin{equation}
-\frac{\epsilon^{Q_t(a)/\tau}}{\sum_{b=1}^n\epsilon^{Q_t(b)/\tau'}}
-\end{equation}
-
-Parameter $\tau$ nazywany jest temperatur±. Im jest ona wy¿sza, tym wybór dowolnej akcji jest bardziej losowy. W przypadku temperatur bliskich 0 wybór praktycznie jednoznacznie padnie na akcjê o najwy¿szej warto¶ci funkcji $Q$. 
 
 \section{Volunteer Computing}
 \label{volunteerComputing}
