@@ -160,6 +160,71 @@ Oto uzyskane wyniki w zale¿no¶ci od ilo¶ci punktów po¶rednich oraz ró¿nica czasu
 
 Ró¿nice w czasie wahaj± siê od 0.003 do 0.064 s, jest to odpowiednio od 0.08\% do ok. 1.8\% ró¿nicy. Wydaje siê, ¿e wystarczaj±cym powinno byæ, aby na tym odcinku okre¶liæ trzy punkty po¶rednie, gdy¿ ró¿nica dla tego przypadku wynosi ok. 0.023 s co stanowi ok. 100.6\% czasu najszybszego, a wiêc ró¿nica nie przekracza 1\%. Zreszt± to samo mo¿na stwierdziæ z rysunków - ju¿ dla trzech punktów praktycznie nie widaæ ró¿nicy pomiêdzy liniami. Zatem na takiej trasie, której odleg³o¶æ w pionie wynosi 10 m mo¿na okre¶liæ 3-4 punktów po¶rednich, które z przybli¿eniem nie wnosz±cym zbyt du¿ych ró¿nic do wyniku bêd± wyznacza³y trasê koñcow±. Oznacza to, ¿e punkty te powinny znajdowaæ siê w odleg³o¶ciach 2-4 m. Wiedz±c, ¿e pomiary przejazdu na zawodach s± z dok³adno¶ci± do setnych czê¶ci sekundy, mo¿na stwierdziæ, ¿e dopiero 5 punktów po¶rednich daje nam a¿ tak± precyzjê obliczeñ. Oczywi¶cie je¶li trasa nie bêdzie zawieraæ zbyt ostrych k±tów za³amania, mo¿na bêdzie zmniejszyæ gêsto¶æ punktów.
 
+\section{Eksperymenty w terenie}
+\label{sec:eksperymenty}
+
+Zainteresowanie tematyk± narciarsk±, sk³oni³o autorki pracy do przetestowania pewnych zale¿no¶ci i zjawisk opisywanych w tym rozdziale w terenie. Dziêki ¿yczliwo¶ci Studenckiego Klubu Narciarskiego FIRN dzia³aj±cego na Akademii Górniczo-Hutniczej w Krakowie, by³a mo¿liwo¶c dokonywania pomiarów przy u¿yciu specjalistycznego sprzêtu do pomiaru czasu na stoku narciarskim. Zosta³y ustalone nastêpuj±ce cele eksperymentów:
+
+\begin{itemize}
+\item eksperymentalne wyznaczenie wspó³czynnika tarcia statycznego miêdzy ¶niegiem a ¶lizgiem nart w zale¿no¶ci od sposobu nasmarowania ¶lizgu narty, jako¶ci ¶lizgu oraz d³ugo¶ci narty.
+\item eksperymentalne porównanie wp³ywu powierzchni narciarza ma uzyskiwane czasy przejazdu, poprzez testowanie ró¿nych pozycji przejazdu oraz ró¿nych rodzajów odzie¿y wierzchniej.
+\item próba porównania szybko¶ci przejazdu z punktu A do B w linii prostej do jazdy po ³uku
+\end{itemize}
+
+\subsection{Wspó³czynnik tarcia}
+\label{espolczynnikTarcia}
+
+\paragraph{Za³o¿enia} 
+W celu zmierzenia wspó³czynnika tarcia, zosta³a wykorzystana drewniana deska, która zosta³a przykryta wartw± ubitego, mokrego, marcowego ¶niegu. Przygotowane zosta³y cztery pary nart:
+\begin{itemize}
+\item Narta Atomic Race GS12, 175 cm d³ugo¶ci, stary, nieprzygotowany, jednak nie do koñca przesuszony ¶lizg
+\item Narta Völkl Racetiger GS, 175 cm d³ugo¶ci, nowy, bardzo dobrze przygotowany  i nasmarowany na gor±co smarem uniwersalnym (Toko System 3)
+\item Narta Atomic SL11, 150 cm d³ugo¶ci, stary, nieprzygotowany i bardzo przesuszony ¶lizg.
+\item Narta Head Worldcup Rebel S
+\end{itemize}
+
+\begin{figure}[H]
+\label{fig:eksp-1}
+\centering
+\includegraphics[height=220px]{eksp-1}
+\caption{masa i stok}
+\end{figure}
+
+\begin{figure}[H]
+\label{fig:eksp-2}
+\centering
+\includegraphics[height=220px]{eksp-2}
+\caption{masa i stok}
+\end{figure}
+
+\begin{figure}[H]
+\label{fig:eksp-3}
+\centering
+\includegraphics[height=220px]{eksp-3}
+\caption{masa i stok}
+\end{figure}
+
+\begin{figure}[H]
+\label{fig:eksp-4}
+\centering
+\includegraphics[height=220px]{eksp-4}
+\caption{masa i stok}
+\end{figure}
+
+\begin{figure}[H]
+\label{fig:eksp-5}
+\centering
+\includegraphics[height=220px]{eksp-5}
+\caption{masa i stok}
+\end{figure}
+
+\begin{figure}[H]
+\label{fig:eksp-6}
+\centering
+\includegraphics[height=220px]{eksp-6}
+\caption{masa i stok}
+\end{figure}
+
 \section{Optymalizacja}
 \label{sec:optWyniki}
 
@@ -605,7 +670,7 @@ Tabela \ref{tab:porownanieKarania} na stronie \pageref{tab:porownanieKarania} po
 \end{table}
 
 \subsubsection{Wybór strategii}
-\label{wyborStartegiiKarania}  
+\label{wyborStartegiiKarania}   
 Rozwa¿aj±c strategiê, zosta³o przyjête, ¿e najlepszym modelem jest model ze strategi± proporcjonalnego zmniejszania d³ugo¶ci wektora prêdko¶ci w zale¿no¶ci od k±tów pomiêdzy kolejnymi odcinkami ³amanej. Czas obliczeñ dla tej strategii nie jest ani najwiêkszy ani najmniejszy. Ta w³a¶nie strategiê - jako najlepiej obrazuj±c± rzeczywisto¶æ i pozwalaj±c± na otrzymywanie najlepiej zamodelowanych wyników, zosta³a wybrana jako sta³± dla wszystkich innych eksperymentów. 
 %---------------------------------------------------------------------------
 
@@ -787,6 +852,13 @@ Celem eksperymentu by³o sprawdzenie ile rozwi±zañ uda siê zebraæ udostêpniaj±c l
 \item w serwisie Wykop.pl
 \item z prywatnego konta w serwisie Twitter  (120 obserwuj±cych)
 \end{itemize}
+
+\begin{figure}[h]
+\label{fig:real-time-ga}
+\centering
+\includegraphics[height=220px]{real-time-ga}
+\caption{Zrzut ekranu z panelu Google Analitics pokazuj±cy aktualn± wówczas ilo¶æ kontrybuuj±cych w obliczeniach ochotników oraz ¼ród³a z jakich trafili na stronê}
+\end{figure}
 
 Przez 6 h od udostêpnienia linku, stronê odwiedzi³o 221 unikatowych odwiedzaj±cych podczas 259 wizyt. W tym czasie do naszej bazy danych wp³ynê³o ponad 2000 rozwi±zañ. W ci±gu kolejnych 24 godzin, do bazy sp³ynê³o jeszcze ponad 2500 rozwi±zañ, co pokazuje, ¿e czê¶æ ludzi raz zarekrutowanych do obliczeñ, zosta³a wierna eksperymentowi przez nastêpny dzieñ. Po tygodniu od akcji promuj±cej, w bazie by³o ponad 6 tysiêcy nowych rozwi±zañ.
 
