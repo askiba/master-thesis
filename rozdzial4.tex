@@ -9,42 +9,57 @@ W rozdziale tym przedstawiono informacje .
 \label{sec:model}
 
 W zaproponowanym rozwi±zaniu trzeba by³a podj±æ pewne decyzje odno¶nie reprezentacji ¶rodowiska oraz narciarza.
-Zosta³o przyjête, ¿e stok traktowany jest jako p³aszczyzna, która jest nachylona pod okre¶lonym przez sta³± $\alpha$ k±tem do powierzchni ziemi. Za³o¿enie co do p³askiej powierzchni jest tylko ograniczeniem przyjêtym do testów. Umo¿liwia to ³atwiejsz± analizê wyników niezaburzonych zmianami nachylenia terenu. Jednak stworzony program mo¿e zostaæ zmodyfikowany tak, aby zamodelowaæ bardziej skomplikowan± powierzchniê. 
-Narciarz traktowany jest jako punkt materialny o masie m. 
+Zosta³o przyjête, ¿e stok traktowany jest jako p³aszczyzna, która jest nachylona pod okre¶lonym przez sta³± $\alpha$ k±tem do powierzchni ziemi. Za³o¿enie co do p³askiej powierzchni jest tylko ograniczeniem przyjêtym do testów. Umo¿liwia to ³atwiejsz± analizê wyników, niezaburzonych zmianami nachylenia terenu. Jednak stworzony program mo¿e zostaæ w prosty sposób zmodyfikowany tak, aby zamodelowaæ bardziej skomplikowan± powierzchniê.
+Narciarz traktowany jest jako punkt materialny o masie m.
 %---------------------------------------------------------------------------
 
 \section{Opis matematyczny modelu}
 \label{sec:matematycznyModel}
 
-m - masa\\
-g - wspó³czynnik grawitacji\\
-$\alpha$ - k±t nachylenia powierzchni stoku do powierzchni ziemi\\
+Oznaczenia:
+\begin{itemize}
+\item m - masa
+\item g - wspó³czynnik grawitacji
+\item $\alpha$ - k±t nachylenia powierzchni stoku do powierzchni ziemi
+\end{itemize}
 
 Si³a grawitacji dzia³aj±ca na obiekt o masie m:\\
 \begin{equation}
 Q = mg
 \end{equation}
 
-Si³a ta mo¿e zostaæ roz³o¿ona na dwie si³y sk³adowe wzglêdem powierzchni stoku. Narciarz poruszaj±cy siê w dó³ stoku przypomina klasyczny przyk³ad punktu materialnego staczaj±cego siê po równi pochy³ej.\\
-Sk³adowa si³y grawitacji równoleg³a do powierzchni stoku:\\
+Si³a ta mo¿e zostaæ roz³o¿ona na dwie si³y sk³adowe wzglêdem powierzchni stoku. Narciarz poruszaj±cy siê w dó³ stoku przypomina klasyczny przyk³ad punktu materialnego staczaj±cego siê po równi pochy³ej. Rozk³ad si³ w takim przypadku rozrysowany jest na rysunku \ref{fig:inclinedPlane}.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{model/inclinedPlane}
+\caption{Rozk³ad si³ na równi pochy³ej}
+\label{fig:inclinedPlane}
+\end{figure}
+
+Sk³adowa si³y grawitacji równoleg³a do powierzchni stoku wynosi:\\
 \begin{equation}
+\label{eq:Qa}
 Q_a = mg\sin\alpha
 \end{equation}
 
 jest to si³a ¶ci±gaj±ca narciarza w dó³ stoku.
 
-Sk³adowa si³y grawitacji prostopad³a do powierzchni stoku:\\
+Sk³adowa si³y grawitacji prostopad³a do powierzchni stoku czyli nacisk na powierzchniê stoku wynosi:\\
 \begin{equation}
+\label{eq:Fn}
 F_n = mg\cos\alpha
 \end{equation}
 
 Warto¶æ tej si³y wp³ywa na warto¶æ si³y tarcia dzia³aj±cej na narciarza:\\
 \begin{equation}
+\label{eq:Ff}
 F_f = \mu F_n = \mu mg\cos\alpha
 \end{equation}
 
-Oprócz si³y tarcia uwzglêdniamy równie¿ inn± si³ê oporu jak± jest si³a oporu powietrza. Zale¿y ona od prêdko¶ci poruszania siê obiektu. Prêdko¶æ bêdziemy wyra¿aæ jako pierwsz± pochodn± po³o¿enia - $ \dot{x} $:\\
+Oprócz si³y tarcia uwzglêdniamy równie¿ inn± si³ê oporu jak± jest si³a oporu powietrza. Zale¿y ona od prêdko¶ci poruszania siê obiektu. Prêdko¶æ bêdziemy wyra¿aæ jako pierwsz± pochodn± po³o¿enia, oznaczan± przez $ \dot{x} $:\\
 \begin{equation}
+\label{eq:Fd}
 F_{d} = k_{1}\dot{x} + k_{2}\dot{x}^2
 \end{equation}
 
@@ -59,6 +74,8 @@ gdzie $ B $:\\
 \begin{equation}
 B = 4 \frac{m}{s}
 \end{equation}
+
+%TODO
 
 Ograniczenie to zosta³o zaczerpniête z pracy ???? (Aerodynamic-Drag) i opisane w rozdziale ????
 
@@ -85,7 +102,13 @@ $ A $ - powierzchnia przednia narciarza prostopad³a do kierunku przep³ywu, a zat
 Rozpatruj±c wszystkie si³y dzia³aj±ce na narciarza równoleg³e do powierzchni stoku, a wiêc powoduj±ce jego ruch w dó³, otrzymujemy nastêpuj±ce równanie:
 
 \begin{equation}
-ma=mgsin\alpha-\mu mgcos\alpha-k_{1}\dot{x} - k_{2}\dot{x}^{2}
+ma = Q_a - F_f - F_d
+\end{equation}
+
+Korzystaj±c z wcze¶niejszych równañ \ref{eq:Qa}, \ref{eq:Ff} i \ref{eq:Fd} opisuj±cych si³y $ Q_a $, $F_f$ oraz $ F_d $ otrzymujemy:
+
+\begin{equation}
+ma = mg\sin\alpha - \mu mg\cos\alpha - k_1\dot{x} - k_2\dot{x}^2
 \end{equation}
 
 Wyra¼my teraz przyspieszenie jako drug± pochodn± po³o¿enia:
@@ -97,24 +120,28 @@ a = \ddot{x}
 Podstawiaj±c do równania:
 
 \begin{equation}
-m\ddot{x}=mgsin\alpha-\mu mgcos\alpha-k_{1}\dot{x} - k_{2}\dot{x}^{2}
+m\ddot{x}=mg\sin\alpha-\mu mg\cos\alpha-k_1\dot{x} - k_2\dot{x}^2
 \end{equation}
 
 Zatem po podzieleniu przez m:
 
 \begin{equation}
 \label{eq:rownRuchu}
-\ddot{x}=gsin\alpha-\mu gcos\alpha-\frac{k_{1}}{m}\dot{x} - \frac{k_{2}}{m}\dot{x}^{2}
+\ddot{x}=g\sin\alpha-\mu g\cos\alpha-\frac{k_1}{m}\dot{x} - \frac{k_2}{m}\dot{x}^2
 \end{equation}
 
-Aby rozwi±zaæ to równanie numerycznie, wprowadzamy now± zmienn± v (odpowiadaj±c± prêdko¶ci):
+Jest to równanie ró¿niczkowe zwyczajne drugiego rzêdu. Aby rozwi±zaæ to równanie numerycznie, przedstawimy to równanie jako uk³ad równañ ró¿niczkowych zwyczajnych rzêdu pierwszego. W tym celu wprowadzamy now± zmienn± v (odpowiadaj±c± prêdko¶ci) bêd±c± pierwsz± pochodn± po³o¿enia, a drug± pochodn± zastêpujemy pierwsz± pochodn± prêdko¶ci:
 
 \begin{equation}
-v = \dot{x}
+\left\{ \begin{array}{ll}
+v = \dot{x}	\\
+\ddot{x} = \dot{v}
+\end{array} \right. 
 \end{equation}
 
-Otrzymujemy nastêpuj±ce równania:\\
+Zatem wykorzystuj±c powy¿sze równania otrzymujemy nastêpuj±cy uk³ad równañ:\\
 \begin{equation}
+\label{eq:ur2d}
 \left\{ \begin{array}{ll}
 \dot{v} = gsin\alpha-\mu gcos\alpha-\frac{k_{1}}{m}v - \frac{k_{2}}{m}v^{2} \\
 v = \dot{x}
@@ -124,54 +151,54 @@ v = \dot{x}
 Pamiêtamy przy tym, ¿e:\\
 \begin{equation}
 \left\{ \begin{array}{ll}
- k_{2} = 0  &\mbox{ $v \le B$} \\ 
- k_{1} = 0 &\mbox{ $v \geq  B$} 
+ k_2 = 0  &\mbox{ $v \le B$} \\ 
+ k_1 = 0 &\mbox{ $v \geq  B$} 
 \end{array} \right. 
 \end{equation}
 
-Powy¿szy uk³ad równañ wystarczy wykorzystaæ w dostêpnych w wielu jêzykach funkcjach bibliotecznych do rozwi±zywania równañ ró¿niczkowych zwyczajnych. W naszym przypadku wykorzysta³y¶my funkcjê dopri (Numerical integration of ODE using Dormand-Prince RK method) z biblioteki Numeric Javascript.
+W wielu jêzykach dostêpne s± funkcje biblioteczne, które znajduj± rozwi±zywania równañ ró¿niczkowych zwyczajnych pierwszego rzêdu, takich jak nasz uk³ad \ref{eq:ur2d}. W naszym przypadku wykorzysta³y¶my funkcjê dopri (ang. \textit{Numerical integration of ODE using Dormand-Prince RK method}) z biblioteki Numeric Javascript.
 
 \subsection{Rozwi±zanie w 3D}
-Powy¿szy uk³ad równañ opisuje poruszanie siê punktu materialnego po równi pochy³ej. Jednak w przypadku narciarza przemieszczaj±cego siê po stoku musimy uwzglêdniæ równie¿ mo¿liwo¶æ poruszania siê w poprzek stoku, a nie tylko w dó³.\\
-Za³ó¿my, ¿e narciarz porusza siê tylko po liniach prostych. \\
+\label{subsec:3d}
+Powy¿szy uk³ad równañ (\ref{eq:ur2d}) opisuje poruszanie siê punktu materialnego po równi pochy³ej. Jednak w przypadku narciarza przemieszczaj±cego siê po stoku musimy uwzglêdniæ równie¿ mo¿liwo¶æ poruszania siê w poprzek stoku, a nie tylko w dó³.\\
+Za³ó¿my, ¿e narciarz porusza siê tylko po liniach prostych. W dalszej czê¶ci pracy poka¿emy, ¿e takie ograniczenie mo¿e byæ dobrym sposobem na przybli¿enie rzeczywistego toru jazdy, a znacznie u³atwia sterowanie ruchem narciarza. \\
+
 Rozpatrzmy teraz jak bêdzie wygl±da³ uk³ad si³ dzia³aj±cych na narciarza:\\
 
+%TODO
 % obrazek
 
 Na naszego narciarza dzia³aj± si³y: grawitacji - w kierunku pionowym oraz si³y oporu - w kierunku linii jazdy narciarza. Je¶li rozpatrzymy teraz uk³ad wspó³rzêdnych zorientowany wzglêdem kierunku jazdy, musimy najpierw zrzutowaæ si³ê grawitacji otrzymuj±c si³ê ¶ci±gaj±ca narciarza:
 
 \begin{equation}
-g\sin\alpha sinus
+g\sin\alpha \sin\beta
 \end{equation}
 
-gdzie sinus to:
-
-%-----------------------SINUS-------------------%
-
-Zatem nasze równanie ruchu bêdzie wygl±da³o nastêpuj±co:
+Zatem nasze równanie ruchu \ref{eq:rownRuchu} bêdzie wygl±da³o nastêpuj±co:
 
 \begin{equation}
-\ddot{x} = g\sin\alpha*sinus - (\mu F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2 )
+\ddot{x} = g\sin\alpha \sin\beta - (\mu F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2 )
 \end{equation}
 
-gdzie $F_n$ to si³a nacisku narciarza, która pozostaje taka sama jak w przypadku 2D:
+gdzie $F_n$ to si³a nacisku narciarza, która pozostaje taka sama jak w przypadku 2D (\ref{eq:Fn}):
 
 \begin{equation}
-F_n = gcos\alpha
+F_n = g\cos\alpha
 \end{equation}
 
 Transformuj±c powy¿sze równanie na uk³ad wspó³rzêdnych zorientowany wzd³u¿ i wszerz stoku otrzymamy nastêpuj±ce równania:
 
-% sprawdzic x i y 
+%TODO sprawdzic x i y 
 
 \begin{equation}
+\label{eq:ur2rzedu}
 \left\{ \begin{array}{ll}
-\ddot{x_x} = (g*\sin\alpha*sinus - (\mu*F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*sinus\\
-\ddot{x_y} = (g*\sin\alpha*sinus - (\mu*F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*cosinus
+\ddot{x_x} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))\sin\beta\\
+\ddot{x_y} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))\cos\beta
 \end{array} \right.
 \end{equation}
 
-Po wprowadzeniu jak poprzednio dodatkowych zmiennych, w tym wypadku prêdko¶ci $v_x$ i $v_y$ oraz pamiêtaniu o zale¿no¶ci miêdzy nimi a pochodn± przemieszczenia:
+Po wprowadzeniu jak poprzednio dodatkowych zmiennych, Aby zredukowaæ równania jak poprzednio do równañ ró¿niczkowych zwyczajnych pierwszego rzêdu, wprowadzamy dodatkowe zmienne, w tym wypadku prêdko¶ci $v_x$ i $v_y$ oraz pamiêtamy o zale¿no¶ci miêdzy nimi a pochodn± przemieszczenia:
 
 \begin{equation}
 \left\{ \begin{array}{ll}
@@ -181,33 +208,31 @@ v_y = \dot{x_y}\\
 \end{array} \right.
 \end{equation}
 
-otrzymujemy:
+Dodatkowo mo¿na zauwa¿yæ, ¿e je¶li $v_x$ stanowi pierwsz± pochodn± $ x_x $ to prawdziwe s± tak¿e poni¿sze równania:
+ 
+\begin{equation}
+\left\{ \begin{array}{ll}
+\dot{v_x} = \ddot{x_x}\\
+\dot{v_y} = \ddot{x_y}\\
+\end{array} \right.
+\end{equation}
+
+Podstawiaj±c te informacje do uk³adu równañ \ref{eq:ur2rzedu}, otrzymujemy:
 
 \begin{equation}
 \left\{ \begin{array}{ll}
 v_x = \dot{x_x}\\
 v_y = \dot{x_y}\\
-\dot{v_x} = (g*\sin\alpha*sinus - (\mu*N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*sinus\\
-\dot{v_y} = (g*\sin\alpha*sinus - (\mu*N + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))*cosinus
+\dot{v_x} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))\sin\beta\\
+\dot{v_y} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))\cos\beta
 \end{array} \right. 
 \end{equation}\\
 
-
-%---------------wzory razem z zakrêtami - gdzie?--------
-
-$$
-\left\{\begin{array}{ll} 
-  v_x=\dot{x_x} \\
-  v_y=\dot{x_y} \\
- \dot{v_x} = gsin\alpha - (\dot{x_x}^2 +\dot{x_y}^2)^{\frac{1}{2}} \kappa \dot{x_y} sgn(\dot{\varphi}) - gsin\alpha \frac{\dot{x_y}^2}{\dot{x_x}^2 +\dot{x_y}^2} - \frac{(F_f + F_d) }{m}\frac{\dot{x_x}}{(\dot{x_x}^2 +\dot{x_y}^2)^{\frac{1}{2}}} \\
- \dot{v_y} = (\dot{x_x}^2 +\dot{x_y}^2)^{\frac{1}{2}} \kappa \dot{x_x} sgn(\dot{\varphi}) + gsin\alpha \frac{\dot{x_x}} {\dot{x_x}^2 +\dot{x_y}^2} - \frac{(F_f + F_d)}{m}\frac{\dot{x_y}}{(\dot{x_x}^2 +\dot{x_y}^2)^{\frac{1}{2}}} 
-\end{array}\right.
-$$\\
 %---------------------------------------------------------------------------
 
 \section{Optymalizacja toru przejazdu}
 \label{sec:optymalizacja}
-Aby znale¼æ rozwi±zanie problemu, nale¿y przyj±æ jaki¶ sposób reprezentacji ka¿dego z rozwi±zañ. Tor przejazdu narciarza w rzeczywisto¶ci to ¶lad, który pozostawiaj± narty na ¶niegu w trakcie przemieszczania siê po stoku. Jak opisano w rozdziale \ref{sec:matematycznyModel} ????, w celu uproszczenia sposobu przemieszczania siê narciarza, zosta³o zdecydowane, ¿e jako przybli¿enie mo¿na przyj±æ poruszanie siê po ³amanej. Zatem do reprezentacji rozwi±zania mo¿na przyj±æ zbiór punktów, przez które kolejno przeje¿d¿a narciarz, poruszaj±c siê miêdzy tymi punktami wy³±cznie po linii prostej.\\
+Aby znale¼æ rozwi±zanie problemu, nale¿y przyj±æ jaki¶ sposób reprezentacji ka¿dego z rozwi±zañ. Tor przejazdu narciarza w rzeczywisto¶ci to ¶lad, który pozostawiaj± narty na ¶niegu w trakcie przemieszczania siê po stoku. Jak opisano w podrozdziale \ref{subsec:3d}, w celu uproszczenia sposobu przemieszczania siê narciarza, zosta³o zdecydowane, ¿e jako przybli¿enie mo¿na przyj±æ poruszanie siê po ³amanej. Zatem do reprezentacji rozwi±zania mo¿na przyj±æ zbiór punktów, przez które kolejno przeje¿d¿a narciarz, poruszaj±c siê miêdzy tymi punktami wy³±cznie po linii prostej.\\
 Jednak wci±¿ takie podej¶cie jest niewystarczaj±ce, poniewa¿ w algorytmach optymalizacyjnych potrzebujemy ¶ci¶lejszego opisu, aby wiedzieæ jak skutecznie przeszukiwaæ przestrzeñ rozwi±zañ. Zatem w zaproponowanym rozwi±zaniu narzucamy z góry co ile metrów w pionie stoku ma pojawiæ siê punkt. Mo¿na traktowaæ to jako poziome linie, z której ka¿da wyznacza mo¿liwe po³o¿enie pojedynczego punktu. Oprócz tego narzucone zosta³o, ¿e narciarz musi przejechaæ jak najbli¿ej ka¿dej wewnêtrznej bramki, co indukuje do³o¿enie punktów w miejscu ka¿dej wewnêtrznej bramki. Warunek ten jest spowodowany tym, ¿e w przeciwnym przypadku algorytm mia³by do przeszukania du¿o wiêcej rozwi±zañ. Opieraj±c siê na do¶wiadczeniu z rzeczywistych slalomów, wiadomo, ¿e przeje¿d¿anie tu¿ przy bramkach jest najkorzystniejsze.
 %chyba ¿e do³o¿ymy tê mo¿liwo¶æ, ¿e niektóre mog± byæ albo s± automatycznie wychwytywane. albo ¿e testowane by³o te¿ to jak siê zachowuje je¶li odrzucimy to ograniczenie.
 
@@ -278,7 +303,7 @@ W tej strategii, dla ka¿dego prze³amania ³amanej, obliczamy indywidualny wspó³cz
 \subsection{Strategia karania za ka¿d± zmianê krawêdzi}
 \label{sec:strategiaKrawedzi}
 
-Ostatnia strategi± polega na zliczaniu ilo¶ci zmian kierunku jazdy na testowanym torze i porównanie jej z ilo¶ci± bramek wymuszaj±cych skrêt na trasie. Otrzymujemy zatem ilo¶æ nadprogramowych zmian krawêdzi, które w ka¿dym przypadku powoduj± gorszy czas przejazdu ni¿ gdyby ich nie by³o. Aby to zatem zamodelowaæ, w tej strategi dodajemy do wyliczonego czasu przejazdu sta³± ilo¶ci sekund kary za ka¿d± nadprogramow± zmianê krawêdzi i to traktujemy jako warto¶æ funkcji celu algorytmu genetycznego.
+Ostatnia strategia polega na zliczaniu ilo¶ci zmian kierunku jazdy na testowanym torze i porównanie jej z ilo¶ci± bramek wymuszaj±cych skrêt na trasie. Otrzymujemy zatem ilo¶æ nadprogramowych zmian krawêdzi, które w ka¿dym przypadku powoduj± gorszy czas przejazdu ni¿ gdyby ich nie by³o. Aby to zatem zamodelowaæ, w tej strategi dodajemy do wyliczonego czasu przejazdu sta³± ilo¶ci sekund kary za ka¿d± nadprogramow± zmianê krawêdzi i to traktujemy jako warto¶æ funkcji celu algorytmu genetycznego.
 
 %---------------------------------------------------------------------------
 
