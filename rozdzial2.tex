@@ -1,12 +1,12 @@
 \chapter{Wprowadzenie teoretyczne}
 \label{cha:wstepTeoretyczny}
 
-Zrozumienie istoty przedstawionego w tej pracy rozwi±zania u doboru optymalnej trasy narciarza, zarówno pod wzglêdem algorytmicznym jak i architektonicznym, wymaga zaznajomienia siê z istotnymi pojêciami. W tym rozdziale, przedstawimy i opiszemy te pojêcia.
+Zrozumienie istoty przedstawionego w tej pracy rozwi±zania doboru optymalnej trasy narciarza, zarówno pod wzglêdem algorytmicznym jak i architektonicznym, wymaga zaznajomienia siê z istotnymi pojêciami. W tym rozdziale, przedstawimy i opiszemy te pojêcia.
 
 \section{Jazda po zadanym torze w narciarstwie alpejskim}
 \label{sec:alpineSkiing}
 
-Sportowa jazda na nartach zjazdowych podzielona jest na kilak dyscyplin. S± to: slalom (SL), slalom gigant (GS), super gigant (GS) oraz zjazd (DH). Elementem wspólnym ka¿dej z nich jest konieczno¶æ pokonania trasy, od startu do mety, w jak najkrótszym czasie i przy prawid³owym ominiêciu ka¿dej z bramek znajduj±cej siê na trasie przejazdu. Szczegó³owe zasady dotycz±ce parametrów stoku i sprzêtu okre¶la regulamin organizacji FIS (Federation International du Ski), z po¶ród których najbardziej istotnymi s±:
+Sportowa jazda na nartach zjazdowych podzielona jest na kilka dyscyplin. S± to: slalom (SL), slalom gigant (GS), super gigant (GS) oraz zjazd (DH). Elementem wspólnym ka¿dej z nich jest konieczno¶æ pokonania trasy, od startu do mety, w jak najkrótszym czasie i przy prawid³owym przejechaniu ka¿dej z bramek znajduj±cych siê na trasie przejazdu. Szczegó³owe zasady dotycz±ce parametrów stoku i sprzêtu okre¶la regulamin organizacji FIS (Federation International du Ski), z po¶ród których najbardziej istotnymi s±:
 
 \begin{itemize}
 \item minimalna i maksymalna ró¿nica wzniesieñ na trasie
@@ -16,10 +16,11 @@ Sportowa jazda na nartach zjazdowych podzielona jest na kilak dyscyplin. S± to: 
 \item wymagany promieñ skrêtu narty
 \end{itemize}
 
-Parametry te ró¿ni± siê w zale¿no¶ci od dyscypliny. Najbardziej techniczn± dyscyplin± jest slalom, nazywany wcze¶niej slalomem specjalnym. Techniczno¶æ tej dyscypliny polega na du¿ej ilo¶ci bramek znajduj±cych siê w niewielkiej odleg³o¶ci od siebie, co wymusza czêste skrêty. Zawodnicy je¿d¿± slalom na nartach o bardzo ma³ym promieniu skrêtu, rzêdu 11 metrów. Bramka w slalomie sk³ada siê z dwóch tyczek tego samego koloru. W slalomie gigancie, odleg³o¶ci miêdzy kolejnymi bramkami s± wiêksze, co implikuje szybsz± jazdê. Bramka w tej dyscyplinie sk³ada siê z czterech tyczek tego samego koloru, po dwie na ka¿dy koniec bramki. Dodatkowo ka¿de dwie tyczki z koñca bramki po³±czone s± p³acht± tego samego koloru co tyczki - czerwon± lub niebiesk±. Zawodnicy do tej dyscypliny u¿ywaj± nart o promieniu nawet 30 metrów. Kolejne dyscypliny s± jeszcze szybsze a promienie nart coraz wiêksze. Bramki zarówno w Super gigancie jak i Zje¼dzie, s± analogiczne do tych gigantowych, ró¿ni± siê tylko szeroko¶ci± p³acht. Super gigant, to bardziej \quotedblbase wypuszczony\textquotedblright slalom gigant, czyli slalom na którym odleg³o¶ci miêdzy bramkami s± ju¿ bardzo du¿e, a prêdko¶æ proporcjonalnie ro¶nie. Zjazd to ju¿ typowa dyscyplina szybko¶ciowa. Na trasie, zakrêty wynikaj± prawie tylko z konfiguracji terenu. Dodatkowo zdarzaj± siê na trasie elementy ukszta³towania terenu na których zawodnicy wybijaj± siê i skacz± po nawet 20 metrów.
+Parametry te ró¿ni± siê w zale¿no¶ci od dyscypliny. Najbardziej techniczn± dyscyplin± jest slalom, nazywany wcze¶niej slalomem specjalnym. Techniczno¶æ tej dyscypliny polega na du¿ej ilo¶ci bramek znajduj±cych siê w niewielkiej odleg³o¶ci od siebie, co wymusza czêste skrêty. Zawodnicy je¿d¿± slalom na nartach o bardzo ma³ym promieniu skrêtu, rzêdu 11 metrów. Bramka w slalomie sk³ada siê z dwóch tyczek tego samego koloru. W slalomie gigancie, odleg³o¶ci miêdzy kolejnymi bramkami s± wiêksze, co implikuje szybsz± jazdê. Bramka w tej dyscyplinie sk³ada siê z czterech tyczek tego samego koloru, po dwie na ka¿dy koniec bramki. Dodatkowo ka¿de dwie tyczki z koñca bramki po³±czone s± p³acht± tego samego koloru co tyczki - czerwon± lub niebiesk±. Zawodnicy do tej dyscypliny u¿ywaj± nart o promieniu nawet 30 metrów. Kolejne dyscypliny s± jeszcze szybsze a promienie nart coraz wiêksze. Bramki zarówno w super gigancie jak i zje¼dzie, s± analogiczne do tych gigantowych, ró¿ni± siê tylko szeroko¶ci± p³acht. Super gigant, to bardziej \quotedblbase wypuszczony\textquotedblright slalom gigant, czyli slalom na którym odleg³o¶ci miêdzy bramkami s± ju¿ bardzo du¿e, a prêdko¶æ proporcjonalnie ro¶nie. Zjazd to ju¿ typowa dyscyplina szybko¶ciowa. Na trasie zakrêty wynikaj± prawie tylko z konfiguracji terenu. Dodatkowo zdarzaj± siê na trasie elementy ukszta³towania terenu na których zawodnicy wybijaj± siê i skacz± po nawet 20 metrów.
 
-Aby poprawnie przejechaæ przez bramkê na trasie, w ka¿dej z opisywanych wy¿ej dyscyplin, nale¿y przejechaæ pomiêdzy tyczkami wyznaczaj±cymi tzw. \textit{¶wiat³o bramki}. Bramki wymuszaj± skrêty, ale nie jest tak, ¿e ustawione s± zawsze rytmicznie tzn. wymuszaj±c skrêty raz w praw±, raz w lew± stronê o tym samym promieniu. Najczê¶ciej spotykanym rodzajem bramki jest tzw. \textit{bramka otwarta}. Bramka otwarta, charakteryzuje siê tym, ¿e ¶wiat³o bramki znajduje siê prostopadle do linii spadku stoku. Poza bramkami otwartymi, bramki mog± byæ ustawione w tzw. figury slalomowe. Pierwsz± z nich jest \textit{przelot} i mo¿e wystêpowaæ w ka¿dej z dyscyplin. Przelot polega na ustawieniu dwóch kolejnych bramek w taki sposób, ¿e nie wymuszaj± skrêtu pomiêdzy nimi. Przelot stosowany jest w celu adaptacji trasy przejazdu do konfiguracji terenu, np. gdy na trasie naturalnie wystêpuje d³u¿szy skrêt w jedn± ze stron lub napêdzeniu narciarza. Kolejn± figur±, stosowan± ju¿ tylko w slalomie, jest \textit{³okieæ}. £okieæ to dwie bramki ustawione w bliskiej odleg³o¶ci jedna pod drug± w linii spadku stoku. S± to bramki zamkniête, czyli ¶wiat³o bramki jest zgodne z lini± spadku stoku. Figura ta wprowadza zmianê rytmu i równie¿ pozwala na dostosowanie trasy do konfiguracji terenu. Ostatni± z figur, równie¿ stosowan± tylko w slalomie, jest \textit{wertikal}. Wertikal to bramki ustawione tak samo jak w wypadku ³okcia, czyli jedna pod drug±, w linii spadku stoku, z tym, ¿e zamiast dwóch, mo¿e byæ trzy, cztery czy nawet piêæ kolejno tak ustawianych bramek.
+Aby poprawnie przejechaæ przez bramkê na trasie, w ka¿dej z opisywanych wy¿ej dyscyplin, nale¿y przejechaæ pomiêdzy tyczkami wyznaczaj±cymi tzw. \textit{¶wiat³o bramki}. Bramki wymuszaj± skrêty, ale nie jest tak, ¿e ustawione s± zawsze rytmicznie tzn. wymuszaj±c skrêty raz w praw±, raz w lew± stronê o tym samym promieniu. Najczê¶ciej spotykanym rodzajem bramki jest tzw. \textit{bramka otwarta}. Bramka otwarta, charakteryzuje siê tym, ¿e ¶wiat³o bramki znajduje siê prostopadle do linii spadku stoku. Poza bramkami otwartymi, bramki mog± byæ ustawione w tzw. figury slalomowe. Pierwsz± z nich jest \textit{przelot} i mo¿e wystêpowaæ w ka¿dej z dyscyplin. Przelot polega na ustawieniu dwóch kolejnych bramek w taki sposób, ¿e nie wymuszaj± skrêtu pomiêdzy nimi. Przelot stosowany jest w celu adaptacji trasy przejazdu do konfiguracji terenu, np. gdy na trasie naturalnie wystêpuje d³u¿szy skrêt w jedn± ze stron lub rozpêdzeniu narciarza. Kolejn± figur±, stosowan± ju¿ tylko w slalomie, jest \textit{³okieæ}. £okieæ to dwie bramki ustawione w bliskiej odleg³o¶ci jedna pod drug± w linii spadku stoku. S± to bramki zamkniête, czyli ¶wiat³o bramki jest zgodne z lini± spadku stoku. Figura ta wprowadza zmianê rytmu i równie¿ pozwala na dostosowanie trasy do konfiguracji terenu. Ostatni± z figur, równie¿ stosowan± tylko w slalomie, jest \textit{wertikal}. Wertikal to bramki ustawione tak samo jak w przypadku ³okcia, czyli jedna pod drug±, w linii spadku stoku, z tym, ¿e zamiast dwóch, mo¿e byæ trzy, cztery czy nawet piêæ kolejno tak ustawianych bramek.
 
+%TODO FIXME Marta - napisz ¿e czasem warto zrobiæ wcze¶nie skrêt a czasem nie i o podkrêconych bramkach
 Opisanie wy¿ej wymienionych elementów, by³o istotne by zrozumieæ problem znajdowania optymalnej trasy. Najtrudniejsze jest bowiem optymalne przejechanie figur slalomowych. Podczas ogl±dania trasy, przed zawodami czy te¿ podczas treningów, zawodnicy zwracaj± du¿± uwagê na zapamiêtanie wystêpuj±cych po sobie figur i przewidywanie, na podstawie do¶wiadczenia, w jaki sposób nale¿y najechaæ na dan± figurê, by zmie¶ciæ siê, czy te¿ najszybciej pokonaæ kolejne, nastêpuj±ce po danej figurze bramki. Poprzez najazd na figurê, rozumiemy moment rozpoczêcia i sposób prowadzenia skrêtu przed figur±. Im wcze¶niej narciarz zrobi najazd, tym szybciej, po poprawnym przejechaniu bramki, bêdzie móg³ zmieniæ kierunek jazdy do kolejnych tyczek.
 
 %---------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Opisanie wy¿ej wymienionych elementów, by³o istotne by zrozumieæ problem znajdow
 \section{Fizyczny model narciarza}
 \label{sec:fizycznyModel}
 
+%TODO FIXME jedno zdanie na temat rozdzia³u?
 
 \subsubsection{Si³a oporu powietrza}
 \label{sec:oporPowietrza}
@@ -47,7 +49,7 @@ F_d = \frac{1}{2}C\rho Av^2
 
 C - wspó³czynnik oporu powietrza, typowe warto¶ci oscyluj± miêdzy 0.4 a 1
 
-$\rho$ - gêsto¶æ powietrza w jednostce $kg m^{-3}$. Warto¶ci gêsto¶ci powietrza przy przeciêtnym ci¶nieniu wahaj± siê miêdzy 1.26 a 1.42 w zale¿no¶ci od temperatury.
+$\rho$ - gêsto¶æ powietrza w jednostce $\frac{kg}{m^3}$. Warto¶ci gêsto¶ci powietrza przy przeciêtnym ci¶nieniu wahaj± siê miêdzy 1.26 a 1.42 w zale¿no¶ci od temperatury.
 
 A - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶ci narciarza wyra¿ona w $m^{2}$.
 
@@ -56,9 +58,10 @@ A - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶
 \includegraphics{airDrag}
 \end{figure}
 
+%TODO biblio link do badan
 Na grafice widzimy warto¶æ wspó³czynnika $A$ w zale¿no¶ci od pozycji narciarza. Grafika pochodzi z badañ prowadzonych w tunelu aerodynamicznym IAT we Francji, przez Caroline Barelle z National Technical University of Athens z Grecji.
 
-Pozycja narciarza ma znacz±cy wp³yw na warto¶æ wspó³czynnika $A$. Przyjêcie pozycji zjazdowej redukuje w stosunku do pozycji podniesionej, warto¶æ wspó³czynnika nawet o jedn± trzeci±. Warto nadmieniæ równie¿, ¿e narciarze, nawet na amatorskich zawodach ubrani s± w specjalne kombinezony tzw. \textit{gumy narciarskie}. Kombinezony te s± jednoczê¶ciowe i ¶ci¶le przylegaj± do cia³a. Nie posiadaj± ¿adnych odstaj±cych elementów, czasami zawieraj± tylko wewnêtrzne ochraniacze w miejscach w których narciarz uderza przy ka¿dym skrêcie cia³em w tyczkê. Powodem dla którego strój ten jest tak popularny równie¿ w amatorskim sporcie jest fakt ¿e znacz±co mniejsza opór powietrza, w stosunku do klasycznego stroju narciarskiego i potrafi na kilkudziesiêciu sekundowej trasie, gdzie liczy siê ka¿da setna sekundy, redukowaæ czas przejazdu nawet o dziesiêtne czê¶ci sekundy.
+Pozycja narciarza ma znacz±cy wp³yw na warto¶æ wspó³czynnika $A$. Przyjêcie pozycji zjazdowej redukuje w stosunku do pozycji podniesionej, warto¶æ wspó³czynnika nawet o jedn± trzeci±. Warto nadmieniæ równie¿, ¿e narciarze, nawet na amatorskich zawodach ubrani s± w specjalne kombinezony tzw. \textit{gumy narciarskie}. Kombinezony te s± jednoczê¶ciowe i ¶ci¶le przylegaj± do cia³a. Nie posiadaj± ¿adnych odstaj±cych elementów, czasami zawieraj± tylko wewnêtrzne ochraniacze w miejscach w których narciarz uderza przy ka¿dym skrêcie cia³em w tyczkê. Powodem dla którego strój ten jest tak popularny równie¿ w amatorskim sporcie jest fakt, ¿e znacz±co zmniejsza opór powietrza, w stosunku do klasycznego stroju narciarskiego i potrafi na kilkudziesiêciu sekundowej trasie, gdzie liczy siê ka¿da setna sekundy, redukowaæ czas przejazdu nawet o dziesiêtne czê¶ci sekundy.
 
 \subsubsection{Interakcje miedzy ¶niegiem a nartami}
 \label{sec:interakcje}
@@ -68,21 +71,26 @@ To, ¿e narty ¶lizgaj± siê na ¶niegu zawdziêczamy skomplikowanej fizyce interakcj
 \item materia³ wykonania ¶lizgu narty
 \item rodzaj, jako¶æ, sposób nak³adania i kolejno¶æ nak³adania smarów na ¶lizg narty
 \item g³adko¶æ ¶lizgu narty
-\item rodzaj i pochodzenie ¶niegu (naturalne/ sztuczne)
+\item rodzaj i pochodzenie ¶niegu (naturalne/sztuczne)
 \item temperatura i stopieñ zanieczyszczenia ¶niegu
 \item k±t nachylenia miêdzy ¶lizgiem a pod³o¿em
 \end{itemize}
 
 
-Jest jeszcze jeden czynnik wp³ywaj±cy na t± interakcjê, tzw. \textit{water suction} (w wolnym t³umaczeniu zasysanie wody). W temperaturze powy¿ej -3 stopni Celsjusza, ciep³o powstaj±ce na skutek tarcia, topi cienk± warstwê ¶niegu pod nartami. Aby zredukowaæ ten negatywnie wp³ywaj±cy na po¶lizg efekt, ¶lizg narty ma perforowan± strukturê, któr± nale¿y zachowywaæ i odkrywaæ po ka¿dym smarowaniu, aby odprowadzaæ wodê. 
+Jest jeszcze jeden czynnik wp³ywaj±cy na tê interakcjê, tzw. \textit{water suction} (w wolnym t³umaczeniu zasysanie wody). W temperaturze powy¿ej -3 stopni Celsjusza, ciep³o powstaj±ce na skutek tarcia, topi cienk± warstwê ¶niegu pod nartami. Aby zredukowaæ ten negatywnie wp³ywaj±cy na po¶lizg efekt, ¶lizg narty ma perforowan± strukturê, któr± nale¿y zachowywaæ i odkrywaæ po ka¿dym smarowaniu, aby odprowadzaæ wodê. 
 
 
+%TODO biblio Skiwaxes
 Wed³ug badañ przeprowadzonych przez Chris'a Talbot'a z European Space Agency \cite{Skiwaxes}, tarcie o ¶nieg ma du¿o wiêkszy wp³yw na czas przejazdu ni¿ si³y tarcia powietrza.
 
 \subsubsection{Tarcie kinetyczne}
 \label{sec:tarcieKinetyczne}
-Tarcie kinetyczne ma du¿o wiêksze znaczenie ni¿ tarcie statyczne poniewa¿ determinuje jak du¿a si³a musi dzia³aæ, ¿eby zachowaæ porz±dan± prêdko¶æ podczas zjazdu. Wspó³czynnik tarcia kinetycznego miêdzy ¶niegiem a nasmarowanymi nartami wynosi ¶rednio 0.05. Wspó³czynnik ten jednak mo¿e siê znacz±co zmieniaæ i w zale¿no¶ci od rodzaju smarów, sposobu smarowania oraz jako¶ci ¶niegu wynosi miêdzy 0.001 a 0.3. Ró¿nica w warto¶ciach wspó³czynników ma prze³o¿enie w cenach smarów, które na warto¶ci tych wspó³czynników wp³ywaj±. Ju¿ na amatorskich zawodach, mo¿na zaobserwowaæ staranne przygotowanie ¶lizgów przed ka¿dym zjazdem i u¿ywanie smarów których cena wynosi nawet kilkaset z³otych, a które s± zu¿ywane w ci±gu jednego sezonu startów.  
+Tarcie kinetyczne ma du¿o wiêksze znaczenie ni¿ tarcie statyczne poniewa¿ determinuje jak du¿a si³a musi dzia³aæ, ¿eby zachowaæ po¿±dan± prêdko¶æ podczas zjazdu. Wspó³czynnik tarcia kinetycznego miêdzy ¶niegiem a nasmarowanymi nartami wynosi ¶rednio 0.05. Wspó³czynnik ten jednak mo¿e siê znacz±co zmieniaæ i w zale¿no¶ci od rodzaju smarów, sposobu smarowania oraz jako¶ci ¶niegu wynosi miêdzy 0.001 a 0.3. Ró¿nica w warto¶ciach wspó³czynników ma prze³o¿enie w cenach smarów, które na warto¶ci tych wspó³czynników wp³ywaj±. Ju¿ na amatorskich zawodach, mo¿na zaobserwowaæ staranne przygotowanie ¶lizgów przed ka¿dym zjazdem i u¿ywanie smarów, których cena wynosi nawet kilkaset z³otych, a które s± zu¿ywane w ci±gu jednego sezonu startów.  
 
+
+%---------------------------------------------------------------------------
+
+%TODO FIXME Anka czy tu co¶ piszemy?
 \section{Metody numeryczne rozwi±zywania równañ ró¿niczkowych}
 \label{sec:numeryka}
 
@@ -95,8 +103,9 @@ Tarcie kinetyczne ma du¿o wiêksze znaczenie ni¿ tarcie statyczne poniewa¿ determ
 W tym podrozdziale opisane s± metody optymalizacji u¿yte w zaproponowanym rozwi±zaniu, czyli algorytm ewolucyjny oraz algorytm optymalizacji lokalnej - Hill climbing.
 
 % czym jest optymalizacja
-Zadaniem optymalizacji jest przeszukanie przestrzeni rozwi±zañ w celu znalezienia takiego, które jest najlepsze. Zatem maj±c dan± funkcjê, nazywan± funkcj± celu, która ka¿demu punktowi reprezentuj±cemu rozwi±zanie problemu, poszukujemy takiego, dla którego warto¶æ tej funkcji bêdzie jak najmniejsza (b±d¼ jak najwiêksza). Trudno¶æ w znalezieniu takiego rozwi±zania zale¿y od charakteru funkcji celu, a czasem tak¿e od nieznajomo¶ci jej analitycznej postaci.
+Zadaniem optymalizacji jest przeszukanie przestrzeni rozwi±zañ w celu znalezienia najlepszego. Zatem, dana jest funkcja, nazywan± funkcj± celu, która ka¿demu punktowi reprezentuj±cemu rozwi±zanie problemu przypisuje jak±¶ warto¶æ oceniaj±c± jego jako¶æ. W¶ród wszystkich rozwi±zañ poszukujemy takiego, dla którego warto¶æ tej funkcji bêdzie jak najmniejsza (b±d¼ jak najwiêksza) - najlepsza z naszego punktu widzenia. Trudno¶æ w znalezieniu takiego rozwi±zania zale¿y od charakteru funkcji celu, a czasem tak¿e od nieznajomo¶ci jej analitycznej postaci.
 
+%TODO biblio Algorytmy genetyczne i cos?
 \subsubsection{Optymalizacja lokalna i globalna}
 W przypadku funkcji z jednym optimum do znalezienia najlepszego rozwi±zania wystarczy przeszukiwanie lokalne. Polega ono na iteracyjnym sprawdzaniu rozwi±zañ w najbli¿szej przestrzeni i wprowadzaniu lokalnych zmian, aby w koñcu znale¼æ rozwi±zanie najlepsze w okolicy tzw. optimum lokalne. Je¶li wiemy, ¿e istnieje tylko jedno takie optimum, mo¿emy mieæ pewno¶æ, ¿e znalezione rozwi±zanie jest najlepszym w ca³ej przestrzeni rozwi±zañ. Przyk³adami optymalizacji lokalnych s±:
 \begin{itemize}
@@ -104,13 +113,13 @@ W przypadku funkcji z jednym optimum do znalezienia najlepszego rozwi±zania wyst
 \item przeszukiwanie tabu
 \end{itemize}
 
-Je¶li natomiast funkcja celu posiada wiele optimów lokalnych (tzw. funkcja wielomodalna) to optymalizacjê nazywamy optymalizacj± globaln±. Je¶li zadanie jest ci±g³e, a wiêc niemo¿liwe jest przeszukanie ca³ej przestrzeni rozwi±zañ, nigdy nie mo¿emy byæ pewni, ¿e zastosowany algorytm optymalizacji da nam rozwi±zanie najlepsze - byæ mo¿e bêdzie to tylko minimum lokalne a nie globalne. Nie maj±c takiej pewno¶ci nie wiemy kiedy nale¿y zatrzymaæ algorytm. Z tego powodu stosuje siê parametr steruj±cy czasem trwania obliczeñ, kosztem mniejszej pewno¶ci co do poprawno¶ci rozwi±zania mo¿emy otrzymaæ krótszy czas optymalizacji i odwrotnie.
+Je¶li natomiast funkcja celu posiada wiele optimów lokalnych (tzw. funkcja wielomodalna) to optymalizacjê nazywamy optymalizacj± globaln±. Je¶li zadanie jest ci±g³e, a wiêc niemo¿liwe jest przeszukanie ca³ej przestrzeni rozwi±zañ, nigdy nie mo¿emy byæ pewni, ¿e zastosowany algorytm optymalizacji da nam rozwi±zanie najlepsze - byæ mo¿e bêdzie to tylko minimum lokalne, a nie globalne. Nie maj±c takiej pewno¶ci nie wiemy kiedy nale¿y zatrzymaæ algorytm. Z tego powodu stosuje siê parametr steruj±cy czasem trwania obliczeñ - kosztem mniejszej pewno¶ci co do poprawno¶ci rozwi±zania mo¿emy otrzymaæ krótszy czas optymalizacji i odwrotnie.
 
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjny}
 Algorytm ewolucyjny jest przyk³adem algorytmu optymalizacyjnego, przeszukuj±cego przestrzeñ rozwi±zañ w celu znalezienia najlepszego rozwi±zania problemu. Algorytm ten oparty jest na obserwacjach ¶rodowiska i przystosowywania siê organizmów do jego warunków. Wiele terminów zapo¿yczonych jest zatem z genetyki.
 
-Podstaw± ca³ego algorytmu jest populacja osobników, z których ka¿dy reprezentuje rozwi±zanie problemu. Populacja ta zmienia siê wraz z dzia³aniem algorytmu. Ewolucja zak³ada, ¿e populacja bêdzie siê sk³adaæ z coraz lepiej przystosowanych osobników. Przystosowanie to jest obliczane za pomoc± wcze¶niej okre¶lonej funkcji oceniaj±cej jako¶æ danego osobnika, czyli wyznaczenie jak dobre jest rozwi±zanie reprezentowane przez niego. Przystosowanie jest warto¶ci± liczbow± obliczon± za pomoc± tej funkcji przystosowania.\\
+Podstaw± ca³ego algorytmu jest populacja osobników, z których ka¿dy reprezentuje inne rozwi±zanie problemu. Populacja ta zmienia siê wraz z dzia³aniem algorytmu. Ewolucja zak³ada, ¿e populacja bêdzie siê sk³adaæ z coraz lepiej przystosowanych osobników. Przystosowanie to jest obliczane za pomoc± wcze¶niej okre¶lonej funkcji oceniaj±cej jako¶æ danego osobnika, czyli tak naprawdê wyznaczenie jak dobre jest rozwi±zanie reprezentowane przez niego. Przystosowanie jest warto¶ci± liczbow± obliczon± za pomoc± tej funkcji przystosowania.\\
 Funkcja przystosowania okre¶la warto¶æ przystosowania osobnika na podstawie jego fenotypu, który jest tworzony z genotypu. Genotyp okre¶la zestaw cech danego osobnika i sk³ada siê z chromosomów (najczê¶ciej z jednego). Natomiast ka¿dy z chromosomów sk³ada siê z elementarnych jednostek - genów.\\
 
 \subsubsection{Schemat dzia³a algorytmu ewolucyjnego}
@@ -135,7 +144,6 @@ Nastêpnie na tych kopiach przeprowadzane s± operacje genetyczne powoduj±ce zmian
 \item krzy¿owanie
 \end{itemize}
 
-%TODO ---- WSTAWKA ANGIELSKA!!!!!!!!!!!!!!!!!--------
 Zadaniem mutacji jest losowe zmodyfikowanie genów w genotypie.\\
 Krzy¿owanie, zwane tak¿e rekombinacj± (ang. \textit{crossover}), dzia³a na co najmniej dwóch osobnikach i na podstawie ich genotypu tworzy jeden lub wiêcej osobników potomnych. Chromosomy rodzicielskie s± mieszane w celu otrzymania nowych genotypów dla osobników potomnych.
 
@@ -151,9 +159,10 @@ W algorytmach ewolucyjnych porzuca siê kodowanie binarne - chromosom sk³ada siê 
 Mutacja takiego osobnika najczê¶ciej odbywa siê poprzez losow± zmianê ka¿dej z warto¶ci genów chromosomu. Do krzy¿owania wybiera siê dwa osobniki, z których dla ka¿dej pary odpowiadaj±cych genów wyci±gana jest ¶rednia i tak otrzymane warto¶ci genów tworz± genotyp nowego osobnika.
 
 \subsubsection{Typy algorytmów ewolucyjnych}
-Algorytmy ewolucyjne wywodz± siê z kilku osobnych nurtów zajmuj±cych siê t± tematyk±, wiêc istnieje wiele podobnych schematów. Najlepiej traktowaæ algorytmy ewolucyjne jako metaheurystykê - okre¶lony jest pewien szkic algorytmu, który mo¿na dostosowywaæ do konkretnego rozwi±zania. W tym podrozdziale opisane s± podstawowe i najbardziej popularne schematy postêpowania oparte o algorytmy ewolucyjne.
+Algorytmy ewolucyjne wywodz± siê z kilku osobnych nurtów zajmuj±cych siê t± tematyk±, wiêc istnieje wiele podobnych schematów dzia³ania. Najlepiej traktowaæ algorytmy ewolucyjne jako metaheurystykê - okre¶lony jest pewien szkic algorytmu, który mo¿na dostosowywaæ do konkretnego rozwi±zania. W tym podrozdziale opisane s± podstawowe i najbardziej popularne schematy postêpowania oparte o algorytmy ewolucyjne.\\
 
-\paragraph{Prosty algorytm genetyczny}
+
+\textbf{Prosty algorytm genetyczny}
 
 Prosty algorytm genetyczny zosta³ zaproponowany w roku 1975 przez John'a Holland'a.
 
@@ -183,7 +192,7 @@ Zatrzymanie algorytmu mo¿e byæ dokonane je¶li np.:
 
 W tej wersji algorytmu czêsto pêtlê algorytmu nazywa siê generacj±, a ka¿d± populacjê $P^t$ w chwili t pokoleniem.\\
 
-\paragraph{Strategia (1+1).}
+\textbf{Strategia (1+1)}
 
 Strategia (1+1) jest podstawow± strategi± ewolucyjn±. W algorytmie tym mamy do czynienia z populacj± sk³adaj±c± siê z tylko jednego osobnika posiadaj±cego jeden chromosom. W ka¿dej pêtli algorytmu dokonuje siê mutacji tego chromosomu, co powoduje powstanie nowego osobnika. Osobnik ten jest poddawany ocenie, a nastêpnie dokonuje siê wyboru lepszego z dwóch istniej±cych osobników i tego pozostawia w populacji.\\
 W mutacji dodaje siê do ka¿dego genu chromosomu losow± modyfikacjê rozk³adem normalnym:
@@ -268,7 +277,7 @@ W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie 
 
 \subsection{Hill climbing}
 \label{sec:hill}
-% ksiazka Stuart Russell, Peter Norvig - Artificial Inteligence A Modern Approach
+%TODO ksiazka Stuart Russell, Peter Norvig - Artificial Inteligence A Modern Approach
 
 Algorytm hill climbing jest jedn± z metod przeszukiwania lokalnego. W ka¿dej iteracji zmieniaj±c warto¶æ jednej ze zmiennych rozwi±zania sprawdzana jest warto¶æ funkcji celu dla nowego rozwi±zania i je¶li warto¶æ ta jest lepsza od dotychczas najlepszej znalezionej, zapamiêtujemy zmienione rozwi±zanie. Dopóki zmiany powoduj± poprawê rozwi±zania, algorytm nie jest zatrzymywany. Na koñcu wiemy, ¿e znalezione rozwi±zanie jest rozwi±zaniem lokalnie optymalnym.\\
 Przeszukiwanie przestrzeni dyskretnej sprowadza siê do sprawdzania rozwi±zañ najbli¿szych obecnemu i wybieranie tego rozwi±zania, którego warto¶æ obliczona za pomoc± funkcji celu jest najlepsza. Je¶li w¶ród s±siadów nie ma ju¿ lepszego rozwi±zania, mo¿emy zakoñczyæ przeszukiwanie.\\
