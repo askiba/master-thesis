@@ -759,7 +759,7 @@ kolejno¶æ rezultatów nie pokrywa siê z kolejno¶ci± ocen - najlepszy czas uzyskan
 \subsection{Strategie karania}
 \label{sec:wynikiStrategieKarania}
 
-Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} strategie karania. Testy mia³y na celu pogl±dowo zorientowaæ siê, czy wszystkie strategie bêd± prowadziæ do poprawnego wizualnie wyniku a przede wszystkim wskazaæ, która strategia bêdzie doprowadza³a do szybszej zbie¿no¶ci algorytmu genetycznego, a co za tym idzie do najszybszego znajdowania wyników. 
+Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} na stronie \pageref{sec:karanie} strategie karania. Testy mia³y na celu pogl±dowo zorientowaæ siê, czy wszystkie strategie bêd± prowadziæ do poprawnego wizualnie wyniku a przede wszystkim wskazaæ, która strategia bêdzie doprowadza³a do szybszej zbie¿no¶ci algorytmu genetycznego oraz lokalnej optymalizacji, a co za tym idzie do najszybszego znajdowania wyników. Dla ka¿dej testowanej strategii, ta sama strategia karania by³a u¿yta w algorytmie genetycznym jak i w lokalnej optymalizacji.
 
 \subsubsection{Poprawno¶æ strategii}
 \label{poprawnoscKarania}
@@ -771,34 +771,37 @@ Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} strategie kara
 \label{fig:punish}
 \end{figure}
 
-Rycina \ref{fig:punish} przedstawia znalezione tory przejazdu przez ka¿d± z tych strategii. Jak widaæ, ka¿da strategia doprowadza do poprawnych wyników i nie widaæ znacznych ró¿nic pomiêdzy znalezionymi torami - nale¿y pamiêtaæ ¿e przedstawione na rycinie tory s± tylko jednym konkretnym przypadkiem torów generowanych przez konkretn± strategiê.
+Rycina \ref{fig:punish} przedstawia znalezione tory przejazdu przez ka¿d± z tych strategii. Jak widaæ, mo¿na dostrzec znacz±c± ró¿nice w torach znalezionych przez algorytm genetyczny (czarna linia) w zale¿no¶ci od wyboru strategii. 
 
 \subsubsection{Szybko¶æ obliczeñ}
 \label{szybkoscObliczenKaranie}
 
-Tabela \ref{tab:porownanieKarania} na stronie \pageref{tab:porownanieKarania} pokazuje ¶redni czas dochodzenia do wyniku dla ka¿dej ze startegii jak równie¿ dla braku zastosowani strategii. Jak widaæ najszybsz± zbie¿no¶æ algorytmu genetycznego uzyskuje siê dla karania poprzez zliczanie ilo¶ci przekrawêdziowañ. Ró¿nice pomiêdzy ¶rednimi szybko¶ciami s± znaczne, bo nawet trzy krotne. 
+Tabela \ref{tab:porownanieKarania} na stronie \pageref{tab:porownanieKarania} pokazuje ¶redni czas dochodzenia do wyniku dla ka¿dej ze strategii jak równie¿ dla braku zastosowani strategii. Najszybsz± zbie¿no¶æ maj± metody które prowadz± do najgorszych jako¶ciowo rozwi±zañ (C i D z rysunku \ref{fig:punish}). Jak widaæ najszybsz± zbie¿no¶æ algorytmu genetycznego uzyskuje siê dla karania poprzez zliczanie ilo¶ci przekrawêdziowañ. Ró¿nice pomiêdzy ¶rednimi szybko¶ciami s± znaczne, bo nawet cztero krotne. Zastosowanie strategii A prowadzi do uzyskania bardzo dobrego jako¶ciowo wyniku, dobrego do tego stopnia, ¿e lokalna optymalizacja nie wprowadza znacznej poprawy. Strategia B, nie do¶æ, ¿e prowadzi do bardzo dobrego wyniku jako¶ciowego, to zbiega siê do¶æ szybko w porównaniu do strategii A - o ponad 40 procent.
 
 \begin{table}[h] 
-  
+\label{tab:porownanieKarania}
+\caption{Porównanie d³ugo¶ci trwania obliczeñ instancji problemu dla u¿ytych ró¿nych strategii karania. Obliczenia prowadzone s± na maszynie o nastêpuj±cych parametrach: Procesor Intel Core i5-2410M, 2.3 GHz, 8 GB pamiêci RAM, System Windows 7 Home Premium, zminimalizowane obci±¿enie procesora przez inne procesy, obliczenia prowadzi jedna zak³adka przegl±darki Chrome }
 \begin{tabular}{|c|l|l|l|l|}
 \hline
-\multicolumn{1}{|l|}{}                                                                                         & \begin{tabular}[c]{@{}c@{}}Strategia 1 -\\sumowanie pochodnych\end{tabular} & \begin{tabular}[c]{@{}c@{}}Startegia 2 - \\ proporcjonalne \\ zmniejszanie\\  d³ugo¶ci wektora\end{tabular} & \begin{tabular}[c]{@{}c@{}}Strategia 3 - \\ zliczanie \\ przekrawêdziowania\end{tabular} & \begin{tabular}[c]{@{}c@{}}Startegia 4 - \\ brak karania\end{tabular} \\ \hline
-\multirow{9}{*}{\begin{tabular}[c]{@{}c@{}}Czas rozwi±zania \\ kolejnego problemu \\ w sekundach\end{tabular}} & 107.713                                                                                                               & 50.67                                                                                                       & 26.808                                                                                   & 32.709                                                                \\ \cline{2-5} 
-\multicolumn{1}{|l|}{}                                                                                         & 81.568                                                                                                                & 59.671                                                                                                      & 27.557                                                                                   & 26.974                                                                \\ \cline{2-5} 
-\multicolumn{1}{|l|}{}                                                                                         & 104.327                                                                                                               & 48.118                                                                                                      & 24.939                                                                                   & 26.256                                                                \\ \cline{2-5} 
-\multicolumn{1}{|l|}{}                                                                                         & 49.773                                                                                                                & 47.877                                                                                                      & 28.11                                                                                    & 21.458                                                                \\ \cline{2-5} 
-\multicolumn{1}{|l|}{}                                                                                         & 67.138                                                                                                                & 64.928                                                                                                      & 29.477                                                                                   & 31.425                                                                \\ \cline{2-5} 
-\multicolumn{1}{|l|}{}                                                                                         & 95.66                                                                                                                 & 50.003                                                                                                      & 15.252                                                                                   & 34.237                                                                \\ \cline{2-5} 
-\multicolumn{1}{|l|}{}                                                                                         & 115.73                                                                                                                & 44.629                                                                                                      & 29.365                                                                                   & 19.737                                                                \\ \cline{2-5} 
-\multicolumn{1}{|l|}{}                                                                                         & 114.533                                                                                                               & 53.924                                                                                                      & 23.848                                                                                   & 24.966                                                                \\ \cline{2-5} 
-\multicolumn{1}{|l|}{}                                                                                         & 71.436                                                                                                                & 80.939                                                                                                      & 27.254                                                                                   & 21.278                                                                \\ \hline
-\multicolumn{1}{|l|}{\textbf{¦redni czas rozwi±zania}}                                                         & \textbf{89.764}                                                                                                       & \textbf{55.64}                                                                                              & \textbf{25.846}                                                                          & \textbf{26.56}                                                        \\ \hline
+\multicolumn{1}{|l|}{}                                                                                         & \begin{tabular}[c]{@{}c@{}}Strategia 1 -\\sumowanie pochodnych\end{tabular} & \begin{tabular}[c]{@{}c@{}}Strategia 2 - \\ proporcjonalne \\ zmniejszanie\\  d³ugo¶ci wektora\end{tabular} & \begin{tabular}[c]{@{}c@{}}Strategia 3 - \\ zliczanie \\ przekrawêdziowania\end{tabular} & \begin{tabular}[c]{@{}c@{}}Strategia 4 - \\ brak karania\end{tabular} \\ \hline
+\multirow{5}{*}{\begin{tabular}[c]{@{}c@{}}Czas rozwi±zania \\ kolejnego problemu \\ w sekundach\end{tabular}} 
+& 91.272 &	48.241	& 18.798	& 31.264
+   \\ \cline{2-5}  
+\multicolumn{1}{|l|}{}                                                                                         
+& 66.032 &	44.404	& 17.888	& 37.16
+ \\ \cline{2-5} 
+\multicolumn{1}{|l|}{}                                                                                         & 117.033	& 54.362	& 20.441	& 27.404
+ \\ \cline{2-5} 
+\multicolumn{1}{|l|}{}                                                                                         & 87.8	& 59.479	& 19.971	& 18.545 \\ \cline{2-5} 
+\multicolumn{1}{|l|}{}                                                                                         & 68.612	& 42.383	& 21.276	& 25.054 \\ \cline{2-5} 
+                                                                         
+\multicolumn{1}{|l|}{\textbf{¦redni czas rozwi±zania}}                                                         & \textbf{86.1498}                                                                                                       & \textbf{49.7738}                                                                                              & \textbf{19.6748}                                                                          & \textbf{27.8854}                                                        \\ \hline
 \end{tabular}
 \end{table}
 
 \subsubsection{Wybór strategii}
 \label{wyborStartegiiKarania}   
-Rozwa¿aj±c strategiê, zosta³o przyjête, ¿e najlepszym modelem jest model ze strategi± proporcjonalnego zmniejszania d³ugo¶ci wektora prêdko¶ci w zale¿no¶ci od k±tów pomiêdzy kolejnymi odcinkami ³amanej. Czas obliczeñ dla tej strategii nie jest ani najwiêkszy ani najmniejszy. Ta w³a¶nie strategiê - jako najlepiej obrazuj±c± rzeczywisto¶æ i pozwalaj±c± na otrzymywanie najlepiej zamodelowanych wyników, zosta³a wybrana jako sta³± dla wszystkich innych eksperymentów. 
+Rozwa¿aj±c strategiê, zosta³o przyjête, ¿e najlepszym modelem jest model ze strategi± proporcjonalnego zmniejszania d³ugo¶ci wektora prêdko¶ci w zale¿no¶ci od k±tów pomiêdzy kolejnymi odcinkami ³amanej - czyli Strategia B. Czas obliczeñ dla tej strategii nie jest ani najwiêkszy ani najmniejszy. Ta w³a¶nie strategiê - jako najlepiej obrazuj±c± rzeczywisto¶æ i pozwalaj±c± na otrzymywanie najlepiej zamodelowanych wyników, zosta³a wybrana jako sta³a dla innych eksperymentów, chyba, ¿e jest zaznaczone inaczej. 
 %---------------------------------------------------------------------------
 
 \section{Architektura systemu}
