@@ -194,7 +194,7 @@ W tej wersji algorytmu czêsto pêtlê algorytmu nazywa siê generacj±, a ka¿d± popu
 
 \textbf{Strategia (1+1)}
 
-Strategia (1+1) jest podstawow± strategi± ewolucyjn±. W algorytmie tym mamy do czynienia z populacj± sk³adaj±c± siê z tylko jednego osobnika posiadaj±cego jeden chromosom. W ka¿dej pêtli algorytmu dokonuje siê mutacji tego chromosomu, co powoduje powstanie nowego osobnika. Osobnik ten jest poddawany ocenie, a nastêpnie dokonuje siê wyboru lepszego z dwóch istniej±cych osobników i tego pozostawia w populacji.\\
+Strategia (1+1) jest podstawow± strategi± ewolucyjn±. W algorytmie tym mamy do czynienia z populacj± sk³adaj±c± siê tylko z jednego osobnika posiadaj±cego jeden chromosom. W ka¿dej pêtli algorytmu dokonuje siê mutacji tego chromosomu, co powoduje powstanie nowego osobnika. Osobnik ten jest poddawany ocenie, a nastêpnie dokonuje siê wyboru lepszego z dwóch istniej±cych osobników i tego pozostawia w populacji.\\
 W mutacji dodaje siê do ka¿dego genu chromosomu losow± modyfikacjê rozk³adem normalnym:
 \begin{equation}
 Y^t_i = X^t_i + \sigma\xi_{N(0,1),i}
@@ -208,7 +208,7 @@ Do wyznaczania $\sigma$ powsta³ nastêpuj±cy algorytm zwany regu³± 1/5 sukcesów:
 \item Je¶li nie zachodzi ¿adne z powy¿szych warto¶æ $\sigma$ jest zmniejszana: $\sigma' = c_d \sigma$. Gdzie $ c_d $ powinna wynosiæ $ 0.82 $
 \end{enumerate}
 
-\paragraph{Strategia ($\mu$ + $\lambda$).}
+\textbf{Strategia ($\mu$ + $\lambda$)}
 
 Strategia ($\mu$ + $\lambda$) jest rozwiniêciem strategii (1+1). $\mu$ oznacza ilo¶æ osobników w populacji pocz±tkowej, a $\lambda$ ile osobników jest reprodukowanych i poddawanych operacjom genetycznym. Dodatkowo, zamiast regu³y 1/5 sukcesów wprowadzono mechanizm samoczynnej adaptacji zasiêgu mutacji, a tak¿e wprowadzono operator krzy¿owania.
 
@@ -236,7 +236,7 @@ Po wylosowaniu warto¶ci zmiennej losowej o rozk³adzie normalnym ($\xi_{N(0,1)}$)
 \sigma'_i = \sigma_i e^{(\tau'\xi_{N(0,1)} + \tau\xi_{N(0,1),i})}
 \end{equation}
 
-%--------CO Z K i n??-------
+
 Gdzie $\tau$ oraz $\tau'$ s± parametrami algorytmu, a ich warto¶ci powinny wynosiæ:
 \begin{equation}
 \tau = \frac{K}{\sqrt{2n}}
@@ -245,6 +245,11 @@ Gdzie $\tau$ oraz $\tau'$ s± parametrami algorytmu, a ich warto¶ci powinny wynos
 \begin{equation}
 \tau' = \frac{K}{\sqrt{2\sqrt{n}}}
 \end{equation}
+
+%TODO biblio Schwefel(1995) (http://ls11-www.cs.uni-dortmund.de/people/rudolph/publications/papers/gra.pdf)
+gdzie:
+K - sta³a, najczê¶ciej stosuje siê warto¶æ 1
+n - wymiarowo¶æ zadania
 
 Maj±c dane nowe warto¶ci odchyleñ standardowych mo¿emy obliczyæ nowe warto¶ci genów korzystaj±c ze wzoru:
 
@@ -257,7 +262,7 @@ Algorytm ewolucyjny wybiera osobniki lepiej przystosowane, a wiêc te, które posi
 
 Krzy¿owanie wystêpuje w tym algorytmie pod nazw± rekombinacja. Najczê¶ciej sprowadza siê do u¶rednienia lub wymianie warto¶ci wektorów, tak¿e wektora $\sigma$.
 
-\paragraph{Strategia ($\mu$, $\lambda$).}
+\textbf{Strategia ($\mu$, $\lambda$)}
 Strategia ($\mu$ + $\lambda$) posiada pewne wady, które postanowiono spróbowaæ wyeliminowaæ za pomoc± nowej strategii ($\mu$, $\lambda$). Poprzedni algorytm sprawia problemy je¶li w populacji pojawia siê osobnik o wysokiej warto¶ci przystosowania, ale posiadaj±cy zbyt du¿e (albo zbyt ma³e) warto¶ci odchyleñ standardowych. Usuniêcie takiego osobnika z populacji czêsto nie jest procesem krótkotrwa³ym, gdy¿ wp³ywa on na powstaj±ce potomstwo, przekazuj±c mu podobne do jego, nieodpowiednie warto¶ci odchyleñ.\\
 W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie nie s± nigdy brane do kolejnej populacji bazowej. Podczas selekcji korzysta siê zatem tylko z powsta³ej populacji potomnej, z niej wybieraj±c osobniki do populacji bazowej w kolejnej iteracji.
 
@@ -275,14 +280,16 @@ W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie 
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Hill climbing}
+\subsection{Hill Climbing}
 \label{sec:hill}
-%TODO ksiazka Stuart Russell, Peter Norvig - Artificial Inteligence A Modern Approach
+%TODO biblio ksiazka Stuart Russell, Peter Norvig - Artificial Inteligence A Modern Approach
 
-Algorytm hill climbing jest jedn± z metod przeszukiwania lokalnego. W ka¿dej iteracji zmieniaj±c warto¶æ jednej ze zmiennych rozwi±zania sprawdzana jest warto¶æ funkcji celu dla nowego rozwi±zania i je¶li warto¶æ ta jest lepsza od dotychczas najlepszej znalezionej, zapamiêtujemy zmienione rozwi±zanie. Dopóki zmiany powoduj± poprawê rozwi±zania, algorytm nie jest zatrzymywany. Na koñcu wiemy, ¿e znalezione rozwi±zanie jest rozwi±zaniem lokalnie optymalnym.\\
-Przeszukiwanie przestrzeni dyskretnej sprowadza siê do sprawdzania rozwi±zañ najbli¿szych obecnemu i wybieranie tego rozwi±zania, którego warto¶æ obliczona za pomoc± funkcji celu jest najlepsza. Je¶li w¶ród s±siadów nie ma ju¿ lepszego rozwi±zania, mo¿emy zakoñczyæ przeszukiwanie.\\
+Algorytm Hill Climbing jest jedn± z metod przeszukiwania lokalnego. W ka¿dej iteracji zmieniaj±c warto¶æ rozwi±zania w jednym z wymiarów sprawdzana jest warto¶æ funkcji celu dla nowego rozwi±zania i je¶li warto¶æ ta jest lepsza od dotychczas najlepszej znalezionej, zapamiêtujemy zmienione rozwi±zanie. Dopóki zmiany powoduj± poprawê rozwi±zania, algorytm nie jest zatrzymywany. Na koñcu wiemy, ¿e znalezione rozwi±zanie jest rozwi±zaniem lokalnie optymalnym.\\
+Przeszukiwanie przestrzeni dyskretnej sprowadza siê do sprawdzania rozwi±zañ najbli¿szych obecnemu i wybieranie tego rozwi±zania, którego warto¶æ obliczona za pomoc± funkcji celu jest najlepsza. Je¶li w¶ród s±siadów nie ma ju¿ lepszego rozwi±zania, mo¿emy zakoñczyæ przeszukiwanie. Pseudokod algorytmu przedstawiony jest poni¿ej (Algorytm \ref{alg:hillClimbDiscrete}).\\
 
 \begin{algorithm}
+\caption{Hill Climbing w przestrzeni dyskretnej}
+\label{alg:hillClimbDiscrete}
 \begin{algorithmic}
 \STATE $current = startPoint$
 \STATE $foundBetter = true $
@@ -290,7 +297,7 @@ Przeszukiwanie przestrzeni dyskretnej sprowadza siê do sprawdzania rozwi±zañ naj
   \STATE $ foundBetter = false $
   \STATE $ neighbours = getNeighbours(current) $
   \FORALL {$neighbour$ $in$ $neighbours$}
-    \IF {$ neighbour.getValue() < current.getValue() $}
+    \IF {$ neighbour.isBetterThan(current) $}
       \STATE $ current = neighbour $
       \STATE $ foundBetter = true $
     \ENDIF
@@ -300,9 +307,12 @@ Przeszukiwanie przestrzeni dyskretnej sprowadza siê do sprawdzania rozwi±zañ naj
 \end{algorithm}
 
 
-W przestrzeni ci±g³ej konieczne jest dobranie kroku, który wyznacza punkty przeszukiwane w okolicy w trakcie ka¿dej iteracji. Dodatkowo wykorzystywane jest tzw. przyspieszenie (ang. \textit{acceleration}), które wyznacza piêciu mo¿liwych kandydatów na lepsze rozwi±zania. Najczê¶ciej przyspieszenie to wynosi 1.2, a warto¶æ kroku jest osobna dla ka¿dej zmiennej rozwi±zania i czêsto wynosi na pocz±tku 1. Zatem za ka¿dym razem obliczane s± nastêpuj±ce wspó³czynniki: -acceleration, -1/acceleration, 0, 1/acceleration, acceleration. Nastêpnie wspó³czynniki mno¿one s± przez krok (step) i dodawane do obecnie analizowanej zmiennej i wybierane jest najlepsze z piêciu rozwi±zañ. Warto¶æ kroku jest indywidualna dla ka¿dej zmiennej. Po wybraniu najlepszego rozwi±zania uaktualniana jest warto¶æ tego kroku - krok mno¿ony jest przez odpowiedni wspó³czynnik, ten który by³ dobrany wcze¶niej do znalezienia tego najlepszego rozwi±zania. Algorytm zatrzymywany jest je¶li zmiana ¿adnej ze zmiennych nie przynosi ju¿ poprawy rozwi±zania, czasem równie¿ je¶li ta zmiana jest ju¿ bardzo ma³a - wprowadzany jest parametr $\epsilon$ wyznaczaj±cy tê ró¿nicê.
+W przestrzeni ci±g³ej konieczne jest dobranie kroku, który wyznacza punkty przeszukiwane w okolicy w trakcie ka¿dej iteracji. Dodatkowo wykorzystywane jest tzw. przyspieszenie (ang. \textit{acceleration}), które wyznacza piêciu mo¿liwych kandydatów na lepsze rozwi±zania. Najczê¶ciej przyspieszenie to wynosi 1.2, a warto¶æ kroku jest osobna dla ka¿dej zmiennej rozwi±zania i czêsto wynosi na pocz±tku 1. Zatem za ka¿dym razem obliczane s± nastêpuj±ce wspó³czynniki: -acceleration, -1/acceleration, 0, 1/acceleration, acceleration. Nastêpnie wspó³czynniki mno¿one s± przez krok (step) i dodawane do obecnie analizowanej zmiennej i wybierane jest najlepsze z piêciu rozwi±zañ. Warto¶æ kroku jest indywidualna dla ka¿dej zmiennej. Po wybraniu najlepszego rozwi±zania uaktualniana jest warto¶æ tego kroku - krok mno¿ony jest przez odpowiedni wspó³czynnik, ten który by³ dobrany wcze¶niej do znalezienia tego najlepszego rozwi±zania. Algorytm zatrzymywany jest je¶li zmiana ¿adnej ze zmiennych nie przynosi ju¿ poprawy rozwi±zania, czasem równie¿ je¶li ta zmiana jest ju¿ bardzo ma³a - wprowadzany jest parametr $\epsilon$ wyznaczaj±cy tê ró¿nicê. Pseudokod algorytmu przedstawiony jest na kolejnej stronie (Algorytm \ref{alg:hillClimbCont}).
+
 
 \begin{algorithm}
+\caption{Hill Climbing w przestrzeni ci±g³ej}
+\label{alg:hillClimbCont}
 \begin{algorithmic}
 \STATE $ currentResult = startPoint$
 \STATE $ steps = initialSteps $ \COMMENT {for each dimension of the solution}
@@ -319,7 +329,7 @@ W przestrzeni ci±g³ej konieczne jest dobranie kroku, który wyznacza punkty przes
 	  \STATE $ currentResult[i] = currentResult[i] + stepSize[i] * candidates[j] $
 	  \STATE $ tempValue = currentResult.getValue() $
 	  \STATE $ currentResult[i] = currentResult[i] - stepSize[i] * candidates[j] $
-	  \IF {$tempValue < bestScore$}
+	  \IF {$tempValue.isBetterThan(bestScore)$}
 	    \STATE $ bestScore = tempValue $
 	    \STATE $ bestIndex = j $
 	  \ENDIF
@@ -339,29 +349,29 @@ W przestrzeni ci±g³ej konieczne jest dobranie kroku, który wyznacza punkty przes
 \section{Volunteer Computing}
 \label{volunteerComputing}
 
-Volunteer computing to nieformalny kontrakt w którym zwykli ludzie czy te¿ organizacje, nazywani dalej ochotnikami, dobrowolnie udostêpniaj± swoje zasoby obliczeniowe by uruchamiaæ na nich obliczenia zwi±zane z ró¿norakimi projektami. Projekty to, przewa¿nie projekty naukowe, których celem jest rozwi±zanie problemów i zadañ matematycznych czy te¿ problemów dotykaj±cych ludzko¶æ, lub d±¿±cych do lepszego poznania ¶wiata i wszech¶wiata. Dziêki platform± umo¿liwiaj±cym Volunteer computing, ka¿dy cz³owiek mo¿e w niewielkim stopniu kontrybuowaæ w rozwi±zywaniu tych problemów.
+Volunteer Computing to nieformalny kontrakt, w którym zwykli ludzie czy te¿ organizacje, nazywani dalej ochotnikami, dobrowolnie udostêpniaj± swoje zasoby obliczeniowe, by uruchamiaæ na nich obliczenia zwi±zane z ró¿norakimi projektami. S± to przewa¿nie projekty naukowe, których celem jest rozwi±zanie problemów i zadañ matematycznych czy te¿ problemów dotykaj±cych ludzko¶æ, lub d±¿±cych do lepszego poznania ¶wiata i wszech¶wiata. Dziêki platformom umo¿liwiaj±cym Volunteer Computing, ka¿dy cz³owiek mo¿e w niewielkim stopniu mieæ wk³ad w rozwi±zywanie tych problemów.
 
-Pprocesory w komputerach osobistych spêdzaj± oko³o 80 procent czasu nie robi±c nic. Równocze¶nie wiele naukowych problemów zwi±zanych na przyk³ad z modelowanie zmian klimatu potrzebuje ogromnych zasobów obliczeniowych. U¿ywanie do tego celu superkomputerów jest bardzo drogie. Po³±czenie tych faktów doprowadzi³o do stworzenia konceptu by u¿ywaæ do tych obliczeñ zasobów zwyk³ych ludzi, którzy chc± siê ¶wiadomie nimi dzieliæ. Obecne do¶wiadczenia wskazuj±, ¿e wydajno¶æ systemu dla pojedynczego prowadzonego projektu opartego o volunteer computing jest porównywalna do tego, gdyby projekt prowadzony by³ przy wsparciu jednego z topowych superkomputerów z listy TOP500.
+Procesory w komputerach osobistych spêdzaj± oko³o 80 procent czasu nie robi±c nic. Równocze¶nie wiele naukowych problemów zwi±zanych na przyk³ad z modelowaniem zmian klimatu potrzebuje ogromnych zasobów obliczeniowych. U¿ywanie do tego celu superkomputerów jest bardzo drogie. Po³±czenie tych faktów doprowadzi³o do stworzenia konceptu, by u¿ywaæ do tych obliczeñ zasobów zwyk³ych ludzi, którzy chc± siê ¶wiadomie nimi dzieliæ. Obecne do¶wiadczenia wskazuj±, ¿e wydajno¶æ systemu dla pojedynczo prowadzonego projektu opartego o Volunteer Computing jest porównywalna do tego, gdyby projekt prowadzony by³ przy wsparciu jednego z topowych superkomputerów z listy TOP500.
 
 Ochotnicy to osoby prywatne albo instytucje takie jak szko³y czy uniwersytety. Ochotnicy przewa¿nie pozostaj± anonimowi, choæ w niektórych projektach wymagane jest dostarczenie podstawowych danych kontaktowych jak np. adresu email. W wypadku celowego dostarczania b³êdnych wyników przez ochotnika, utrudnione jest jego dyscyplinowanie czy te¿ wy³±czenie z projektu. Ochotnicy nie s± wynagradzani finansowo za uczestnictwo w projekcie. 
 
-Organizacja czy osoba chc±ca wykorzystaæ model Volunteer computing do swoich projektów, musi byæ jednostk± zaufan± dla ochotników realizuj±cych obliczenia. Wynika to z prostego faktu, ¿e ochotnicy decyduj± siê, wed³ug standardowego modelu computing,  na zainstalowanie aplikacji dostarczanej przez dawcê zadañ obliczeniowych. Osoba instaluj±ca aplikacjê musi ufaæ, ¿e nie uszkodzi ona jej komputera ani te¿ nie bêdzie wykorzystywaæ jej zasobów w sposób niezgodny z zapewnieniami zleceniodawcy obliczeñ. Zleceniobiorca obliczeñ ma te¿ prawo oczekiwaæ, ¿e aplikacja, zosta³a napisana przestrzegaj±c dobrych praktyk bezpieczeñstwa, gdy¿ jako, ¿e aplikacja ta ³±czy siê z internetem i potencjalnie jest zainstalowana na du¿ej ilo¶ci maszyn wiêc jest atrakcyjnym celem ataków zmierzaj±cych do przejêcia  tych maszyn do niezgodnych z prawem celów przez hakerów. 
+Organizacja czy osoba chc±ca wykorzystaæ model Volunteer computing do swoich projektów, musi byæ jednostk± zaufan± dla ochotników realizuj±cych obliczenia. Wynika to z prostego faktu, ¿e ochotnicy decyduj± siê, wed³ug standardowego modelu computing, na zainstalowanie aplikacji dostarczanej przez dawcê zadañ obliczeniowych. Osoba instaluj±ca aplikacjê musi ufaæ, ¿e nie uszkodzi ona jej komputera, ani te¿ nie bêdzie wykorzystywaæ jej zasobów w sposób niezgodny z zapewnieniami zleceniodawcy obliczeñ. Zleceniobiorca obliczeñ ma te¿ prawo oczekiwaæ, ¿e aplikacja, zosta³a napisana przestrzegaj±c dobrych praktyk bezpieczeñstwa, gdy¿ jako, ¿e aplikacja ta ³±czy siê z internetem i potencjalnie jest zainstalowana na du¿ej ilo¶ci maszyn, jest wiêc atrakcyjnym celem ataków zmierzaj±cych do przejêcia tych maszyn do niezgodnych z prawem celów przez hakerów. 
 
-Przewa¿nie model komunikacyjny systemu Volunteer Computing uwzglêdnia tylko komunikacje poszczególnych klientów z centralnym serwerem i nie zak³ada bezpo¶redniej komunikacji miêdzy klientami.
+Przewa¿nie model komunikacyjny systemu Volunteer Computing uwzglêdnia tylko komunikacjê poszczególnych klientów z centralnym serwerem i nie zak³ada bezpo¶redniej komunikacji miêdzy klientami.
 
-Volunteer Computing pierwotnie zak³ada³, ¿e obliczenia s± wykonywane na zwyk³ych PC-tach. Ilo¶æ komputerów tego typu jest nieporównywalnie wiêksza do ilo¶ci wyspecjalizowanych komputerów o du¿ej mocy obliczeniowej i jest szacowana na ponad miliard. Dodatkowa, z przyczyn ekonomicznych, na rozwój tych maszyn producenci sprzêtu przeznaczaj± najwiêksze fundusze wiêc ich moc i zdolno¶ci obliczeniowe stale rosn±. 
+Volunteer Computing pierwotnie zak³ada³, ¿e obliczenia s± wykonywane na zwyk³ych komputerach osobistych (PC). Ilo¶æ komputerów tego typu jest nieporównywalnie wiêksza ni¿ ilo¶æ wyspecjalizowanych komputerów o du¿ej mocy obliczeniowej i jest szacowana na ponad miliard. Dodatkowo, z przyczyn ekonomicznych, na rozwój tych maszyn producenci sprzêtu przeznaczaj± najwiêksze fundusze, wiêc ich moc i zdolno¶ci obliczeniowe stale rosn±. 
 
-Wa¿nym aspektem, który istotnie wp³ywa na stosowanie modelu w praktyce jest koszt prowadzenia obliczeñ. Model zak³ada, ¿e do³±czanie siê do obliczeñ jest ochotnicze i nie dostaje siê za uczestnictwo w projekcie wynagrodzenia. Dziêki temu, projekty, które maj± poparcie i akceptacjê spo³eczn± mog± liczyæ na darmowe moce obliczeniowe udostêpnione przez zwyk³ych ludzi.
+Wa¿nym aspektem, który istotnie wp³ywa na stosowanie modelu w praktyce, jest koszt prowadzenia obliczeñ. Model zak³ada, ¿e do³±czanie siê do obliczeñ jest dobrowolne i nie dostaje siê za uczestnictwo w projekcie wynagrodzenia. Dziêki temu, projekty, które maj± poparcie i akceptacjê spo³eczn± mog± liczyæ na darmowe moce obliczeniowe udostêpnione przez zwyk³ych ludzi.
 
-Na ten model mo¿na patrzyæ tak¿e w kategoriach edukacyjnych. Podczas gdy ochotnik przystêpuje do projektu i udostêpnia swoje moce obliczeniowe, mo¿na wykorzystaæ jego potencjalne zainteresowanie rozwi±zywanym problemem i za pomoc± przystêpnych wizualizacji przedstawiæ mu sedno rozwi±zywanego zadania, nakre¶liæ mu problem z ró¿nych perspektyw i pokazaæ mu do czego potencjalnie zmierzaj± obliczenia. Po³±czenie atrakcyjnej formy t³umaczenia rozwi±zywanych problemów z potencja³em portali spo³eczno¶ciowych i wiralno¶ci ciekawego materia³u mo¿na uzyskaæ daleko id±cy efekt propagacji i pod³±czaniu siê do obliczeñ coraz wiêkszej ilo¶ci osób.
+Na ten model mo¿na patrzyæ tak¿e w kategoriach edukacyjnych. Podczas gdy ochotnik przystêpuje do projektu i udostêpnia swoje moce obliczeniowe, mo¿na wykorzystaæ jego potencjalne zainteresowanie rozwi±zywanym problemem i za pomoc± przystêpnych wizualizacji przedstawiæ mu sedno rozwi±zywanego zadania, nakre¶liæ mu problem z ró¿nych perspektyw i pokazaæ mu do czego potencjalnie zmierzaj± obliczenia. Po³±czenie atrakcyjnej formy t³umaczenia rozwi±zywanych problemów z potencja³em portali spo³eczno¶ciowych i popularno¶ci ciekawego materia³u mo¿na uzyskaæ daleko id±cy efekt propagacji i pod³±czaniu siê do obliczeñ coraz wiêkszej ilo¶ci osób.
 
 \section{Web Workers}
 \label{webWorkers}
 
-Przeprowadzanie intensywnych obliczeñ w przegl±darkach internetowych nie by³o mo¿liwe do czasu wprowadzenia przez  grupê WHATWG (Web Hypertext Application Technology Working Group) specyfikacji Web Worker. Ograniczenie wynika³o z faktu, ¿e jêzyk w którym wykonywane s± skrypty poprzez silniki przegl±darki to Java Script. Java Script to ¶rodowisko jednow±tkowe, wiêc nic nie mo¿e byæ wykonywane równolegle. Zlecaj±c wiêc skryptowi intensywne obliczenia, na ich czas ca³y UI strony by³by nieresponsywny, co jest nie do przyjêcia dla cz³owieka obs³uguj±cego stronê internetow±. Przegl±darki broni± u¿ytkownika przed takim zachowaniem skryptów na stronie i czasami zdarza siê jeszcze zobaczyæ okno z ostrze¿eniem, ¿e skrypt przesta³ odpowiadaæ i mo¿liwo¶ci± manualnego zatrzymania skryptu.
+Przeprowadzanie intensywnych obliczeñ w przegl±darkach internetowych nie by³o mo¿liwe do czasu wprowadzenia przez grupê WHATWG (Web Hypertext Application Technology Working Group) specyfikacji Web Worker. Ograniczenie wynika³o z faktu, ¿e jêzyk w którym wykonywane s± skrypty poprzez silniki przegl±darki to Java Script. Java Script to ¶rodowisko jednow±tkowe, wiêc nic nie mo¿e byæ wykonywane równolegle. Zlecaj±c wiêc skryptowi intensywne obliczenia, na ich ca³y czas UI strony by³by nieresponsywny, co jest nie do przyjêcia dla cz³owieka obs³uguj±cego stronê internetow±. Przegl±darki broni± u¿ytkownika przed takim zachowaniem skryptów na stronie i czasami zdarza siê jeszcze zobaczyæ okno z ostrze¿eniem, ¿e skrypt przesta³ odpowiadaæ i mo¿liwo¶ci± manualnego zatrzymania skryptu.
 
-Web Workers definiuje API do tworzenia osobnych procesów w tle. Workery wykorzystuj± do komunikacji z w±tkiem g³ównym klasyczny model przekazywania wiadomo¶ci. Nowoczesne przegl±darki umo¿liwiaj± przekazywanie zarówno tekstu jak i obiektów zserializowanych jako JSONy. Nale¿y zwróciæ uwagê, ¿e obiekty te nie s± wspó³dzielone ale w pe³ni kopiowane. 
+Web Workers definiuje API do tworzenia osobnych procesów w tle. Worker'y wykorzystuj± do komunikacji z w±tkiem g³ównym klasyczny model przekazywania wiadomo¶ci. Nowoczesne przegl±darki umo¿liwiaj± przekazywanie zarówno tekstu jak i obiektów zserializowanych w formacie JSON. Nale¿y zwróciæ uwagê, ¿e obiekty te nie s± wspó³dzielone, ale w pe³ni kopiowane. 
 
-Web Workery nie ma j± dostêpu do struktury DOM, obiektu \textit{window} ani \textit{document}. Zewnêtrzne skrypty wykorzystywane przez workera musz± byæ serwowane z tej samej domeny co kod workera.
+Web Worker'y nie maj± dostêpu do struktury DOM, obiektu \textit{window} ani \textit{document}. Zewnêtrzne skrypty wykorzystywane przez worker'a musz± byæ serwowane z tej samej domeny co kod worker'a.
 
-Wed³ug specyfikacji, stworzonej przez WHATWG, Web Workery powinny byæ u¿ywane do zadañ trwaj±cych d³u¿szy czas, maj±cych du¿y narzut startowy i spory narzut pamiêciowy. Nie s± wiêc odpowiednie tworzenie bardzo wielu workerów zajmuj±cych siê obliczeniami trwaj±cymi marginalny czas, gdy¿ sam narzut na stworzenie przez przegl±darkê osobnego procesu mo¿e byæ zbyt du¿y by uzasadniæ jego u¿ycie.
+Wed³ug specyfikacji, stworzonej przez WHATWG, Web Workery powinny byæ u¿ywane do zadañ trwaj±cych d³u¿szy czas, maj±cych du¿y narzut startowy i spory narzut pamiêciowy. Nie jest wiêc odpowiednim tworzenie bardzo wielu worker'ów zajmuj±cych siê obliczeniami trwaj±cymi marginalny czas, gdy¿ sam narzut na stworzenie przez przegl±darkê osobnego procesu mo¿e byæ zbyt du¿y, by uzasadniæ jego u¿ycie.
