@@ -102,7 +102,6 @@ Tarcie kinetyczne ma du¿o wiêksze znaczenie ni¿ tarcie statyczne poniewa¿ determ
 
 W tym podrozdziale opisane s± metody optymalizacji u¿yte w zaproponowanym rozwi±zaniu, czyli algorytm ewolucyjny oraz algorytm optymalizacji lokalnej - Hill climbing.
 
-% czym jest optymalizacja
 Zadaniem optymalizacji jest przeszukanie przestrzeni rozwi±zañ w celu znalezienia najlepszego. Zatem, dana jest funkcja, nazywan± funkcj± celu, która ka¿demu punktowi reprezentuj±cemu rozwi±zanie problemu przypisuje jak±¶ warto¶æ oceniaj±c± jego jako¶æ. W¶ród wszystkich rozwi±zañ poszukujemy takiego, dla którego warto¶æ tej funkcji bêdzie jak najmniejsza (b±d¼ jak najwiêksza) - najlepsza z naszego punktu widzenia. Trudno¶æ w znalezieniu takiego rozwi±zania zale¿y od charakteru funkcji celu, a czasem tak¿e od nieznajomo¶ci jej analitycznej postaci.
 
 %TODO biblio Algorytmy genetyczne i cos?
@@ -166,7 +165,7 @@ Algorytmy ewolucyjne wywodz± siê z kilku osobnych nurtów zajmuj±cych siê t± tema
 
 Prosty algorytm genetyczny zosta³ zaproponowany w roku 1975 przez John'a Holland'a.
 
-Poni¿ej umieszczony jest schemat tego algorytmu (\ref{alg:prostyGenetyczny}).
+Poni¿ej umieszczony jest schemat tego algorytmu (Algorytm \ref{alg:prostyGenetyczny}).
 
 \begin{algorithm}
 \caption{Prosty algorytm genetyczny}
@@ -314,7 +313,7 @@ Przeszukiwanie przestrzeni dyskretnej sprowadza siê do sprawdzania rozwi±zañ naj
 \end{algorithm}
 
 
-W przestrzeni ci±g³ej konieczne jest dobranie kroku, który wyznacza punkty przeszukiwane w okolicy w trakcie ka¿dej iteracji. Dodatkowo wykorzystywane jest tzw. przyspieszenie (ang. \textit{acceleration}), które wyznacza piêciu mo¿liwych kandydatów na lepsze rozwi±zania. Najczê¶ciej przyspieszenie to wynosi 1.2, a warto¶æ kroku jest osobna dla ka¿dej zmiennej rozwi±zania i czêsto wynosi na pocz±tku 1. Zatem za ka¿dym razem obliczane s± nastêpuj±ce wspó³czynniki: -acceleration, -1/acceleration, 0, 1/acceleration, acceleration. Nastêpnie wspó³czynniki mno¿one s± przez krok (step) i dodawane do obecnie analizowanej zmiennej i wybierane jest najlepsze z piêciu rozwi±zañ. Warto¶æ kroku jest indywidualna dla ka¿dej zmiennej. Po wybraniu najlepszego rozwi±zania uaktualniana jest warto¶æ tego kroku - krok mno¿ony jest przez odpowiedni wspó³czynnik, ten który by³ dobrany wcze¶niej do znalezienia tego najlepszego rozwi±zania. Algorytm zatrzymywany jest je¶li zmiana ¿adnej ze zmiennych nie przynosi ju¿ poprawy rozwi±zania, czasem równie¿ je¶li ta zmiana jest ju¿ bardzo ma³a - wprowadzany jest parametr $\epsilon$ wyznaczaj±cy tê ró¿nicê. Pseudokod algorytmu przedstawiony jest na kolejnej stronie (Algorytm \ref{alg:hillClimbCont}).
+W przestrzeni ci±g³ej konieczne jest dobranie kroku, który wyznacza punkty przeszukiwane w okolicy w trakcie ka¿dej iteracji. Dodatkowo wykorzystywane jest tzw. przyspieszenie (ang. \textit{acceleration}), które wyznacza piêciu mo¿liwych kandydatów na lepsze rozwi±zania. Najczê¶ciej przyspieszenie to wynosi 1.2, a warto¶æ kroku jest osobna dla ka¿dej zmiennej rozwi±zania i czêsto wynosi na pocz±tku 1. Zatem za ka¿dym razem obliczane s± nastêpuj±ce wspó³czynniki: -acceleration, -1/acceleration, 0, 1/acceleration, acceleration. Nastêpnie wspó³czynniki mno¿one s± przez krok (step) i dodawane do obecnie analizowanej zmiennej i wybierane jest najlepsze z piêciu rozwi±zañ. Warto¶æ kroku jest indywidualna dla ka¿dej zmiennej. Po wybraniu najlepszego rozwi±zania uaktualniana jest warto¶æ tego kroku - krok mno¿ony jest przez odpowiedni wspó³czynnik, ten który by³ dobrany wcze¶niej do znalezienia tego najlepszego rozwi±zania. Algorytm zatrzymywany jest je¶li zmiana ¿adnej ze zmiennych nie przynosi ju¿ poprawy rozwi±zania, czasem równie¿ je¶li ta zmiana jest ju¿ bardzo ma³a - wprowadzany jest parametr $\epsilon$ wyznaczaj±cy tê ró¿nicê. Pseudokod algorytmu przedstawiony jest na stronie \pageref{alg:hillClimbCont} (Algorytm \ref{alg:hillClimbCont}).
 
 
 \begin{algorithm}

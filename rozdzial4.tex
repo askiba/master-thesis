@@ -1,7 +1,7 @@
 \chapter{Proponowane rozwi±zanie}
 \label{cha:rozwiazanie}
 
-W rozdziale tym przedstawiono informacje .
+W rozdziale tym przedstawiono informacje dotycz±ce zastosowanego rozwi±zania. Opisane zosta³y przyjête za³o¿enia dotycz±ce modelu, matematyczny opis tego modelu oraz szczegó³y zastosowanego sposobu optymalizacji. Na koñcu rozdzia³u przedstawiona zosta³a architektura rozwi±zania wraz z opisem powsta³ej aplikacji koñcowej.
 
 %---------------------------------------------------------------------------
 
@@ -9,7 +9,9 @@ W rozdziale tym przedstawiono informacje .
 \label{sec:model}
 
 W zaproponowanym rozwi±zaniu trzeba by³a podj±æ pewne decyzje odno¶nie reprezentacji ¶rodowiska oraz narciarza.
-Zosta³o przyjête, ¿e stok traktowany jest jako p³aszczyzna, która jest nachylona pod okre¶lonym przez sta³± $\alpha$ k±tem do powierzchni ziemi. Za³o¿enie co do p³askiej powierzchni jest tylko ograniczeniem przyjêtym do testów. Umo¿liwia to ³atwiejsz± analizê wyników, niezaburzonych zmianami nachylenia terenu. Jednak stworzony program mo¿e zostaæ w prosty sposób zmodyfikowany tak, aby zamodelowaæ bardziej skomplikowan± powierzchniê.
+
+Zosta³o przyjête, ¿e stok traktowany jest jako p³aszczyzna, która jest nachylona pod okre¶lonym przez sta³± $\alpha$ k±tem do powierzchni ziemi. Za³o¿enie co do p³askiej powierzchni jest tylko ograniczeniem przyjêtym do testów. Umo¿liwia to ³atwiejsz± analizê wyników, niezaburzonych zmianami nachylenia terenu. Jednak stworzony program mo¿e zostaæ w prosty sposób zmodyfikowany tak, aby zamodelowaæ równie¿ bardziej skomplikowan± powierzchniê.
+
 Narciarz traktowany jest jako punkt materialny o masie m.
 %---------------------------------------------------------------------------
 
@@ -45,7 +47,7 @@ Q_a = mg\sin\alpha
 
 jest to si³a ¶ci±gaj±ca narciarza w dó³ stoku.
 
-Sk³adowa si³y grawitacji prostopad³a do powierzchni stoku czyli nacisk na powierzchniê stoku wynosi:\\
+Sk³adowa si³y grawitacji prostopad³a do powierzchni stoku, czyli nacisk jaki narciarz wywiera swoj± mas± na powierzchniê stoku, wynosi:\\
 \begin{equation}
 \label{eq:Fn}
 F_n = mg\cos\alpha
@@ -60,14 +62,14 @@ F_f = \mu F_n = \mu mg\cos\alpha
 Oprócz si³y tarcia uwzglêdniamy równie¿ inn± si³ê oporu jak± jest si³a oporu powietrza. Zale¿y ona od prêdko¶ci poruszania siê obiektu. Prêdko¶æ bêdziemy wyra¿aæ jako pierwsz± pochodn± po³o¿enia, oznaczan± przez $ \dot{x} $:\\
 \begin{equation}
 \label{eq:Fd}
-F_{d} = k_{1}\dot{x} + k_{2}\dot{x}^2
+F_d = k_1\dot{x} + k_2\dot{x}^2
 \end{equation}
 
-Za³o¿enia, które narzucane s± na sta³e $ k_{1} $ oraz $ k_{2} $:\\
+Je¶li prêdko¶æ jest mniejsza od pewnej sta³ej $B$ to zak³adamy, ¿e opór zale¿y liniowo od prêdko¶ci, a po jej przekroczeniu kwadratowo. Przyjête za³o¿enia na sta³e $ k_1 $ oraz $ k_2 $ s± nastêpuj±ce:\\
 \begin{equation}
 \left\{ \begin{array}{ll}
- k_{2} = 0  &\mbox{ $v \le B$} \\ 
- k_{1} = 0 &\mbox{ $v \geq  B$} 
+ k_2 = 0  &\mbox{ $v \le B$} \\ 
+ k_1 = 0 &\mbox{ $v \geq  B$} 
 \end{array} \right. 
 \end{equation}\\
 gdzie $ B $:\\
@@ -75,7 +77,7 @@ gdzie $ B $:\\
 B = 4 \frac{m}{s}
 \end{equation}
 
-%TODO
+%TODO FIXME Marta sk±d mamy te informacje o sta³ej B oraz wspó³czynnikach k_1 i k_2
 
 Ograniczenie to zosta³o zaczerpniête z pracy ???? (Aerodynamic-Drag) i opisane w rozdziale ????
 
@@ -104,6 +106,8 @@ Rozpatruj±c wszystkie si³y dzia³aj±ce na narciarza równoleg³e do powierzchni sto
 \begin{equation}
 ma = Q_a - F_f - F_d
 \end{equation}
+
+Wypadkowa si³a dzia³aj±ce na narciarza jest sum± si³: ¶ci±gaj±cej oraz oporów (tarcia i oporu powietrza).
 
 Korzystaj±c z wcze¶niejszych równañ \ref{eq:Qa}, \ref{eq:Ff} i \ref{eq:Fd} opisuj±cych si³y $ Q_a $, $F_f$ oraz $ F_d $ otrzymujemy:
 
@@ -156,17 +160,19 @@ Pamiêtamy przy tym, ¿e:\\
 \end{array} \right. 
 \end{equation}
 
-W wielu jêzykach dostêpne s± funkcje biblioteczne, które znajduj± rozwi±zywania równañ ró¿niczkowych zwyczajnych pierwszego rzêdu, takich jak nasz uk³ad \ref{eq:ur2d}. W naszym przypadku wykorzysta³y¶my funkcjê dopri (ang. \textit{Numerical integration of ODE using Dormand-Prince RK method}) z biblioteki Numeric Javascript.
+W wielu jêzykach programowania dostêpne s± funkcje biblioteczne, które potrafi± znale¼æ rozwi±zanie uk³adu równañ ró¿niczkowych zwyczajnych pierwszego rzêdu, takich jak nasz uk³ad \ref{eq:ur2d}. W celu jego rozwi±zania zosta³a wykorzystana funkcja dopri (ang. \textit{Numerical integration of ODE using Dormand-Prince RK method}) z biblioteki Numeric Javascript.
 
 \subsection{Rozwi±zanie w 3D}
 \label{subsec:3d}
 Powy¿szy uk³ad równañ (\ref{eq:ur2d}) opisuje poruszanie siê punktu materialnego po równi pochy³ej. Jednak w przypadku narciarza przemieszczaj±cego siê po stoku musimy uwzglêdniæ równie¿ mo¿liwo¶æ poruszania siê w poprzek stoku, a nie tylko w dó³.\\
-Za³ó¿my, ¿e narciarz porusza siê tylko po liniach prostych. W dalszej czê¶ci pracy poka¿emy, ¿e takie ograniczenie mo¿e byæ dobrym sposobem na przybli¿enie rzeczywistego toru jazdy, a znacznie u³atwia sterowanie ruchem narciarza. \\
+Za³ó¿my, ¿e narciarz porusza siê tylko po liniach prostych. W dalszej czê¶ci pracy poka¿emy, ¿e takie ograniczenie mo¿e byæ dobrym sposobem na przybli¿enie rzeczywistego toru jazdy, które jednocze¶nie znacznie u³atwia sterowanie ruchem narciarza. \\
 
 Rozpatrzmy teraz jak bêdzie wygl±da³ uk³ad si³ dzia³aj±cych na narciarza:\\
 
 %TODO
 % obrazek
+
+OBRAZEK
 
 Na naszego narciarza dzia³aj± si³y: grawitacji - w kierunku pionowym oraz si³y oporu - w kierunku linii jazdy narciarza. Je¶li rozpatrzymy teraz uk³ad wspó³rzêdnych zorientowany wzglêdem kierunku jazdy, musimy najpierw zrzutowaæ si³ê grawitacji otrzymuj±c si³ê ¶ci±gaj±ca narciarza:
 
@@ -198,7 +204,7 @@ Transformuj±c powy¿sze równanie na uk³ad wspó³rzêdnych zorientowany wzd³u¿ i wsz
 \end{array} \right.
 \end{equation}
 
-Po wprowadzeniu jak poprzednio dodatkowych zmiennych, Aby zredukowaæ równania jak poprzednio do równañ ró¿niczkowych zwyczajnych pierwszego rzêdu, wprowadzamy dodatkowe zmienne, w tym wypadku prêdko¶ci $v_x$ i $v_y$ oraz pamiêtamy o zale¿no¶ci miêdzy nimi a pochodn± przemieszczenia:
+Po wprowadzeniu jak poprzednio dodatkowych zmiennych, aby zredukowaæ równania jak poprzednio do równañ ró¿niczkowych zwyczajnych pierwszego rzêdu, wprowadzamy dodatkowe zmienne, w tym wypadku prêdko¶ci $v_x$ i $v_y$ oraz pamiêtamy o zale¿no¶ci miêdzy nimi a pochodn± przemieszczenia:
 
 \begin{equation}
 \left\{ \begin{array}{ll}
@@ -217,7 +223,7 @@ Dodatkowo mo¿na zauwa¿yæ, ¿e je¶li $v_x$ stanowi pierwsz± pochodn± $ x_x $ to pr
 \end{array} \right.
 \end{equation}
 
-Podstawiaj±c te informacje do uk³adu równañ \ref{eq:ur2rzedu}, otrzymujemy:
+Wprowadzaj±c te informacje do uk³adu równañ \ref{eq:ur2rzedu}, otrzymujemy:
 
 \begin{equation}
 \left\{ \begin{array}{ll}
@@ -228,43 +234,52 @@ v_y = \dot{x_y}\\
 \end{array} \right. 
 \end{equation}\\
 
+Taki uk³ad równañ ró¿niczkowych mo¿na rozwi±zaæ wymieni± wcze¶niej funkcjê dopri. 
+
 %---------------------------------------------------------------------------
 
 \section{Optymalizacja toru przejazdu}
 \label{sec:optymalizacja}
-Aby znale¼æ rozwi±zanie problemu, nale¿y przyj±æ jaki¶ sposób reprezentacji ka¿dego z rozwi±zañ. Tor przejazdu narciarza w rzeczywisto¶ci to ¶lad, który pozostawiaj± narty na ¶niegu w trakcie przemieszczania siê po stoku. Jak opisano w podrozdziale \ref{subsec:3d}, w celu uproszczenia sposobu przemieszczania siê narciarza, zosta³o zdecydowane, ¿e jako przybli¿enie mo¿na przyj±æ poruszanie siê po ³amanej. Zatem do reprezentacji rozwi±zania mo¿na przyj±æ zbiór punktów, przez które kolejno przeje¿d¿a narciarz, poruszaj±c siê miêdzy tymi punktami wy³±cznie po linii prostej.\\
-Jednak wci±¿ takie podej¶cie jest niewystarczaj±ce, poniewa¿ w algorytmach optymalizacyjnych potrzebujemy ¶ci¶lejszego opisu, aby wiedzieæ jak skutecznie przeszukiwaæ przestrzeñ rozwi±zañ. Zatem w zaproponowanym rozwi±zaniu narzucamy z góry co ile metrów w pionie stoku ma pojawiæ siê punkt. Mo¿na traktowaæ to jako poziome linie, z której ka¿da wyznacza mo¿liwe po³o¿enie pojedynczego punktu. Oprócz tego narzucone zosta³o, ¿e narciarz musi przejechaæ jak najbli¿ej ka¿dej wewnêtrznej bramki, co indukuje do³o¿enie punktów w miejscu ka¿dej wewnêtrznej bramki. Warunek ten jest spowodowany tym, ¿e w przeciwnym przypadku algorytm mia³by do przeszukania du¿o wiêcej rozwi±zañ. Opieraj±c siê na do¶wiadczeniu z rzeczywistych slalomów, wiadomo, ¿e przeje¿d¿anie tu¿ przy bramkach jest najkorzystniejsze.
-%chyba ¿e do³o¿ymy tê mo¿liwo¶æ, ¿e niektóre mog± byæ albo s± automatycznie wychwytywane. albo ¿e testowane by³o te¿ to jak siê zachowuje je¶li odrzucimy to ograniczenie.
+Aby znale¼æ rozwi±zanie problemu optymalizacji, nale¿y przyj±æ jaki¶ sposób reprezentacji ka¿dego z rozwi±zañ. Tor przejazdu narciarza w rzeczywisto¶ci to ¶lad, który pozostawiaj± narty na ¶niegu w trakcie przemieszczania siê po stoku. Jak opisano w podrozdziale \ref{subsec:3d}, w celu uproszczenia sposobu przemieszczania siê narciarza, zosta³o zdecydowane, ¿e jako przybli¿enie mo¿na przyj±æ poruszanie siê po ³amanej. Zatem do reprezentacji rozwi±zania mo¿na przyj±æ zbiór punktów, przez które kolejno przeje¿d¿a narciarz, poruszaj±c siê miêdzy tymi punktami wy³±cznie po linii prostej.
 
-Zatem pozostaje okre¶liæ w jaki sposób mo¿emy stwierdziæ, ¿e dane rozwi±zanie jest najlepsze. W przypadku algorytmów optymalizacyjnych zawsze nale¿y okre¶liæ funkcjê celu. W naszym przypadku interesuje nas, aby narciarz w jak najkrótszym czasie dotar³ do mety. Maj±c dane rozwi±zanie w postaci punktów wyznaczaj±cych ³aman±, obliczamy ile czasu zajmie narciarzowi przejechanie po tej trasie. Im mniejsza warto¶æ tym rozwi±zanie jest lepsze, gdy¿ tym mniej czasu potrzebuje narciarz na prawid³owe pokonanie slalomu.
+Jednak wci±¿ takie podej¶cie jest niewystarczaj±ce, poniewa¿ w algorytmach optymalizacyjnych potrzebujemy ¶ci¶lejszego opisu, aby wiedzieæ jak skutecznie przeszukiwaæ przestrzeñ rozwi±zañ. Zatem w zaproponowanym rozwi±zaniu narzucamy z góry co ile metrów w pionie stoku ma pojawiæ siê punkt przez który bêdzie musia³ przejechaæ narciarz. Mo¿na wyobraziæ to sobie jako zbiór poziomych linii, z której ka¿da wyznacza mo¿liwe po³o¿enie pojedynczego punktu. 
+
+Oprócz tego, narzucone zosta³o, ¿e narciarz musi przejechaæ jak najbli¿ej ka¿dej wewnêtrznej bramki, co indukuje do³o¿enie punktów w miejscu ka¿dej wewnêtrznej bramki. Warunek ten jest spowodowany tym, ¿e ogranicza to znacznie ilo¶æ rozwi±zañ, które nale¿y sprawdziæ i dziêki temu przyspiesza dzia³anie algorytmu. Takie za³o¿enie oparte jest tak¿e na do¶wiadczeniu z rzeczywistych slalomów, gdy¿ jest wiadome, ¿e przeje¿d¿anie tu¿ przy bramkach jest najkorzystniejsze. Istniej± oczywi¶cie przypadki, w których to za³o¿enie nie jest prawdziwe, ale jest to raczej rzadko¶ci±. Tak naprawdê zdarza siê to jedynie w przypadku tzw. bramek otwartych opisanych w rozdziale \ref{sec:alpineSkiing}. W tych pojedynczych przypadkach konieczne jest zrezygnowanie z takiego ograniczenia.
+
+Zatem pozostaje okre¶liæ w jaki sposób mo¿emy stwierdziæ, ¿e dane rozwi±zanie jest najlepsze. W przypadku algorytmów optymalizacyjnych zawsze nale¿y okre¶liæ funkcjê celu. W naszym przypadku interesuje nas, aby narciarz w jak najkrótszym czasie dotar³ do mety prawid³owo przeje¿d¿aj±c przez wszystkie bramki. Maj±c dane rozwi±zanie w postaci punktów wyznaczaj±cych ³aman±, obliczamy ile czasu zajmie narciarzowi przejechanie po tej trasie. Im mniejsza warto¶æ tym rozwi±zanie jest lepsze.
 
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjnyRozw}
-Opisana powy¿ej reprezentacja rozwi±zania to w zastosowanym algorytmie ewolucyjnym pojedynczy osobnik, a punkty sk³adaj±ce siê na to rozwi±zanie, a ¶ci¶lej, ich po³o¿enie w pozycji poziomej okre¶laj± genotyp ka¿dego osobnika. Nie wprowadzamy tu typowego dla algorytmów genetycznych kodowania binarnego, pozycja ka¿dego punktu jest zapamiêtana jako warto¶æ rzeczywista.\\
-Dodatkowo do genotypu wchodzi tak¿e parametr $\sigma$, który w strategiach ewolucyjnych u¿ywany jest podczas mutacji tak jak opisano w rozdziale \ref{cha:wstepTeoretyczny} w czê¶ci o strategiach. Ka¿demu punktowi przypisana jest osobna warto¶æ $\sigma$ - odchylenie standardowe.
+Opisana w poprzednim podrozdziale reprezentacja rozwi±zania to w zastosowanym algorytmie ewolucyjnym pojedynczy osobnik, a punkty sk³adaj±ce siê na to rozwi±zanie, a ¶ci¶lej, ich po³o¿enie w pozycji poziomej okre¶laj± genotyp ka¿dego osobnika. Nie wprowadzamy tu typowego dla algorytmów genetycznych kodowania binarnego, pozycja ka¿dego punktu jest zapamiêtywana jako warto¶æ rzeczywista.
 
-Zastosowany algorytm opiera siê na strategii ($\mu$ + $\lambda$) opisanej w rozdziale \ref{cha:wstepTeoretyczny}. Jako pocz±tkow± populacjê wybieramy losowe osobniki - poziome warto¶ci punktów s± ograniczone jedynie przez warto¶ci poziome po³o¿enia dwóch najbli¿szych bramek. Jest to kierowane konieczno¶ci± zadbania o szybsze znalezienie rozwi±zania - zbyt du¿e odleg³o¶ci mo¿na z góry odrzuciæ opieraj±c siê na do¶wiadczeniach z rzeczywistej jazdy narciarza po slalomie. Wielko¶æ populacji bazowej $\mu$ jest jednym z parametrów programu, ale najczê¶ciej warto¶æ ta wynosi 30. Warto¶æ parametru $\lambda$ tak¿e jest parametrem, jednak w testach przewa¿nie u¿yto wielko¶ci 100.\\
+Dodatkowo do genotypu wchodzi tak¿e zestaw parametrów $\sigma$, które w strategiach ewolucyjnych u¿ywane s± podczas mutacji, tak jak opisano to w rozdziale \ref{sec:ewolucyjny} w czê¶ci o "Typy algorytmów ewolucyjnych" w opisie strategii ewolucyjnych. Ka¿demu punktowi przypisana jest osobna warto¶æ $\sigma$ - reprezentuj±ca odchylenie standardowe.
+
+Zastosowany algorytm opiera siê na strategii ($\mu$ + $\lambda$) opisanej w rozdziale \ref{sec:ewolucyjny}. Jako pocz±tkow± populacjê wybieramy losowe osobniki - poziome warto¶ci punktów s± ograniczone jedynie przez warto¶ci poziome po³o¿enia dwóch najbli¿szych bramek. Jest to kierowane konieczno¶ci± zadbania o szybsze znalezienie rozwi±zania - zbyt du¿e odleg³o¶ci mo¿na z góry odrzuciæ opieraj±c siê na do¶wiadczeniach z rzeczywistej jazdy narciarza po slalomie. Wielko¶æ populacji bazowej $\mu$ jest jednym z parametrów programu, ale najczê¶ciej warto¶æ ta wynosi 30. Warto¶æ parametru $\lambda$ tak¿e jest parametrem, jednak w testach przewa¿nie u¿yto wielko¶ci 100.
+
 Szkielet algorytmu zgodny jest z zastosowan± strategi±, po wylosowaniu z istniej±cej populacji populacji tymczasowej o wielko¶ci $\lambda$, dokonuje siê na jej osobnikach operacji genetycznych, najpierw krzy¿owania, a nastêpnie mutacji na osobnikach otrzymanych z krzy¿owania. Kolejnym krokiem jest ocenienie nowych osobników i wybranie spo¶ród nich oraz populacji pocz±tkowej osobników o najlepszym przystosowaniu i to one stanowi± now± populacjê bazow±.
 
 \subsubsection{Krzy¿owanie}
 Aby dokonaæ krzy¿owania potrzebne s± pary rodziców dla ka¿dego nowego osobnika. Aby utrzymaæ wielko¶æ populacji tymczasowej, losujemy (ze zwracaniem) $\lambda$ par spo¶ród populacji tymczasowej. Krzy¿owanie rodziców sprowadza siê do obliczenia ¶redniej warto¶ci po³o¿enia odpowiadaj±cych sobie punktów oraz parametrów $\sigma$.
 
 \subsubsection{Mutacja}
-Po krzy¿owaniu mamy znowu w populacji tymczasowej $\lambda$ osobników. Mutacja osobników przeprowadzana jest zgodnie ze strategi± - wykorzystywane s± warto¶ci odchyleñ standardowych odpowiadaj±cych kolejnym punktom. Jedynie punkty, które s± przy bramkach nie podlegaj± mutacji. Wynika to z wcze¶niejszego za³o¿enia, ¿e wtedy otrzymamy rozwi±zanie najlepsze.
+Po krzy¿owaniu mamy znowu w populacji tymczasowej $\lambda$ osobników. Mutacja osobników przeprowadzana jest zgodnie ze strategi± - wykorzystywane s± warto¶ci odchyleñ standardowych odpowiadaj±cych kolejnym punktom. Jedynie punkty, które s± przy bramkach nie podlegaj± mutacji. Wynika to z wcze¶niejszego za³o¿enia, ¿e i tak te punkty nale¿± do rozwi±zania najlepszego.
 
 \subsubsection{Warunek zakoñczenia}
-Warunek zakoñczenia algorytmu zawsze sprawia wiele problemów. Nie jest ³atwo zdecydowaæ na jakiej podstawie zatrzymywaæ jego dzia³anie. Czêsto korzysta siê z informacji o rozrzucie przystosowania w populacji - obliczamy go na podstawie ró¿nicy pomiêdzy najlepszym i najgorszym osobnikiem. Je¶li rozrzut ten jest niewielki mo¿e oznaczaæ stagnacjê algorytmu. Niekoniecznie ¶wiadczy to o znalezieniu rozwi±zania, ale w po³±czeniu z dodatkowymi mechanizmami mo¿e byæ skuteczn± metod± na decyzjê o zakoñczeniu optymalizacji.\\
-W naszym rozwi±zaniu bierzemy zatem równie¿ pod uwagê taki wska¼nik jak poprawa najlepszego obecnego rozwi±zania. Je¶li przez okre¶lon± liczbê iteracji, najczê¶ciej kilka lub kilkana¶cie najlepsze rozwi±zanie nie poprawia siê w ogóle, a populacja jest bardzo ma³o zró¿nicowana to jest to znak, ¿e znalezione rozwi±zanie powinno byæ wystarczaj±co bliskie najlepszemu. Oczywi¶cie steruj±c liczb± iteracji przez które sprawdzamy zmiany oraz wielko¶ci± rozrzutu populacji mo¿emy znajdowaæ lepsze lub gorsze rozwi±zania kosztem wyd³u¿enia lub skrócenia czasu dzia³ania algorytmu.
+Wybór warunku zakoñczenia algorytmu zawsze sprawia wiele problemów. Nie jest ³atwo zdecydowaæ na jakiej podstawie zatrzymywaæ jego dzia³anie. Czêsto korzysta siê z informacji o rozrzucie przystosowania w populacji - obliczamy go na podstawie ró¿nicy pomiêdzy najlepszym i najgorszym osobnikiem. Je¶li rozrzut ten jest niewielki mo¿e oznaczaæ stagnacjê algorytmu. Niekoniecznie ¶wiadczy to o znalezieniu dobrego rozwi±zania, ale w po³±czeniu z dodatkowymi mechanizmami mo¿e byæ skuteczn± metod± podjêcia decyzji o zakoñczeniu optymalizacji.
+
+W naszym rozwi±zaniu bierzemy zatem równie¿ pod uwagê taki wska¼nik jak poprawa najlepszego obecnego rozwi±zania. Je¶li przez okre¶lon± liczbê iteracji, najczê¶ciej kilka lub kilkana¶cie najlepsze rozwi±zanie nie poprawia siê w ogóle, a populacja jest bardzo ma³o zró¿nicowana to jest to znak, ¿e znalezione rozwi±zanie powinno byæ wystarczaj±co bliskie najlepszemu. Oczywi¶cie steruj±c liczb± iteracji, przez które sprawdzamy zmiany, oraz wielko¶ci± rozrzutu populacji mo¿emy znajdowaæ lepsze lub gorsze rozwi±zania kosztem wyd³u¿enia lub skrócenia czasu dzia³ania algorytmu.
 
 \subsection{Hill climbing}
-Zastosowanie algorytmu genetycznego sprawdzi³o siê w przypadku problemu narciarza, jednak problemem by³ d³ugi czas wykonywania siê programu. Zw³aszcza s³aba poprawa wyników wystêpowa³a w koñcowej fazie dzia³ania. Widoczne by³y niepotrzebne próby przeszukiwania zbyt odleg³ych rozwi±zañ, a jednak wci±¿ znalezione rozwi±zanie nie by³o tak dobre jak mo¿na by tego oczekiwaæ. Wiedz±c, ¿e rozwi±zanie jest ju¿ dosyæ bliskie najlepszemu mo¿na z du¿ym prawdopodobieñstwem za³o¿yæ, ¿e wystarczy znale¼æ rozwi±zanie lokalnie optymalne, aby by³o ono satysfakcjonuj±ce. Oczywi¶cie nie mamy pewno¶ci, ¿e bêdzie globalnie optymalne, ale takiej pewno¶ci nie mo¿emy mieæ nigdy.\\
-Zatem zastosowanie algorytmu lokalnej optymalizacji powinno pomóc w koñcowej fazie poszukiwañ. Z tego powodu u¿yty zosta³ algorytm Hill climbing opisany w rozdziale \ref{cha:wstepTeoretyczny}. W ka¿dym kroku algorytmu sprawdzane jest czy zmiana pojedynczej zmiennej - w tym wypadku poziomej pozycji punktu przejazdu, daje poprawê wyniku. Je¶li zmiany te nie przynosz± rezultatów, s± mniejsze ni¿ narzucony parametr $\epsilon$ algorytm zatrzymuje swoje dzia³anie. Warto¶æ $\epsilon$ wynosi przewa¿nie 0.00001. W przypadku parametrów typowych dla tego algorytmu postanowiono wybraæ warto¶ci: dla przyspieszenia standardowa - 1.2, natomiast dla kroku, mniejsz± ni¿ zwykle, bo wynosz±c± 0.5. Zmiana ta wynika z za³o¿enia, ¿e rozwi±zanie nie powinno potrzebowaæ wiêkszych zmian, aby znale¼æ rozwi±zanie jak najlepsze.
+Zastosowanie algorytmu genetycznego sprawdza siê w przypadku problemu optymalizacji trasy narciarza, co zostanie pokazane w rozdziale z wynikami (rozdzia³ \ref{cha:wyniki}), jednak problemem mo¿e byæ d³ugi czas wykonywania siê programu. Zw³aszcza s³aba poprawa wyników mo¿e wystêpowaæ w koñcowej fazie dzia³ania. Widoczne s± wtedy niepotrzebne próby przeszukiwania zbyt odleg³ych rozwi±zañ, a jednak wci±¿ znalezione rozwi±zanie nie jest jeszcze tak dobre jak mo¿na by tego oczekiwaæ. Wiedz±c, ¿e rozwi±zanie jest ju¿ dosyæ bliskie najlepszemu mo¿na z du¿ym prawdopodobieñstwem za³o¿yæ, ¿e wystarczy znale¼æ rozwi±zanie lokalnie optymalne, aby by³o ono satysfakcjonuj±ce. Oczywi¶cie nie mamy pewno¶ci, ¿e bêdzie to rozwi±zanie globalnie optymalne, ale takiej pewno¶ci nie mo¿emy mieæ nigdy. Problemem mo¿e wci±¿ byæ jednak decyzja kiedy nale¿y przej¶æ na algorytm lokalnej optymalizacji.
+
+Zastosowanie algorytmu lokalnej optymalizacji powinno pomóc w koñcowej fazie poszukiwañ. Z tego powodu u¿yty zosta³ algorytm Hill climbing opisany w rozdziale \ref{sec:hill}. W ka¿dym kroku algorytmu sprawdzane jest czy zmiana pojedynczej zmiennej - w tym wypadku poziomej pozycji punktu przejazdu, daje poprawê wyniku. Je¶li zmiany te nie przynosz± znacz±cych rezultatów, s± mniejsze ni¿ narzucony parametr $\epsilon$, algorytm zatrzymuje swoje dzia³anie. Warto¶æ $\epsilon$ wynosi przewa¿nie w testach 0.00001. W przypadku parametrów typowych dla tego algorytmu postanowiono wybraæ warto¶ci: dla przyspieszenia standardowa - 1.2, natomiast dla kroku, mniejsz± ni¿ zwykle, bo wynosz±c± 0.5 (odpowiada to wielko¶ci 0.5 metra). Zmiana ta wynika z za³o¿enia, ¿e rozwi±zanie nie powinno potrzebowaæ wiêkszych zmian, aby znale¼æ rozwi±zanie jak najlepsze - zak³adamy, ¿e bêd± one raczej mniejsze ni¿ wybrane 0.5 m.
+
 %---------------------------------------------------------------------------
 
 \section{Modelowanie karania}
 \label{sec:karanie}
 
-W celu jak najdok³adniejszego zamodelowania zmian prêdko¶ci podczas poruszania siê po ³amanej, testowanych by³o szereg modeli. Konieczno¶æ wprowadzenia takich mechanizmów staje siê oczywista, gdy u¶wiadomimy sobie, ¿e im wiêkszy jest k±t pomiêdzy kolejnymi odcinkami pokonywanej ³amanej, tym bardziej w realnej sytuacji, kosztowne pod wzglêdem wytraty prêdko¶ci jest to krok. Dla zobrazowania sytuacji, rozwa¿my k±t 90 stopni. Aby przej¶æ ze stanu jechania w linii spadku stoku do jechania w skos stoku, narciarz musi przyhamowaæ do zera. Z kolei im k±t jest bardziej zbli¿ony do 180 stopni, nie ma efektu przyhamowania, b±d¼ przyhamowanie jest minimalne, gdy¿ w realnym przypadku, zmiana kierunku jazdy jest wykonywana w p³ynnym ³uku.
+W celu jak najdok³adniejszego zamodelowania zmian prêdko¶ci podczas poruszania siê po ³amanej, testowany by³ szereg modeli. Konieczno¶æ wprowadzenia takich mechanizmów staje siê oczywista, gdy u¶wiadomimy sobie, ¿e im mniejszy jest k±t pomiêdzy kolejnymi odcinkami pokonywanej ³amanej, tym bardziej jest to kosztowne w realnej sytuacji pod wzglêdem utraty prêdko¶ci. Dla zobrazowania sytuacji, rozwa¿my k±t 90 stopni. Aby przej¶æ ze stanu jazdy w linii spadku stoku do jazdy w skos stoku, narciarz musi przyhamowaæ do zera. Z kolei im k±t jest bardziej zbli¿ony do 180 stopni, nie ma efektu przyhamowania, b±d¼ przyhamowanie jest minimalne, gdy¿ w realnym przypadku, zmiana kierunku jazdy jest wykonywana w p³ynnym ³uku.
 
 \begin{figure}[h]
 \centering
@@ -276,13 +291,13 @@ W celu jak najdok³adniejszego zamodelowania zmian prêdko¶ci podczas poruszania s
 \subsection{Strategia sumowania pochodnych}
 \label{sec:strategiaPochodnych}
 
-Pierwsza strategia opiera siê na obliczanie kolejno drugich pochodnych funkcji w ka¿dym kolejnym punkcie trasy a nastêpnie zsumowaniu ich bezwzglêdnych warto¶ci. 
+Pierwsza strategia opiera siê na obliczaniu kolejno drugich pochodnych funkcji w ka¿dym kolejnym punkcie trasy a nastêpnie zsumowaniu ich bezwzglêdnych warto¶ci. 
 
 \[ \ddot{d_i} = \frac{x_1 + x_3 - 2x_2}{(y_3 -y_2) (y_2-y_1) } \]   
 
 \[ k =  \sum\limits_{i=1}^{n-1} |\ddot{d_i}|^{3}  \]   
 
-Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna warto¶æ oznacza bardzo ³agodne k±ty przej¶cia na ca³ej trasie natomiast im wiêksz± kanciasto¶æ trasy tym implikuje ona wiêksz± warto¶æ tego wspó³czynnika. Aby wzmocniæ efektywno¶æ wspó³czynnika, dodatkowo, przed zsumowaniem, warto¶æ bezwzglêdna drugiej pochodnej jest podnoszona do trzeciej potêgi. Wyliczony wspó³czynnik dla ka¿dej z rozwa¿anych w algorytmie tras jest mno¿ony przez obliczony czas przejazdu tej trasy. Dopiero taka liczba jest traktowana jako funkcji celu algorytmu genetycznego. Minusem tej strategi jest kompletne zniekszta³cenie wyników tj. realnego czasu przejazdu narciarza po zadanym torze.
+Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna warto¶æ oznacza bardzo ³agodne k±ty przej¶cia na ca³ej trasie natomiast im wiêksz± kanciasto¶æ trasy tym wiêksza warto¶æ tego wspó³czynnika. Aby wzmocniæ efektywno¶æ wspó³czynnika, dodatkowo, przed zsumowaniem, warto¶æ bezwzglêdna drugiej pochodnej jest podnoszona do trzeciej potêgi. Wyliczony wspó³czynnik dla ka¿dej z rozwa¿anych w algorytmie tras jest mno¿ony przez obliczony czas przejazdu tej trasy. Dopiero taka liczba jest traktowana jako warto¶æ funkcji celu algorytmu genetycznego. Minusem tej strategii jest kompletne zniekszta³cenie wyników tj. realnego czasu przejazdu narciarza po zadanym torze.
 
 \subsection{Strategia proporcjonalnego zmniejszania warto¶ci wektora prêdko¶ci}
 \label{sec:strategiaZmniejszania}
@@ -290,7 +305,7 @@ Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna 
 W tej strategii, dla ka¿dego prze³amania ³amanej, obliczamy indywidualny wspó³czynnik kary $m$ z zakresu od 0 do 1. D³ugo¶æ wektora prêdko¶ci w ka¿dym kolejnym punkcie bêdzie mno¿ona przez wspó³czynnik dla tego punktu. Modelowane bêdzie zatem przyhamowywanie - tym wiêksze, im wiêkszy jest k±t pomiêdzy kolejnymi punktami ³amanej. Wspó³czynnik w danym punkcie zale¿y od k±ta ABC z rysunku \ref{fig:punish} pomiêdzy poprzednim a nastêpuj±cym punktem. Zaproponowana zosta³a nastêpuj±ca funkcja, zmierzaj±ca do zera dla k±ta 90 stopni i mniejszego, i zmierzaj±ca do jedynki dla 180 stopni.
 
  
-\[m\left(\alpha\right) = \left \{ {{0.01, \alpha \in \left( 0, 90\right)} \atop {1- \left(  \frac{\alpha}{180} - 1.5  \right)^{6}, \alpha \in \left( 90, 180\right) }} \right.\]
+\[m\left(\alpha\right) = \left \{ {{0.01, \alpha \in \left( 0, 90\right)} \atop {1- \left(  \frac{\alpha}{180} - 1.5  \right)^{6}, \alpha \in \left[ 90, 180\right) }} \right.\]
   
  
 \begin{figure}[h]
@@ -303,30 +318,30 @@ W tej strategii, dla ka¿dego prze³amania ³amanej, obliczamy indywidualny wspó³cz
 \subsection{Strategia karania za ka¿d± zmianê krawêdzi}
 \label{sec:strategiaKrawedzi}
 
-Ostatnia strategia polega na zliczaniu ilo¶ci zmian kierunku jazdy na testowanym torze i porównanie jej z ilo¶ci± bramek wymuszaj±cych skrêt na trasie. Otrzymujemy zatem ilo¶æ nadprogramowych zmian krawêdzi, które w ka¿dym przypadku powoduj± gorszy czas przejazdu ni¿ gdyby ich nie by³o. Aby to zatem zamodelowaæ, w tej strategi dodajemy do wyliczonego czasu przejazdu sta³± ilo¶ci sekund kary za ka¿d± nadprogramow± zmianê krawêdzi i to traktujemy jako warto¶æ funkcji celu algorytmu genetycznego.
+Ostatnia strategia przyjmuje, ¿e nie ma potrzeby wykonywaæ dodatkowych skrêtów pomiêdzy bramkami. Choæ teoretycznie jest mo¿liwe, by taki dodatkowy skrêt pozwala³ uzyskaæ lepszy czas, to jednak jest to niespotykane podczas rzeczywistej jazdy po slalomach. Dlatego w strategii tej zlicza siê ilo¶æ zmian kierunku jazdy na testowanym torze i porównanie j± z ilo¶ci± bramek wymuszaj±cych skrêt na trasie. Otrzymujemy zatem ilo¶æ nadprogramowych zmian krawêdzi, które w ka¿dym przypadku powoduj± gorszy czas przejazdu ni¿ gdyby ich nie by³o. Aby to zatem zamodelowaæ, w tej strategii dodajemy do wyliczonego czasu przejazdu sta³± ilo¶æ sekund kary za ka¿d± niepotrzebn± zmianê krawêdzi i to traktujemy jako warto¶æ funkcji celu algorytmu genetycznego.
 
 %---------------------------------------------------------------------------
 
 \section{Architektura systemu}
 \label{sec:architektura}
 
-Wybór docelowej architektury dla naszego systemu zosta³ poprzedzony eksperymentowaniem z dwoma ró¿nymi, zgo³a odmiennymi podej¶ciami. Dziêki temu, zosta³y przeanalizowane mocne i s³abe punkty ka¿dej z nich a ostatecznie wybrane rozwi±zanie spe³nia wszystie potrzeby.
+Wybór docelowej architektury dla naszego systemu zosta³ poprzedzony eksperymentowaniem z dwoma ró¿nymi, zgo³a odmiennymi podej¶ciami. Dziêki temu, zosta³y przeanalizowane mocne i s³abe punkty ka¿dej z nich, a ostatecznie wybrane rozwi±zanie spe³nia wszystkie potrzeby.
 
 \subsection{Architektura prototypowa}
 
 Pierwszym wybranym przez nas ¶rodowiskiem tworzenia systemu by³ jêzyk Python i dostêpne dla niego modu³y: VPython umo¿liwiaj±cy wizualizacjê w 2D i 3D oraz biblioteki numeryczne NumPy i SciPy wykorzystywane do rozwi±zywania równañ ró¿niczkowych. 
 
-Dobrze znany nam jêzyk pozwoli³ nam na szybkie prototypowanie i testowanie pierwszego fizycznego modelu narciarza. Wizualizacja by³a prosta w implementacji, a biblioteki numeryczne wystarczaj±co dobrze udokumentowane i powszechnie u¿ywane, co zapewnia³o ich stabilno¶æ i jako¶æ. Szybko ujawni³y siê jednak wady wybranego ¶rodowiska - uruchomienie naszego programu wymaga³o od u¿ytkownika instalacji z³o¿onego ¶rodowiska do obs³ugi jêzyka Python oraz graficznych i numerycznych bibliotek co by³o istotn± barier±. Bariera ta by³a istotnym problemem, bior±c pod uwagê potencjaln± mo¿liwo¶æ rozpraszania obliczeñ.  Zda³y¶my sobie sprawê, ¿e rozwi±zywany przez nas problem i otrzymywane przez nas wyniki s± atrakcyjne wizualnie i ludzie zwi±zani z narciarstwem z chêci± mog± wzi±æ udzia³ w obliczeniach i udostêpniæ nam zasoby obliczeniowe swoich komputerów. Warunkiem koniecznym by by³o to mo¿liwe jest ³atwo¶æ w do³±czaniu do obliczeñ, wizualizacji wyników i bezproblemowa konfiguracja. Bior±c to pod uwagê, zdecydowa³y¶my ¿e potrzebujemy innego ¶rodowiska.
+Dobrze znany nam jêzyk pozwoli³ nam na szybkie prototypowanie i testowanie pierwszego fizycznego modelu narciarza. Wizualizacja by³a prosta w implementacji, a biblioteki numeryczne wystarczaj±co dobrze udokumentowane i powszechnie u¿ywane, co zapewnia³o ich stabilno¶æ i jako¶æ. Szybko ujawni³y siê jednak wady wybranego ¶rodowiska - uruchomienie naszego programu wymaga³o od u¿ytkownika instalacji z³o¿onego ¶rodowiska do obs³ugi jêzyka Python oraz graficznych i numerycznych bibliotek co by³o istotn± barier±. Stanowi³o to powa¿ny problem, bior±c pod uwagê potencjaln± mo¿liwo¶æ rozpraszania obliczeñ. Zda³y¶my sobie sprawê, ¿e rozwi±zywany przez nas problem i otrzymywane przez nas wyniki s± atrakcyjne wizualnie i ludzie zwi±zani z narciarstwem z chêci± mog± wzi±æ udzia³ w obliczeniach i udostêpniæ nam zasoby obliczeniowe swoich komputerów. Warunkiem koniecznym by by³o to mo¿liwe jest ³atwo¶æ w do³±czaniu do obliczeñ, wizualizacji wyników i bezproblemowa konfiguracja. Bior±c to pod uwagê, zdecydowa³y¶my, ¿e potrzebujemy innego ¶rodowiska.
 
 \subsection{Architektura docelowa}
 
-Potrzeba ³atwo¶ci do³±czania do obliczeñ sk³oni³a nas do stworzenia systemu w którym klientami obliczeniowymi s± przegl±darki internetowe. Klienci chc±cy pod³±czyæ siê do obliczeñ wchodz± na dobrze znany adres internetowy sk±d serwowana jest strona g³ówna i skrypty które dokonuj± obliczeñ. Na ¿±danie klienta, dostaje on ze zdalnego serwisu instancjê problemu, która jest nastêpnie lokalnie przetwarzana i wizualizowana klientowi na bie¿±co. Po skoñczonym obliczeniu, rozwi±zanie jest umieszczane na serwerze a klient mo¿e przej¶æ do obliczania kolejnego problemu, lub jeszcze raz tego samego problemu. 
+Potrzeba ³atwo¶ci do³±czania do obliczeñ sk³oni³a nas do stworzenia systemu, w którym klientami obliczeniowymi s± przegl±darki internetowe. Klienci chc±cy pod³±czyæ siê do obliczeñ wchodz± na dobrze znany adres internetowy sk±d serwowana jest strona g³ówna i skrypty, które dokonuj± obliczeñ. Na ¿±danie klienta, dostaje on ze zdalnego serwisu instancjê problemu, która jest nastêpnie lokalnie przetwarzana i wizualizowana klientowi na bie¿±co. Po skoñczonym obliczeniu, rozwi±zanie jest umieszczane na serwerze, a klient mo¿e przej¶æ do obliczania kolejnego problemu lub jeszcze raz tego samego problemu.
 
-Architektura naszego systemu sk³ada siê z dwóch g³ównych, niezale¿nych komponentów. Pierwszym jest aplikacja kliencka przeprowadzaj±ca obliczenia i wizualizacjê oraz komunikuj±ca siê z serwerem zarz±dzaj±cym obliczeniami. Drugim jest aplikacja lekkiego serwera http, jako warstwa wystawiaj±ca RESTowe API. Warstw± persystentn± jest dokumentowa, nierelacyjna baza danych CouchDB. 
+Architektura naszego systemu sk³ada siê z dwóch g³ównych, niezale¿nych komponentów. Pierwszym jest aplikacja kliencka przeprowadzaj±ca obliczenia i wizualizacjê oraz komunikuj±ca siê z serwerem zarz±dzaj±cym obliczeniami. Drugim jest aplikacja lekkiego serwera http, jako warstwa wystawiaj±ca REST-owe API. Warstw± persystentn± jest dokumentowa, nierelacyjna baza danych CouchDB. 
 
 \subsection{Aplikacja kliencka}
 
-Aplikacja kliencka, to aplikacja webow± stworzon± przy u¿yciu frameworku Chaplin, wprowadzaj±cego dobre praktyki w strukturyzowaniu aplikacji Java Scryptowych opartych na bibliotekê Backbone.js. Aplikacja w ca³o¶ci jest pisana w jêzyku Coffee Script. Coffee Script to przyjazdy w sk³adni jêzyk programowania, kompiluj±cy siê do Java Scriptu. Powsta³y po kompilacji kod Java Script jest czytelny i przyjazny do debugowania. Programuj±c w Coffee Script mo¿na u¿ywaæ wszystkich bibliotek i modu³ów napisanych w Java Script, bo koniec koñców wszystko zamieni siê w Java Script. Zdecydowa³y¶my siê u¿ywaæ tego jêzyka przede wszystkim z uwagi na sk³adnie przypominaj±c± dobrze znany nam jêzyk Python, wiêksz± przejrzysto¶æ i czytelno¶æ kodu. 
+Aplikacja kliencka to aplikacja webowa stworzona przy u¿yciu frameworku Chaplin, wprowadzaj±cego dobre praktyki w strukturyzowaniu aplikacji Java Script'owych opartych o bibliotekê Backbone.js. Aplikacja w ca³o¶ci napisana jest w jêzyku Coffee Script. Coffee Script to przyjazny w sk³adni jêzyk programowania, kompiluj±cy siê do Java Script'u. Powsta³y po kompilacji kod Java Script jest czytelny i przyjazny do debugowania. Programuj±c w Coffee Script mo¿na u¿ywaæ wszystkich bibliotek i modu³ów napisanych w Java Script, co daje wiele mo¿liwo¶ci z powodu szerokiego zakresu dostêpnych bibliotek w tym jêzyku. Zdecydowa³y¶my siê u¿ywaæ tego jêzyka przede wszystkim z uwagi na sk³adniê przypominaj±c± dobrze znany nam jêzyk Python, wiêksz± przejrzysto¶æ i czytelno¶æ kodu ni¿ Java Script, jednocze¶nie zachowuj±c szerokie mo¿liwo¶ci tego jêzyka.
 
 Aplikacja ma zasadniczo trzy warstwy:
 \begin{itemize}
@@ -338,29 +353,29 @@ Aplikacja ma zasadniczo trzy warstwy:
 \begin{figure}[h]
 \centering
 \includegraphics[width=360px]{diagramClientLayers}
-\caption{Sekwencjê komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej}
+\caption{Sekwencja komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej}
 \label{diagramClientLayers}
 \end{figure}
 
-Sekwencjê komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej, przedstawia Diagram \ref{diagramClientLayers} na stronie \pageref{diagramClientLayers}
+Sekwencjê komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej przedstawia Diagram \ref{diagramClientLayers} na stronie \pageref{diagramClientLayers}.
 
 \subsubsection{Warstwa prezentacji}
 
-Wizualizacja zaimplementowana jest na elemencie Canvas ze specyfikacji HTML5. Wykresy wizualizuj±ce przebieg obliczeñ stworzone s± przy u¿yciu biblioteki Highcharts. Warstwa spe³nia nastêpuj±ce funkcjê:
+Wizualizacja zaimplementowana jest na elemencie Canvas ze specyfikacji HTML5. Wykresy wizualizuj±ce przebieg obliczeñ stworzone s± przy u¿yciu biblioteki Highcharts. Warstwa spe³nia nastêpuj±ce funkcje:
 \begin{itemize}
-\item zaznajamiaj±ca u¿ytkownika wchodz±cego na stronê internetow± z tym czemu strona s³u¿y 
+\item wyja¶nienie u¿ytkownikowi jaki problem jest rozwi±zywany oraz jak mo¿e pomóc
 \item umo¿liwienie rozpoczêcia wziêcia udzia³u w obliczeniu
-\item prezentowanie trasy narciarskiej, popranej z serwera do obliczeñ
-\item wizualizacja na bie¿±co wyników obliczeñ w postaci bie¿±co rozwa¿anego toru przejazdu
-\item wizualizacja parametrów algorytmu obliczaj±cego w postaci wykresów
+\item prezentowanie trasy narciarskiej (uk³adu bramek), pobranej z serwera do obliczeñ
+\item wizualizacja na bie¿±co wyników obliczeñ w postaci rozwa¿anego jako najlepszy toru przejazdu
+\item wizualizacja statystyk algorytmu obliczaj±cego w postaci wykresów
 \end{itemize}
 
 \subsubsection{Warstwa komunikacyjna}
 
-Komunikacja z serwerem odbywa siê poprzez REST-owe API, wykorzystuj±ce JSONowy format do wymiany danych. Warstwa spe³nia nastêpuj±ce funkcjê:
+Komunikacja z serwerem odbywa siê poprzez REST-owe API, wykorzystuj±ce JSON-owy format do wymiany danych. Warstwa spe³nia nastêpuj±ce funkcje:
 \begin{itemize}
 \item pobieranie instancji problemu do obliczenia 
-\item wysy³anie na serwer rozwiazania zadanego problemu
+\item wysy³anie na serwer rozwi±zania zadanego problemu
 \item pobierania z serwera informacji o obecnie najlepszym rozwi±zaniu tego problemu
 \end{itemize}
 
@@ -370,7 +385,7 @@ Zastosowanie w naszej architekturze Web Workerów do wykonywania obliczeñ jest do
 
 \subsection{Aplikacja serwerowa}
 
-Aplikacja jest lekkim serwerem Http napisanym w ¶rodowisku Node.js. U¿ytym jêzykiem programowania podobnie jak w aplikacji klienckiej, jest Coffee Script. Serwer wystawia REST-owe API, u¿ywaj±c do wymiany danych JSON-owego formatu serializacji. Serwer komunikuje siê z dokumentow±, nierelacyjn± baz± danych CouchDB. Podstawowymi funkcjami serwera s±:
+Aplikacja jest lekkim serwerem Http napisanym w ¶rodowisku Node.js. U¿ytym jêzykiem programowania, podobnie jak w aplikacji klienckiej, jest Coffee Script. Serwer wystawia REST-owe API, u¿ywaj±c do wymiany danych JSON-owego formatu serializacji. Serwer komunikuje siê z dokumentow±, nierelacyjn± baz± danych CouchDB. Podstawowymi funkcjami serwera s±:
 
 \begin{itemize}
 \item umo¿liwienie dodania instancji problemu obliczeniowego do bazy danych
@@ -389,7 +404,7 @@ Diagram \ref{diagramClientServerDb} na stronie \pageref{diagramClientServerDb} p
 
 \subsection{Efekt koñcowy}
 
-Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tego projektu aplikacji jest strona www, dostêpna pod dobrze znanym adresem URL - http://giant-client.herokuapp.com/. Na stronie jest krótko wyt³umaczone o co chodzi w projekcie i w jaki sposób ka¿dy odwiedzaj±cy mo¿e pomóc w obliczeniach. Na stronie znajduje siê jedno wyra¼ne tzn. "call to action" - du¿y przycisk zachêcaj±cy do rozpoczêcia obliczeñ.
+Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tego projektu aplikacji jest strona www, dostêpna pod dobrze znanym adresem URL - http://giant-client.herokuapp.com/. Na stronie jest krótko wyt³umaczone o co chodzi w projekcie i w jaki sposób ka¿dy odwiedzaj±cy mo¿e pomóc w obliczeniach. Na stronie znajduje siê jedno wyra¼ne tzw. "call to action" - du¿y przycisk zachêcaj±cy do rozpoczêcia obliczeñ.
 
 
 \begin{figure}[h]
@@ -399,18 +414,18 @@ Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tego projektu 
 \label{fig:interfejs-1}
 \end{figure}
 
-Po uruchomieniu obliczeñ, osoba odwiedzaj±ca stronê dostaje na bie¿±co informacje zwrotne dotycz±ce efektów jej wspó³pracy. Na stronie:
+Po uruchomieniu obliczeñ osoba odwiedzaj±ca stronê dostaje na bie¿±co informacje zwrotne dotycz±ce efektów jej wspó³pracy. Na stronie:
 
 \begin{itemize}
-\item rysowana jest ca³y czas aktualnie rozwa¿ana trasa przejazdu
+\item rysowana jest ca³y czas aktualnie rozwa¿ana jako najlepsza trasa przejazdu
 \item wy¶wietla siê obliczony czas przejazdu po aktualnie rozwa¿anym torze przejazdu
 \item wy¶wietla siê najlepszy, dotychczas znaleziony, czas przejazdu dla aktualnie rozwa¿anej konfiguracji trasy
-\item rysowane s± wykresy przedstawiaj±ce parametry algorytmu genetycznego (aktualny Fitness populacji) 
+\item rysowane s± wykresy przedstawiaj±ce statystyki algorytmu genetycznego (aktualny Fitness populacji - najlepszy, najgorszy oraz ¶rednia dla wszystkich osobników) 
 \end{itemize}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=400px]{interfejs-2}
-\caption{Nasza strona, podczas prowadzonych obliczeñ}
+\caption{Nasza strona podczas prowadzonych obliczeñ}
 \label{fig:interfejs-2}
 \end{figure}
