@@ -1,29 +1,27 @@
 \chapter{Wyniki}
 \label{cha:wyniki}
 
-%TODO
-W rozdziale tym przedstawiono informacje .
+W rozdziale tym przedstawiono informacje na temat wyników przeprowadzonych eksperymentów. Najpierw przedstawione zosta³y testy pokazuj±ce poprawno¶æ zastosowanego modelu zarówno teoretycznie jak i w praktyce. Nastêpnie pokazane zosta³y wyniki optymalizacji algorytmu genetycznego, lokalnej optymalizacji oraz mechanizmu karania dla ró¿nych parametrów. Na koniec omówione zosta³y wyniki dotycz±ce zastosowanego rozwi±zania architektonicznego oraz skuteczno¶ci zastosowania Volunteer Computing.
 
 Je¿eli nie jest wskazane inaczej w eksperymencie, przyjmowane s± nastêpuj±ce warto¶ci sta³e:
 \begin{itemize}
-\item $\mu = 0.05$ - wspó³czynnik tarcia, typowa warto¶æ dla nasmarowanych nart %TODO odno¶nik
+\item $\mu = 0.05$ - wspó³czynnik tarcia, typowa warto¶æ dla nasmarowanych nart
 \item $\rho = 1.17 \frac{kg}{m^3}$ - przybli¿ona warto¶æ gêsto¶ci powietrza dla temperatury $0^\circ C$
 i wilgotno¶ci 20\% na wysoko¶ci 800 m n.p.m
 \item $C = 0.6$ - wspó³czynnik oporu powietrza, typowe warto¶ci to 0.4 - 1
 \item $A = 0.2 m^2$ - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶ci narciarza
-\item $k_2 = 0.5 * C \rho A$ - wspó³czynnik oporu powietrza
 \item $k_1 = 0.05 $ - wspó³czynnik oporu powietrza
-
+\item $k_2 = \frac{1}{2}C \rho A$ - wspó³czynnik oporu powietrza
 \end{itemize}
+Opis powy¿szych sta³ych mo¿na znale¼æ w rozdzia³ach \ref{sec:fizycznyModel} oraz \ref{sec:ewolucyjny}
 
 W eksperymentach wszystkie wspó³rzêdne punktów s± w uk³adzie kartezjañskim, dwuwymiarowym, zorientowanym na p³aszczy¼nie stoku. O¶ x skierowana jest wzd³u¿ stoku, natomiast o¶ y w poprzek.
 %---------------------------------------------------------------------------
 
-%TODO numery wykresów nie zgadzaj± siê z tym co referencje pokazuj±
 \section{Weryfikacja modelu}
 \label{sec:weryfikacja}
 
-W tej sekcji chcia³y¶my pokazaæ, ¿e model, który zosta³ przyjêty jest prawid³owy. W poni¿szych eksperymentach zostanie pokazane, ¿e zale¿no¶ci pomiêdzy zmian± poszczególnych zmiennych modelu, takich jak masa, nachylenie stoku oraz opory ruchu, a otrzymywanym czasem przejazdu, jest zgodne z prawami fizyki. Kolejne eksperymenty uka¿± równie¿, ¿e czas przejazdu po teoretycznie najszybciej trasie jest praktycznie identyczny z tym, który mo¿na wyliczyæ ze wzorów przedstawionych w artyku³ach naukowych. Na koniec sprawdzimy czy mo¿liwe jest przybli¿anie jazdy narciarza jazd± po ³amanej i jak gêsto bêd± musia³y byæ rozmieszczane punkty przegiêcia, ¿eby nie straciæ na dok³adno¶ci.
+W tej sekcji chcia³y¶my pokazaæ, ¿e model, który zosta³ przyjêty jest prawid³owy. W poni¿szych eksperymentach zostanie przedstawione, ¿e zale¿no¶ci pomiêdzy zmian± poszczególnych zmiennych modelu, takich jak masa, nachylenie stoku oraz opory ruchu, a otrzymywanym czasem przejazdu, jest zgodne z prawami fizyki. Kolejne eksperymenty uka¿± równie¿, ¿e czas przejazdu po teoretycznie najszybszej trasie jest praktycznie identyczny z tym, który mo¿na wyliczyæ ze wzorów przedstawionych w artyku³ach naukowych. Na koniec sprawdzimy czy mo¿liwe jest przybli¿anie jazdy narciarza jazd± po ³amanej i jak gêsto bêd± musia³y byæ rozmieszczane punkty przegiêcia, ¿eby nie straciæ na dok³adno¶ci wyników.
 
 \subsection{Masa i nachylenie stoku}
 Na pocz±tek zosta³y przeprowadzane proste eksperymenty, które dowodz±, ¿e przyjêty model jest poprawny. Dlatego dla celów pierwszego testu naj³atwiej by³o sprawdziæ jak zmienia siê czas przejazdu narciarza poruszaj±cego siê po prostej w dó³ stoku przy ró¿nych masach narciarza oraz zmianach nachylenia stoku, dodatkowo sprawdzaj±c jaki wp³yw na wyniki ma równie¿ tarcie oraz opór powietrza.
@@ -31,54 +29,51 @@ Na pocz±tek zosta³y przeprowadzane proste eksperymenty, które dowodz±, ¿e przyjê
 Analizuj±c równanie \ref{eq:rownRuchu}, które opisuje model poruszania siê narciarza zauwa¿amy, ¿e jego masa wp³ywa jedynie na warto¶æ przyspieszenia wynikaj±c± z si³y oporu powietrza. Natomiast k±t nachylenia $\alpha$ wp³ywa zarówno na si³ê ¶ci±gaj±c±, jak i na si³ê tarcia. W opisanym eksperymencie zostanie pokazane, ¿e:
 \begin{itemize}
 \item im wiêkszy k±t nachylenia stoku tym szybciej porusza siê narciarz, bez wzglêdu na rodzaj uwzglêdnionych si³ oporu
-\item je¶li uwzglêdnimy tylko si³ê ¶ci±gaj±c±, bez si³ oporu czas przejazdu narciarzy o ró¿nych masach na tej samej trasie jest identyczny
+\item je¶li uwzglêdnimy tylko si³ê ¶ci±gaj±c±, bez si³ oporu, czas przejazdu narciarzy o ró¿nych masach na tej samej trasie jest identyczny
 \item taki sam wynik otrzymamy je¶li uwzglêdnimy dodatkowo si³ê tarcia
 \item przy uwzglêdnieniu si³y oporu powietrza otrzymujemy nastêpuj±c± zale¿no¶æ: im wiêksza jest masa narciarza, tym mniejsza jest si³a oporu powietrza co skutkuje szybszym przejazdem narciarza (przy za³o¿eniu, ¿e frontalna powierzchnia narciarza $A$ nie zmienia siê)
 \end{itemize}
 
 \subsubsection{Opis eksperymentu}
-Eksperyment zosta³ przeprowadzony na dwóch modelach stoków narciarskich. Oba maj± 600 m d³ugo¶ci co odpowiada rzeczywistej d³ugo¶ci stoku Harenda w Zakopanem. Stoki modelujemy jako równie pochy³e o sta³ym nachyleniu. Aby zweryfikowaæ prawid³owo¶æ modelu, w eksperymencie zosta³y wprowadzone rzeczywiste warto¶ci nachyleñ stoków Harenda w Zakopanem oraz Kotelnica w Bia³ce Tatrzañskiej.
+Eksperyment zosta³ przeprowadzony na dwóch modelach stoków narciarskich. Oba maj± 600 m d³ugo¶ci co odpowiada rzeczywistej d³ugo¶ci stoku Harenda w Zakopanem. Stoki modelujemy jako równie pochy³e o sta³ym nachyleniu. Aby zweryfikowaæ dodatkowo prawid³owo¶æ modelu, w eksperymencie zosta³y wprowadzone rzeczywiste warto¶ci nachyleñ stoków Harenda w Zakopanem oraz Kotelnica w Bia³ce Tatrzañskiej.
 \begin{itemize}
 \item Harenda - ok. $20^\circ$ (0.3367 radianów)
 \item Kotelnica - ok. $8^\circ$ (0.1470 radianów)
 \end{itemize}
 
-Zosta³y przeprowadzone trzy próby, których wyniki mo¿na zobaczyæ odpowiednio na kolejnych wykresach \ref{fig:bezOporow}, \ref{fig:bezOporu}, \ref{fig:wszystkieOpory}. W pierwszej czê¶ci eksperymentu uwzglêdniamy tylko i wy³±cznie si³ê grawitacji, w drugiej dok³adamy wy³±cznie si³ê tarcia , natomiast w trzeciej uwzglêdniamy wszystkie si³y oporu, a wiêc tak¿e si³ê oporu powietrza.
+Zosta³y przeprowadzone trzy próby, których wyniki mo¿na zobaczyæ odpowiednio na kolejnych wykresach \ref{fig:abezOporow}, \ref{fig:bezOporu}, \ref{fig:wszystkieOpory}. W pierwszej czê¶ci eksperymentu uwzglêdniamy tylko i wy³±cznie si³ê grawitacji, w drugiej dok³adamy wy³±cznie si³ê tarcia, natomiast w trzeciej uwzglêdniamy wszystkie si³y oporu, a wiêc tak¿e si³ê oporu powietrza.
 
 \subsubsection{Rezultaty eksperymentu}
 
-%TODO
 \begin{figure}[H]
-\label{fig:bezOporow}
 \centering
-\includegraphics[scale=0.7]{experyment-masa-bez-oporow}
-\caption{masa i stok}
+\includegraphics[scale=0.6]{experyment-masa-bez-oporow}
+\caption{Porównanie czasu przejazdu narciarzy o ró¿nych masach, na stokach o ró¿nym nachyleniu bez uwzglêdniania si³ oporu}
+\label{fig:abezOporow}
 \end{figure}
 
-%TODO
 \begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{experyment-masa-bez-oporu}
+\caption{Porównanie czasu przejazdu narciarzy o ró¿nych masach, na stokach o ró¿nym nachyleniu z uwzglêdnieniem si³y tarcia jako jedynej si³y oporu}
 \label{fig:bezOporu}
-\centering
-\includegraphics[scale=0.7]{experyment-masa-bez-oporu}
-\caption{masa i stok}
 \end{figure}
 
-%TODO
 \begin{figure}[H]
-\label{fig:wszystkieOpory}
 \centering
-\includegraphics[scale=0.7]{experyment-masa}
-\caption{masa i stok}
+\includegraphics[scale=0.6]{experyment-masa}
+\caption{Porównanie czasu przejazdu narciarzy o ró¿nych masach, na stokach o ró¿nym nachyleniu z uwzglêdnieniem zarówno si³y tarcia jak oporu powietrza}
+\label{fig:wszystkieOpory}
 \end{figure}
 
 Obserwujemy, ¿e w ka¿dym z trzech przypadków na stromym stoku narciarze przeje¿d¿aj± ten sam dystans w krótszym czasie. W pierwszej i drugiej czê¶ci eksperymentu nie ma znaczenia masa narciarza - czas przejazdu jest taki sam. Jednak na wykresie \ref{fig:bezOporow} czas przejazdu wynosi odpowiednio ok. 19 i 28 s., natomiast je¶li uwzglêdnimy si³ê tarcia, czasy te wyd³u¿aj± siê do ok. 21 i 35 s.\\
-Analizuj±c wykres \ref{fig:wszystkieOpory} zauwa¿amy, ¿e na bardziej stromym stoku ró¿nica w czasie przejazdu pomiêdzy ciê¿szym a l¿ejszym narciarzem wynosi 1.14 s na korzy¶æ ciê¿szego, a na ³agodniejszym 1.94 s równie¿ na korzy¶æ ciê¿szego. Zmierzone czasy przejazdu slalomu w rzeczywisto¶ci na stoku Harenda wynosz± ok. 40 s, a wiêc wydaje siê rozs±dne, ¿e przejazd na wprost mo¿e zajmowaæ ok. 22 s, które zosta³y otrzymane w eksperymencie. W porównaniu z poprzednimi czê¶ciami eksperymentu ³atwo spostrzec, ¿e czas przejazdu jest jeszcze d³u¿szy - 22-23 oraz 38-40 s.
+Analizuj±c wykres \ref{fig:wszystkieOpory} zauwa¿amy, ¿e na bardziej stromym stoku ró¿nica w czasie przejazdu pomiêdzy ciê¿szym a l¿ejszym narciarzem wynosi 1.14 s na korzy¶æ ciê¿szego, a na ³agodniejszym 1.94 s równie¿ na korzy¶æ ciê¿szego. Zmierzone czasy przejazdu slalomu w rzeczywisto¶ci na stoku Harenda wynosz± ok. 40 s, a wiêc wydaje siê rozs±dne, ¿e przejazd na wprost mo¿e zajmowaæ ok. 22 s, które zosta³y otrzymane w eksperymencie. W porównaniu z poprzednimi czê¶ciami eksperymentu ³atwo spostrzec, ¿e w ostatniej czê¶ci czasy przejazdu s± d³u¿sze - 22-23 oraz 38-40 s.
 
 \subsection{Czas przejazdu w zale¿no¶ci od toru jazdy}
 \label{sec:torJazdy}
-Optymalizacja trasy narciarza polega na znalezieniu takiej linii jazdy, która spowoduje najszybszy przejazd. Warto tu zauwa¿yæ, ¿e wbrew pozorom, nie oznacza to zawsze najkrótszej linii. W poni¿szym eksperymencie zostanie pokazane jak zmienia siê czas przejazdu w zale¿no¶ci od linii poruszania siê.
+Optymalizacja trasy narciarza polega na znalezieniu takiej linii jazdy, która spowoduje najszybszy przejazd. Warto tu zauwa¿yæ, ¿e wbrew pozorom, nie oznacza to zawsze najkrótszej linii bêd±cego odcinkiem ³±cz±cym punkt pocz±tkowy z koñcowym. W poni¿szym eksperymencie zostanie pokazane jak zmienia siê czas przejazdu w zale¿no¶ci od linii poruszania siê.
 
-Je¶li rozwa¿ymy przyk³ad bez bramek, gdzie najkrótsza linia przejazdu nie powoduje jazdy w skos stoku, a jedynie w dó³, to w takim przypadku, jest to jednocze¶nie najszybsza trasa przejazdu. Jednak w pozosta³ych przypadkach, je¶li rozwa¿amy uk³ad bez dzia³ania oporów, linie te bêd± ró¿ne.
+Je¶li rozwa¿ymy przyk³ad bez bramek, gdzie najkrótsza linia przejazdu nie powoduje jazdy w skos stoku, a jedynie w dó³, to w takim przypadku, jest to jednocze¶nie najszybsza trasa przejazdu. Jednak w pozosta³ych przypadkach, je¶li rozwa¿amy uk³ad bez dzia³ania oporów, tory te bêd± ró¿ne.
 
 \subsubsection{Opis eksperymentu}
 Chcemy sprawdziæ ile czasu zajmie narciarzowi przejechanie z punktu (0,0) do punktu (10,10). Aby upro¶ciæ przyk³ad, sprawdzimy wyniki pomijaj±c wk³ad wszystkich oporów. Gdyby narciarz porusza³ siê po linii prostej, bezpo¶rednio do punktu koñcowego, czas przejazdu mo¿na wyliczyæ przekszta³caj±c wzór:
@@ -98,27 +93,29 @@ gdzie:
 \item $s = 10\sqrt{2}$ - odleg³o¶æ miêdzy punktem pocz±tkowym i koñcowym
 \item $a = g\sin(\frac{\pi}{12})\sin(\frac{\pi}{4})$ - przyspieszenie narciarza
 \end{itemize}
-Przyspieszenie narciarza jest sk³adow± przyspieszenia ziemskiego uwzglêdniaj±c± zarówno nachylenie stoku ($\frac{\pi}{12}$), jak i jazdê w skos stoku ($\frac{\pi}{4}$, czyli $45^\circ$). Zatem czas przejazdu po linii prostej powinien wynosiæ oko³o:
+Przyspieszenie narciarza jest sk³adow± przyspieszenia ziemskiego uwzglêdniaj±c± zarówno nachylenie stoku ($\frac{\pi}{12}$), jak i jazdê w skos stoku ($\frac{\pi}{4}$, czyli $45^\circ$). Zatem, przyjmuj±c $g=9.81$, czas przejazdu po linii prostej powinien wynosiæ oko³o:
 
 \begin{equation}
-t = \frac{2*10\sqrt{2}}{9.81*\sin(\frac{\pi}{12})\sin(\frac{\pi}{4})} \simeq 3.969 
+t \simeq \frac{2*10\sqrt{2}}{9.81*\sin(\frac{\pi}{12})\sin(\frac{\pi}{4})} \simeq 3.969 
 \end{equation}
 
-Sprawdzimy teraz jakie czasy otrzymamy wykorzystuj±c program, sprawdzaj±c poruszanie siê po linii prostej oraz po æwiartce okrêgu (a dok³adniej, po ³amanej, której kolejne punkty za³amania znajduj± siê na okrêgu w niewielkich odleg³o¶ciach od siebie). Poni¿ej widzimy jak wygl±da trasa przejazdu w dwóch przypadkach.
+Sprawdzimy teraz jakie czasy otrzymamy wykorzystuj±c program, sprawdzaj±c poruszanie siê po linii prostej oraz po æwiartce okrêgu (a dok³adniej, po ³amanej, której kolejne punkty za³amania znajduj± siê na okrêgu w niewielkich odleg³o¶ciach od siebie). Poni¿ej na rysunku \ref{fig:czasPrzejazdu} widzimy jak wygl±da trasa przejazdu w dwóch przypadkach.
 
 \begin{figure}[H]
 \centering
 \includegraphics{czasPrzejazdu}
+\caption{Tory przejazdu w eksperymencie porównuj±cym czas przejazdu dla ró¿nych linii jazdy}
+\label{fig:czasPrzejazdu}
 \end{figure}
 
 \subsubsection{Rezultaty eksperymentu}
-W tym przypadku otrzymali¶my wyniki odpowiednio dla narciarza jad±cego po prostej 3.965, a dla poruszaj±cego siê po czarnej linii 3.671.
+W tym przypadku otrzymali¶my wyniki odpowiednio dla narciarza jad±cego po prostej 3.965 s, a dla poruszaj±cego siê po czarnej linii 3.671 s.
 
 Po pierwsze, warto zwróciæ uwagê, ¿e czas jazdy po prostej minimalnie ró¿ni siê od czasu teoretycznego, obliczonego ze wzoru - ró¿nica ta wynosi ok. 0.1\%, co jest dopuszczalne i mo¿liwe do zaniedbania, gdy¿ nie ma znacz±cego wp³ywu na wyniki eksperymentów. Ró¿nica ta mo¿e wynikaæ z niedok³adno¶ci obliczeñ numerycznych, a tak¿e z trudno¶ci trafienia przez narciarza idealnie w punkt koñcowy, w którym powinien siê znale¼æ.
 
-Wyra¼nie widaæ równie¿, ¿e czas przejazdu po linii czarnej jest krótszy ni¿ czas przejazdu po linii niebieskiej. Trasê po prostej narciarz przebywa w ok. 7\% d³u¿szym czasie ni¿ trasê d³u¿sz±. Na tak krótkim odcinku narciarz by³ w stanie zdobyæ przewagê ok. 0.3 s. Wa¿ne jest to, ¿e w prawdziwych przejazdach slalomowych nawet najmniejsza ró¿nica czasu mo¿e decydowaæ o wygranej, oczywi¶cie zale¿y to od dok³adno¶ci pomiaru, który zawsze jest sprawdzany do setnych czê¶ci sekundy. Dlatego ogromne znaczenie ma tor po jakim porusza siê narciarz i nawet najmniejsza zmiana mo¿e powodowaæ kluczow± poprawê czasu na ca³ej trasie. Czasami warto pojechaæ d³u¿sz± tras±, ale tak±, na której nabierzemy wiêkszej prêdko¶ci i pó¼niej zyskamy na kolejnym odcinku.
+Wyra¼nie widaæ równie¿, ¿e czas przejazdu po linii czarnej jest krótszy ni¿ czas przejazdu po linii niebieskiej. Trasê po prostej narciarz przebywa w ok. 7\% d³u¿szym czasie ni¿ trasê d³u¿sz±. Na tak krótkim odcinku narciarz by³ w stanie zdobyæ przewagê ok. 0.3 s. Wa¿ne jest to, ¿e w prawdziwych przejazdach slalomowych nawet najmniejsza ró¿nica czasu mo¿e decydowaæ o wygranej, oczywi¶cie zale¿y to od dok³adno¶ci pomiaru, który zawsze jest sprawdzany do setnych czê¶ci sekundy. Dlatego ogromne znaczenie ma tor po jakim porusza siê narciarz i nawet najmniejsza zmiana mo¿e powodowaæ kluczow± poprawê czasu na ca³ej trasie. Czasami warto jednak pojechaæ d³u¿sz± tras±, ale tak±, na której nabierzemy wiêkszej prêdko¶ci i pó¼niej zyskamy na kolejnym odcinku.
 
-%TODO odno¶niki
+%TODO biblio
 Pozostaje jeszcze pytanie jaka jest najlepsza linia poruszania siê pomiêdzy dwoma punktami. Problem ten zosta³ ju¿ rozwi±zany - linia najszybsza jest fragmentem cykloidy. Dok³adniejsze informacje mo¿na znale¼æ m.in. w http://www.hep.caltech.edu/~fcp/math/variationalCalculus/variationalCalculus.pdf oraz
 http://www.math.utk.edu/~freire/teaching/m231f08/m231f08brachistochrone.pdf.
 W http://www.math.utk.edu/~freire/teaching/m231f08/m231f08brachistochrone.pdf znajduje siê wzór na czas przejazdu pomiêdzy dwoma punktami. Korzystaj±c z tego wzoru podstawiaj±c odpowiednio wyliczone parametry otrzymujemy, ¿e najkrótszy mo¿liwy czas przejazdu z punktu (0,0) do punktu (10,10) to ok. 3.623. Jak widaæ, wynik ten jest lepszy ni¿ otrzymane w naszym eksperymencie: od czasu jazdy po æwiartce ko³a o ok. 0.05 s., co nie jest ró¿nic± bardzo du¿±, ale znacz±c± dla zwyciêstwa.
@@ -134,19 +131,20 @@ Wybieraj±c okre¶lon± liczbê punktów znajduj±cych siê na linii ³uku sprawdzimy il
 
 \subsubsection{Rezultaty eksperymentu}
 
-Poni¿ej znajduj± siê obrazki przedstawiaj±ce poszczególne próby przejazdu po ³amanej sk³adaj±cej siê odpowiednio z 2-6 punktów po¶rednich (linia szara) oraz pierwotn± liniê najszybszego przejazdu (linia niebieska). Ilo¶æ punktów na ³amanej nie bierze pod uwagê punktu startowego, a jedynie kolejne punkty w³±cznie z punktem na mecie.
+Poni¿ej znajduj± siê obrazki (Rysunek \ref{fig:brachSteps}) przedstawiaj±ce poszczególne próby przejazdu po ³amanej sk³adaj±cej siê odpowiednio z 2-6 punktów po¶rednich (linia szara) oraz pierwotn± liniê najszybszego przejazdu (linia niebieska). Ilo¶æ punktów na ³amanej nie bierze pod uwagê punktu startowego, a jedynie kolejne punkty w³±cznie z punktem na mecie.
 
-%TODO opis
 \begin{figure}[hp]
-\label{fig:brachSteps}
 \centering
 \includegraphics[scale=0.8]{brach_steps}
+\caption{Linie przejazdu w poszczególnych eksperymentach. Linia niebieska to najszybsza linia przejazdu, linia szara to ³amana przybli¿aj±ca liniê niebiesk±}
+\label{fig:brachSteps}
 \end{figure}
 
-Oto uzyskane wyniki w zale¿no¶ci od ilo¶ci punktów po¶rednich oraz ró¿nica czasu w porównaniu do najkrótszego czasu przejazdu - 3.623.
+W tabeli \ref{tab:punktyPrzelamania} przedstawione s± uzyskane wyniki w zale¿no¶ci od ilo¶ci punktów po¶rednich oraz ró¿nica czasu w porównaniu do najkrótszego czasu przejazdu - 3.623.
 
-%TODO opis
-% \caption{zebrane czasy przejazdu dla ró¿nej ilo¶ci punktów po¶rednich wraz z porównaniem z czasem najlepszym}
+\begin{table}[h]
+\caption{Czasy przejazdu po ³amanej w zale¿no¶ci od liczby punktów prze³amania}
+\label{tab:punktyPrzelamania}
 \begin{tabular}{ | c | c | c |}
   \hline                        
   ilo¶æ punktów po¶rednich & czas przejazdu [s] & ró¿nica w stosunku do czasu najszybszego [s] \\ \hline  
@@ -155,73 +153,92 @@ Oto uzyskane wyniki w zale¿no¶ci od ilo¶ci punktów po¶rednich oraz ró¿nica czasu
   4 & 3.635 & 0.012 \\ \hline
   5 & 3.629 & 0.006 \\ \hline
   6 & 3.626 & 0.003 \\ \hline
-\end{tabular}\\
+\end{tabular}
+\end{table}
 
-
-Ró¿nice w czasie wahaj± siê od 0.003 do 0.064 s, jest to odpowiednio od 0.08\% do ok. 1.8\% ró¿nicy. Wydaje siê, ¿e wystarczaj±cym powinno byæ, aby na tym odcinku okre¶liæ trzy punkty po¶rednie, gdy¿ ró¿nica dla tego przypadku wynosi ok. 0.023 s co stanowi ok. 100.6\% czasu najszybszego, a wiêc ró¿nica nie przekracza 1\%. Zreszt± to samo mo¿na stwierdziæ z rysunków - ju¿ dla trzech punktów praktycznie nie widaæ ró¿nicy pomiêdzy liniami. Zatem na takiej trasie, której odleg³o¶æ w pionie wynosi 10 m mo¿na okre¶liæ 3-4 punktów po¶rednich, które z przybli¿eniem nie wnosz±cym zbyt du¿ych ró¿nic do wyniku bêd± wyznacza³y trasê koñcow±. Oznacza to, ¿e punkty te powinny znajdowaæ siê w odleg³o¶ciach 2-4 m. Wiedz±c, ¿e pomiary przejazdu na zawodach s± z dok³adno¶ci± do setnych czê¶ci sekundy, mo¿na stwierdziæ, ¿e dopiero 5 punktów po¶rednich daje nam a¿ tak± precyzjê obliczeñ. Oczywi¶cie je¶li trasa nie bêdzie zawieraæ zbyt ostrych k±tów za³amania, mo¿na bêdzie zmniejszyæ gêsto¶æ punktów.
+Ró¿nice w czasie wahaj± siê od 0.003 do 0.064 s, jest to odpowiednio od 0.08\% do ok. 1.8\% ró¿nicy w stosunku do czasu najszybszego. Wydaje siê, ¿e wystarczaj±cym powinno byæ, aby odcinku takiej d³ugo¶ci okre¶liæ trzy punkty po¶rednie, gdy¿ ró¿nica dla tego przypadku wynosi ok. 0.023 s co stanowi ok. 100.6\% czasu najszybszego, a wiêc ró¿nica nie przekracza 1\%. Zreszt± to samo mo¿na stwierdziæ z rysunków - ju¿ dla trzech punktów praktycznie nie widaæ ró¿nicy pomiêdzy liniami. Zatem na takiej trasie, której odleg³o¶æ w pionie wynosi 10 m mo¿na okre¶liæ 3-4 punktów po¶rednich, które z przybli¿eniem nie wnosz±cym zbyt du¿ych ró¿nic do wyniku bêd± wyznacza³y trasê koñcow±. Oznacza to, ¿e punkty te powinny znajdowaæ siê w odleg³o¶ciach 2-4 m. Wiedz±c, ¿e pomiary przejazdu na zawodach s± z dok³adno¶ci± do setnych czê¶ci sekundy, mo¿na stwierdziæ, ¿e dopiero 5 punktów po¶rednich daje nam a¿ tak± precyzjê obliczeñ. Oczywi¶cie je¶li trasa nie bêdzie zawieraæ zbyt ostrych k±tów za³amania, mo¿na bêdzie zmniejszyæ gêsto¶æ punktów.
 
 \section{Eksperymenty w terenie}
 \label{sec:eksperymenty}
 
-Zainteresowanie tematyk± narciarsk±, sk³oni³o autorki pracy do przetestowania pewnych zale¿no¶ci i zjawisk opisywanych w tym rozdziale w terenie. Dziêki ¿yczliwo¶ci Studenckiego Klubu Narciarskiego FIRN dzia³aj±cego na Akademii Górniczo-Hutniczej w Krakowie, by³a mo¿liwo¶æ dokonania pomiarów przy u¿yciu specjalistycznego sprzêtu do pomiaru czasu na stoku narciarskim. Zosta³y ustalone nastêpuj±ce cele eksperymentów:
+Zainteresowanie tematyk± narciarsk±, sk³oni³o autorki pracy do przetestowania w terenie pewnych zale¿no¶ci i zjawisk opisywanych w tym rozdziale. Dziêki ¿yczliwo¶ci Studenckiego Klubu Narciarskiego FIRN dzia³aj±cego na Akademii Górniczo-Hutniczej w Krakowie, by³a mo¿liwo¶æ dokonania pomiarów przy u¿yciu specjalistycznego sprzêtu do pomiaru czasu na stoku narciarskim. Zosta³y ustalone nastêpuj±ce cele eksperymentów:
 
 \begin{itemize}
 \item eksperymentalne wyznaczenie wspó³czynnika tarcia statycznego miêdzy ¶niegiem a ¶lizgiem nart w zale¿no¶ci od sposobu nasmarowania ¶lizgu narty oraz jako¶ci ¶lizgu
-\item eksperymentalne porównanie wp³ywu powierzchni narciarza ma uzyskiwane czasy przejazdu, poprzez testowanie ró¿nych pozycji przejazdu oraz ró¿nych rodzajów odzie¿y wierzchniej
+\item eksperymentalne porównanie wp³ywu powierzchni narciarza na uzyskiwane czasy przejazdu, poprzez testowanie ró¿nych pozycji przejazdu oraz ró¿nych rodzajów odzie¿y wierzchniej
 \item próba porównania szybko¶ci przejazdu z punktu A do B w linii prostej do jazdy po ³uku
 \end{itemize} 
 
 \subsection{Wspó³czynnik tarcia}
-\label{espolczynnikTarcia}
+\label{subsec:espolczynnikTarcia}
 
 \paragraph{Za³o¿enia i warunki eksperymentu} 
 W celu zmierzenia wspó³czynnika tarcia, zosta³a wykorzystana drewniana deska, która zosta³a przykryta warstw± ubitego, mokrego, marcowego ¶niegu. Przygotowane zosta³y cztery pary nart:
 \begin{itemize}
 \item \textbf{A} - Narta \textit{Atomic SL 11}, 150 cm d³ugo¶ci, stary, nieprzygotowany i bardzo przesuszony ¶lizg.
 \item \textbf{B} - Narta \textit{Head Worldcup Rebel S}, 155 cm d³ugo¶ci, bardzo dobrze przygotowany ¶lizg, nasmarowany na gor±co niefluorowym smarem uniwersalnym (Toko System 3) 
-\item \textbf{C} - Narta \textit{Völkl Racetiger GS}, 175 cm d³ugo¶ci, nowy, bardzo dobrze przygotowany pod zawody ¶lizgi. ¦lizg by³ posmarowany miêdzy innymi smarami fluorowymi.
+\item \textbf{C} - Narta \textit{Völkl Racetiger GS}, 175 cm d³ugo¶ci, nowy, bardzo dobrze przygotowany pod zawody ¶lizg. ¦lizg by³ posmarowany miêdzy innymi smarami fluorowymi.
 \item \textbf{D} - Narta \textit{Atomic Race GS 12}, 175 cm d³ugo¶ci, stary, nieprzygotowany, jednak nie do koñca przesuszony ¶lizg
 
 \end{itemize}
-¦lizg ka¿dej narty przed eksperymentem by³ wycierany, tak by³o na nim osadzonych kropel stopionego ¶niegu. Wy³o¿ona ubitym ¶niegiem deska o d³ugo¶ci oko³o 2.5 metra zosta³a podparta o pod³o¿ê z jednej strony, z drugiej, pod niewielkim k±tem w stosunku do pod³o¿a by³a podtrzymywana rêk±. Na desce odmierzono 2 metry od punktu podparcia i oznaczono ten punkt. 
+¦lizg ka¿dej narty przed eksperymentem by³ wycierany, ale i tak by³o na nim osadzonych kilka kropel stopionego ¶niegu. Wy³o¿ona ubitym ¶niegiem deska o d³ugo¶ci oko³o 2.5 metra zosta³a podparta o pod³o¿e z jednej strony, z drugiej, pod niewielkim k±tem w stosunku do pod³o¿a by³a podtrzymywana rêk±. Na desce odmierzono 2 metry od punktu podparcia i oznaczono ten punkt.
 
 \begin{figure}[H]
-\label{fig:narty}
 \centering
 \includegraphics[height=300px]{narty}
-\caption{Narty bior±ce udzia³ w eksperymencie, wraz z zaznaczonymi oznaczeniami u¿ywanymi w dalszej czê¶ci opisu} 
+\caption{Narty bior±ce udzia³ w eksperymencie, wraz z zaznaczonymi oznaczeniami u¿ywanymi w dalszej czê¶ci opisu}
+\label{fig:narty}
 \end{figure}
 
 \paragraph{Przebieg eksperymentu dla ka¿dej z nart}
 \begin{itemize}
 \item wyznaczany by³ ¶rodek ciê¿ko¶ci narty i oznaczany markerem
 \item na desce k³adziona by³a narta, tak by ¶rodek ciê¿ko¶ci znajdowa³ siê w oznaczonym wcze¶niej punkcie odleg³ym o 2 metry od punktu podparcia
-\item stopniowo zwiêkszany by³ k±t nachylenia deski do pod³o¿a, a¿ do momentu w którym narta straci³a przyczepno¶æ i zaczyna³a osuwaæ siê po ¶niegu
+\item stopniowo zwiêkszany by³ k±t nachylenia deski do pod³o¿a, a¿ do momentu w którym narta straci³a przyczepno¶æ i zaczyna³a zsuwaæ siê po ¶niegu
 \item mierzona by³a wysoko¶æ w linii prostej miêdzy pod³o¿em a punktem gdzie znajdowa³ siê ¶rodek ciê¿ko¶ci narty
 \end{itemize}
 
 Dla ka¿dej z nart przeprowadzone zosta³y dwie próby i jako wynik traktowana by³a ¶rednia z tych prób.
-Jako, ¿e zauwa¿ony zosta³a podczas eksperymentu ogromny wp³yw wilgotno¶ci ¶lizgu na wynik, postanowione zosta³o równie¿ przeprowadzenia prób dla dwóch rodzajów nart z niewytartym ¶lizgiem, na którym zebrana by³a znaczna ilo¶æ wody.
-
+Jako, ¿e zauwa¿ony zosta³ podczas eksperymentu ogromny wp³yw wilgotno¶ci ¶lizgu na wynik, postanowione zosta³o równie¿ przeprowadzenia prób dla dwóch rodzajów nart z niewytartym ¶lizgiem, na którym zebrana by³a znaczna ilo¶æ wody.
 
 \paragraph{Wyniki i Wnioski}
 
-\begin{figure}[H]  
-\label{fig:rownia}
+\begin{figure}[H] 
 \centering
 \includegraphics[height=160px]{rownia} 
 \caption{S - ¶rodek ciê¿ko¶ci narty; a - odleg³o¶æ miêdzy ¶rodkiem ciê¿ko¶ci narty a punktem podparcia deski; h - zmierzona eksperymentalnie wysoko¶æ graniczna, po przekroczeniu której narta zaczê³a siê zsuwaæ }
+\label{fig:rownia}
 \end{figure}
 
-Aby obliczyæ wspó³czynnik tarcia wykorzystana zosta³a nastêpuj±ca zale¿no¶æ: skoro narta jest na granicy zsuwania siê, oznacza to, ¿e si³a tarcia równowa¿y si³ê ¶ci±gaj±c± dzia³aj±c± na cia³o. Zatem:
+Aby obliczyæ wspó³czynnik tarcia wykorzystana zosta³a nastêpuj±ca zale¿no¶æ: dopóki narta pozostaje w spoczynku oznacza to, ¿e si³a tarcia równowa¿y si³ê ¶ci±gaj±c± dzia³aj±c± na cia³o. Zatem bêd±c na granicy zsuwania siê, tarcie statyczne osi±ga swoj± maksymaln± warto¶æ. Zatem:
 
-\[T = F_s\] 
-\[ \mu Q\cos\alpha = Q\sin\alpha\]
-\[ \mu\cos\alpha = \sin\alpha\]
-\[ \mu = \tan\alpha\]  
-\[ \tan\alpha = \frac{\sin\alpha}{\sqrt{1-\sin\alpha}}\]
-\[ \sin\alpha = \frac{h}{a} \]
-\[ \mu = \frac{ \frac{h}{a}}{\sqrt{1- \frac{h}{a}}}\]
+\begin{equation}
+T = F_s
+\end{equation}
+
+\begin{equation}
+ \mu Q\cos\alpha = Q\sin\alpha
+\end{equation}
+
+\begin{equation}
+ \mu\cos\alpha = \sin\alpha
+\end{equation}
+
+\begin{equation}
+ \mu = \tan\alpha 
+\end{equation}
+
+\begin{equation}
+ \tan\alpha = \frac{\sin\alpha}{\sqrt{1-\sin\alpha}}
+\end{equation}
+
+\begin{equation}
+ \sin\alpha = \frac{h}{a}
+\end{equation}
+
+\begin{equation}
+ \mu = \frac{ \frac{h}{a}}{\sqrt{1- \frac{h}{a}}}
+\end{equation}
 
 W eksperymencie d³ugo¶æ $a$ by³a sta³a i zawsze wynosi³a 2 metry. Wyniki pomiarów oraz obliczone warto¶ci znajduj± siê w tabeli \ref{tab:wspolczynnikTarcia}. 
 
@@ -254,10 +271,10 @@ Jak widaæ, wyliczone eksperymentalne wspó³czynniki tarcia dla niezawilgoconych ¶
 Przeprowadzone zosta³y dodatkowo eksperymenty na stoku narciarskim. Pierwszy z nich polega³ na porównaniu czasów przejazdu w linii spadku stoku tego samego narciarza w nastêpuj±cych niezmiennych warunkach:
 \begin{itemize}
 \item na odcinku o d³ugo¶ci 28 metrów, w linii spadku stoku 
-\item stoku o sta³ym nachyleniu oko³o 8 stopni
+\item stoku o sta³ym nachyleniu oko³o $8^\circ$
 \item narciarz rozpoczyna przejazd bez odpychania siê kijami
 \item narciarz porusza siê po wyje¿d¿onym torze (brak ¶wie¿ego ¶niegu)
-\item narciarz ma ten sam strój (kurtka narciarska i spodnie narciarskie) i pokonuje trasê w takiej samej pozycji - pozycji zrównowa¿onej
+\item narciarz ma ten sam strój (kurtka narciarska i spodnie narciarskie) i pokonuje trasê w takiej samej pozycji - pozycji zrównowa¿onej)
 \end{itemize}
 
 Warunkami zmiennymi eksperymentu by³y u¿yte narty
@@ -283,9 +300,10 @@ Kolejny eksperyment mia³ na celu zbadaæ jak wp³ynie na czas przejazdu poruszanie
 \item cienka warstwa ¶wie¿ego ¶niegu
 \end{itemize}
 
-Zmierzone czasy by³y ponownie istotnie ró¿ne. Przejazd po wy¶lizganym torze zaj±³ 5.98 sekund, natomiast po dziewiczym torze a¿ 7.19. Jest to ponownie, gigantyczna ró¿nica w ujêciu tak krótkiego czasu przejazdu - czas po dziewiczym ¶niegu jest o ponad 22 procent gorszy. 
+Zmierzone czasy by³y ponownie istotnie ró¿ne. Przejazd po wy¶lizganym torze zaj±³ 5.98 sekund, natomiast po dziewiczym torze a¿ 7.19. Jest to ponownie, gigantyczna ró¿nica w ujêciu tak krótkiego czasu przejazdu - czas po dziewiczym ¶niegu jest o ponad 22\% gorszy. 
 
 Podsumowuj±c eksperymenty dynamiczne: zarówno rodzaj pod³o¿a jak i stan ¶lizgu narty wp³ywaj± w bardzo znacz±cy sposób na warto¶æ wspó³czynnika tarcia, a w konsekwencji na czas pokonywania trasy.
+
 \subsection{Si³a oporu powietrza}
 \label{silaOporuEksperymnet}
 
@@ -768,10 +786,10 @@ Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} na stronie \pa
 \centering
 \includegraphics[height=300px]{punish-test}
 \caption{Tor A przedstawia trasê obliczon± przy u¿yciu strategi sumowania pochodnych, Tor B przy strategi zmniejszania wektorów, Tor C strategi karania za przekrawêdziowanie a Tor D trasê bez zastosowania ¿adnej strategii karania}
-\label{fig:punish}
+\label{fig:punishment}
 \end{figure}
 
-Rycina \ref{fig:punish} przedstawia znalezione tory przejazdu przez ka¿d± z tych strategii. Jak widaæ, mo¿na dostrzec znacz±c± ró¿nice w torach znalezionych przez algorytm genetyczny (czarna linia) w zale¿no¶ci od wyboru strategii. 
+Rycina \ref{fig:punishment} przedstawia znalezione tory przejazdu przez ka¿d± z tych strategii. Jak widaæ, mo¿na dostrzec znacz±c± ró¿nice w torach znalezionych przez algorytm genetyczny (czarna linia) w zale¿no¶ci od wyboru strategii. 
 
 \subsubsection{Szybko¶æ obliczeñ}
 \label{szybkoscObliczenKaranie}
