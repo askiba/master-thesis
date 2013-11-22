@@ -726,6 +726,8 @@ W eksperymencie pierwszym sprawdzili¶my dzia³anie algorytmu lokalnego dla domy¶l
 
 Szczegó³owy opis parametrów mo¿na znale¼æ w podrozdziale \ref{sec:hill}. W domy¶lnym ustawieniu warto¶ci tych parametrów wynosz± odpowiednio 0.5 (odpowiadaj±ca 0.5 metrom na rzeczywistej trasie) oraz 1.2 dla przyspieszenia. W przeprowadzonym eksperymencie poka¿emy jak te parametry wp³ywaj± na ostateczne rozwi±zanie. Na tym samym rezultacie dzia³ania algorytmu genetycznego uruchomimy trzy razy algorytm lokalnej optymalizacji, ale z zestawami parametrów przedstawionymi w tabeli \ref{tab:paramHill}.
 
+Jak zostanie pokazane w nastêpnym eksperymencie, stosowanie mechanizmu karania poprawia otrzymywane wyniki, wiêc ten sam eksperyment wykonamy tak¿e z zastosowaniem tego mechanizmu.
+
 \begin{table}[h]
 \caption{Warto¶ci parametrów algorytmu Hill climbing w kolejnych eksperymentach}
 \centering
@@ -753,7 +755,7 @@ Szczegó³owy opis parametrów mo¿na znale¼æ w podrozdziale \ref{sec:hill}. W domy¶
 \label{fig:w11ws2}
 \end{figure}
 
-Powy¿sze wykresy pokazuj± otrzymane trasy dla poszczególnych instancji algorytmów:
+Rysunki \ref{fig:w11ws} i \ref{fig:w11ws2} pokazuje otrzymane trasy dla ró¿nych algorytmów i parametrów:
 \begin{itemize}
 \item trasa czarna - trasa uzyskana w wyniki dzia³ania algorytmu genetycznego
 \item trasa czerwona - optymalizacja lokalna z parametrami domy¶lnymi
@@ -761,20 +763,16 @@ Powy¿sze wykresy pokazuj± otrzymane trasy dla poszczególnych instancji algorytmó
 \item trasa zielona - optymalizacja lokalna z krokiem 0.3 m oraz przyspieszeniem 1.1
 \end{itemize}
 
-%TODO pierwszy  i drugi wykres +-karanie
+Trasy otrzymane w wyniku dzia³ania algorytmu optymalizacji lokalnej ró¿ni± siê miejscami od siebie, choæ w niewielkim stopniu. Ma³e zró¿nicowanie wynika z tego, ¿e pocz±tkowa trasa, któr± nale¿a³o zoptymalizowaæ by³a w ka¿dym przypadku taka sama. Algorytm Hill Climbing jest algorytmem deterministycznym, ale zmiana parametrów tego algorytmu wp³ywa na otrzymywany wynik koñcowy. W przypadku pierwszym, bez zastosowania mechanizmu karania zmiany s± minimalne, a otrzymywany wynik tak naprawdê mo¿na sprowadziæ do jazdy od bramki do bramki po liniach prostych. W drugim te¶cie wyniki ró¿ni± siê zw³aszcza w okolicach bramek, gdzie podejmowane s± decyzje o wcze¶niejszym lub pó¼niejszym skrêcie - to tam mo¿na najwiêcej zyskaæ lub straciæ.
 
-Trasy otrzymane w wyniku dzia³ania algorytmu optymalizacji lokalnej ró¿ni± siê miejscami od siebie, choæ w niewielkim stopniu. Niewielkie zró¿nicowanie wynika z tego, ¿e pocz±tkowa trasa, któr± nale¿a³o zoptymalizowaæ by³a w ka¿dym przypadku taka sama. Algorytm Hill Climbing jest algorytmem deterministycznym, ale zmiana parametrów tego algorytmu wp³ywa na otrzymywany wynik koñcowy. Jednak w przypadku pierwszym zmiany s± minimalne, a otrzymywany wynik tak naprawdê mo¿na sprowadziæ do jazdy od bramki do bramki po liniach prostych. W drugim te¶cie wyniki ró¿ni± siê zw³aszcza w okolicach bramek, gdzie podejmowane s± decyzje o wcze¶niejszym lub pó¼niejszym skrêcie - to tam mo¿na najwiêcej zyskaæ lub straciæ. 
+Przeanalizujmy teraz dok³adniej otrzymane wyniki zebrane w tabelach \ref{tab:paramHillTab} oraz \ref{tab:paramHillTabPunish}.
 
-Wyniki:
+Czas dzia³ania algorytmu genetycznego w pierwszym przypadku to 181 s, w eksperymencie z karaniem 253 s. Czasy uzyskane w wyniku dzia³ania algorytmu genetycznego w ka¿dej z prób wynosz± odpowiednio 10.974 s oraz 10.895 s.
 
-eksperyment 1. bez karania \\
-Czas dzia³ania programu: 181 s. \\
-Czas uzyskany w wyniku dzia³ania algorytmu genetycznego: 10.974 \\
-
-\begin{table}
-%TODO opis tabelki
-\caption{}
+\begin{table}[h]
+\caption{Wyniki dla ró¿nych parametrów algorytmu lokalnego bez mechanizmu karania}
 \centering
+\label{tab:paramHillTab}
 \begin{tabular}{ | c | c | c |}
   \hline                        
   nr & otrzymany czas przejazdu [s] & ilo¶æ iteracji\\ \hline  
@@ -784,14 +782,10 @@ Czas uzyskany w wyniku dzia³ania algorytmu genetycznego: 10.974 \\
 \end{tabular}
 \end{table}
 
-eksperyment 2. z karaniem \\
-Czas dzia³ania programu: 253 s. \\
-Czas uzyskany w wyniku dzia³ania algorytmu genetycznego: 10.895 \\
-
-\begin{table}
-%TODO opis tabelki
-\caption{}
+\begin{table}[h]
+\caption{Wyniki dla ró¿nych parametrów algorytmu lokalnego z mechanizmem karania}
 \centering
+\label{tab:paramHillTabPunish}
 \begin{tabular}{ | c | c | c |}
   \hline                        
   nr &  otrzymany czas przejazdu [s] & ilo¶æ iteracji\\ \hline  
@@ -801,27 +795,17 @@ Czas uzyskany w wyniku dzia³ania algorytmu genetycznego: 10.895 \\
 \end{tabular}
 \end{table}
 
-%10.828910174398331 (6)
-%10.818552975659884 (8)
-%10.824364225106574 (8)
-
-%czas 181 s, przed lokalna 10.974349975585938
-
-%11.035537719726562(11)
-%11.04949951171875(14)
-%11.023712158203125(10)
-
-%czas 253 s., przed 10.894622802734375
-
 W pierwszej czê¶ci eksperymentu najlepszy czas otrzymany zosta³ dla drugiego przypadku, a wiêc przy zmniejszeniu wy³±cznie kroku. Poprawa w stosunku do pozosta³ych przypadków to 0.005-0.01 s czyli mniej ni¿ 0.1\%, ale widzimy, ¿e nawet tak niewielkie zmiany na trasie przejazdu mog± wp³ywaæ na koñcowy wynik.
 
-Drugi przypadek jest trudniejszy do analizy, poniewa¿ wprowadzenie karania powoduje, ¿e nie jeste¶my w stanie przenie¶æ uzyskiwanych ocen do rzeczywisto¶ci. Wed³ug nich, znów najlepszy okazuje siê byæ zestaw parametrów z drugiego przypadku, kiedy jednak sprawdzimy uzyskiwane czasy, widzimy, ¿e s± one gorsze ni¿ najlepszy uzyskany wynik z algorytmu genetycznego, a w dodatku
-kolejno¶æ rezultatów nie pokrywa siê z kolejno¶ci± ocen - najlepszy czas uzyskany zosta³ w ostatnim przypadku. Uzasadnieniem tego zachowania jest fakt uwzglêdniania w karaniu zbyt ostrych zakrêtów, które fizycznie nie s± mo¿liwe do wykonania lub musia³yby zabraæ dodatkowy czas. W rzeczywisto¶ci wyniki z pierwszego eksperymentu s± niemo¿liwe do otrzymania - przy ka¿dej bramce musieliby¶my straciæ dodatkowy czas na przestawienie nart poprzez konieczno¶æ przyhamowania.
+Drugi przypadek jest trudniejszy do analizy, poniewa¿ wprowadzenie karania powoduje, ¿e nie jeste¶my w stanie przenie¶æ uzyskiwanych ocen do rzeczywisto¶ci. Wed³ug nich, znów najlepszy okazuje siê byæ zestaw parametrów z drugiego przypadku, kiedy jednak sprawdzimy w tabeli uzyskiwane czasy, widzimy, ¿e s± one gorsze ni¿ najlepszy uzyskany wynik z algorytmu genetycznego, a w dodatku kolejno¶æ rezultatów nie pokrywa siê z kolejno¶ci± ocen - najlepszy czas uzyskany zosta³ w ostatnim przypadku.
+
+Uzasadnieniem tego zachowania jest fakt uwzglêdniania w karaniu zbyt ostrych zakrêtów, które fizycznie nie s± mo¿liwe do wykonania lub musia³yby zabraæ dodatkowy czas. W rzeczywisto¶ci wyniki z pierwszego eksperymentu s± niemo¿liwe do otrzymania - przy ka¿dej bramce musieliby¶my straciæ dodatkowy czas na przestawienie nart poprzez konieczno¶æ przyhamowania.
 
 \subsection{Strategie karania}
 \label{sec:wynikiStrategieKarania}
 
-Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} na stronie \pageref{sec:karanie} strategie karania. Testy mia³y na celu pogl±dowo zorientowaæ siê, czy wszystkie strategie bêd± prowadziæ do poprawnego wizualnie wyniku a przede wszystkim wskazaæ, która strategia bêdzie doprowadza³a do szybszej zbie¿no¶ci algorytmu genetycznego oraz lokalnej optymalizacji, a co za tym idzie do najszybszego znajdowania wyników. Dla ka¿dej testowanej strategii, ta sama strategia karania by³a u¿yta w algorytmie genetycznym jak i w lokalnej optymalizacji.
+%TODO FIXME mo¿e jednak skupiæ siê na tym, ¿e zale¿y nam nie na szybszej zbie¿no¶ci, a na poprawno¶ci wyniku, bo z tym by³ najwiêkszy problem. I tak za szybko tak naprawdê nam siê to zbiega i czas  wykonania jest krótki. Bardziej napisaæ, ¿e przy okazji to sprawdza³y¶my tylko jaki jest wp³yw na zbie¿no¶æ.
+Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} na stronie \pageref{sec:karanie} strategie karania. Testy mia³y na celu pogl±dowo zorientowaæ siê, czy wszystkie strategie bêd± prowadziæ do poprawnego wizualnie wyniku a przede wszystkim wskazaæ, która strategia bêdzie doprowadza³a do szybszej zbie¿no¶ci algorytmu genetycznego oraz lokalnej optymalizacji, a co za tym idzie do najszybszego znajdowania wyników. Dla ka¿dej testowanej strategii, ta sama strategia karania by³a u¿yta w algorytmie genetycznym, jak i w lokalnej optymalizacji.
 
 \subsubsection{Poprawno¶æ strategii}
 \label{poprawnoscKarania}
@@ -829,20 +813,20 @@ Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} na stronie \pa
 \begin{figure}[h]
 \centering
 \includegraphics[height=300px]{punish-test}
-\caption{Tor A przedstawia trasê obliczon± przy u¿yciu strategi sumowania pochodnych, Tor B przy strategi zmniejszania wektorów, Tor C strategi karania za przekrawêdziowanie a Tor D trasê bez zastosowania ¿adnej strategii karania}
+\caption{Tor A przedstawia trasê obliczon± przy u¿yciu strategii sumowania pochodnych, Tor B przy strategii zmniejszania wektorów, Tor C strategii karania za przekrawêdziowanie a Tor D trasê bez zastosowania ¿adnej strategii karania}
 \label{fig:punishment}
 \end{figure}
 
-Rycina \ref{fig:punishment} przedstawia znalezione tory przejazdu przez ka¿d± z tych strategii. Jak widaæ, mo¿na dostrzec znacz±c± ró¿nice w torach znalezionych przez algorytm genetyczny (czarna linia) w zale¿no¶ci od wyboru strategii. 
+Rycina \ref{fig:punishment} przedstawia znalezione tory przejazdu przy zastosowaniu ka¿dej z tych strategii. Jak widaæ, mo¿na dostrzec znacz±c± ró¿nicê w torach znalezionych przez algorytm genetyczny (czarna linia) w zale¿no¶ci od wyboru strategii. W przypadku lokalnej optymalizacji ró¿nice s± ju¿ mniejsze, jednak pierwsze dwie strategie wypadaj± w tym przypadku lepiej ni¿ pozosta³e, zw³aszcza na pierwszym odcinku trasy.
 
 \subsubsection{Szybko¶æ obliczeñ}
 \label{szybkoscObliczenKaranie}
 
-Tabela \ref{tab:porownanieKarania} na stronie \pageref{tab:porownanieKarania} pokazuje ¶redni czas dochodzenia do wyniku dla ka¿dej ze strategii jak równie¿ dla braku zastosowani strategii. Najszybsz± zbie¿no¶æ maj± metody które prowadz± do najgorszych jako¶ciowo rozwi±zañ (C i D z rysunku \ref{fig:punish}). Jak widaæ najszybsz± zbie¿no¶æ algorytmu genetycznego uzyskuje siê dla karania poprzez zliczanie ilo¶ci przekrawêdziowañ. Ró¿nice pomiêdzy ¶rednimi szybko¶ciami s± znaczne, bo nawet cztero krotne. Zastosowanie strategii A prowadzi do uzyskania bardzo dobrego jako¶ciowo wyniku, dobrego do tego stopnia, ¿e lokalna optymalizacja nie wprowadza znacznej poprawy. Strategia B, nie do¶æ, ¿e prowadzi do bardzo dobrego wyniku jako¶ciowego, to zbiega siê do¶æ szybko w porównaniu do strategii A - o ponad 40 procent.
+Tabela \ref{tab:porownanieKarania} na stronie \pageref{tab:porownanieKarania} pokazuje ¶redni czas dochodzenia do wyniku dla ka¿dej ze strategii jak równie¿ dla braku zastosowania strategii. Najszybsz± zbie¿no¶æ maj± metody, które prowadz± do najgorszych jako¶ciowo rozwi±zañ (C i D z rysunku \ref{fig:punish}). Jak widaæ najszybsz± zbie¿no¶æ algorytmu genetycznego uzyskuje siê dla karania poprzez zliczanie ilo¶ci przekrawêdziowañ. Ró¿nice pomiêdzy ¶rednimi szybko¶ciami s± znaczne, bo nawet czterokrotne. Zastosowanie strategii A prowadzi do uzyskania bardzo dobrego jako¶ciowo wyniku, dobrego do tego stopnia, ¿e lokalna optymalizacja nie wprowadza znacznej poprawy. Strategia B, nie do¶æ, ¿e prowadzi do bardzo dobrego wyniku jako¶ciowego, to zbiega siê do¶æ szybko w porównaniu ze strategi± A - o ponad 40\%.
 
 \begin{table}[h] 
 \label{tab:porownanieKarania}
-\caption{Porównanie d³ugo¶ci trwania obliczeñ instancji problemu dla u¿ytych ró¿nych strategii karania. Obliczenia prowadzone s± na maszynie o nastêpuj±cych parametrach: Procesor Intel Core i5-2410M, 2.3 GHz, 8 GB pamiêci RAM, System Windows 7 Home Premium, zminimalizowane obci±¿enie procesora przez inne procesy, obliczenia prowadzi jedna zak³adka przegl±darki Chrome }
+\caption{Porównanie d³ugo¶ci trwania obliczeñ instancji problemu dla u¿ytych ró¿nych strategii karania. Obliczenia prowadzone s± na maszynie o nastêpuj±cych parametrach: Procesor Intel Core i5-2410M, 2.3 GHz, 8 GB pamiêci RAM, System Windows 7 Home Premium, zminimalizowane obci±¿enie procesora przez inne procesy, obliczenia prowadzi jedna zak³adka przegl±darki Chrome}
 \centering
 \begin{tabular}{|c|l|l|l|l|}
 \hline
@@ -864,21 +848,20 @@ Tabela \ref{tab:porownanieKarania} na stronie \pageref{tab:porownanieKarania} po
 
 \subsubsection{Wybór strategii}
 \label{wyborStartegiiKarania}   
-Rozwa¿aj±c strategiê, zosta³o przyjête, ¿e najlepszym modelem jest model ze strategi± proporcjonalnego zmniejszania d³ugo¶ci wektora prêdko¶ci w zale¿no¶ci od k±tów pomiêdzy kolejnymi odcinkami ³amanej - czyli Strategia B. Czas obliczeñ dla tej strategii nie jest ani najwiêkszy ani najmniejszy. Ta w³a¶nie strategiê - jako najlepiej obrazuj±c± rzeczywisto¶æ i pozwalaj±c± na otrzymywanie najlepiej zamodelowanych wyników, zosta³a wybrana jako sta³a dla innych eksperymentów, chyba, ¿e jest zaznaczone inaczej. 
+Rozwa¿aj±c wszystkie strategie, zosta³o przyjête, ¿e najlepszym modelem jest model ze strategi± proporcjonalnego zmniejszania d³ugo¶ci wektora prêdko¶ci w zale¿no¶ci od k±tów pomiêdzy kolejnymi odcinkami ³amanej - czyli Strategia B. Czas obliczeñ dla tej strategii nie jest ani najwiêkszy ani najmniejszy. Ta w³a¶nie strategia, jako najlepiej obrazuj±ca rzeczywisto¶æ i pozwalaj±ca na otrzymywanie najlepszych wyników, zosta³a wybrana jako mechanizm karania dla innych eksperymentów, chyba, ¿e jest to zaznaczone inaczej.
+ 
 %---------------------------------------------------------------------------
 
 \section{Architektura systemu}
 \label{sec:architektura-podsumownanie}
 
-
-Aby zweryfikowaæ funkcjonalno¶æ zaproponowanej architektury zaplanowany zosta³ szereg eksperymentów, maj±cych na celu zbadaæ:
+Aby zweryfikowaæ funkcjonalno¶æ zaproponowanej architektury zaplanowany zosta³ szereg eksperymentów, maj±cych na celu zbadanie:
 
 \begin{itemize}
-\item wydajno¶æ poszczególnych przegl±darek dla intensywnych obliczeñ (Chrome, Firefox, Internet Explorer) oraz znalezienie maksymalnej prêdko¶ci obliczeñ na jednej maszynie, poprzez znalezienie optymalnej konfiguracji - ilo¶ci uruchomionych na raz kart przegl±darki
-\item skuteczno¶æ rekrutowania ochotników do obliczeñ typu Volunteer Computing w przegl±darce, poprzez internetowe media spo³eczno¶ciowe
+\item wydajno¶ci poszczególnych przegl±darek dla intensywnych obliczeñ (Chrome, Firefox, Internet Explorer) oraz znalezienie maksymalnej prêdko¶ci obliczeñ na jednej maszynie, poprzez znalezienie optymalnej konfiguracji - ilo¶ci uruchomionych na raz kart przegl±darki
+\item skuteczno¶ci rekrutowania ochotników do obliczeñ typu Volunteer Computing w przegl±darce, poprzez internetowe media spo³eczno¶ciowe
 \end{itemize}
 
- 
 \subsection{Wydajno¶æ przegl±darek dla intensywnych obliczeñ}
 \label{sec:wydajnoscSilnikow}
 W celu zbadania wydajno¶ci silników \textit{JavaScript} dla rozwi±zywania naszego problemu zosta³ przeprowadzony nastêpuj±cy eksperyment. 
@@ -935,7 +918,7 @@ $P=\frac{T_{MAX}}{A}[\frac{s}{rozwiazanie}]$
 \multicolumn{4}{c}{} \\ \hline
                                                                                                                                & \textbf{Chrome}        & \textbf{Firefox}        & \textbf{IE}       \\ \hline
 Numer zak³adki                                                                                                                 & 0                      & 0                       & 0                 \\ \hline
-\multirow{10}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Czas rozwi±zania kolejnego\\  problemu w sekundach\end{tabular}}}          & 50.67                  & 351.528                 & 125.749           \\ \cline{2-4} 
+\multirow{10}{*}{\textbf{\begin{tabular}[l]{@{}l@{}}Czas rozwi±zania kolejnego \\problemu [s]\end{tabular}}}          & 50.67                  & 351.528                 & 125.749           \\ \cline{2-4} 
                                                                                                                                & 59.671                 & 272.213                 & 137.551           \\ \cline{2-4} 
                                                                                                                                & 48.118                 & 209.443                 & 153.626           \\ \cline{2-4} 
                                                                                                                                & 47.877                 & 160.335                 & 163.051           \\ \cline{2-4} 
@@ -946,7 +929,7 @@ Numer zak³adki                                                                  
                                                                                                                                & 80.939                 & 193.573                 & 105.364           \\ \cline{2-4} 
                                                                                                                                & 50.685                 & 195.714                 & 90.609            \\ \hline
 \textbf{Suma czasów}                                                                                                           & 551.444                & 2235.314                & 1354.803          \\ \hline
-\textbf{\begin{tabular}[c]{@{}c@{}}Suma czasów z uwzglêdnieniem\\ opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}}        & 551                    & 2235                    & 1355              \\ \hline
+\textbf{\begin{tabular}[l]{@{}l@{}}Suma czasów z uwzglêdnieniem \\opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}}        & 551                    & 2235                    & 1355              \\ \hline
 \textbf{$T_{max} [s]$}                                                                                                           & 551                    & 2235                    & 1355              \\ \hline
 \textbf{A - Ilo¶æ obliczonych rozwi±zañ}                                                                                       & 10                     & 10                      & 10                \\ \hline
 \textbf{P - Tempo [s/rozwi±zanie]}                                                                                             & 55.1                   & 223.5                   & 135.5             \\ \hline
@@ -954,19 +937,19 @@ Numer zak³adki                                                                  
 \end{table}
 
 \begin{table}[h]
-\caption{Uruchomienie obliczeñ w 6 zak³adkach przegl±darki Chrome równocze¶nie.}
+\caption{Uruchomienie obliczeñ w sze¶ciu zak³adkach przegl±darki Chrome równocze¶nie.}
 \label{tab:szescZakladekCh}
 \centering
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \multicolumn{7}{c}{}                                                                                          \\ \hline
 \multicolumn{7}{|l|}{\textbf{Chrome}}                                                                                                                                                \\ \hline
 Numer zak³adki                                                                                                           & 0       & 1       & 2       & 3       & 4       & 5       \\ \hline
-\multirow{4}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Czas rozwi±zania kolejnego \\ problemu w sekundach\end{tabular}}}     & 122.138 & 131.19  & 211.114 & 106.006 & 227.966 & 133.511 \\ \cline{2-7} 
+\multirow{4}{*}{\textbf{\begin{tabular}[l]{@{}l@{}}Czas rozwi±zania kolejnego \\problemu [s]\end{tabular}}}     & 122.138 & 131.19  & 211.114 & 106.006 & 227.966 & 133.511 \\ \cline{2-7} 
                                                                                                                          & 178.092 & 167.305 & 161.464 & 132.485 & 210.441 & 144.768 \\ \cline{2-7} 
                                                                                                                          & 128.211 & 108.657 & 128.156 & 96.603  & 190.033 & 204.7   \\ \cline{2-7} 
                                                                                                                          & 188.534 & 107.546 & 170.106 & 155.116 & 148.481 & 184.593 \\ \hline
 \textbf{Suma czasów}                                                                                                     & 616.975 & 514.698 & 670.84  & 670.84  & 490.21  & 667.572 \\ \hline
-\textbf{\begin{tabular}[c]{@{}c@{}}Suma czasów z uwzglêdnieniem \\ opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}} & 617     & 514     & 669     & 668     & 486     & 663     \\ \hline
+\textbf{\begin{tabular}[l]{@{}l@{}}Suma czasów z uwzglêdnieniem \\opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}} & 617     & 514     & 669     & 668     & 486     & 663     \\ \hline
 \textbf{$T_{max} [s]$}                                                                                                     & \multicolumn{6}{|c|}{669}                                 \\ \hline
 \textbf{A - Ilo¶æ obliczonych rozwi±zañ}                                                                                 & \multicolumn{6}{|c|}{24}                                  \\ \hline
 \textbf{P - Tempo [s/rozwi±zanie]}                                                                                       & \multicolumn{6}{|c|}{27.9}                                \\ \hline
@@ -974,18 +957,18 @@ Numer zak³adki                                                                  
 \end{table}
 
 \begin{table}[h]
-\caption{Uruchomienie obliczeñ w 6 zak³adkach przegl±darki Firefox równocze¶nie.}
+\caption{Uruchomienie obliczeñ w sze¶ciu zak³adkach przegl±darki Firefox równocze¶nie.}
 \label{tab:szescZakladekFF}
 \centering
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \multicolumn{7}{c}{}                                                                                                                                     \\ \hline
 \textbf{Firefox}                                                                                                                                              &          &          &          &          &          &          \\ \hline
 Numer zak³adki                                                                                                                                                & 0        & 1        & 2        & 3        & 4        & 5        \\ \hline
-\multirow{3}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Czas rozwi±zania kolejnego\\ problemu w sekundach\end{tabular}}} & 971.73   & 876.713  & 870.914  & 987.587  & 622.23   & 959.31   \\ \cline{2-7} 
+\multirow{3}{*}{\textbf{\begin{tabular}[l]{@{}l@{}}Czas rozwi±zania kolejnego\\problemu [s]\end{tabular}}} & 971.73   & 876.713  & 870.914  & 987.587  & 622.23   & 959.31   \\ \cline{2-7} 
                                                                                                                                                               & 707.105  & 1181.745 & 1167.395 & 987.172  & 787.954  & 716.807  \\ \cline{2-7} 
                                                                                                                                                               & 471.037  &          &          &          & 608.404  &          \\ \hline
 \textbf{Suma czasów}                                                                                                                                          & 2149.872 & 2058.458 & 2038.309 & 1974.759 & 2018.588 & 1676.117 \\ \hline
-\textbf{\begin{tabular}[c]{@{}c@{}}Suma czasów z uwzglêdnieniem \\ opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}}                                      & 2150     & 2057     & 2036     & 1972     & 2015     & 1671     \\ \hline
+\textbf{\begin{tabular}[l]{@{}l@{}}Suma czasów z uwzglêdnieniem \\opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}}                                      & 2150     & 2057     & 2036     & 1972     & 2015     & 1671     \\ \hline
 \textbf{$T_{max} [s]$}                                                                                                                                          & \multicolumn{6}{|c|}{2150}                                      \\ \hline
 \textbf{A - Ilo¶æ obliczonych rozwi±zañ}                                                                                                                      & \multicolumn{6}{|c|}{14}                                        \\ \hline
 \textbf{P - Tempo [s/rozwi±zanie]}                                                                                                                            & \multicolumn{6}{|c|}{153.6}                                     \\ \hline
@@ -993,19 +976,19 @@ Numer zak³adki                                                                  
 \end{table}
 
 \begin{table}[h]
-\caption{Uruchomienie obliczeñ w 6 zak³adkach przegl±darki Internet Explorer równocze¶nie.}
+\caption{Uruchomienie obliczeñ w sze¶ciu zak³adkach przegl±darki Internet Explorer równocze¶nie}
 \label{tab:szescZakladekIE}
 \centering
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \multicolumn{7}{c}{}                                                                                            \\ \hline
 \multicolumn{7}{|l|}{\textbf{Internet Explorer}}                                                                                                                                       \\ \hline
 Numer zak³adki                                                                                                          & 0        & 1       & 2       & 3        & 4        & 5       \\ \hline
-\multirow{4}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Czas rozwi±zania kolejnego\\ problemu w sekundach\end{tabular}}}     & 465.152  & 186.834 & 154.918 & 247.763  & 486.031  & 147.32  \\ \cline{2-7} 
+\multirow{4}{*}{\textbf{\begin{tabular}[l]{@{}l@{}}Czas rozwi±zania kolejnego\\problemu [s]\end{tabular}}}     & 465.152  & 186.834 & 154.918 & 247.763  & 486.031  & 147.32  \\ \cline{2-7} 
                                                                                                                         & 267.013  & 194.181 & 212.844 & 248.019  & 295.73   & 200.593 \\ \cline{2-7} 
                                                                                                                         & 260.614  & 207.847 &         & 415.193  & 280.427  & 172.52  \\ \cline{2-7} 
                                                                                                                         & 260.386  & 245.773 &         & 248.019  &          & 231.295 \\ \hline
 \textbf{Suma czasów}                                                                                                    & 1253.165 & 834.635 & 367.762 & 1158.994 & 1062.188 & 751.728 \\ \hline
-\textbf{\begin{tabular}[c]{@{}c@{}}Suma czasów z uwzglêdnieniem\\ opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}} & 1253     & 834     & 366     & 1156     & 1058     & 747     \\ \hline
+\textbf{\begin{tabular}[l]{@{}l@{}}Suma czasów z uwzglêdnieniem\\ opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}} & 1253     & 834     & 366     & 1156     & 1058     & 747     \\ \hline
 \textbf{$T_{max} [s]$}                                                                                                    & \multicolumn{6}{|c|}{1253}                                   \\ \hline
 \textbf{A - Ilo¶æ obliczonych rozwi±zañ}                                                                                & \multicolumn{6}{|c|}{21}                                     \\ \hline
 \textbf{P - Tempo [s/rozwi±zanie]}                                                                                      & \multicolumn{6}{|c|}{59.7}                                   \\ \hline
@@ -1027,14 +1010,14 @@ Ciekawym wnioskiem jest te¿ fakt, ¿e przegl±darki przydzielaj± podobne zasoby do
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.7\textwidth]{taskManager4}
-\caption{Podzia³ zu¿ycia procesora dla 4 zak³adek przegl±darki Chrome prowadz±cej obliczenia.}
+\caption{Podzia³ zu¿ycia procesora dla czterech zak³adek przegl±darki Chrome prowadz±cej obliczenia.}
 \label{fig:taskManager4}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.7\textwidth]{taskManager15}
-\caption{Podzia³ zu¿ycia procesora dla 15 zak³adek przegl±darki Chrome prowadz±cej obliczenia.}
+\caption{Podzia³ zu¿ycia procesora dla piêtnastu zak³adek przegl±darki Chrome prowadz±cej obliczenia.}
 \label{fig:taskManager15}
 \end{figure}
 
