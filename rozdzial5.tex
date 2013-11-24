@@ -115,7 +115,7 @@ Po pierwsze, warto zwróciæ uwagê, ¿e czas jazdy po prostej minimalnie ró¿ni siê 
 
 Wyra¼nie widaæ równie¿, ¿e czas przejazdu po linii czarnej jest krótszy ni¿ czas przejazdu po linii niebieskiej. Trasê po prostej narciarz przebywa w ok. 7\% d³u¿szym czasie ni¿ trasê d³u¿sz±. Na tak krótkim odcinku narciarz by³ w stanie zdobyæ przewagê ok. 0.3 s. Wa¿ne jest to, ¿e w prawdziwych przejazdach slalomowych nawet najmniejsza ró¿nica czasu mo¿e decydowaæ o wygranej, oczywi¶cie zale¿y to od dok³adno¶ci pomiaru, który zawsze jest sprawdzany do setnych czê¶ci sekundy. Dlatego ogromne znaczenie ma tor po jakim porusza siê narciarz i nawet najmniejsza zmiana mo¿e powodowaæ kluczow± poprawê czasu na ca³ej trasie. Czasami warto jednak pojechaæ d³u¿sz± tras±, ale tak±, na której nabierzemy wiêkszej prêdko¶ci i pó¼niej zyskamy na kolejnym odcinku.
 
-%TODO biblio
+%TODO Ania biblio
 Pozostaje jeszcze pytanie jaka jest najlepsza linia poruszania siê pomiêdzy dwoma punktami. Problem ten zosta³ ju¿ rozwi±zany - linia najszybsza jest fragmentem cykloidy. Dok³adniejsze informacje mo¿na znale¼æ m.in. w http://www.hep.caltech.edu/~fcp/math/variationalCalculus/variationalCalculus.pdf oraz
 http://www.math.utk.edu/~freire/teaching/m231f08/m231f08brachistochrone.pdf.
 W http://www.math.utk.edu/~freire/teaching/m231f08/m231f08brachistochrone.pdf znajduje siê wzór na czas przejazdu pomiêdzy dwoma punktami. Korzystaj±c z tego wzoru podstawiaj±c odpowiednio wyliczone parametry otrzymujemy, ¿e najkrótszy mo¿liwy czas przejazdu z punktu (0,0) do punktu (10,10) to ok. 3.623. Jak widaæ, wynik ten jest lepszy ni¿ otrzymane w naszym eksperymencie: od czasu jazdy po æwiartce ko³a o ok. 0.05 s., co nie jest ró¿nic± bardzo du¿±, ale znacz±c± dla zwyciêstwa.
@@ -716,15 +716,15 @@ Na wykresie \ref{fig:w9ws} wci±¿ znajduj± siê zmiany wy³±cznie dotycz±ce algoryt
 Czerwona linia stanowi trasê uzyskan± po zaaplikowaniu algorytmu optymalizacji lokalnej na trasie znalezionej przez algorytm genetyczny. Na wykresie \ref{fig:w9wyk} mo¿emy zobaczyæ jak dok³adnie zmienia³ siê czas przejazdu w ka¿dej iteracji algorytmu lokalnego. Iteracja numer 0 to wynik otrzymany przez algorytm genetyczny. Po 7 iteracjach otrzymali¶my wynik 10.825 s, co stanowi poprawê o 0.235 s, czyli ok. 2\%. Poprawa ta jest zdecydowanie zauwa¿alna tak¿e w kszta³cie slalomu i na pewno na tyle znacz±ca, ¿e decyduje o zwyciêstwie zawodnika.
 
 \paragraph{Eksperyment 2.}
-%TODO to jest z karaniem!!
+%TODO to jest z karaniem!! - @Ania to jest Twoje TODO right?
 W eksperymencie pierwszym sprawdzili¶my dzia³anie algorytmu lokalnego dla domy¶lnie ustawionych parametrów. W zastosowanym algorytmie Hill Climbing mamy mo¿liwo¶æ zmiany dwóch parametrów:
 
 \begin{itemize}
-\item rozmiar kroku
+\item rozmiar kroku%
 \item tzw. przyspieszenie (ang. \textit{acceleration}) 
 \end{itemize}
 
-Szczegó³owy opis parametrów mo¿na znale¼æ w podrozdziale \ref{sec:hill}. W domy¶lnym ustawieniu warto¶ci tych parametrów wynosz± odpowiednio 0.5 (odpowiadaj±ca 0.5 metrom na rzeczywistej trasie) oraz 1.2 dla przyspieszenia. W przeprowadzonym eksperymencie poka¿emy jak te parametry wp³ywaj± na ostateczne rozwi±zanie. Na tym samym rezultacie dzia³ania algorytmu genetycznego uruchomimy trzy razy algorytm lokalnej optymalizacji, ale z zestawami parametrów przedstawionymi w tabeli \ref{tab:paramHill}.
+Szczegó³owy opis parametrów mo¿na znale¼æ w podrozdziale \ref{sec:hill}. W domy¶lnym ustawieniu warto¶ci tych parametrów wynosz± odpowiednio 0.5 (odpowiadaj±ca 0.5 metrom na rzeczywistej trasie) oraz 1.2 dla przyspieszenia. W przeprowadzonym eksperymencie poka¿em%y jak te parametry wp³ywaj± na ostateczne rozwi±zanie. Na tym samym rezultacie dzia³ania algorytmu genetycznego uruchomimy trzy razy algorytm lokalnej optymalizacji, ale z zestawami parametrów przedstawionymi w tabeli \ref{tab:paramHill}.
 
 Jak zostanie pokazane w nastêpnym eksperymencie, stosowanie mechanizmu karania poprawia otrzymywane wyniki, wiêc ten sam eksperyment wykonamy tak¿e z zastosowaniem tego mechanizmu.
 
@@ -804,8 +804,9 @@ Uzasadnieniem tego zachowania jest fakt uwzglêdniania w karaniu zbyt ostrych zak
 \subsection{Strategie karania}
 \label{sec:wynikiStrategieKarania}
 
-%TODO FIXME mo¿e jednak skupiæ siê na tym, ¿e zale¿y nam nie na szybszej zbie¿no¶ci, a na poprawno¶ci wyniku, bo z tym by³ najwiêkszy problem. I tak za szybko tak naprawdê nam siê to zbiega i czas  wykonania jest krótki. Bardziej napisaæ, ¿e przy okazji to sprawdza³y¶my tylko jaki jest wp³yw na zbie¿no¶æ.
-Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} na stronie \pageref{sec:karanie} strategie karania. Testy mia³y na celu pogl±dowo zorientowaæ siê, czy wszystkie strategie bêd± prowadziæ do poprawnego wizualnie wyniku a przede wszystkim wskazaæ, która strategia bêdzie doprowadza³a do szybszej zbie¿no¶ci algorytmu genetycznego oraz lokalnej optymalizacji, a co za tym idzie do najszybszego znajdowania wyników. Dla ka¿dej testowanej strategii, ta sama strategia karania by³a u¿yta w algorytmie genetycznym, jak i w lokalnej optymalizacji.
+%TODO @Ania zredagowa³am ten wstêpnik - teraz OK? "FIXME mo¿e jednak skupiæ siê na tym, ¿e zale¿y nam nie na szybszej zbie¿no¶ci, a na poprawno¶ci wyniku, bo z tym by³ najwiêkszy problem. I tak za szybko tak naprawdê nam siê to zbiega i czas  wykonania jest krótki. Bardziej napisaæ, ¿e przy okazji to sprawdza³y¶my tylko jaki jest wp³yw na zbie¿no¶æ".
+
+Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} na stronie \pageref{sec:karanie} strategie karania. Testy mia³y na celu zorientowaæ siê, czy wszystkie strategie bêd± przede wszystkim prowadziæ do poprawnego wyniku - tj. wizualnie poprawneji p³ynnej trasie. Przy okazji sprawdzany by³ wp³yw kolejnych strategi karania na szybko¶æ zbie¿no¶ci algorytmu genetycznego oraz lokalnej optymalizacji, a co za tym idzie do najszybszego znajdowania wyników. Dla ka¿dej testowanej strategii, ta sama strategia karania by³a u¿yta w algorytmie genetycznym, jak i w lokalnej optymalizacji.
 
 \subsubsection{Poprawno¶æ strategii}
 \label{poprawnoscKarania}
