@@ -62,31 +62,10 @@ F_f = \mu F_n = \mu mg\cos\alpha
 Oprócz si³y tarcia uwzglêdniamy równie¿ inn± si³ê oporu jak± jest si³a oporu powietrza. Zale¿y ona od prêdko¶ci poruszania siê obiektu. Prêdko¶æ bêdziemy wyra¿aæ jako pierwsz± pochodn± po³o¿enia, oznaczan± przez $ \dot{x} $:\\
 \begin{equation}
 \label{eq:Fd}
-F_d = k_1\dot{x} + k_2\dot{x}^2
+F_d = k_2\dot{x}^2
 \end{equation}
 
-Je¶li prêdko¶æ jest mniejsza od pewnej sta³ej $B$ to zak³adamy, ¿e opór zale¿y liniowo od prêdko¶ci, a po jej przekroczeniu kwadratowo. Przyjête za³o¿enia na sta³e $ k_1 $ oraz $ k_2 $ s± nastêpuj±ce:\\
-\begin{equation}
-\left\{ \begin{array}{ll}
- k_2 = 0  &\mbox{ $v \le B$} \\ 
- k_1 = 0 &\mbox{ $v \geq  B$} 
-\end{array} \right. 
-\end{equation}\\
-gdzie $ B $:\\
-\begin{equation}
-B = 4 \frac{m}{s}
-\end{equation}
 
-%TODO FIXME Marta sk±d mamy te informacje o sta³ej B oraz wspó³czynnikach k_1 i k_2
-
-Ograniczenie to zosta³o zaczerpniête z pracy ???? (Aerodynamic-Drag) i opisane w rozdziale ????
-
-Wspó³czynnik $ k_1 $ ....\\
-\begin{equation}
-k_1 = ... 
-\end{equation}
-
-Wspó³czynnik $ k_2 $ zosta³ opisany w ????\\
 \begin{equation}
 k_2 = \frac{1}{2} C \rho A
 \end{equation}
@@ -95,6 +74,8 @@ gdzie:\\
 $ C $ - wspó³czynnik oporu\\
 $ \rho $ - gêsto¶æ powietrza\\
 $ A $ - powierzchnia przednia narciarza prostopad³a do kierunku przep³ywu, a zatem prostopad³a do wektora prêdko¶ci narciarza
+
+Wiêcej o sile oporu powietrza jest opisane w sekcji \ref{sec:oporPowietrza} na stronie \pageref{sec:oporPowietrza}.
 
 %---------------------------------------------------------------------------
 
@@ -112,7 +93,7 @@ Wypadkowa si³a dzia³aj±ce na narciarza jest sum± si³: ¶ci±gaj±cej oraz oporów (t
 Korzystaj±c z wcze¶niejszych równañ \ref{eq:Qa}, \ref{eq:Ff} i \ref{eq:Fd} opisuj±cych si³y $ Q_a $, $F_f$ oraz $ F_d $ otrzymujemy:
 
 \begin{equation}
-ma = mg\sin\alpha - \mu mg\cos\alpha - k_1\dot{x} - k_2\dot{x}^2
+ma = mg\sin\alpha - \mu mg\cos\alpha - k_2\dot{x}^2
 \end{equation}
 
 Wyra¼my teraz przyspieszenie jako drug± pochodn± po³o¿enia:
@@ -124,14 +105,14 @@ a = \ddot{x}
 Podstawiaj±c do równania:
 
 \begin{equation}
-m\ddot{x}=mg\sin\alpha-\mu mg\cos\alpha-k_1\dot{x} - k_2\dot{x}^2
+m\ddot{x}=mg\sin\alpha-\mu mg\cos\alpha - k_2\dot{x}^2
 \end{equation}
 
 Zatem po podzieleniu przez m:
 
 \begin{equation}
 \label{eq:rownRuchu}
-\ddot{x}=g\sin\alpha-\mu g\cos\alpha-\frac{k_1}{m}\dot{x} - \frac{k_2}{m}\dot{x}^2
+\ddot{x}=g\sin\alpha-\mu g\cos\alpha - \frac{k_2}{m}\dot{x}^2
 \end{equation}
 
 Jest to równanie ró¿niczkowe zwyczajne drugiego rzêdu. Aby rozwi±zaæ to równanie numerycznie, przedstawimy to równanie jako uk³ad równañ ró¿niczkowych zwyczajnych rzêdu pierwszego. W tym celu wprowadzamy now± zmienn± v (odpowiadaj±c± prêdko¶ci) bêd±c± pierwsz± pochodn± po³o¿enia, a drug± pochodn± zastêpujemy pierwsz± pochodn± prêdko¶ci:
@@ -152,13 +133,6 @@ v = \dot{x}
 \end{array} \right. 
 \end{equation}
 
-Pamiêtamy przy tym, ¿e:\\
-\begin{equation}
-\left\{ \begin{array}{ll}
- k_2 = 0  &\mbox{ $v \le B$} \\ 
- k_1 = 0 &\mbox{ $v \geq  B$} 
-\end{array} \right. 
-\end{equation}
 
 W wielu jêzykach programowania dostêpne s± funkcje biblioteczne, które potrafi± znale¼æ rozwi±zanie uk³adu równañ ró¿niczkowych zwyczajnych pierwszego rzêdu, takich jak nasz uk³ad \ref{eq:ur2d}. W celu jego rozwi±zania zosta³a wykorzystana funkcja dopri (ang. \textit{Numerical integration of ODE using Dormand-Prince RK method}) z biblioteki Numeric Javascript.
 
@@ -183,7 +157,7 @@ g\sin\alpha \sin\beta
 Zatem nasze równanie ruchu \ref{eq:rownRuchu} bêdzie wygl±da³o nastêpuj±co:
 
 \begin{equation}
-\ddot{x} = g\sin\alpha \sin\beta - (\mu F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2 )
+\ddot{x} = g\sin\alpha \sin\beta - (\mu F_n  + \frac{k_2}{m}\dot{x}^2 )
 \end{equation}
 
 gdzie $F_n$ to si³a nacisku narciarza, która pozostaje taka sama jak w przypadku 2D (\ref{eq:Fn}):
@@ -199,8 +173,8 @@ Transformuj±c powy¿sze równanie na uk³ad wspó³rzêdnych zorientowany wzd³u¿ i wsz
 \begin{equation}
 \label{eq:ur2rzedu}
 \left\{ \begin{array}{ll}
-\ddot{x_x} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))\sin\beta\\
-\ddot{x_y} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))\cos\beta
+\ddot{x_x} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_2}{m}\dot{x}^2))\sin\beta\\
+\ddot{x_y} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_2}{m}\dot{x}^2))\cos\beta
 \end{array} \right.
 \end{equation}
 
@@ -229,8 +203,8 @@ Wprowadzaj±c te informacje do uk³adu równañ \ref{eq:ur2rzedu}, otrzymujemy:
 \left\{ \begin{array}{ll}
 v_x = \dot{x_x}\\
 v_y = \dot{x_y}\\
-\dot{v_x} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))\sin\beta\\
-\dot{v_y} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_1}{m}\dot{x} + \frac{k_2}{m}\dot{x}^2))\cos\beta
+\dot{v_x} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_2}{m}\dot{x}^2))\sin\beta\\
+\dot{v_y} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_2}{m}\dot{x}^2))\cos\beta
 \end{array} \right. 
 \end{equation}\\
 
