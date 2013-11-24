@@ -293,9 +293,13 @@ W celu jak najdok³adniejszego zamodelowania zmian prêdko¶ci podczas poruszania s
 
 Pierwsza strategia opiera siê na obliczaniu kolejno drugich pochodnych funkcji w ka¿dym kolejnym punkcie trasy a nastêpnie zsumowaniu ich bezwzglêdnych warto¶ci. 
 
-\[ \ddot{d_i} = \frac{x_1 + x_3 - 2x_2}{(y_3 -y_2) (y_2-y_1) } \]   
+\begin{equation}
+\ddot{d_i} = \frac{x_1 + x_3 - 2x_2}{(y_3 -y_2) (y_2-y_1) }
+\end{equation}
 
-\[ k =  \sum\limits_{i=1}^{n-1} |\ddot{d_i}|^{3}  \]   
+\begin{equation}
+k =  \sum\limits_{i=1}^{n-1} |\ddot{d_i}|^{3} 
+\end{equation}
 
 Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna warto¶æ oznacza bardzo ³agodne k±ty przej¶cia na ca³ej trasie natomiast im wiêksz± kanciasto¶æ trasy tym wiêksza warto¶æ tego wspó³czynnika. Aby wzmocniæ efektywno¶æ wspó³czynnika, dodatkowo, przed zsumowaniem, warto¶æ bezwzglêdna drugiej pochodnej jest podnoszona do trzeciej potêgi. Wyliczony wspó³czynnik dla ka¿dej z rozwa¿anych w algorytmie tras jest mno¿ony przez obliczony czas przejazdu tej trasy. Dopiero taka liczba jest traktowana jako warto¶æ funkcji celu algorytmu genetycznego. Minusem tej strategii jest kompletne zniekszta³cenie wyników tj. realnego czasu przejazdu narciarza po zadanym torze.
 
@@ -304,8 +308,10 @@ Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna 
 
 W tej strategii, dla ka¿dego prze³amania ³amanej, obliczamy indywidualny wspó³czynnik kary $m$ z zakresu od 0 do 1. D³ugo¶æ wektora prêdko¶ci w ka¿dym kolejnym punkcie bêdzie mno¿ona przez wspó³czynnik dla tego punktu. Modelowane bêdzie zatem przyhamowywanie - tym wiêksze, im wiêkszy jest k±t pomiêdzy kolejnymi punktami ³amanej. Wspó³czynnik w danym punkcie zale¿y od k±ta ABC z rysunku \ref{fig:punish} pomiêdzy poprzednim a nastêpuj±cym punktem. Zaproponowana zosta³a nastêpuj±ca funkcja, zmierzaj±ca do zera dla k±ta 90 stopni i mniejszego, i zmierzaj±ca do jedynki dla 180 stopni.
 
- 
-\[m\left(\alpha\right) = \left \{ {{0.01, \alpha \in \left( 0, 90\right)} \atop {1- \left(  \frac{\alpha}{180} - 1.5  \right)^{6}, \alpha \in \left[ 90, 180\right) }} \right.\]
+
+\begin{equation}
+m\left(\alpha\right) = \left \{ {{0.01, \alpha \in \left( 0, 90\right)} \atop {1- \left(  \frac{\alpha}{180} - 1.5  \right)^{6}, \alpha \in \left[ 90, 180\right) }} \right.
+\end{equation} 
   
  
 \begin{figure}[h]
