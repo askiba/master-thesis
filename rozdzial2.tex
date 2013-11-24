@@ -20,15 +20,14 @@ Parametry te ró¿ni± siê w zale¿no¶ci od dyscypliny. Najbardziej techniczn± dyscy
 
 Aby poprawnie przejechaæ przez bramkê na trasie, w ka¿dej z opisywanych wy¿ej dyscyplin, nale¿y przejechaæ pomiêdzy tyczkami wyznaczaj±cymi tzw. \textit{¶wiat³o bramki}. Bramki wymuszaj± skrêty, ale nie jest tak, ¿e ustawione s± zawsze rytmicznie tzn. wymuszaj±c skrêty raz w praw±, raz w lew± stronê o tym samym promieniu. Najczê¶ciej spotykanym rodzajem bramki jest tzw. \textit{bramka otwarta}. Bramka otwarta, charakteryzuje siê tym, ¿e ¶wiat³o bramki znajduje siê prostopadle do linii spadku stoku. Poza bramkami otwartymi, bramki mog± byæ ustawione w tzw. figury slalomowe. Pierwsz± z nich jest \textit{przelot} i mo¿e wystêpowaæ w ka¿dej z dyscyplin. Przelot polega na ustawieniu dwóch kolejnych bramek w taki sposób, ¿e nie wymuszaj± skrêtu pomiêdzy nimi. Przelot stosowany jest w celu adaptacji trasy przejazdu do konfiguracji terenu, np. gdy na trasie naturalnie wystêpuje d³u¿szy skrêt w jedn± ze stron lub rozpêdzeniu narciarza. Kolejn± figur±, stosowan± ju¿ tylko w slalomie, jest \textit{³okieæ}. £okieæ to dwie bramki ustawione w bliskiej odleg³o¶ci jedna pod drug± w linii spadku stoku. S± to bramki zamkniête, czyli ¶wiat³o bramki jest zgodne z lini± spadku stoku. Figura ta wprowadza zmianê rytmu i równie¿ pozwala na dostosowanie trasy do konfiguracji terenu. Ostatni± z figur, równie¿ stosowan± tylko w slalomie, jest \textit{wertikal}. Wertikal to bramki ustawione tak samo jak w przypadku ³okcia, czyli jedna pod drug±, w linii spadku stoku, z tym, ¿e zamiast dwóch, mo¿e byæ trzy, cztery czy nawet piêæ kolejno tak ustawianych bramek.
 
-%TODO Ania: Dopisa³am na koñcu zdanie o tym ¿e warto czasem wcze¶niej czasem pó¿niej i o podkrêconych. Jak ok, to zma¿ TODO :)
-Opisanie wy¿ej wymienionych elementów, by³o istotne by zrozumieæ problem znajdowania optymalnej trasy. Najtrudniejsze jest bowiem optymalne przejechanie figur slalomowych. Podczas ogl±dania trasy, przed zawodami czy te¿ podczas treningów, zawodnicy zwracaj± du¿± uwagê na zapamiêtanie wystêpuj±cych po sobie figur i przewidywanie, na podstawie do¶wiadczenia, w jaki sposób nale¿y najechaæ na dan± figurê, by zmie¶ciæ siê, czy te¿ najszybciej pokonaæ kolejne, nastêpuj±ce po danej figurze bramki. Poprzez najazd na figurê, rozumiemy moment rozpoczêcia i sposób prowadzenia skrêtu przed figur±. Im wcze¶niej narciarz zrobi najazd, tym szybciej, po poprawnym przejechaniu bramki, bêdzie móg³ zmieniæ kierunek jazdy do kolejnych tyczek. Czasem warto skrêt rozpocz±æ wcze¶niej, tak by zmie¶ciæ siê w kolejnej podkrêconej bramce, czasem z kolei warto wybraæ tor bardziej "wypuszczony" gdy konfiguracja slalomu pozwala na nabranie prêdko¶ci.  
+Opisanie wy¿ej wymienionych elementów, by³o istotne by zrozumieæ problem znajdowania optymalnej trasy. Najtrudniejsze jest bowiem optymalne przejechanie figur slalomowych. Podczas ogl±dania trasy, przed zawodami czy te¿ podczas treningów, zawodnicy zwracaj± du¿± uwagê na zapamiêtanie wystêpuj±cych po sobie figur i przewidywanie, na podstawie do¶wiadczenia, w jaki sposób nale¿y najechaæ na dan± figurê, by zmie¶ciæ siê, czy te¿ najszybciej pokonaæ kolejne, nastêpuj±ce po danej figurze bramki. Poprzez najazd na figurê, rozumiemy moment rozpoczêcia i sposób prowadzenia skrêtu przed figur±. Im wcze¶niej narciarz zrobi najazd, tym szybciej, po poprawnym przejechaniu bramki, bêdzie móg³ zmieniæ kierunek jazdy do kolejnych tyczek. Czasem warto skrêt rozpocz±æ wcze¶niej, tak by zmie¶ciæ siê w kolejnej podkrêconej bramce, czasem z kolei warto wybraæ tor bardziej "wypuszczony", gdy konfiguracja slalomu pozwala na nabranie prêdko¶ci.  
 
 %---------------------------------------------------------------------------
 
 \section{Fizyczny model narciarza}
 \label{sec:fizycznyModel}
 
-%TODO FIXME jedno zdanie na temat rozdzia³u?
+Aby dobrze odwzorowaæ jazdê narciarza nale¿y uwzglêdniæ wszystkie zachodz±ce zjawiska fizyczne. W tym rozdziale pokazane zostanie w jaki sposób mo¿emy zamodelowaæ odpowiednie zachowanie narciarza uwzglêdniaj±ce te zjawiska.
 
 \subsubsection{Si³a oporu powietrza}
 \label{sec:oporPowietrza}
@@ -45,6 +44,7 @@ $\rho$ - gêsto¶æ powietrza w jednostce $\frac{kg}{m^3}$. Warto¶ci gêsto¶ci powie
 
 A - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶ci narciarza wyra¿ona w $m^{2}$.
 
+%TODO FIXME Marta brak opisu
 \begin{figure}[h]
 \label{fig:airDrag}
 \centering
