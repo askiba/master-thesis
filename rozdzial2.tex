@@ -1,4 +1,4 @@
-\chapter{Wprowadzenie teoretyczne}
+\chapter{Wprowadzenie teoretyczne i istniej±ce rozwi±zania - Optymalizacja}
 \label{cha:wstepTeoretyczny}
 
 Zrozumienie istoty przedstawionego w tej pracy rozwi±zania doboru optymalnej trasy narciarza, zarówno pod wzglêdem algorytmicznym jak i architektonicznym, wymaga zaznajomienia siê z istotnymi pojêciami. W tym rozdziale, przedstawimy i opiszemy te pojêcia.
@@ -344,36 +344,56 @@ W przestrzeni ci±g³ej konieczne jest dobranie kroku, który wyznacza punkty przes
 \end{algorithmic}
 \end{algorithm}
 
+\section{Inne podej¶cia do problemu znajdowania optymalnego toru przejazdu}
+\label{sec:innePodejscia}
+
+%TODO Ania wstaw proszê odniesienie do elementu FMCNewZeland w bibliografi gdzie¶ w tym rozdziale tak jak trzeba
+
+Matthew Brodie z Massey University w Nowej Zelandii jako pierwszy na ¶wiecie wykorzysta³ w³asnorêcznie zaprojektowany i wykonany system sk³adaj±cy siê z sieci miniaturowych czujników mocowanych na ciele narciarza, po³±czonego z GPS, w celu ¶ledzenia i analizy ruchu narciarza jad±cego po slalomie. System, nazywaj±cy siê Motion Capture Fusion (FMC), zosta³ stworzony, by jak twierdzi autor, pomóc narciarzom ze ¶wiatowej czo³ówki lepiej rozumieæ co dzieje siê z nimi podczas jazdy, zoptymalizowaæ jazdê, a w konsekwencji doprowadziæ ich do wiêkszej ilo¶ci zwyciêstw i z³otych medali. Opis systemu oraz wnioski zamie¶ci³ w swojej pracy doktorskiej pod tytu³em \textit{Optimisation of Performance in Alpine Ski Racing with Fusion Motion Capture}. Prezentacjê systemu oraz jego funkcjonowania mo¿na obejrzeæ w kanale Matthew'a w serwisie YouTube.
+
+\paragraph{Poni¿ej przedstawimy najwa¿niejsze wnioski Matthew'a, zawarte w jego pracy doktorskiej}
+
+\begin{itemize}
+\item Optymalna strategia na pokonywanie trasy slalomu jest kompromisem miêdzy ciasnymi skrêtami, prowadz±cymi do toru o mniejszej d³ugo¶ci, a bardziej otwartymi skrêtami o wiêkszym promieniu, które umo¿liwiaj± utrzymanie wiêkszej prêdko¶ci w skrêcie.
+\item Najkrótsza droga wcale nie jest czêsto najszybsz± drog±. Ka¿da bramka ma inny optymalny sposób na jej przejechanie.
+\item Zawodnicy czêsto dobieraj± skrêty o identycznym promieniu skrêtu, bo jest to dla nich bardziej naturalne ni¿ skrêty o zmiennym promieniu. Tymczasem warto do ka¿dej bramki dobieraæ optymalny promieñ i punkt rozpoczêcia skrêtu.
+\item W niektórych konfiguracjach terenu, optymalny promieñ skrêtu jest ograniczony poprzez maksymalny k±t pomiêdzy krawêdziami nart a ¶niegiem, jaki narciarz mo¿e utrzymaæ.
+\item Wyniki do¶wiadczalne zaprzeczaj± wynikom laboratoryjnym i sugeruj±, ¿e podczas przejazdu slalomu giganta, opór ¶niegu ma tak samo du¿e znaczenia co opór powietrza. 
+\item W pewnych warunkach, tj. przy prêdko¶ci mniejszej ni¿ 20 m/s i terenie o nachyleniu mniejszym ni¿ 25 procent, narciarz mo¿e poprzez pracê miê¶ni - tzw. \textit{pompowanie} - zwiêkszyæ przyspieszenie w zakrêtach, a wiêc w rezultacie zmniejszyæ czas przejazdu. 
+\item Dobór sprzêtu, dostosowany zarówno do konkretnej trasy i jej nachylenia, jak i do warunków fizycznych zawodnika, ma znaczny wp³yw na otrzymywane przez niego wyniki.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=250px]{matt-1} 
+\caption{Klatka z materia³u wideo na kanele Matthewa umieszczonego w serwisie YouTube, na którym pokazuje przygotowania do testowania systemu na stoku narciarskim. Na kasku narciarza widaæ zamontowany GPS}
+\label{fig:matt-1} 
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=250px]{matt-2} 
+\caption{Klatka z materia³u wideo na kanele Matthewa umieszczonego w serwisie YouTube, która przedstawia wizualizacjê zebranych na stoku danych, w stworzonym przez Matthewa oprogramowaniu.}
+\label{fig:matt-2} 
+\end{figure}
+
+%TODO @Ania to chyba nie jest miejsce w pracy na podsumowanie. Wspomne o tym w rozdzaile 6-tym ok? FIXME Marta podsumowanie czemu my lepsze ni¿ to albo przynajmniej inne 
+
+\section{Wp³yw pozycji narciarza na szybko¶æ poruszania siê}
+\label{sec:symulacjaPozycjaS}
+
+W nawi±zaniu do sekcji teoretycznej \ref{sec:oporPowietrza} ze strony \pageref{sec:oporPowietrza}, w której jest zaznaczony wp³yw sylwetki narciarza na warto¶æ si³y oporu, warto pokazaæ aplikacjê stworzon± przez Francusk± Federacjê Narciarsk±.
+
+Aplikacja jest skierowana do narciarzy z federacji i ma im pokazaæ jak bardzo wybór pozycji wp³ywa na ich ostateczny wynik na zawodach. U¿ytkownik ma do wyboru sze¶æ ró¿nych pozycji zjazdowych oraz trzy warto¶ci prêdko¶ci pocz±tkowych. Mo¿e wybraæ pozycjê bazow± oraz pozycjê docelow± oraz prêdko¶æ jak± ma bêd±c w pozycji bazowej. Program symuluje jaka bêdzie zmiana prêdko¶ci narciarza po przej¶ciu do pozycji docelowej po 100 metrach jazdy w dó³ w linii prostej. Co wiêcej, program wskazuje jaka bêdzie ró¿nica w prêdko¶ci narciarza po 200 metrach, z za³o¿eniem, ¿e po 100 metrach narciarz wróci³ do pozycji referencyjnej. Jest to o tyle istotne, ¿e pozwala u¶wiadomiæ zawodnikom, ¿e powinni wykorzystywaæ ka¿d± sytuacjê do przyjêcia jak najbardziej optymalnej pozycji. 
+
+Zrzut ekranu aplikacji jest na rycinie \ref{fig:frenchapp} na stronie \pageref{fig:frenchapp}, a aplikacja opisana jest w pracy %TODO Ania dodaj proszê referencjê do AirDrag z biblio.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=270px]{frenchapp}
+\caption{Zrzut ekranu z aplikacji Francuskiej Federacji Narciarskiej, zaczerpniêty z pracy AirDrag} %TODO Ania ref AirDrag z Bibilio
+\label{fig:frenchapp}
+\end{figure}
+
 %---------------------------------------------------------------------------
 
-\section{Volunteer Computing}
-\label{volunteerComputing}
-
-%TODO Ania wstaw prosze odno¶nik do pozycji VolunteerIntro z biblio
-Volunteer Computing to nieformalny kontrakt, w którym zwykli ludzie czy te¿ organizacje, nazywani dalej ochotnikami, dobrowolnie udostêpniaj± swoje zasoby obliczeniowe, by uruchamiaæ na nich obliczenia zwi±zane z ró¿norakimi projektami. S± to przewa¿nie projekty naukowe, których celem jest rozwi±zanie problemów i zadañ matematycznych czy te¿ problemów dotykaj±cych ludzko¶æ, lub d±¿±cych do lepszego poznania ¶wiata i wszech¶wiata. Dziêki platformom umo¿liwiaj±cym Volunteer Computing, ka¿dy cz³owiek mo¿e w niewielkim stopniu mieæ wk³ad w rozwi±zywanie tych problemów.
-
-Procesory w komputerach osobistych spêdzaj± oko³o 80 procent czasu nie robi±c nic. Równocze¶nie wiele naukowych problemów zwi±zanych na przyk³ad z modelowaniem zmian klimatu potrzebuje ogromnych zasobów obliczeniowych. U¿ywanie do tego celu superkomputerów jest bardzo drogie. Po³±czenie tych faktów doprowadzi³o do stworzenia konceptu, by u¿ywaæ do tych obliczeñ zasobów zwyk³ych ludzi, którzy chc± siê ¶wiadomie nimi dzieliæ. Obecne do¶wiadczenia wskazuj±, ¿e wydajno¶æ systemu dla pojedynczo prowadzonego projektu opartego o Volunteer Computing jest porównywalna do tego, gdyby projekt prowadzony by³ przy wsparciu jednego z topowych superkomputerów z listy TOP500.
-
-Ochotnicy to osoby prywatne albo instytucje takie jak szko³y czy uniwersytety. Ochotnicy przewa¿nie pozostaj± anonimowi, choæ w niektórych projektach wymagane jest dostarczenie podstawowych danych kontaktowych jak np. adresu email. W wypadku celowego dostarczania b³êdnych wyników przez ochotnika, utrudnione jest jego dyscyplinowanie czy te¿ wy³±czenie z projektu. Ochotnicy nie s± wynagradzani finansowo za uczestnictwo w projekcie. 
-
-Organizacja czy osoba chc±ca wykorzystaæ model Volunteer computing do swoich projektów, musi byæ jednostk± zaufan± dla ochotników realizuj±cych obliczenia. Wynika to z prostego faktu, ¿e ochotnicy decyduj± siê, wed³ug standardowego modelu computing, na zainstalowanie aplikacji dostarczanej przez dawcê zadañ obliczeniowych. Osoba instaluj±ca aplikacjê musi ufaæ, ¿e nie uszkodzi ona jej komputera, ani te¿ nie bêdzie wykorzystywaæ jej zasobów w sposób niezgodny z zapewnieniami zleceniodawcy obliczeñ. Zleceniobiorca obliczeñ ma te¿ prawo oczekiwaæ, ¿e aplikacja, zosta³a napisana przestrzegaj±c dobrych praktyk bezpieczeñstwa, gdy¿ jako, ¿e aplikacja ta ³±czy siê z internetem i potencjalnie jest zainstalowana na du¿ej ilo¶ci maszyn, jest wiêc atrakcyjnym celem ataków zmierzaj±cych do przejêcia tych maszyn do niezgodnych z prawem celów przez hakerów. 
-
-Przewa¿nie model komunikacyjny systemu Volunteer Computing uwzglêdnia tylko komunikacjê poszczególnych klientów z centralnym serwerem i nie zak³ada bezpo¶redniej komunikacji miêdzy klientami.
-
-Volunteer Computing pierwotnie zak³ada³, ¿e obliczenia s± wykonywane na zwyk³ych komputerach osobistych (PC). Ilo¶æ komputerów tego typu jest nieporównywalnie wiêksza ni¿ ilo¶æ wyspecjalizowanych komputerów o du¿ej mocy obliczeniowej i jest szacowana na ponad miliard. Dodatkowo, z przyczyn ekonomicznych, na rozwój tych maszyn producenci sprzêtu przeznaczaj± najwiêksze fundusze, wiêc ich moc i zdolno¶ci obliczeniowe stale rosn±. 
-
-Wa¿nym aspektem, który istotnie wp³ywa na stosowanie modelu w praktyce, jest koszt prowadzenia obliczeñ. Model zak³ada, ¿e do³±czanie siê do obliczeñ jest dobrowolne i nie dostaje siê za uczestnictwo w projekcie wynagrodzenia. Dziêki temu, projekty, które maj± poparcie i akceptacjê spo³eczn± mog± liczyæ na darmowe moce obliczeniowe udostêpnione przez zwyk³ych ludzi.
-
-Na ten model mo¿na patrzyæ tak¿e w kategoriach edukacyjnych. Podczas gdy ochotnik przystêpuje do projektu i udostêpnia swoje moce obliczeniowe, mo¿na wykorzystaæ jego potencjalne zainteresowanie rozwi±zywanym problemem i za pomoc± przystêpnych wizualizacji przedstawiæ mu sedno rozwi±zywanego zadania, nakre¶liæ mu problem z ró¿nych perspektyw i pokazaæ mu do czego potencjalnie zmierzaj± obliczenia. Po³±czenie atrakcyjnej formy t³umaczenia rozwi±zywanych problemów z potencja³em portali spo³eczno¶ciowych i popularno¶ci ciekawego materia³u mo¿na uzyskaæ daleko id±cy efekt propagacji i pod³±czaniu siê do obliczeñ coraz wiêkszej ilo¶ci osób.
-
-\section{Web Workers}
-\label{webWorkers}
-
-%TODO Ania wstaw proszê odno¶nik do pozycji WebWorkersSpec z biblio
-Przeprowadzanie intensywnych obliczeñ w przegl±darkach internetowych nie by³o mo¿liwe do czasu wprowadzenia przez grupê WHATWG (Web Hypertext Application Technology Working Group) specyfikacji Web Worker. Ograniczenie wynika³o z faktu, ¿e jêzyk w którym wykonywane s± skrypty poprzez silniki przegl±darki to Java Script. Java Script to ¶rodowisko jednow±tkowe, wiêc nic nie mo¿e byæ wykonywane równolegle. Zlecaj±c wiêc skryptowi intensywne obliczenia, na ich ca³y czas UI strony by³by nieresponsywny, co jest nie do przyjêcia dla cz³owieka obs³uguj±cego stronê internetow±. Przegl±darki broni± u¿ytkownika przed takim zachowaniem skryptów na stronie i czasami zdarza siê jeszcze zobaczyæ okno z ostrze¿eniem, ¿e skrypt przesta³ odpowiadaæ i mo¿liwo¶ci± manualnego zatrzymania skryptu.
-
-Web Workers definiuje API do tworzenia osobnych procesów w tle. Worker'y wykorzystuj± do komunikacji z w±tkiem g³ównym klasyczny model przekazywania wiadomo¶ci. Nowoczesne przegl±darki umo¿liwiaj± przekazywanie zarówno tekstu jak i obiektów zserializowanych w formacie JSON. Nale¿y zwróciæ uwagê, ¿e obiekty te nie s± wspó³dzielone, ale w pe³ni kopiowane. 
-
-Web Worker'y nie maj± dostêpu do struktury DOM, obiektu \textit{window} ani \textit{document}. Zewnêtrzne skrypty wykorzystywane przez worker'a musz± byæ serwowane z tej samej domeny co kod worker'a.
-
-Wed³ug specyfikacji, stworzonej przez WHATWG, Web Workery powinny byæ u¿ywane do zadañ trwaj±cych d³u¿szy czas, maj±cych du¿y narzut startowy i spory narzut pamiêciowy. Nie jest wiêc odpowiednim tworzenie bardzo wielu worker'ów zajmuj±cych siê obliczeniami trwaj±cymi marginalny czas, gdy¿ sam narzut na stworzenie przez przegl±darkê osobnego procesu mo¿e byæ zbyt du¿y, by uzasadniæ jego u¿ycie.
