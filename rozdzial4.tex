@@ -21,8 +21,8 @@ Narciarz traktowany jest jako punkt materialny o masie m.
 Oznaczenia:
 \begin{itemize}
 \item m - masa
-\item g - wspó³czynnik grawitacji
-\item $\alpha$ - k±t nachylenia powierzchni stoku do powierzchni ziemi
+\item g - przyspieszenie ziemskie
+\item $\alpha$ - k±t nachylenia stoku
 \end{itemize}
 
 Si³a grawitacji dzia³aj±ca na obiekt o masie m:\\
@@ -30,36 +30,41 @@ Si³a grawitacji dzia³aj±ca na obiekt o masie m:\\
 Q = mg
 \end{equation}
 
-Si³a ta mo¿e zostaæ roz³o¿ona na dwie si³y sk³adowe wzglêdem powierzchni stoku. Narciarz poruszaj±cy siê w dó³ stoku przypomina klasyczny przyk³ad punktu materialnego staczaj±cego siê po równi pochy³ej. Rozk³ad si³ w takim przypadku rozrysowany jest na rysunku \ref{fig:inclinedPlane}.\\
+Si³a ta mo¿e zostaæ roz³o¿ona na dwie sk³adowe wzglêdem powierzchni stoku:
+\begin{itemize}
+\item równoleg³±, wynosz±c± $Q_a$,
+\item prostopad³± $F_n$.
+\end{itemize}
+Narciarz poruszaj±cy siê w dó³ stoku jest modelowany jako punkt materialny poruszaj±cego siê po równi pochy³ej. Rozk³ad si³ w takim przypadku rozrysowany jest na rysunku \ref{fig:inclinedPlane}.\\
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=1]{model/inclinedPlane}
-\caption{Rozk³ad si³ na równi pochy³ej}
+\caption{Rozk³ad si³ dzia³aj±cych na narciarza przemieszczaj±cego siê na równi pochy³ej}
 \label{fig:inclinedPlane}
 \end{figure}
 
-Sk³adowa si³y grawitacji równoleg³a do powierzchni stoku wynosi:\\
+Sk³adowa si³y grawitacji równoleg³a do powierzchni stoku jest równa:\\
 \begin{equation}
 \label{eq:Qa}
 Q_a = mg\sin\alpha
 \end{equation}
 
-jest to si³a ¶ci±gaj±ca narciarza w dó³ stoku.
+Si³a $Q_a$ jest si³± ¶ci±gaj±c± narciarza w dó³ stoku.
 
-Sk³adowa si³y grawitacji prostopad³a do powierzchni stoku, czyli nacisk jaki narciarz wywiera swoj± mas± na powierzchniê stoku, wynosi:\\
+Sk³adowa si³y grawitacji prostopad³a do powierzchni stoku, czyli nacisk jaki narciarz wywiera swoj± mas± na powierzchniê stoku, jest równa:\\
 \begin{equation}
 \label{eq:Fn}
 F_n = mg\cos\alpha
 \end{equation}
 
-Warto¶æ tej si³y wp³ywa na warto¶æ si³y tarcia dzia³aj±cej na narciarza:\\
+Warto¶æ tej si³y wp³ywa na si³ê tarcia dzia³aj±cej na narciarza:\\
 \begin{equation}
 \label{eq:Ff}
 F_f = \mu F_n = \mu mg\cos\alpha
 \end{equation}
 
-Oprócz si³y tarcia uwzglêdniamy równie¿ inn± si³ê oporu jak± jest si³a oporu powietrza. Zale¿y ona od prêdko¶ci poruszania siê obiektu. Prêdko¶æ bêdziemy wyra¿aæ jako pierwsz± pochodn± po³o¿enia, oznaczan± przez $ \dot{x} $:\\
+Oprócz si³y tarcia uwzglêdniamy równie¿ si³ê oporu powietrza. Zale¿y ona od prêdko¶ci poruszania siê obiektu. Prêdko¶æ bêdziemy wyra¿aæ jako pierwsz± pochodn± po³o¿enia, oznaczan± przez $ \dot{x} $:\\
 \begin{equation}
 \label{eq:Fd}
 F_d = k_2\dot{x}^2
@@ -73,7 +78,7 @@ k_2 = \frac{1}{2} C \rho A
 gdzie:\\
 $ C $ - wspó³czynnik oporu\\
 $ \rho $ - gêsto¶æ powietrza\\
-$ A $ - powierzchnia przednia narciarza prostopad³a do kierunku przep³ywu, a zatem prostopad³a do wektora prêdko¶ci narciarza
+$ A $ - powierzchnia narciarza prostopad³a do kierunku ruchu
 
 Wiêcej o sile oporu powietrza jest opisane w sekcji \ref{sec:oporPowietrza} na stronie \pageref{sec:oporPowietrza}.
 
@@ -96,7 +101,7 @@ Korzystaj±c z wcze¶niejszych równañ \ref{eq:Qa}, \ref{eq:Ff} i \ref{eq:Fd} opisu
 ma = mg\sin\alpha - \mu mg\cos\alpha - k_2\dot{x}^2
 \end{equation}
 
-Wyra¼my teraz przyspieszenie jako drug± pochodn± po³o¿enia:
+Wyra¼my teraz przyspieszenie jako drug± pochodn± przemieszczenia:
 
 \begin{equation}
 a = \ddot{x} 
@@ -115,7 +120,7 @@ Zatem po podzieleniu przez m:
 \ddot{x}=g\sin\alpha-\mu g\cos\alpha - \frac{k_2}{m}\dot{x}^2
 \end{equation}
 
-Jest to równanie ró¿niczkowe zwyczajne drugiego rzêdu. Aby rozwi±zaæ to równanie numerycznie, przedstawimy to równanie jako uk³ad równañ ró¿niczkowych zwyczajnych rzêdu pierwszego. W tym celu wprowadzamy now± zmienn± v (odpowiadaj±c± prêdko¶ci) bêd±c± pierwsz± pochodn± po³o¿enia, a drug± pochodn± zastêpujemy pierwsz± pochodn± prêdko¶ci:
+Jest to równanie ró¿niczkowe zwyczajne drugiego rzêdu. Aby rozwi±zaæ to równanie numerycznie, przedstawimy to równanie jako uk³ad równañ ró¿niczkowych zwyczajnych rzêdu pierwszego. W tym celu wprowadzamy now± zmienn± v (odpowiadaj±c± prêdko¶ci) bêd±c± pierwsz± pochodn± przemieszczenia, a drug± pochodn± zastêpujemy pierwsz± pochodn± prêdko¶ci:
 
 \begin{equation}
 \left\{ \begin{array}{ll}

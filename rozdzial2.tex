@@ -99,7 +99,7 @@ W tym podrozdziale opisane s± metody optymalizacji u¿yte w zaproponowanym rozwi±
 Zadaniem optymalizacji jest przeszukanie przestrzeni rozwi±zañ w celu znalezienia najlepszego. Zatem, dana jest funkcja, nazywan± funkcj± celu, która ka¿demu punktowi reprezentuj±cemu rozwi±zanie problemu przypisuje jak±¶ warto¶æ oceniaj±c± jego jako¶æ. W¶ród wszystkich rozwi±zañ poszukujemy takiego, dla którego warto¶æ tej funkcji bêdzie jak najmniejsza (b±d¼ jak najwiêksza) - najlepsza z naszego punktu widzenia. Trudno¶æ w znalezieniu takiego rozwi±zania zale¿y od charakteru funkcji celu, a czasem tak¿e od nieznajomo¶ci jej analitycznej postaci.
 
 %TODO Ania biblio Algorytmy genetyczne i cos?
-\subsubsection{Optymalizacja lokalna i globalna}
+\subsection{Optymalizacja lokalna i globalna}
 W przypadku funkcji z jednym optimum do znalezienia najlepszego rozwi±zania wystarczy przeszukiwanie lokalne. Polega ono na iteracyjnym sprawdzaniu rozwi±zañ w najbli¿szej przestrzeni i wprowadzaniu lokalnych zmian, aby w koñcu znale¼æ rozwi±zanie najlepsze w okolicy tzw. optimum lokalne. Je¶li wiemy, ¿e istnieje tylko jedno takie optimum, mo¿emy mieæ pewno¶æ, ¿e znalezione rozwi±zanie jest najlepszym w ca³ej przestrzeni rozwi±zañ. Przyk³adami optymalizacji lokalnych s±:
 \begin{itemize}
 \item hill climbing
@@ -116,7 +116,7 @@ Podstaw± ca³ego algorytmu jest populacja osobników, z których ka¿dy reprezentuje
 Funkcja przystosowania okre¶la warto¶æ przystosowania osobnika na podstawie jego fenotypu, który jest tworzony z genotypu. Genotyp okre¶la zestaw cech danego osobnika i sk³ada siê z chromosomów (najczê¶ciej z jednego). Natomiast ka¿dy z chromosomów sk³ada siê z elementarnych jednostek - genów.\\
 
 \subsubsection{Schemat dzia³ania algorytmu ewolucyjnego}
-Algorytm ewolucyjny rozpoczyna siê poprzez wygenerowanie populacji bazowej oraz obliczenie przystosowania jej osobników. Przewa¿nie osobniki te generowane s± ca³kowicie losowo, ale mo¿na tak¿e wprowadziæ konkretne osobniki np. o znanym dobrym przystosowaniu do ¶rodowiska.
+Na pocz±tku algorytmu ewolucyjnego generowana jest populacja bazowa oraz obliczane przystosowanie ka¿dego z jej osobników. Przewa¿nie osobniki te generowane s± ca³kowicie losowo, ale mo¿na tak¿e wprowadziæ konkretne osobniki np. o znanym dobrym przystosowaniu do ¶rodowiska.
 
 G³ówna czê¶æ algorytmu opiera siê na powtarzaniu pêtli, w której wykonywane s± kolejno:
 
@@ -138,11 +138,11 @@ Nastêpnie na tych kopiach przeprowadzane s± operacje genetyczne powoduj±ce zmian
 \end{itemize}
 
 Zadaniem mutacji jest losowe zmodyfikowanie genów w genotypie.\\
-Krzy¿owanie, zwane tak¿e rekombinacj± (ang. \textit{crossover}), dzia³a na co najmniej dwóch osobnikach i na podstawie ich genotypu tworzy jeden lub wiêcej osobników potomnych. Chromosomy rodzicielskie s± mieszane w celu otrzymania nowych genotypów dla osobników potomnych.
+Krzy¿owanie, zwane tak¿e rekombinacj± (ang. \textit{crossover}), dzia³a na co najmniej dwóch osobnikach i na podstawie ich genotypów tworzy jeden lub wiêcej osobników potomnych. Chromosomy rodzicielskie s± mieszane w celu otrzymania nowych genotypów dla osobników potomnych.
 
 W wyniku operacji genetycznych powstaj± nowe osobniki, które wchodz± w sk³ad populacji potomnej. Ka¿dy z tych osobników jest oceniany za pomoc± funkcji przystosowania. Porównuj±c jako¶æ osobników z populacji bazowej oraz potomnej dokonuje siê sukcesji, czyli wyboru osobników z tych populacji (czasem wy³±cznie z populacji potomnej) i tworzy now± populacjê bazow±.
 
-Zakoñczenie dzia³ania algorytmu przewa¿nie opiera siê na badaniu funkcji przystosowania ca³ej populacji. Je¶li warto¶æ przystosowania populacji nie jest zró¿nicowana mówimy o stagnacji algorytmu i mo¿e byæ to wskazaniem do zakoñczenia dzia³ania algorytmu. Czasem jednak oczekuje siê a¿ przystosowanie to bêdzie wystarczaj±co du¿e, ¿eby stwierdziæ, ¿e znalezione rozwi±zanie jest bardzo dobre. Przewa¿nie jednak nie znamy nawet przybli¿onej warto¶ci jako¶ci rozwi±zania, wiêc nie mo¿emy stwierdziæ kiedy przystosowanie jest odpowiednie i czy nie mo¿e siê jeszcze znacznie poprawiæ.
+Decyzja o zakoñczeniu dzia³ania algorytmu przewa¿nie podejmowana jest w oparciu o badanie funkcji przystosowania ca³ej populacji. Je¶li warto¶æ przystosowania populacji nie jest zró¿nicowana mówimy o stagnacji algorytmu i mo¿e byæ to wskazaniem do zakoñczenia dzia³ania algorytmu. Czasem jednak oczekuje siê a¿ przystosowanie to bêdzie wystarczaj±co du¿e, ¿eby stwierdziæ, ¿e znalezione rozwi±zanie jest bardzo dobre. Przewa¿nie jednak nie znamy nawet przybli¿onej warto¶ci przystosowania rozwi±zania, wiêc nie mo¿emy stwierdziæ kiedy przystosowanie jest odpowiednie i czy nie mo¿e siê jeszcze znacznie poprawiæ.
 
 \subsubsection{Kodowanie osobników}
 W przypadku algorytmów genetycznych, bêd±cych szczególnym przypadkiem algorytmów ewolucyjnych, do kodowania osobników stosuje siê kodowanie binarne chromosomów. Pojedynczy bit reprezentuje zatem gen nale¿±cy do chromosomu.\\
@@ -227,7 +227,7 @@ Oznaczenie $\mu$ + $\lambda$ oznacza, ¿e po wygenerowaniu populacji potomnej wyb
 \end{algorithm}
 
 
-W strategii tej wa¿ne jest te¿ kodowanie, do którego dodatkowo do³o¿ono równie¿ chromosom przechowuj±cy wektor $\sigma$ zawieraj±cy warto¶ci odchyleñ standardowych, które wykorzystuje siê w trakcie mutacji.\\
+W strategii tej wa¿ne jest te¿ kodowanie, do którego dodatkowo do³o¿ono chromosom przechowuj±cy wektor $\sigma$ zawieraj±cy warto¶ci odchyleñ standardowych, które wykorzystuje siê w trakcie mutacji.\\
 Po wylosowaniu warto¶ci zmiennej losowej o rozk³adzie normalnym ($\xi_{N(0,1)}$) dla ka¿dego elementu wektora $\sigma$ losujemy jeszcze jedn± zmienn± losow± o rozk³adzie normalnym ($\xi_{N(0,1),i}$) i obliczamy nowe warto¶ci odchyleñ z wektora $\sigma$:
 
 \begin{equation}
@@ -246,8 +246,9 @@ Gdzie $\tau$ oraz $\tau'$ s± parametrami algorytmu, a ich warto¶ci powinny wynos
 
 %TODO Ania biblio Schwefel(1995) (http://ls11-www.cs.uni-dortmund.de/people/rudolph/publications/papers/gra.pdf)
 gdzie:
-K - sta³a, najczê¶ciej stosuje siê warto¶æ 1
-n - wymiarowo¶æ zadania
+\begin{itemize}
+\item K - sta³a, najczê¶ciej stosuje siê warto¶æ 1
+\item n - wymiarowo¶æ zadania
 
 Maj±c dane nowe warto¶ci odchyleñ standardowych mo¿emy obliczyæ nowe warto¶ci genów korzystaj±c ze wzoru:
 
@@ -258,10 +259,10 @@ gdzie $\xi_{N(0,1),i}$ jest now± losow± warto¶ci±.
 
 Algorytm ewolucyjny wybiera osobniki lepiej przystosowane, a wiêc te, które posiadaj± tak¿e lepsze warto¶ci odchyleñ standardowych. Powoduje to naturaln± selekcjê, doprowadzaj±c± do samoczynnej adaptacji odchyleñ standardowych stosowanych w trakcie mutacji.
 
-Krzy¿owanie wystêpuje w tym algorytmie pod nazw± rekombinacja. Najczê¶ciej sprowadza siê do u¶rednienia lub wymianie warto¶ci wektorów, tak¿e wektora $\sigma$.
+Krzy¿owanie wystêpuje w tym algorytmie pod nazw± ``rekombinacja''. Najczê¶ciej sprowadza siê do u¶rednienia lub wymianie warto¶ci sk³adowe wektorów, tak¿e warto¶ci $\sigma$.
 
 \textbf{Strategia ($\mu$, $\lambda$)}
-Strategia ($\mu$ + $\lambda$) posiada pewne wady, które postanowiono spróbowaæ wyeliminowaæ za pomoc± nowej strategii ($\mu$, $\lambda$). Poprzedni algorytm sprawia problemy je¶li w populacji pojawia siê osobnik o wysokiej warto¶ci przystosowania, ale posiadaj±cy zbyt du¿e (albo zbyt ma³e) warto¶ci odchyleñ standardowych. Usuniêcie takiego osobnika z populacji czêsto nie jest procesem krótkotrwa³ym, gdy¿ wp³ywa on na powstaj±ce potomstwo, przekazuj±c mu podobne do jego, nieodpowiednie warto¶ci odchyleñ.\\
+Strategia ($\mu$ + $\lambda$) posiada pewne wady, które wyeliminowano za pomoc± nowej strategii ($\mu$, $\lambda$). Poprzedni algorytm sprawia problemy je¶li w populacji pojawia siê osobnik o wysokiej warto¶ci przystosowania, ale posiadaj±cy zbyt du¿e (albo zbyt ma³e) warto¶ci odchyleñ standardowych. Usuniêcie takiego osobnika z populacji czêsto nie jest procesem krótkotrwa³ym, gdy¿ wp³ywa on na powstaj±ce potomstwo, przekazuj±c mu podobne do jego, nieodpowiednie warto¶ci odchyleñ.\\
 W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie nie s± nigdy brane do kolejnej populacji bazowej. Podczas selekcji korzysta siê zatem tylko z powsta³ej populacji potomnej, z niej wybieraj±c osobniki do populacji bazowej w kolejnej iteracji. Algorytm \ref{alg:miLambda} prezentuje kolejne kroki schematu tego algorytmu.
 
 \begin{algorithm}
