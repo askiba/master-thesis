@@ -27,11 +27,11 @@ Podczas ogl±dania trasy, przed zawodami czy te¿ podczas treningów, zawodnicy zwr
 \section{Fizyczny model narciarza}
 \label{sec:fizycznyModel}
 
-Aby dobrze odwzorowaæ jazdê narciarza nale¿y uwzglêdniæ wszystkie zachodz±ce zjawiska fizyczne. W tym rozdziale pokazane zostanie w jaki sposób mo¿emy zamodelowaæ odpowiednie zachowanie narciarza uwzglêdniaj±ce te zjawiska.
+Aby dobrze odwzorowaæ jazdê narciarza po slalomie, nale¿y uwzglêdniæ wszystkie zachodz±ce w jego ¶rodowisku zjawiska fizyczne. W tym rozdziale pokazane zostanie w jaki sposób jest mo¿liwe zamodelowanie narciarza, stoku oraz trasu po którym siê porusza.
 
 \subsubsection{Si³a oporu powietrza}
 \label{sec:oporPowietrza}
-Si³a oporu powietrza jest przyk³adem si³y tarcia p³ynu. Zale¿no¶æ warto¶ci tej si³y od prêdko¶ci mo¿e byæ bardzo z³o¿ona i skomplikowana i tylko w specjalnych przypadkach mo¿e byæ rozwi±zana analitycznie. Si³a oporu powietrza jest w dobrym przybli¿eniu proporcjonalna do kwadratu prêdko¶ci i zale¿no¶æ t±, mo¿na opisaæ równaniem:
+Si³a oporu powietrza jest przyk³adem si³y tarcia p³ynu. Zale¿no¶æ warto¶ci tej si³y od prêdko¶ci mo¿e byæ bardzo z³o¿ona. Tylko w specjalnych przypadkach równanie opisuj±ce si³ê oporu powietrza mo¿e byæ rozwi±zana analitycznie. Si³a oporu powietrza jest w dobrym przybli¿eniu proporcjonalna do kwadratu prêdko¶ci poruszaj±cego siê obiektu i zale¿no¶æ t±, mo¿na opisaæ równaniem:
 
 
 \begin{equation}
@@ -44,10 +44,9 @@ $\rho$ - gêsto¶æ powietrza w jednostce $\frac{kg}{m^3}$. Warto¶ci gêsto¶ci powie
 
 A - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶ci narciarza wyra¿ona w $m^{2}$.
 
-%TODO FIXME Marta brak opisu
 \begin{figure}[h]
 \label{fig:airDrag}
-\caption{Warto¶æ wspó³czynnika $A$ w zale¿no¶ci od pozycji narciarza. Grafika pochodzi z badañ prowadzonych w tunelu aerodynamicznym IAT we Francji, opiasnych przez Caroline Barelle z National Technical University of Athens z Grecji.}
+\caption{Warto¶æ wspó³czynnika $A$ w zale¿no¶ci od pozycji narciarza. Grafika pochodzi z badañ prowadzonych w tunelu aerodynamicznym IAT we Francji, opisanych przez Caroline Barelle z National Technical University of Athens z Grecji.}
 \centering
 \includegraphics{airDrag}
 \end{figure}
@@ -55,11 +54,11 @@ A - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶
 %TODO  Ania wst aw proszê referencjê do opiektu AirDrag z biblio   - Ania usówam t± rozkinê z zale¿no¶ci± liniow± dla ma³ych predko¶ci - to jest opisane na jakiej¶æ randomowej stronie http://hyperphysics.phy-astr.gsu.edu/hbase/airfri.html uniwersytetu z Gruzji oraz jako¶ mocno skomplinkowanie przedstawione na Wikipedi
 
 
-Pozycja narciarza ma znacz±cy wp³yw na warto¶æ wspó³czynnika $A$, co widaæ na rysunku \ref{fig:airDrag} na stronie \pageref{fig:airDrag}. Przyjêcie pozycji zjazdowej redukuje w stosunku do pozycji podniesionej, warto¶æ wspó³czynnika nawet o jedn± trzeci±. Warto nadmieniæ równie¿, ¿e narciarze, nawet na amatorskich zawodach ubrani s± w specjalne kombinezony tzw. \textit{gumy narciarskie}. Kombinezony te s± jednoczê¶ciowe i ¶ci¶le przylegaj± do cia³a. Nie posiadaj± ¿adnych odstaj±cych elementów, czasami zawieraj± tylko wewnêtrzne ochraniacze w miejscach w których narciarz uderza przy ka¿dym skrêcie cia³em w tyczkê. Powodem dla którego strój ten jest tak popularny równie¿ w amatorskim sporcie jest fakt, ¿e znacz±co zmniejsza opór powietrza, w stosunku do klasycznego stroju narciarskiego i potrafi na kilkudziesiêciu sekundowej trasie, gdzie liczy siê ka¿da setna sekundy, redukowaæ czas przejazdu nawet o dziesiêtne czê¶ci sekundy.
+Pozycja narciarza ma znacz±cy wp³yw na warto¶æ wspó³czynnika $A$, co widaæ na rysunku \ref{fig:airDrag} na stronie \pageref{fig:airDrag}. Przyjêcie pozycji zjazdowej redukuje w stosunku do pozycji podniesionej, warto¶æ wspó³czynnika nawet o jedn± trzeci±. Warto nadmieniæ równie¿, ¿e narciarze, nawet na amatorskich zawodach ubrani s± w specjalne kombinezony tzw. \textit{gumy narciarskie}. Kombinezony te s± jednoczê¶ciowe i ¶ci¶le przylegaj± do cia³a. Nie posiadaj± ¿adnych odstaj±cych elementów, czasami zawieraj± tylko wewnêtrzne ochraniacze w miejscach w których narciarz uderza przy ka¿dym skrêcie cia³em w tyczkê. Powodem dla którego strój ten jest tak popularny równie¿ w amatorskim sporcie jest fakt, ¿e znacz±co zmniejsza opór powietrza, w stosunku do klasycznego stroju narciarskiego i potrafi na kilkudziesiêciu sekundowej trasie, gdzie liczy siê ka¿da setna sekundy, redukowaæ czas przejazdu nawet o kilkadziesi±t setnych sekundy.
 
 \subsubsection{Interakcje miedzy ¶niegiem a nartami}
 \label{sec:interakcje}
-To, ¿e narty ¶lizgaj± siê na ¶niegu zawdziêczamy skomplikowanej fizyce interakcji miêdzy powierzchni± narty a ¶niegiem czy lodem. Ilo¶æ czynników jakie wp³ywaj± na jako¶æ tej interakcji jest bardzo du¿a, a z po¶ród nich warto wymieniæ:
+To, ¿e narty ¶lizgaj± siê na ¶niegu zawdziêczamy skomplikowanym oddzia³ywaniom miêdzy powierzchni± narty a ¶niegiem czy lodem. Liczba czynników jakie wp³ywaj± na t± interakcjê jest bardzo du¿a, a z po¶ród nich warto wymieniæ:
 
 \begin{itemize}
 \item materia³ wykonania ¶lizgu narty
@@ -67,7 +66,7 @@ To, ¿e narty ¶lizgaj± siê na ¶niegu zawdziêczamy skomplikowanej fizyce interakcj
 \item g³adko¶æ ¶lizgu narty
 \item rodzaj i pochodzenie ¶niegu (naturalne/sztuczne)
 \item temperatura i stopieñ zanieczyszczenia ¶niegu
-\item k±t nachylenia miêdzy ¶lizgiem a pod³o¿em
+\item warto¶æ k±ta nachylenia miêdzy powierzchni± ¶lizgu a pod³o¿em
 \end{itemize}
 
 
@@ -75,11 +74,12 @@ Jest jeszcze jeden czynnik wp³ywaj±cy na tê interakcjê, tzw. \textit{water sucti
 
 
 %TODO Ania, wstaw porszê odniesienie do pozycji z bibliografi o nazwie Skiwaxes
-Wed³ug badañ przeprowadzonych przez Chris'a Talbot'a z European Space Agency \cite{Skiwaxes}, tarcie o ¶nieg ma du¿o wiêkszy wp³yw na czas przejazdu ni¿ si³y tarcia powietrza.
+Wed³ug badañ przeprowadzonych przez Chris'a Talbot'a z European Space Agency \cite{Skiwaxes}, tarcie o ¶nieg ma du¿o wiêkszy wp³yw na czas przejazdu ni¿ si³y oporu powietrza.
 
 \subsubsection{Tarcie kinetyczne}
 \label{sec:tarcieKinetyczne}
-Tarcie kinetyczne ma du¿o wiêksze znaczenie ni¿ tarcie statyczne poniewa¿ determinuje jak du¿a si³a musi dzia³aæ, ¿eby zachowaæ po¿±dan± prêdko¶æ podczas zjazdu. Wspó³czynnik tarcia kinetycznego miêdzy ¶niegiem a nasmarowanymi nartami wynosi ¶rednio 0.05. Wspó³czynnik ten jednak mo¿e siê znacz±co zmieniaæ i w zale¿no¶ci od rodzaju smarów, sposobu smarowania oraz jako¶ci ¶niegu wynosi miêdzy 0.001 a 0.3. Ró¿nica w warto¶ciach wspó³czynników ma prze³o¿enie w cenach smarów, które na warto¶ci tych wspó³czynników wp³ywaj±. Ju¿ na amatorskich zawodach, mo¿na zaobserwowaæ staranne przygotowanie ¶lizgów przed ka¿dym zjazdem i u¿ywanie smarów, których cena wynosi nawet kilkaset z³otych, a które s± zu¿ywane w ci±gu jednego sezonu startów.  
+Tarcie kinetyczne ma du¿o wiêksze znaczenie ni¿ tarcie statyczne poniewa¿ determinuje jak du¿a si³a musi dzia³aæ, ¿eby zachowaæ po¿±dan± prêdko¶æ podczas zjazdu. Wspó³czynnik tarcia kinetycznego miêdzy ¶niegiem a nasmarowanymi nartami wynosi ¶rednio 0.05. Wspó³czynnik ten jednak mo¿e siê znacz±co zmieniaæ i w zale¿no¶ci od rodzaju smarów, sposobu smarowania oraz jako¶ci ¶niegu wynosi miêdzy 0.001 a 0.3. Ju¿ na amatorskich zawodach, mo¿na zaobserwowaæ staranne przygotowanie ¶lizgów przed ka¿dym zjazdem i u¿ywanie smarów, których cena wynosi nawet kilkaset z³otych, a które s± zu¿ywane w ci±gu jednego sezonu startów. 
+%TODO Ania, Romek zaznaczy³ zeby tu te¿ wstawiæ biboliografiê - te wszystie warto¶ci te¿ s± z pozycji Skiwaxes
 
 
 %---------------------------------------------------------------------------
