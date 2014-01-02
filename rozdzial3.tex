@@ -8,15 +8,35 @@ W rozdziale tym przedstawimy istniej±ce rozwi±zania zarówno architektoniczne, kt
 \label{volunteerComputing}
 
 %TODO Ania wstaw prosze odno¶nik do pozycji VolunteerIntro z biblio
-Volunteer Computing to nieformalny kontrakt, w którym zwykli ludzie czy te¿ organizacje, nazywani dalej ochotnikami, dobrowolnie udostêpniaj± swoje zasoby obliczeniowe, by uruchamiaæ na nich obliczenia zwi±zane z ró¿norakimi projektami. S± to przewa¿nie projekty naukowe, których celem jest rozwi±zanie problemów i zadañ matematycznych czy te¿ problemów dotykaj±cych ludzko¶æ, lub d±¿±cych do lepszego poznania ¶wiata i wszech¶wiata. Dziêki platformom umo¿liwiaj±cym Volunteer Computing, ka¿dy cz³owiek mo¿e w niewielkim stopniu mieæ wk³ad w rozwi±zywanie tych problemów.
+Volunteer Computing to model obliczeniowy, w którym zwykli ludzie czy te¿ organizacje, nazywani dalej ochotnikami, dobrowolnie udostêpniaj± swoje zasoby obliczeniowe, by uruchamiaæ na nich obliczenia zwi±zane z ró¿norakimi projektami. S± to przewa¿nie projekty naukowe, których celem jest rozwi±zanie problemów i zadañ matematycznych czy te¿ problemów dotykaj±cych ludzko¶æ, lub d±¿±cych do lepszego poznania ¶wiata i wszech¶wiata. Dziêki platformom u¿ywaj±cym modelu Volunteer Computing, ka¿dy cz³owiek mo¿e mieæ wk³ad w rozwi±zywanie tych problemów.
 
-Procesory w komputerach osobistych spêdzaj± oko³o 80 procent czasu nie robi±c nic. Równocze¶nie wiele naukowych problemów zwi±zanych na przyk³ad z modelowaniem zmian klimatu potrzebuje ogromnych zasobów obliczeniowych. U¿ywanie do tego celu superkomputerów jest bardzo drogie. Po³±czenie tych faktów doprowadzi³o do stworzenia konceptu, by u¿ywaæ do tych obliczeñ zasobów zwyk³ych ludzi, którzy chc± siê ¶wiadomie nimi dzieliæ. Obecne do¶wiadczenia wskazuj±, ¿e wydajno¶æ systemu dla pojedynczo prowadzonego projektu opartego o Volunteer Computing jest porównywalna do tego, gdyby projekt prowadzony by³ przy wsparciu jednego z topowych superkomputerów z listy TOP500.
+Procesory w komputerach osobistych s± bezczynne przez oko³o 80 procent czasu. Równocze¶nie wiele naukowych problemów zwi±zanych na przyk³ad z modelowaniem zmian klimatu potrzebuje ogromnych zasobów obliczeniowych. U¿ywanie do tego celu superkomputerów jest bardzo drogie. Po³±czenie tych faktów doprowadzi³o do stworzenia modelu, wykorzystuj±cego zasoby obliczeniowe ochotników, którzy chc± siê nimi ¶wiadomie dzieliæ. 
 
-Ochotnicy to osoby prywatne albo instytucje takie jak szko³y czy uniwersytety. Ochotnicy przewa¿nie pozostaj± anonimowi, choæ w niektórych projektach wymagane jest dostarczenie podstawowych danych kontaktowych jak np. adresu email. W wypadku celowego dostarczania b³êdnych wyników przez ochotnika, utrudnione jest jego dyscyplinowanie czy te¿ wy³±czenie z projektu. Ochotnicy nie s± wynagradzani finansowo za uczestnictwo w projekcie. 
+Moc obliczeniowa najmocniejszego superkomputera z listy TOP500, na listopad 2013, jest tego samego rzêdu co moc obliczeniowa generowana przez ochotników u¿ywaj±cych platformy do Volunteer Computingu - BOINC opisanej w rozdziale \pageref{sec:BOINC}, na dzieñ 26 Grudnia 2013. Moc ta wynosi oko³o 9 Peta flopsów dla BOINC i 33 Peta flopsów dla National Super Computer Center in Guangzhou, China z listy TOP500. Flops to jednostka wyra¿aj±ca moc obliczeniow± i wskazuj±ca ile operacji zmiennoprzecinkowych na jedn± sekundê komputer mo¿e wykonywaæ. Moc rzêdu 9 peta flops to ${9}*{10}^{15}$ operacji zmiennoprzecinkowych na sekundê
 
-Organizacja czy osoba chc±ca wykorzystaæ model Volunteer computing do swoich projektów, musi byæ jednostk± zaufan± dla ochotników realizuj±cych obliczenia. Wynika to z prostego faktu, ¿e ochotnicy decyduj± siê, wed³ug standardowego modelu computing, na zainstalowanie aplikacji dostarczanej przez dawcê zadañ obliczeniowych. Osoba instaluj±ca aplikacjê musi ufaæ, ¿e nie uszkodzi ona jej komputera, ani te¿ nie bêdzie wykorzystywaæ jej zasobów w sposób niezgodny z zapewnieniami zleceniodawcy obliczeñ. Zleceniobiorca obliczeñ ma te¿ prawo oczekiwaæ, ¿e aplikacja, zosta³a napisana przestrzegaj±c dobrych praktyk bezpieczeñstwa, gdy¿ jako, ¿e aplikacja ta ³±czy siê z internetem i potencjalnie jest zainstalowana na du¿ej ilo¶ci maszyn, jest wiêc atrakcyjnym celem ataków zmierzaj±cych do przejêcia tych maszyn do niezgodnych z prawem celów przez hakerów. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=200px]{boinc-26-12}
+\caption{Zrzut ekranu ze strony internetowej https://boinc.berkeley.edu/, z dnia 26/12/2013 pokazuj±cy ¶redni± moc obliczeniow± systemu z ostatnich 24 godzin.}
+\label{fig:boinc-26-12}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=300px]{top500-november2013}
+\caption{Zrzut ekranu ze strony http://www.top500.org/lists/2013/11/ pokazuj±cu pierwsze miejsce na li¶cie TOP500 z listopada 2013 roku.}
+\label{fig:top500-november2013}
+\end{figure}
+
+
+Ochotnicy to osoby prywatne albo instytucje takie jak szko³y czy uniwersytety. Ochotnicy przewa¿nie pozostaj± anonimowi, choæ w niektórych projektach wymagane jest dostarczenie podstawowych danych kontaktowych jak np. adresu email. Czasem zdarza siê, ¿e ochotnicy z premedytacj± przek³amuj± wysy³ane do centralnego serwera wyniki swoich obliczeñ. Z uwagi na anonimowo¶æ ochotników, utrudnione jest w takich przypadkach ich dyscyplinowanie czy te¿ wy³±czenie z projektu. Ochotnicy nie s± wynagradzani finansowo za uczestnictwo w projekcie. 
+
+Organizacja czy osoba chc±ca wykorzystaæ model Volunteer computing do swoich projektów, musi byæ jednostk± zaufan± dla ochotników realizuj±cych obliczenia. Wynika to z prostego faktu, ¿e ochotnicy decyduj± siê, wed³ug standardowego modelu obliczeniowego, na zainstalowanie aplikacji dostarczanej przez dostarczyciela zadañ obliczeniowych. Osoba instaluj±ca aplikacjê musi ufaæ, ¿e nie uszkodzi ona jej komputera, ani te¿ nie bêdzie wykorzystywaæ jej zasobów w sposób niezgodny z zapewnieniami zleceniodawcy obliczeñ. Ma te¿ prawo oczekiwaæ, ¿e aplikacja, zosta³a napisana przestrzegaj±c dobrych praktyk bezpieczeñstwa, gdy¿ jako, ¿e aplikacja ta ³±czy siê z internetem i potencjalnie jest zainstalowana na du¿ej ilo¶ci maszyn, jest wiêc atrakcyjnym celem ataków zmierzaj±cych do przejêcia tych maszyn przez hakerów, do niezgodnych z prawem celów. 
 
 Przewa¿nie model komunikacyjny systemu Volunteer Computing uwzglêdnia tylko komunikacjê poszczególnych klientów z centralnym serwerem i nie zak³ada bezpo¶redniej komunikacji miêdzy klientami.
+%TODO Ania wstaw proszê odno¶nik do VolunteerIntro  - ROmek chcia³
 
 Volunteer Computing pierwotnie zak³ada³, ¿e obliczenia s± wykonywane na zwyk³ych komputerach osobistych (PC). Ilo¶æ komputerów tego typu jest nieporównywalnie wiêksza ni¿ ilo¶æ wyspecjalizowanych komputerów o du¿ej mocy obliczeniowej i jest szacowana na ponad miliard. Dodatkowo, z przyczyn ekonomicznych, na rozwój tych maszyn producenci sprzêtu przeznaczaj± najwiêksze fundusze, wiêc ich moc i zdolno¶ci obliczeniowe stale rosn±. 
 
@@ -146,7 +166,7 @@ Projekt wywodz±cy siê z Amerykañskiego Uniwersytetu Stanford by³ pierwszym, któr
 \label{fig:foldingMonitor}
 \end{figure}
 
-Folding@home jest jednym z najwiêkszych systemów komputerowych na ¶wiecie. Jego szybko¶æ szacuje siê na oko³o 14 petaflops'ów na sekundê, wiêcej ni¿ wszystkich projektów, które s± przetwarzane na wywodz±cej siê z Berkeley platformie BOINC. Flops to jednostka wyra¿aj±ca moc obliczeniow± i wskazuj±ca ile operacji zmiennoprzecinkowych na jedn± sekundê komputer mo¿e wykonywaæ. Moc rzêdu 14 petaflops to ${14}*{10}^{15}$ operacji zmiennoprzecinkowych na sekundê. W 2007 zosta³ wpisany do ksiêgi rekordów Guinessa jako system rozproszonych obliczeñ o najwiêkszej mocy obliczeniowej. Stan na Czerwiec 2013 wskazuje prawie pó³ miliona aktywnych CPU oraz prawie 25 tysiêcy aktywnych GPU.
+Folding@home jest jednym z najwiêkszych systemów komputerowych na ¶wiecie. Jego szybko¶æ szacuje siê na oko³o 14 petaflops'ów na sekundê, wiêcej ni¿ wszystkich projektów, które s± przetwarzane na wywodz±cej siê z Berkeley platformie BOINC. W 2007 zosta³ wpisany do ksiêgi rekordów Guinessa jako system rozproszonych obliczeñ o najwiêkszej mocy obliczeniowej. Stan na Czerwiec 2013 wskazuje prawie pó³ miliona aktywnych CPU oraz prawie 25 tysiêcy aktywnych GPU.
 
 Folding@home wprowadza elementy rywalizacyjne poprzez wprowadzenie systemu punktowego. Osoby udostêpniaj±ce swoje zasoby dostaj± punkty za ka¿de wykonane zadanie, dodatkowe punkty mo¿na zdobywaæ za szybkie wykonanie pewnych zadañ, które s± szczególnie wymagaj±ce obliczeniowo albo maj± wiêkszy priorytet ze wzglêdu na warto¶æ naukow±. Gromadziæ wiêcej punków mo¿na dziêki w³±czeniu do programu, pod jednym loginem, wielu swoich maszyn. Ogólnym za³o¿eniem systemu punktowego jest motywowanie ochotników do coraz wiêkszego zaanga¿owania i w³±czania znajomych do wspólnej zabawy ³±czonej z rywalizacj±. Statystyki, zarówno poszczególnych dru¿yn, jak i indywidualnych osób s± widoczne na stronie g³ównej projektu.
 
