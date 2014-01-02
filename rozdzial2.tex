@@ -46,13 +46,10 @@ A - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶
 
 \begin{figure}[h]
 \label{fig:airDrag}
-\caption{Warto¶æ wspó³czynnika $A$ w zale¿no¶ci od pozycji narciarza. Grafika pochodzi z badañ prowadzonych w tunelu aerodynamicznym IAT we Francji, opisanych przez Caroline Barelle z National Technical University of Athens z Grecji.}
+\caption{Warto¶æ wspó³czynnika $A$ w zale¿no¶ci od pozycji narciarza. Grafika pochodzi z badañ prowadzonych w tunelu aerodynamicznym IAT we Francji, opisanych przez Caroline Barelle z National Technical University of Athens z Grecji. \cite{AirDrag}}
 \centering
 \includegraphics{airDrag}
 \end{figure}
-
-%TODO  Ania wst aw proszê referencjê do opiektu AirDrag z biblio   - Ania usówam t± rozkinê z zale¿no¶ci± liniow± dla ma³ych predko¶ci - to jest opisane na jakiej¶æ randomowej stronie http://hyperphysics.phy-astr.gsu.edu/hbase/airfri.html uniwersytetu z Gruzji oraz jako¶ mocno skomplinkowanie przedstawione na Wikipedi
-
 
 Pozycja narciarza ma znacz±cy wp³yw na warto¶æ wspó³czynnika $A$, co widaæ na rysunku \ref{fig:airDrag} na stronie \pageref{fig:airDrag}. Przyjêcie pozycji zjazdowej redukuje w stosunku do pozycji podniesionej, warto¶æ wspó³czynnika nawet o jedn± trzeci±. Warto nadmieniæ równie¿, ¿e narciarze, nawet na amatorskich zawodach ubrani s± w specjalne kombinezony tzw. \textit{gumy narciarskie}. Kombinezony te s± jednoczê¶ciowe i ¶ci¶le przylegaj± do cia³a. Nie posiadaj± ¿adnych odstaj±cych elementów, czasami zawieraj± tylko wewnêtrzne ochraniacze w miejscach w których narciarz uderza przy ka¿dym skrêcie cia³em w tyczkê. Powodem dla którego strój ten jest tak popularny równie¿ w amatorskim sporcie jest fakt, ¿e znacz±co zmniejsza opór powietrza, w stosunku do klasycznego stroju narciarskiego i potrafi na kilkudziesiêciu sekundowej trasie, gdzie liczy siê ka¿da setna sekundy, redukowaæ czas przejazdu nawet o kilkadziesi±t setnych sekundy.
 
@@ -72,22 +69,11 @@ To, ¿e narty ¶lizgaj± siê na ¶niegu zawdziêczamy skomplikowanym oddzia³ywaniom m
 
 Jest jeszcze jeden czynnik wp³ywaj±cy na tê interakcjê, tzw. \textit{water suction} (w wolnym t³umaczeniu zasysanie wody). W temperaturze powy¿ej -3 stopni Celsjusza, ciep³o powstaj±ce na skutek tarcia, topi cienk± warstwê ¶niegu pod nartami. Aby zredukowaæ ten negatywnie wp³ywaj±cy na po¶lizg efekt, ¶lizg narty ma perforowan± strukturê, któr± nale¿y zachowywaæ i odkrywaæ po ka¿dym smarowaniu, aby odprowadzaæ wodê. 
 
-
-%TODO Ania, wstaw porszê odniesienie do pozycji z bibliografi o nazwie Skiwaxes
 Wed³ug badañ przeprowadzonych przez Chris'a Talbot'a z European Space Agency \cite{Skiwaxes}, tarcie o ¶nieg ma du¿o wiêkszy wp³yw na czas przejazdu ni¿ si³y oporu powietrza.
 
 \subsubsection{Tarcie kinetyczne}
 \label{sec:tarcieKinetyczne}
-Tarcie kinetyczne ma du¿o wiêksze znaczenie ni¿ tarcie statyczne poniewa¿ determinuje jak du¿a si³a musi dzia³aæ, ¿eby zachowaæ po¿±dan± prêdko¶æ podczas zjazdu. Wspó³czynnik tarcia kinetycznego miêdzy ¶niegiem a nasmarowanymi nartami wynosi ¶rednio 0.05. Wspó³czynnik ten jednak mo¿e siê znacz±co zmieniaæ i w zale¿no¶ci od rodzaju smarów, sposobu smarowania oraz jako¶ci ¶niegu wynosi miêdzy 0.001 a 0.3. Ju¿ na amatorskich zawodach, mo¿na zaobserwowaæ staranne przygotowanie ¶lizgów przed ka¿dym zjazdem i u¿ywanie smarów, których cena wynosi nawet kilkaset z³otych, a które s± zu¿ywane w ci±gu jednego sezonu startów. 
-%TODO Ania, Romek zaznaczy³ zeby tu te¿ wstawiæ biboliografiê - te wszystie warto¶ci te¿ s± z pozycji Skiwaxes
-
-
-%---------------------------------------------------------------------------
-
-%TODO FIXME Anka czy tu co¶ piszemy?
-\section{Metody numeryczne rozwi±zywania równañ ró¿niczkowych}
-\label{sec:numeryka}
-
+Tarcie kinetyczne ma du¿o wiêksze znaczenie ni¿ tarcie statyczne poniewa¿ determinuje jak du¿a si³a musi dzia³aæ, ¿eby zachowaæ po¿±dan± prêdko¶æ podczas zjazdu. Wspó³czynnik tarcia kinetycznego miêdzy ¶niegiem a nasmarowanymi nartami wynosi ¶rednio 0.05 \cite{Skiwaxes}. Wspó³czynnik ten jednak mo¿e siê znacz±co zmieniaæ i w zale¿no¶ci od rodzaju smarów, sposobu smarowania oraz jako¶ci ¶niegu wynosi miêdzy 0.001 a 0.3 \cite{Skiwaxes}. Ju¿ na amatorskich zawodach, mo¿na zaobserwowaæ staranne przygotowanie ¶lizgów przed ka¿dym zjazdem i u¿ywanie smarów, których cena wynosi nawet kilkaset z³otych, a które s± zu¿ywane w ci±gu jednego sezonu startów. 
 
 %---------------------------------------------------------------------------
 
@@ -98,7 +84,6 @@ W tym podrozdziale opisane s± metody optymalizacji u¿yte w zaproponowanym rozwi±
 
 Zadaniem optymalizacji jest przeszukanie przestrzeni rozwi±zañ w celu znalezienia najlepszego. Zatem, dana jest funkcja, nazywan± funkcj± celu, która ka¿demu punktowi reprezentuj±cemu rozwi±zanie problemu przypisuje jak±¶ warto¶æ oceniaj±c± jego jako¶æ. W¶ród wszystkich rozwi±zañ poszukujemy takiego, dla którego warto¶æ tej funkcji bêdzie jak najmniejsza (b±d¼ jak najwiêksza) - najlepsza z naszego punktu widzenia. Trudno¶æ w znalezieniu takiego rozwi±zania zale¿y od charakteru funkcji celu, a czasem tak¿e od nieznajomo¶ci jej analitycznej postaci.
 
-%TODO Ania biblio Algorytmy genetyczne i cos?
 \subsection{Optymalizacja lokalna i globalna}
 W przypadku funkcji z jednym optimum do znalezienia najlepszego rozwi±zania wystarczy przeszukiwanie lokalne. Polega ono na iteracyjnym sprawdzaniu rozwi±zañ w najbli¿szej przestrzeni i wprowadzaniu lokalnych zmian, aby w koñcu znale¼æ rozwi±zanie najlepsze w okolicy tzw. optimum lokalne. Je¶li wiemy, ¿e istnieje tylko jedno takie optimum, mo¿emy mieæ pewno¶æ, ¿e znalezione rozwi±zanie jest najlepszym w ca³ej przestrzeni rozwi±zañ. Przyk³adami optymalizacji lokalnych s±:
 \begin{itemize}
@@ -112,20 +97,26 @@ Je¶li natomiast funkcja celu posiada wiele optimów lokalnych (tzw. funkcja wielo
 \label{sec:ewolucyjny}
 Algorytm ewolucyjny jest przyk³adem algorytmu optymalizacyjnego, przeszukuj±cego przestrzeñ rozwi±zañ w celu znalezienia najlepszego rozwi±zania problemu. Algorytm ten oparty jest na obserwacjach ¶rodowiska i przystosowywania siê organizmów do jego warunków. Wiele terminów zapo¿yczonych jest zatem z genetyki.
 
-Podstaw± ca³ego algorytmu jest populacja osobników, z których ka¿dy reprezentuje inne rozwi±zanie problemu. Populacja ta zmienia siê wraz z dzia³aniem algorytmu. Ewolucja zak³ada, ¿e populacja bêdzie siê sk³adaæ z coraz lepiej przystosowanych osobników. Przystosowanie to jest obliczane za pomoc± wcze¶niej okre¶lonej funkcji oceniaj±cej jako¶æ danego osobnika, czyli tak naprawdê wyznaczenie jak dobre jest rozwi±zanie reprezentowane przez niego. Przystosowanie jest warto¶ci± liczbow± obliczon± za pomoc± tej funkcji przystosowania.\\
+``Algorytm ewolucyjny przetwarza populacjê osobników, z których ka¿dy jest propozycj± rozwi±zania postawionego problemu. Dzia³a on w ¶rodowisku, które mo¿na zdefiniowaæ na podstawie problemu rozwi±zywanego przez algorytm. W ¶rodowisku ka¿demu osobnikowi jest przyporz±dkowana warto¶æ liczbowa, okre¶laj±ca jako¶æ reprezentowanego przez niego rozwi±zania; warto¶æ ta jest nazywana przystosowaniem osobnika.'' \cite{arabas}
+
 Funkcja przystosowania okre¶la warto¶æ przystosowania osobnika na podstawie jego fenotypu, który jest tworzony z genotypu. Genotyp okre¶la zestaw cech danego osobnika i sk³ada siê z chromosomów (najczê¶ciej z jednego). Natomiast ka¿dy z chromosomów sk³ada siê z elementarnych jednostek - genów.\\
 
 \subsubsection{Schemat dzia³ania algorytmu ewolucyjnego}
 Na pocz±tku algorytmu ewolucyjnego generowana jest populacja bazowa oraz obliczane przystosowanie ka¿dego z jej osobników. Przewa¿nie osobniki te generowane s± ca³kowicie losowo, ale mo¿na tak¿e wprowadziæ konkretne osobniki np. o znanym dobrym przystosowaniu do ¶rodowiska.
 
-G³ówna czê¶æ algorytmu opiera siê na powtarzaniu pêtli, w której wykonywane s± kolejno:
+G³ówna czê¶æ algorytmu opiera siê na powtarzaniu pêtli, w której wykonywane s± kolejne kroki przedstawione w \ref{alg:glowny}.
 
-\begin{itemize}
-\item reprodukcja
-\item operacje genetyczne
-\item ocena
-\item sukcesja
-\end{itemize}
+\begin{algorithm}
+\caption{Schemat dzia³ania algorytmu ewolucyjnego}
+\label{alg:glowny}
+\begin{algorithmic}
+\STATE	$reprodukcja$
+\STATE	$operacje$ $genetyczne$
+\STATE	$ocena$
+\STATE	$sukcesja$
+\end{algorithmic}
+\end{algorithm}
+
 
 Czêsto reprodukcjê i sukcesjê ³±czy siê pod nazw± selekcja.
 
@@ -142,24 +133,25 @@ Krzy¿owanie, zwane tak¿e rekombinacj± (ang. \textit{crossover}), dzia³a na co na
 
 W wyniku operacji genetycznych powstaj± nowe osobniki, które wchodz± w sk³ad populacji potomnej. Ka¿dy z tych osobników jest oceniany za pomoc± funkcji przystosowania. Porównuj±c jako¶æ osobników z populacji bazowej oraz potomnej dokonuje siê sukcesji, czyli wyboru osobników z tych populacji (czasem wy³±cznie z populacji potomnej) i tworzy now± populacjê bazow±.
 
-Decyzja o zakoñczeniu dzia³ania algorytmu przewa¿nie podejmowana jest w oparciu o badanie funkcji przystosowania ca³ej populacji. Je¶li warto¶æ przystosowania populacji nie jest zró¿nicowana mówimy o stagnacji algorytmu i mo¿e byæ to wskazaniem do zakoñczenia dzia³ania algorytmu. Czasem jednak oczekuje siê a¿ przystosowanie to bêdzie wystarczaj±co du¿e, ¿eby stwierdziæ, ¿e znalezione rozwi±zanie jest bardzo dobre. Przewa¿nie jednak nie znamy nawet przybli¿onej warto¶ci przystosowania rozwi±zania, wiêc nie mo¿emy stwierdziæ kiedy przystosowanie jest odpowiednie i czy nie mo¿e siê jeszcze znacznie poprawiæ.
+Decyzja o zakoñczeniu dzia³ania algorytmu przewa¿nie podejmowana jest w oparciu o badanie warto¶ci funkcji przystosowania ca³ej populacji. Je¶li warto¶æ przystosowania populacji nie jest zró¿nicowana mówimy o stagnacji algorytmu i mo¿e byæ to wskazaniem do zakoñczenia dzia³ania algorytmu. Czasem jednak oczekuje siê a¿ przystosowanie to bêdzie wystarczaj±co du¿e, ¿eby stwierdziæ, ¿e znalezione rozwi±zanie jest bardzo dobre. Przewa¿nie jednak nie znamy nawet przybli¿onej warto¶ci przystosowania rozwi±zania, wiêc nie mo¿emy stwierdziæ kiedy przystosowanie jest odpowiednie i czy nie mo¿e siê jeszcze znacznie poprawiæ.
 
 \subsubsection{Kodowanie osobników}
-W przypadku algorytmów genetycznych, bêd±cych szczególnym przypadkiem algorytmów ewolucyjnych, do kodowania osobników stosuje siê kodowanie binarne chromosomów. Pojedynczy bit reprezentuje zatem gen nale¿±cy do chromosomu.\\
+W przypadku algorytmów genetycznych do kodowania osobników stosuje siê kodowanie binarne chromosomów. Pojedynczy bit reprezentuje zatem gen nale¿±cy do chromosomu.\\
 W takim przypadku mutacja wykonywana jest na ka¿dym genie osobno z pewnym prawdopodobieñstwem, je¶li do niej dochodzi, zmienia siê warto¶æ bitu na przeciwn±. W krzy¿owaniu wybiera siê dwa osobniki rodzicielskie, których chromosomy rozcinane s± na dwie czê¶ci i ³±czone ``na krzy¿''. Miejsce przeciêcia jest losowane z rozk³adem równomiernym.
 
 W algorytmach ewolucyjnych porzuca siê kodowanie binarne - chromosom sk³ada siê z jednej lub wiêcej liczb stanowi±cych cechy osobnika.\\
 Mutacja takiego osobnika najczê¶ciej odbywa siê poprzez losow± zmianê ka¿dej z warto¶ci genów chromosomu. Do krzy¿owania wybiera siê dwa osobniki, z których dla ka¿dej pary odpowiadaj±cych genów wyci±gana jest ¶rednia i tak otrzymane warto¶ci genów tworz± genotyp nowego osobnika.
 
 \subsubsection{Typy algorytmów ewolucyjnych}
-Algorytmy ewolucyjne wywodz± siê z kilku osobnych nurtów zajmuj±cych siê t± tematyk±, wiêc istnieje wiele podobnych schematów dzia³ania. Najlepiej traktowaæ algorytmy ewolucyjne jako metaheurystykê - okre¶lony jest pewien szkic algorytmu, który mo¿na dostosowywaæ do konkretnego rozwi±zania. W tym podrozdziale opisane s± podstawowe i najbardziej popularne schematy postêpowania oparte o algorytmy ewolucyjne.\\
+Algorytmy ewolucyjne wywodz± siê z kilku osobnych nurtów zajmuj±cych siê t± tematyk±, wiêc istnieje wiele podobnych schematów dzia³ania. Najlepiej traktowaæ algorytmy ewolucyjne jako metaheurystykê - okre¶lony jest pewien szkic algorytmu, który mo¿na dostosowywaæ do konkretnego rozwi±zania. W tym podrozdziale opisane s± podstawowe i najbardziej popularne schematy dzia³ania algorytmów ewolucyjnych.\\
 
+\begin{enumerate}
 
-\textbf{Prosty algorytm genetyczny}
+\item{Prosty algorytm genetyczny}
 
-Prosty algorytm genetyczny zosta³ zaproponowany w roku 1975 przez John'a Holland'a.
+Prosty algorytm genetyczny zosta³ zaproponowany w roku 1975 przez John'a Holland'a w \cite{Holland1975}.
 
-Poni¿ej umieszczony jest schemat tego algorytmu (Algorytm \ref{alg:prostyGenetyczny}).
+Poni¿ej umieszczony jest schemat tego algorytmu (Algorytm \ref{alg:prostyGenetyczny} oparty o algorytm umieszczony w \cite{arabas}).
 
 \begin{algorithm}
 \caption{Prosty algorytm genetyczny}
@@ -188,27 +180,29 @@ Zatrzymanie algorytmu mo¿e byæ dokonane je¶li np.:
 
 W tej wersji algorytmu czêsto pêtlê algorytmu nazywa siê generacj±, a ka¿d± populacjê $P^t$ w chwili t pokoleniem.\\
 
-\textbf{Strategia (1+1)}
+\item{Strategia (1+1)}
 
-Strategia (1+1) jest podstawow± strategi± ewolucyjn±. W algorytmie tym mamy do czynienia z populacj± sk³adaj±c± siê tylko z jednego osobnika posiadaj±cego jeden chromosom. W ka¿dej pêtli algorytmu dokonuje siê mutacji tego chromosomu, co powoduje powstanie nowego osobnika. Osobnik ten jest poddawany ocenie, a nastêpnie dokonuje siê wyboru lepszego z dwóch istniej±cych osobników i tego pozostawia w populacji.\\
+Strategia (1+1) jest strategi± ewolucyjn± zaproponowan± przez Schwefel'a w 1965 r. \cite{Schwefelthesis}, a pó¼niej analizowana równie¿ w pracach Rechenberg'a \cite{rechenberg1971}, \cite{rechenberg1973}. W algorytmie tym mamy do czynienia z populacj± sk³adaj±c± siê tylko z jednego osobnika posiadaj±cego jeden chromosom. W ka¿dej pêtli algorytmu dokonuje siê mutacji tego chromosomu, co powoduje powstanie nowego osobnika. Osobnik ten jest poddawany ocenie, a nastêpnie dokonuje siê wyboru lepszego z dwóch istniej±cych osobników i tego pozostawia w populacji.\\
 W mutacji dodaje siê do ka¿dego genu chromosomu losow± modyfikacjê rozk³adem normalnym:
 \begin{equation}
 Y^t_i = X^t_i + \sigma\xi_{N(0,1),i}
 \end{equation}
 
 Warto¶æ $\sigma$ bêdzie powodowa³a wiêksze lub mniejsze zmiany w chromosomie. Je¶li chcemy przeszukaæ przestrzeñ rozwi±zañ, powinni¶my zwiêkszaæ jej warto¶æ, co jest po¿±dane zw³aszcza w pocz±tkowej fazie dzia³ania algorytmu. Natomiast, aby znale¼æ jak najlepsze rozwi±zanie, wiedz±c ¿e obecne rozwi±zanie jest ju¿ bardzo bliskie najlepszemu, mo¿emy zmniejszaæ warto¶æ $\sigma$ przeszukuj±c tylko najbli¿sz± przestrzeñ.\\
-Do wyznaczania $\sigma$ powsta³ nastêpuj±cy algorytm zwany regu³± 1/5 sukcesów:
+Do wyznaczania $\sigma$ powsta³ nastêpuj±cy algorytm zwany regu³± 1/5 sukcesów (\cite{rechenberg1973}):
 \begin{enumerate}
-\item Je¶li przez kolejnych k pêtli algorytmu mutacja powoduje powstanie lepszego osobnika w wiêcej ni¿ 1/5 wszystkich mutacji, to zwiêkszamy $\sigma$: $\sigma' = c_i \sigma$. Warto¶æ $c_i$ wyznaczona empirycznie wynosi $ \frac{1}{0.82} $
+\item Je¶li przez kolejnych k pêtli algorytmu mutacja powoduje powstanie lepszego osobnika w wiêcej ni¿ 1/5 wszystkich mutacji, to zwiêkszamy $\sigma$: $\sigma' = c_i \sigma$. Warto¶æ $c_i$ wyznaczona empirycznie wynosi $ \frac{1}{0.82} $ (\cite{schwefel1981})
 \item Gdy dok³adnie 1/5 koñczy siê sukcesem, warto¶æ $\sigma$ pozostaje bez zmian.
-\item Je¶li nie zachodzi ¿adne z powy¿szych warto¶æ $\sigma$ jest zmniejszana: $\sigma' = c_d \sigma$. Gdzie $ c_d $ powinna wynosiæ $ 0.82 $
+\item Je¶li nie zachodzi ¿adne z powy¿szych warto¶æ $\sigma$ jest zmniejszana: $\sigma' = c_d \sigma$. Gdzie $ c_d $ powinna wynosiæ $ 0.82 $ (\cite{schwefel1981})
 \end{enumerate}
 
-\textbf{Strategia ($\mu$ + $\lambda$)}
+Opisane poni¿ej strategie s± rozwiniêciem strategii (1+1) i zosta³y zaproponowane przez Schwefel'a w \cite{Schwefel1975}, \cite{Schwefel1977}, \cite{schwefel1981}.
+
+\item{Strategia ($\mu$ + $\lambda$)}
 
 Strategia ($\mu$ + $\lambda$) jest rozwiniêciem strategii (1+1). $\mu$ oznacza ilo¶æ osobników w populacji pocz±tkowej, a $\lambda$ ile osobników jest reprodukowanych i poddawanych operacjom genetycznym. Dodatkowo, zamiast regu³y 1/5 sukcesów wprowadzono mechanizm samoczynnej adaptacji zasiêgu mutacji, a tak¿e wprowadzono operator krzy¿owania.
 
-Oznaczenie $\mu$ + $\lambda$ oznacza, ¿e po wygenerowaniu populacji potomnej wybierane jest $\mu$ najlepszych osobników do nowej populacji bazowej - zarówno spo¶ród populacji potomnej, jak i starej populacji bazowej zawieraj±cych ³±cznie $\mu$ + $\lambda$ osobników. Algorytm \ref{alg:miPlusLambda} przedstawia schemat dzia³ania.
+Oznaczenie $\mu$ + $\lambda$ oznacza, ¿e po wygenerowaniu populacji potomnej wybierane jest $\mu$ najlepszych osobników do nowej populacji bazowej - zarówno spo¶ród populacji potomnej, jak i starej populacji bazowej zawieraj±cych ³±cznie $\mu$ + $\lambda$ osobników. Algorytm \ref{alg:miPlusLambda} przedstawia schemat tej strategii (w oparciu o algorytm umieszczony w \cite{arabas}).
 
 \begin{algorithm}
 \caption{Strategia ewolucyjna ($\mu$ + $\lambda$)}
@@ -235,7 +229,7 @@ Po wylosowaniu warto¶ci zmiennej losowej o rozk³adzie normalnym ($\xi_{N(0,1)}$)
 \end{equation}
 
 
-Gdzie $\tau$ oraz $\tau'$ s± parametrami algorytmu, a ich warto¶ci powinny wynosiæ:
+Gdzie $\tau$ oraz $\tau'$ s± parametrami algorytmu, a ich warto¶ci powinny wynosiæ wed³ug \cite{schwefel1995}:
 \begin{equation}
 \tau = \frac{K}{\sqrt{2n}}
 \end{equation}
@@ -244,11 +238,13 @@ Gdzie $\tau$ oraz $\tau'$ s± parametrami algorytmu, a ich warto¶ci powinny wynos
 \tau' = \frac{K}{\sqrt{2\sqrt{n}}}
 \end{equation}
 
-%TODO Ania biblio Schwefel(1995) (http://ls11-www.cs.uni-dortmund.de/people/rudolph/publications/papers/gra.pdf)
 gdzie:
 \begin{itemize}
-\item K - sta³a, najczê¶ciej stosuje siê warto¶æ 1
+\item K - sta³a, najczê¶ciej stosuje siê warto¶æ 1 (\cite{schwefel1995})
 \item n - wymiarowo¶æ zadania
+\end{itemize}
+
+Beyer w 2007 r. napisa³, ¿e empirycznie sprawdzono, ¿e nale¿y wybieraæ warto¶æ $\tau$ proporcjonalnie do $\frac{1}{\sqrt{n}}$. \cite{Beyer07}
 
 Maj±c dane nowe warto¶ci odchyleñ standardowych mo¿emy obliczyæ nowe warto¶ci genów korzystaj±c ze wzoru:
 
@@ -257,13 +253,14 @@ X'_i = X_i + \sigma'_i\xi_{N(0,1),i}
 \end{equation}
 gdzie $\xi_{N(0,1),i}$ jest now± losow± warto¶ci±.
 
-Algorytm ewolucyjny wybiera osobniki lepiej przystosowane, a wiêc te, które posiadaj± tak¿e lepsze warto¶ci odchyleñ standardowych. Powoduje to naturaln± selekcjê, doprowadzaj±c± do samoczynnej adaptacji odchyleñ standardowych stosowanych w trakcie mutacji.
+Algorytm ewolucyjny wybiera osobniki lepiej przystosowane, uwzglêdniaj±c przy tym równie¿ warto¶ci odchyleñ standardowych. Powoduje to naturaln± selekcjê, doprowadzaj±c± do samoczynnej adaptacji odchyleñ standardowych stosowanych w trakcie mutacji.
 
 Krzy¿owanie wystêpuje w tym algorytmie pod nazw± ``rekombinacja''. Najczê¶ciej sprowadza siê do u¶rednienia lub wymianie warto¶ci sk³adowe wektorów, tak¿e warto¶ci $\sigma$.
 
-\textbf{Strategia ($\mu$, $\lambda$)}
+\item{Strategia ($\mu$, $\lambda$)}
+
 Strategia ($\mu$ + $\lambda$) posiada pewne wady, które wyeliminowano za pomoc± nowej strategii ($\mu$, $\lambda$). Poprzedni algorytm sprawia problemy je¶li w populacji pojawia siê osobnik o wysokiej warto¶ci przystosowania, ale posiadaj±cy zbyt du¿e (albo zbyt ma³e) warto¶ci odchyleñ standardowych. Usuniêcie takiego osobnika z populacji czêsto nie jest procesem krótkotrwa³ym, gdy¿ wp³ywa on na powstaj±ce potomstwo, przekazuj±c mu podobne do jego, nieodpowiednie warto¶ci odchyleñ.\\
-W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie nie s± nigdy brane do kolejnej populacji bazowej. Podczas selekcji korzysta siê zatem tylko z powsta³ej populacji potomnej, z niej wybieraj±c osobniki do populacji bazowej w kolejnej iteracji. Algorytm \ref{alg:miLambda} prezentuje kolejne kroki schematu tego algorytmu.
+W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie nie s± nigdy brane do kolejnej populacji bazowej. Podczas selekcji korzysta siê zatem tylko z powsta³ej populacji potomnej, z niej wybieraj±c osobniki do populacji bazowej w kolejnej iteracji. Algorytm \ref{alg:miLambda} prezentuje kolejne kroki schematu tego algorytmu (w oparciu o algorytm umieszczony w \cite{arabas}).
 
 \begin{algorithm}
 \caption{Strategia ewolucyjna ($\mu$, $\lambda$)}
@@ -281,11 +278,23 @@ W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie 
 \end{algorithmic}
 \end{algorithm}
 
+\end{enumerate}
+
+
 \subsection{Hill Climbing}
 \label{sec:hill}
-%TODO biblio ksiazka Stuart Russell, Peter Norvig - Artificial Inteligence A Modern Approach
+Podrozdzia³ oparty jest o opis algorytmu Hill Climbing w \cite{russell}.
 
-Algorytm Hill Climbing jest jedn± z metod przeszukiwania lokalnego. W ka¿dej iteracji zmieniaj±c warto¶æ rozwi±zania w jednym z wymiarów sprawdzana jest warto¶æ funkcji celu dla nowego rozwi±zania i je¶li warto¶æ ta jest lepsza od dotychczas najlepszej znalezionej, zapamiêtujemy zmienione rozwi±zanie. Dopóki zmiany powoduj± poprawê rozwi±zania, algorytm nie jest zatrzymywany. Na koñcu wiemy, ¿e znalezione rozwi±zanie jest rozwi±zaniem lokalnie optymalnym.\\
+Algorytm Hill Climbing jest jedn± z metod przeszukiwania lokalnego. W podstawowej wersji algorytmu zwanej \textit{Greedy local search}, w ka¿dej iteracji zmieniaj±c warto¶æ rozwi±zania w jednym z wymiarów sprawdzana jest warto¶æ funkcji celu dla nowego rozwi±zania i je¶li warto¶æ ta jest lepsza od dotychczas najlepszej znalezionej, zapamiêtujemy zmienione rozwi±zanie. Dopóki zmiany powoduj± poprawê rozwi±zania, algorytm nie jest zatrzymywany. Na koñcu wiemy, ¿e znalezione rozwi±zanie jest rozwi±zaniem lokalnie optymalnym.
+
+Istnieje wiele rodzajów algorytmu rozwijaj±cych wersjê podstawow±:
+
+\begin{itemize}
+\item \textit{Stochastic hill climbing} - wybiera kolejny punkt losowo, prawdopodobieñstwo wyboru mo¿e zale¿eæ od tego jak stromy jest krok,
+\item \textit{First-choice hill climbing} - wybiera pierwszego z generowanych kolejno s±siadów, którego warto¶æ jest lepsza ni¿ obecny stan. Rozwi±zanie to warto stosowaæ je¶li istnieje wielu s±siadów,
+\item \textit{Random-restart hill climbing} - uruchamiaj±c wielokrotnie algorytm rozpoczynaj±c w losowych punktach mo¿emy zwiêkszyæ prawdopodobieñstwo znalezienia rozwi±zania globalnego.
+\end{itemize}
+
 Przeszukiwanie przestrzeni dyskretnej sprowadza siê do sprawdzania rozwi±zañ najbli¿szych obecnemu i wybieranie tego rozwi±zania, którego warto¶æ obliczona za pomoc± funkcji celu jest najlepsza. Je¶li w¶ród s±siadów nie ma ju¿ lepszego rozwi±zania, mo¿emy zakoñczyæ przeszukiwanie. Pseudokod algorytmu przedstawiony jest poni¿ej (Algorytm \ref{alg:hillClimbDiscrete}).\\
 
 \begin{algorithm}
@@ -348,9 +357,7 @@ W przestrzeni ci±g³ej konieczne jest dobranie kroku, który wyznacza punkty przes
 \section{Inne podej¶cia do problemu znajdowania optymalnego toru przejazdu}
 \label{sec:innePodejscia}
 
-%TODO Ania wstaw proszê odniesienie do elementu FMCNewZeland w bibliografi gdzie¶ w tym rozdziale tak jak trzeba
-
-Matthew Brodie z Massey University w Nowej Zelandii jako pierwszy na ¶wiecie wykorzysta³ w³asnorêcznie zaprojektowany i wykonany system sk³adaj±cy siê z sieci miniaturowych czujników mocowanych na ciele narciarza, po³±czonego z GPS, w celu ¶ledzenia i analizy ruchu narciarza jad±cego po slalomie. System, nazywaj±cy siê Motion Capture Fusion (FMC), zosta³ stworzony, by jak twierdzi autor, pomóc narciarzom ze ¶wiatowej czo³ówki lepiej rozumieæ co dzieje siê z nimi podczas jazdy, zoptymalizowaæ jazdê, a w konsekwencji doprowadziæ ich do wiêkszej ilo¶ci zwyciêstw i z³otych medali. Opis systemu oraz wnioski zamie¶ci³ w swojej pracy doktorskiej pod tytu³em \textit{Optimisation of Performance in Alpine Ski Racing with Fusion Motion Capture}. Prezentacjê systemu oraz jego funkcjonowania mo¿na obejrzeæ w kanale Matthew'a w serwisie YouTube.
+Matthew Brodie z Massey University w Nowej Zelandii jako pierwszy na ¶wiecie wykorzysta³ w³asnorêcznie zaprojektowany i wykonany system sk³adaj±cy siê z sieci miniaturowych czujników mocowanych na ciele narciarza, po³±czonego z GPS, w celu ¶ledzenia i analizy ruchu narciarza jad±cego po slalomie. System, nazywaj±cy siê Motion Capture Fusion (FMC), zosta³ stworzony, by jak twierdzi autor, pomóc narciarzom ze ¶wiatowej czo³ówki lepiej rozumieæ co dzieje siê z nimi podczas jazdy, zoptymalizowaæ jazdê, a w konsekwencji doprowadziæ ich do wiêkszej ilo¶ci zwyciêstw i z³otych medali. Opis systemu oraz wnioski zamie¶ci³ w swojej pracy doktorskiej pod tytu³em \textit{Optimisation of Performance in Alpine Ski Racing with Fusion Motion Capture} \cite{FMCNewZeland}. Prezentacjê systemu oraz jego funkcjonowania mo¿na obejrzeæ w kanale Matthew'a w serwisie YouTube.
 
 \paragraph{Poni¿ej przedstawimy najwa¿niejsze wnioski Matthew'a, zawarte w jego pracy doktorskiej}
 
@@ -387,12 +394,12 @@ W nawi±zaniu do sekcji teoretycznej \ref{sec:oporPowietrza} ze strony \pageref{s
 
 Aplikacja jest skierowana do narciarzy z federacji i ma im pokazaæ jak bardzo wybór pozycji wp³ywa na ich ostateczny wynik na zawodach. U¿ytkownik ma do wyboru sze¶æ ró¿nych pozycji zjazdowych oraz trzy warto¶ci prêdko¶ci pocz±tkowych. Mo¿e wybraæ pozycjê bazow± oraz pozycjê docelow± oraz prêdko¶æ jak± ma bêd±c w pozycji bazowej. Program symuluje jaka bêdzie zmiana prêdko¶ci narciarza po przej¶ciu do pozycji docelowej po 100 metrach jazdy w dó³ w linii prostej. Co wiêcej, program wskazuje jaka bêdzie ró¿nica w prêdko¶ci narciarza po 200 metrach, z za³o¿eniem, ¿e po 100 metrach narciarz wróci³ do pozycji referencyjnej. Jest to o tyle istotne, ¿e pozwala u¶wiadomiæ zawodnikom, ¿e powinni wykorzystywaæ ka¿d± sytuacjê do przyjêcia jak najbardziej optymalnej pozycji. 
 
-Zrzut ekranu aplikacji jest na rycinie \ref{fig:frenchapp} na stronie \pageref{fig:frenchapp}, a aplikacja opisana jest w pracy %TODO Ania dodaj proszê referencjê do AirDrag z biblio.
+Zrzut ekranu aplikacji jest na rycinie \ref{fig:frenchapp} na stronie \pageref{fig:frenchapp}, a aplikacja opisana jest w pracy \cite{AirDrag}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=270px]{frenchapp}
-\caption{Zrzut ekranu z aplikacji Francuskiej Federacji Narciarskiej, zaczerpniêty z pracy AirDrag} %TODO Ania ref AirDrag z Bibilio
+\caption{Zrzut ekranu z aplikacji Francuskiej Federacji Narciarskiej, zaczerpniêty z pracy AirDrag \cite{AirDrag}}
 \label{fig:frenchapp}
 \end{figure}
 

@@ -7,12 +7,11 @@ W rozdziale tym przedstawimy istniej±ce rozwi±zania zarówno architektoniczne, kt
 \section{Volunteer Computing}
 \label{volunteerComputing}
 
-%TODO Ania wstaw prosze odno¶nik do pozycji VolunteerIntro z biblio
-Volunteer Computing to model obliczeniowy, w którym zwykli ludzie czy te¿ organizacje, nazywani dalej ochotnikami, dobrowolnie udostêpniaj± swoje zasoby obliczeniowe, by uruchamiaæ na nich obliczenia zwi±zane z ró¿norakimi projektami. S± to przewa¿nie projekty naukowe, których celem jest rozwi±zanie problemów i zadañ matematycznych czy te¿ problemów dotykaj±cych ludzko¶æ, lub d±¿±cych do lepszego poznania ¶wiata i wszech¶wiata. Dziêki platformom u¿ywaj±cym modelu Volunteer Computing, ka¿dy cz³owiek mo¿e mieæ wk³ad w rozwi±zywanie tych problemów.
+Volunteer Computing to nieformalny kontrakt, w którym zwykli ludzie czy te¿ organizacje, nazywani dalej ochotnikami, dobrowolnie udostêpniaj± swoje zasoby obliczeniowe, by uruchamiaæ na nich obliczenia zwi±zane z ró¿norakimi projektami. S± to przewa¿nie projekty naukowe, których celem jest rozwi±zanie problemów i zadañ matematycznych czy te¿ problemów dotykaj±cych ludzko¶æ, lub d±¿±cych do lepszego poznania ¶wiata i wszech¶wiata. Dziêki platformom umo¿liwiaj±cym Volunteer Computing, ka¿dy cz³owiek mo¿e w niewielkim stopniu mieæ wk³ad w rozwi±zywanie tych problemów. 
 
-Procesory w komputerach osobistych s± bezczynne przez oko³o 80 procent czasu. Równocze¶nie wiele naukowych problemów zwi±zanych na przyk³ad z modelowaniem zmian klimatu potrzebuje ogromnych zasobów obliczeniowych. U¿ywanie do tego celu superkomputerów jest bardzo drogie. Po³±czenie tych faktów doprowadzi³o do stworzenia modelu, wykorzystuj±cego zasoby obliczeniowe ochotników, którzy chc± siê nimi ¶wiadomie dzieliæ. 
+Procesory w komputerach osobistych spêdzaj± oko³o 80\% czasu nie robi±c nic. Równocze¶nie wiele naukowych problemów zwi±zanych na przyk³ad z modelowaniem zmian klimatu potrzebuje ogromnych zasobów obliczeniowych. U¿ywanie do tego celu superkomputerów jest bardzo drogie. Po³±czenie tych faktów doprowadzi³o do stworzenia konceptu, by u¿ywaæ do tych obliczeñ zasobów zwyk³ych ludzi, którzy chc± siê ¶wiadomie nimi dzieliæ. Obecne do¶wiadczenia wskazuj±, ¿e wydajno¶æ systemu dla pojedynczo prowadzonego projektu opartego o Volunteer Computing jest porównywalna do tego, gdyby projekt prowadzony by³ przy wsparciu jednego z topowych superkomputerów z listy TOP500.
 
-Moc obliczeniowa najmocniejszego superkomputera z listy TOP500, na listopad 2013, jest tego samego rzêdu co moc obliczeniowa generowana przez ochotników u¿ywaj±cych platformy do Volunteer Computingu - BOINC opisanej w rozdziale \pageref{sec:BOINC}, na dzieñ 26 Grudnia 2013. Moc ta wynosi oko³o 9 Peta flopsów dla BOINC i 33 Peta flopsów dla National Super Computer Center in Guangzhou, China z listy TOP500. Flops to jednostka wyra¿aj±ca moc obliczeniow± i wskazuj±ca ile operacji zmiennoprzecinkowych na jedn± sekundê komputer mo¿e wykonywaæ. Moc rzêdu 9 peta flops to ${9}*{10}^{15}$ operacji zmiennoprzecinkowych na sekundê
+Moc obliczeniowa najmocniejszego superkomputera z listy TOP500, na listopad 2013, jest tego samego rzêdu co moc obliczeniowa generowana przez ochotników u¿ywaj±cych platformy do Volunteer Computingu - BOINC opisanej w rozdziale \pageref{sec:BOINC}, na dzieñ 26 Grudnia 2013. Moc ta wynosi oko³o 9 Peta flopsów dla BOINC i 33 Peta flopsów dla National Super Computer Center in Guangzhou, China z listy TOP500. Flops to jednostka wyra¿aj±ca moc obliczeniow± i wskazuj±ca ile operacji zmiennoprzecinkowych na jedn± sekundê komputer mo¿e wykonywaæ. Moc rzêdu 9 peta flops to ${9}*{10}^{15}$ operacji zmiennoprzecinkowych na sekundê. \cite{VolunteerIntro}
 
 
 \begin{figure}[h]
@@ -46,8 +45,8 @@ Na ten model mo¿na patrzyæ tak¿e w kategoriach edukacyjnych. Podczas gdy ochotni
 
 \section{Web Workers}
 \label{webWorkers}
+Rozdzia³ napisany w oparciu o \cite{WebWorkersSpec}.
 
-%TODO Ania wstaw proszê odno¶nik do pozycji WebWorkersSpec z biblio
 Przeprowadzanie intensywnych obliczeñ w przegl±darkach internetowych nie by³o mo¿liwe do czasu wprowadzenia przez grupê WHATWG (Web Hypertext Application Technology Working Group) specyfikacji Web Worker. Ograniczenie wynika³o z faktu, ¿e jêzyk w którym wykonywane s± skrypty poprzez silniki przegl±darki to Java Script. Java Script to ¶rodowisko jednow±tkowe, wiêc nic nie mo¿e byæ wykonywane równolegle. Zlecaj±c wiêc skryptowi intensywne obliczenia, na ich ca³y czas UI strony by³by nieresponsywny, co jest nie do przyjêcia dla cz³owieka obs³uguj±cego stronê internetow±. Przegl±darki broni± u¿ytkownika przed takim zachowaniem skryptów na stronie i czasami zdarza siê jeszcze zobaczyæ okno z ostrze¿eniem, ¿e skrypt przesta³ odpowiadaæ i mo¿liwo¶ci± manualnego zatrzymania skryptu.
 
 Web Workers definiuje API do tworzenia osobnych procesów w tle. Worker'y wykorzystuj± do komunikacji z w±tkiem g³ównym klasyczny model przekazywania wiadomo¶ci. Nowoczesne przegl±darki umo¿liwiaj± przekazywanie zarówno tekstu jak i obiektów zserializowanych w formacie JSON. Nale¿y zwróciæ uwagê, ¿e obiekty te nie s± wspó³dzielone, ale w pe³ni kopiowane. 
@@ -125,11 +124,11 @@ Obecnie prawie trzy miliony ludzi udostêpnia zasoby swoich osobistych komputerów
 
 \subsection{Urz±dzenia mobilne w rozproszonych obliczeniach naukowych}
 \label{sec:mobilne}
-Przez dziesiêciolecia miliony ludzi udostêpnia³y zasoby swoich maszyn, aby wspomóc naukê. Jednak komputery typu PC s± coraz mniej popularne, a ich sprzeda¿ spada o prawie 8 procent rocznie. Prognozy jasno wskazuj± na to, ¿e ten trend siê utrzyma. Z drugiej strony, bardzo dynamicznie rozwija siê rynek urz±dzeñ mobilnych, w tym smartphonów. Wed³ug serwisu Bloomberg, do koñca roku 2013, na rynek zostanie dostarczonych 919 milionów nowych urz±dzeñ, co jest 27 procentowym wzrostem w stosunku do roku 2012. %TODO  ANia latexowe odniesienie do pozycji BOINCAndroid z bibliografi
+Przez dziesiêciolecia miliony ludzi udostêpnia³y zasoby swoich maszyn, aby wspomóc naukê. Jednak komputery typu PC s± coraz mniej popularne, a ich sprzeda¿ spada o prawie 8 procent rocznie. Prognozy jasno wskazuj± na to, ¿e ten trend siê utrzyma. Z drugiej strony, bardzo dynamicznie rozwija siê rynek urz±dzeñ mobilnych, w tym smartphonów. Wed³ug serwisu Bloomberg, do koñca roku 2013, na rynek zostanie dostarczonych 919 milionów nowych urz±dzeñ, co jest 27 procentowym wzrostem w stosunku do roku 2012. \cite{BOINCAndroid}
 
 Do niedawna, telefony tego typu nie mia³y wystarczaj±cych zasobów, by prowadziæ naukowe obliczenia. Obecnie maj± nawet cztery rdzenie i mog± wykonywaæ pó³tora miliarda operacji numerycznych na sekundê, co odpowiada oko³o jednej pi±tej tego co potrafi± wspó³czesne komputery osobiste. David Anderson, naukowiec z Berkeley, który wspó³tworzy mobiln± aplikacjê, która jest furtk± do naukowych obliczeñ na smartphonach, twierdzi, ¿e jako, ¿e hardware mobilnych urz±dzeñ jest obecnie najbardziej rozwijan± ga³êzi± urz±dzeñ elektronicznych, ju¿ wkrótce, moc obliczeniowa tych urz±dzeñ mo¿e wyrównaæ obecne osi±gi komputerów osobistych. Miêdzy innymi z tego powodu warto zacz±æ uwzglêdniaæ urz±dzenia mobilne w roli potencjalnego wykonawcy intensywnych obliczeñ.
 
-Ciekawym konceptem jest obliczeniowa sieæ stworzona z ogromnej liczby urz±dzeñ, która mog³aby rywalizowaæ z takimi dostawcami us³ug jak Amazon Web Services. W tym momencie warto¶æ rynku komercyjnych obliczeñ w chmurze osi±ga 131 miliardów dolarów. Sieæ stworzona z telefonów mo¿e byæ tanim odpowiednikiem i umo¿liwiæ na przyk³ad firmie farmaceutycznej p³aciæ po kilkadziesi±t centów miesiêcznie za udostêpnienie swojego urz±dzenia np. przez noc do potrzebnych jej obliczeñ. Wizjê t± roztacza Bernie Meyerson, wiceprezydent innowacji w firmie IBM. %TODO Ania - te wsyztskie dane sa z tego artyku³u z Bloomberga BOINCAndorid w bibliografi. Oznacz to proszê tak ¿eby byKo dobrze
+Ciekawym konceptem jest obliczeniowa sieæ stworzona z ogromnej liczby urz±dzeñ, która mog³aby rywalizowaæ z takimi dostawcami us³ug jak Amazon Web Services. W tym momencie warto¶æ rynku komercyjnych obliczeñ w chmurze osi±ga 131 miliardów dolarów. Sieæ stworzona z telefonów mo¿e byæ tanim odpowiednikiem i umo¿liwiæ na przyk³ad firmie farmaceutycznej p³aciæ po kilkadziesi±t centów miesiêcznie za udostêpnienie swojego urz±dzenia np. przez noc do potrzebnych jej obliczeñ. Wizjê t± roztacza Bernie Meyerson, wiceprezydent innowacji w firmie IBM. \cite{BOINCAndroid}
 
 W sierpniu 2013 w g³ównym sklepie z aplikacjami na system Android - Google Play, pojawi³a siê oficjalna aplikacja stworzona przez zespó³ BOINC z Berkeley. Aplikacja umo¿liwia posiadaczowi smartphona w bardzo przyjazny sposób na do³±czenie do obliczeñ. 
 Rozwa¿anie u¿ycia urz±dzeñ mobilnych do obliczeñ wywo³uje pytanie o zu¿ycie baterii. Aplikacja zaprojektowana jest tak, by daæ u¿ytkownikowi pe³n± kontrolê nad tym jakie warunki musz± zaj¶æ, aby prowadzone by³y obliczenia (implikuj±ce szybsze zu¿ycie baterii). Warunkami tymi mo¿e byæ np. pod³±czenie do ¼ród³a zasilania oraz poziom zu¿ycia baterii powy¿ej zadanego progu.
@@ -144,7 +143,7 @@ Rozwa¿anie u¿ycia urz±dzeñ mobilnych do obliczeñ wywo³uje pytanie o zu¿ycie bate
 \begin{figure}[h]
 \centering
 \includegraphics[height=200px]{boinc-app}
-\caption{Aplikacja BOINC w trakcie obliczeñ dokonywanych na platformie z systemem Android}
+\caption{Aplikacja BOINC w trakcie obliczeñ dokonywanych na platformie z systemem Android \cite{BOINCAndroid}}
 \label{fig:boinc-app}
 \end{figure}
 

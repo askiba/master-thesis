@@ -1,9 +1,9 @@
 \chapter{Wyniki}
 \label{cha:wyniki}
 
-W rozdziale tym przedstawiono informacje na temat wyników przeprowadzonych eksperymentów. Najpierw przedstawione zosta³y testy pokazuj±ce poprawno¶æ zastosowanego modelu zarówno teoretycznie jak i w praktyce. Nastêpnie pokazane zosta³y wyniki optymalizacji algorytmu genetycznego, lokalnej optymalizacji oraz mechanizmu karania dla ró¿nych parametrów. Na koniec omówione zosta³y wyniki dotycz±ce zastosowanego rozwi±zania architektonicznego oraz skuteczno¶ci zastosowania Volunteer Computing.
+W rozdziale tym przedstawiono informacje na temat wyników przeprowadzonych eksperymentów. Najpierw przedstawione zosta³y testy zarówno teoretyczne, jak i w praktyce pokazuj±ce poprawno¶æ zastosowanego modelu. Nastêpnie pokazane zosta³y wyniki optymalizacji algorytmu ewolucyjnego, lokalnej optymalizacji oraz mechanizmu karania dla ró¿nych parametrów. Na koniec omówione zosta³y wyniki dotycz±ce zastosowanego rozwi±zania architektonicznego oraz skuteczno¶ci Volunteer Computing.
 
-Je¿eli nie jest wskazane inaczej w eksperymencie, przyjmowane s± nastêpuj±ce warto¶ci sta³e:
+Je¿eli nie jest wskazane inaczej, w eksperymencie przyjmowane s± nastêpuj±ce warto¶ci sta³e:
 \begin{itemize}
 \item $\mu = 0.05$ - wspó³czynnik tarcia, typowa warto¶æ dla nasmarowanych nart
 \item $\rho = 1.17 \frac{kg}{m^3}$ - przybli¿ona warto¶æ gêsto¶ci powietrza dla temperatury $0^\circ C$
@@ -13,25 +13,40 @@ i wilgotno¶ci 20\% na wysoko¶ci 800 m n.p.m
 \item $k_1 = 0.05 $ - wspó³czynnik oporu powietrza
 \item $k_2 = \frac{1}{2}C \rho A$ - wspó³czynnik oporu powietrza
 \end{itemize}
-Opis powy¿szych sta³ych mo¿na znale¼æ w rozdzia³ach \ref{sec:fizycznyModel} oraz \ref{sec:ewolucyjny}
+Opis powy¿szych sta³ych mo¿na znale¼æ w rozdzia³ach \ref{sec:fizycznyModel} oraz \ref{sec:ewolucyjny}.
+
+W rozdziale zastosowano nastêpuj±ce oznaczenia:
+\begin{itemize}
+\item ES - strategia ewolucyjna (w tym przypadku ($\mu$ + $\lambda$))
+\item HC - Hill climbing
+\item PF - funkcja kary
+\end{itemize}
 
 W eksperymentach wszystkie wspó³rzêdne punktów s± w uk³adzie kartezjañskim, dwuwymiarowym, zorientowanym na p³aszczy¼nie stoku. O¶ x skierowana jest wzd³u¿ stoku, natomiast o¶ y w poprzek.
 %---------------------------------------------------------------------------
 
+%TODO biblio do artyku³u
 \section{Weryfikacja modelu}
 \label{sec:weryfikacja}
 
-W tej sekcji chcia³y¶my pokazaæ, ¿e model, który zosta³ przyjêty jest prawid³owy. W poni¿szych eksperymentach zostanie przedstawione, ¿e zale¿no¶ci pomiêdzy zmian± poszczególnych zmiennych modelu, takich jak masa, nachylenie stoku oraz opory ruchu, a otrzymywanym czasem przejazdu, jest zgodne z prawami fizyki. Kolejne eksperymenty uka¿± równie¿, ¿e czas przejazdu po teoretycznie najszybszej trasie jest praktycznie identyczny z tym, który mo¿na wyliczyæ ze wzorów przedstawionych w artyku³ach naukowych. Na koniec sprawdzimy czy mo¿liwe jest przybli¿anie jazdy narciarza jazd± po ³amanej i jak gêsto bêd± musia³y byæ rozmieszczane punkty przegiêcia, ¿eby nie straciæ na dok³adno¶ci wyników.
+W tej sekcji chcia³y¶my pokazaæ, ¿e model, który zosta³ przyjêty jest prawid³owy. W poni¿szych eksperymentach zostanie sprawdzone, czy zale¿no¶ci pomiêdzy zmian± poszczególnych zmiennych modelu, takich jak masa, nachylenie stoku oraz opory ruchu, a otrzymywanym czasem przejazdu, s± zgodne z prawami fizyki. Kolejne eksperymenty zweryfikuj± równie¿, czy czas przejazdu po teoretycznie najszybszej trasie jest podobny do tego, który mo¿na wyliczyæ ze wzorów przedstawionych w artyku³ach naukowych. Na koniec sprawdzimy czy mo¿liwe jest przybli¿anie jazdy narciarza jazd± po ³amanej i jak gêsto bêd± musia³y byæ rozmieszczane punkty przegiêcia, ¿eby nie straciæ na dok³adno¶ci wyników.
 
 \subsection{Masa i nachylenie stoku}
-Na pocz±tek zosta³y przeprowadzane proste eksperymenty, które dowodz±, ¿e przyjêty model jest poprawny. Dlatego dla celów pierwszego testu naj³atwiej by³o sprawdziæ jak zmienia siê czas przejazdu narciarza poruszaj±cego siê po prostej w dó³ stoku przy ró¿nych masach narciarza oraz zmianach nachylenia stoku, dodatkowo sprawdzaj±c jaki wp³yw na wyniki ma równie¿ tarcie oraz opór powietrza.
+Na pocz±tek zosta³y przeprowadzane proste eksperymenty, które mia³y udowodniæ, ¿e przyjêty model jest prawid³owy. Dlatego dla celów pierwszego testu naj³atwiej by³o sprawdziæ jak zmienia siê czas przejazdu narciarza poruszaj±cego siê po prostej w dó³ stoku przy ró¿nych masach narciarza oraz zmianach nachylenia stoku, dodatkowo sprawdzaj±c jaki wp³yw na wyniki ma równie¿ tarcie oraz opór powietrza.
 
-Analizuj±c równanie \ref{eq:rownRuchu}, które opisuje model poruszania siê narciarza zauwa¿amy, ¿e jego masa wp³ywa jedynie na warto¶æ przyspieszenia wynikaj±c± z si³y oporu powietrza. Natomiast k±t nachylenia $\alpha$ wp³ywa zarówno na si³ê ¶ci±gaj±c±, jak i na si³ê tarcia. W opisanym eksperymencie zostanie pokazane, ¿e:
+Przypomnijmy równanie \ref{eq:rownRuchu}, które opisuje model poruszania siê narciarza:
+
+\begin{equation}
+\label{eq:rownRuchu}
+\ddot{x}=g\sin\alpha-\mu g\cos\alpha - \frac{k_2}{m}\dot{x}^2
+\end{equation}
+
+Zauwa¿my, ¿e jego masa wp³ywa jedynie na warto¶æ przyspieszenia wynikaj±c± z si³y oporu powietrza. Natomiast k±t nachylenia $\alpha$ wp³ywa zarówno na si³ê ¶ci±gaj±c±, jak i na si³ê tarcia. W opisanym eksperymencie zostanie pokazane, ¿e:
 \begin{itemize}
-\item im wiêkszy k±t nachylenia stoku tym szybciej porusza siê narciarz, bez wzglêdu na rodzaj uwzglêdnionych si³ oporu
-\item je¶li uwzglêdnimy tylko si³ê ¶ci±gaj±c±, bez si³ oporu, czas przejazdu narciarzy o ró¿nych masach na tej samej trasie jest identyczny
-\item taki sam wynik otrzymamy je¶li uwzglêdnimy dodatkowo si³ê tarcia
-\item przy uwzglêdnieniu si³y oporu powietrza otrzymujemy nastêpuj±c± zale¿no¶æ: im wiêksza jest masa narciarza, tym mniejsza jest si³a oporu powietrza co skutkuje szybszym przejazdem narciarza (przy za³o¿eniu, ¿e frontalna powierzchnia narciarza $A$ nie zmienia siê)
+\item im wiêkszy k±t nachylenia stoku tym szybciej porusza siê narciarz, bez wzglêdu na rodzaj uwzglêdnionych si³ oporu,
+\item je¶li uwzglêdnimy tylko si³ê ¶ci±gaj±c±, bez si³ oporu, czas przejazdu narciarzy o ró¿nych masach na tej samej trasie jest identyczny,
+\item taki sam wynik otrzymamy je¶li uwzglêdnimy dodatkowo si³ê tarcia,
+\item przy uwzglêdnieniu si³y oporu powietrza otrzymujemy nastêpuj±c± zale¿no¶æ: im wiêksza jest masa narciarza, tym mniejsze jest opó¼nienie wynikaj±ce z si³y oporu powietrza, co skutkuje szybszym przejazdem narciarza (przy za³o¿eniu, ¿e frontalna powierzchnia narciarza $A$ nie zmienia siê).
 \end{itemize}
 
 \subsubsection{Opis eksperymentu}
@@ -49,14 +64,14 @@ Zosta³y przeprowadzone trzy próby, których wyniki mo¿na zobaczyæ odpowiednio na 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{experyment-masa-bez-oporow}
-\caption{Porównanie czasu przejazdu narciarzy o ró¿nych masach, na stokach o ró¿nym nachyleniu bez uwzglêdniania si³ oporu}
+\caption{Porównanie czasu przejazdu narciarzy o ró¿nych masach, na stokach o ró¿nym nachyleniu bez uwzglêdniania si³ oporu. Linie wykresów dla ró¿nych mas narciarzy i tego samego rodzaju stoku pokrywaj± siê.}
 \label{fig:bezOporow}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{experyment-masa-bez-oporu}
-\caption{Porównanie czasu przejazdu narciarzy o ró¿nych masach, na stokach o ró¿nym nachyleniu z uwzglêdnieniem si³y tarcia jako jedynej si³y oporu}
+\caption{Porównanie czasu przejazdu narciarzy o ró¿nych masach, na stokach o ró¿nym nachyleniu z uwzglêdnieniem si³y tarcia jako jedynej si³y oporu. Linie wykresów dla ró¿nych mas narciarzy i tego samego rodzaju stoku pokrywaj± siê.}
 \label{fig:bezOporu}
 \end{figure}
 
@@ -72,12 +87,12 @@ Analizuj±c wykres \ref{fig:wszystkieOpory} zauwa¿amy, ¿e na bardziej stromym sto
 
 \subsection{Czas przejazdu w zale¿no¶ci od toru jazdy}
 \label{sec:torJazdy}
-Optymalizacja trasy narciarza polega na znalezieniu takiej linii jazdy, która spowoduje najszybszy przejazd. Warto tu zauwa¿yæ, ¿e wbrew pozorom, nie oznacza to zawsze najkrótszej linii bêd±cego odcinkiem ³±cz±cym punkt pocz±tkowy z koñcowym. W poni¿szym eksperymencie zostanie pokazane jak zmienia siê czas przejazdu w zale¿no¶ci od linii poruszania siê.
+Optymalizacja trasy narciarza polega na znalezieniu linii najszybszego przejazdu. Warto tu zauwa¿yæ, ¿e wbrew pozorom, nie zawsze jest to najkrótsza linia - odcinek ³±cz±cy punkt pocz±tkowy z koñcowym. W poni¿szym eksperymencie zostanie pokazane, jak zmienia siê czas przejazdu w zale¿no¶ci od linii poruszania siê.
 
 Je¶li rozwa¿ymy przyk³ad bez bramek, gdzie najkrótsza linia przejazdu nie powoduje jazdy w skos stoku, a jedynie w dó³, to w takim przypadku, jest to jednocze¶nie najszybsza trasa przejazdu. Jednak w pozosta³ych przypadkach, je¶li rozwa¿amy uk³ad bez dzia³ania oporów, tory te bêd± ró¿ne.
 
 \subsubsection{Opis eksperymentu}
-Chcemy sprawdziæ ile czasu zajmie narciarzowi przejechanie z punktu (0,0) do punktu (10,10). Aby upro¶ciæ przyk³ad, sprawdzimy wyniki pomijaj±c wk³ad wszystkich oporów. Gdyby narciarz porusza³ siê po linii prostej, bezpo¶rednio do punktu koñcowego, czas przejazdu mo¿na wyliczyæ przekszta³caj±c wzór:
+Chcemy sprawdziæ, ile czasu zajmie narciarzowi przejechanie z punktu (0,0) do punktu (10,10). Aby upro¶ciæ przyk³ad, sprawdzimy wyniki pomijaj±c wk³ad wszystkich oporów. Gdyby narciarz porusza³ siê po linii prostej, bezpo¶rednio do punktu koñcowego, czas przejazdu mo¿na wyliczyæ przekszta³caj±c wzór:
 
 \begin{equation}
 s = \frac{at^2}{2}
@@ -97,7 +112,7 @@ gdzie:
 Przyspieszenie narciarza jest sk³adow± przyspieszenia ziemskiego uwzglêdniaj±c± zarówno nachylenie stoku ($\frac{\pi}{12}$), jak i jazdê w skos stoku ($\frac{\pi}{4}$, czyli $45^\circ$). Zatem, przyjmuj±c $g=9.81$, czas przejazdu po linii prostej powinien wynosiæ oko³o:
 
 \begin{equation}
-t \simeq \frac{2*10\sqrt{2}}{9.81*\sin(\frac{\pi}{12})\sin(\frac{\pi}{4})} \simeq 3.969 
+t \simeq \sqrt{\frac{2*10\sqrt{2}}{9.81*\sin(\frac{\pi}{12})\sin(\frac{\pi}{4})}} \simeq 3.969 
 \end{equation}
 
 Sprawdzimy teraz jakie czasy otrzymamy wykorzystuj±c program, sprawdzaj±c poruszanie siê po linii prostej oraz po æwiartce okrêgu (a dok³adniej, po ³amanej, której kolejne punkty za³amania znajduj± siê na okrêgu w niewielkich odleg³o¶ciach od siebie). Poni¿ej na rysunku \ref{fig:czasPrzejazdu} widzimy jak wygl±da trasa przejazdu w dwóch przypadkach.
@@ -112,27 +127,24 @@ Sprawdzimy teraz jakie czasy otrzymamy wykorzystuj±c program, sprawdzaj±c porusz
 \subsubsection{Rezultaty eksperymentu}
 W tym przypadku otrzymali¶my wyniki odpowiednio dla narciarza jad±cego po prostej 3.965 s, a dla poruszaj±cego siê po czarnej linii 3.671 s.
 
-Po pierwsze, warto zwróciæ uwagê, ¿e czas jazdy po prostej minimalnie ró¿ni siê od czasu teoretycznego, obliczonego ze wzoru - ró¿nica ta wynosi ok. 0.1\%, co jest dopuszczalne i mo¿liwe do zaniedbania, gdy¿ nie ma znacz±cego wp³ywu na wyniki eksperymentów. Ró¿nica ta mo¿e wynikaæ z niedok³adno¶ci obliczeñ numerycznych, a tak¿e z trudno¶ci trafienia przez narciarza idealnie w punkt koñcowy, w którym powinien siê znale¼æ.
+Po pierwsze, warto zwróciæ uwagê, ¿e czas jazdy po prostej minimalnie ró¿ni siê od czasu teoretycznego, obliczonego ze wzoru - ró¿nica ta wynosi ok. 0.1\%, co jest dopuszczalne i mo¿liwe do zaniedbania, gdy¿ nie ma znacz±cego wp³ywu na wyniki eksperymentów. Ró¿nica ta wynika z niedok³adno¶ci obliczeñ numerycznych. Dodatkowym problemem jest fakt, ¿e nie mo¿emy wyliczyæ dok³adnego czasu jakiego potrzebuje narciarz na dojechanie do okre¶lonego punktu - mo¿emy jedynie  ale tak¿e z trudno¶ci trafienia przez narciarza idealnie w punkt koñcowy, w którym powinien siê znale¼æ.
 
 Wyra¼nie widaæ równie¿, ¿e czas przejazdu po linii czarnej jest krótszy ni¿ czas przejazdu po linii niebieskiej. Trasê po prostej narciarz przebywa w ok. 7\% d³u¿szym czasie ni¿ trasê d³u¿sz±. Na tak krótkim odcinku narciarz by³ w stanie zdobyæ przewagê ok. 0.3 s. Wa¿ne jest to, ¿e w prawdziwych przejazdach slalomowych nawet najmniejsza ró¿nica czasu mo¿e decydowaæ o wygranej, oczywi¶cie zale¿y to od dok³adno¶ci pomiaru, który zawsze jest sprawdzany do setnych czê¶ci sekundy. Dlatego ogromne znaczenie ma tor po jakim porusza siê narciarz i nawet najmniejsza zmiana mo¿e powodowaæ kluczow± poprawê czasu na ca³ej trasie. Czasami warto jednak pojechaæ d³u¿sz± tras±, ale tak±, na której nabierzemy wiêkszej prêdko¶ci i pó¼niej zyskamy na kolejnym odcinku.
 
-%TODO Ania biblio
-Pozostaje jeszcze pytanie jaka jest najlepsza linia poruszania siê pomiêdzy dwoma punktami. Problem ten zosta³ ju¿ rozwi±zany - linia najszybsza jest fragmentem cykloidy. Dok³adniejsze informacje mo¿na znale¼æ m.in. w http://www.hep.caltech.edu/~fcp/math/variationalCalculus/variationalCalculus.pdf oraz
-http://www.math.utk.edu/~freire/teaching/m231f08/m231f08brachistochrone.pdf.
-W http://www.math.utk.edu/~freire/teaching/m231f08/m231f08brachistochrone.pdf znajduje siê wzór na czas przejazdu pomiêdzy dwoma punktami. Korzystaj±c z tego wzoru podstawiaj±c odpowiednio wyliczone parametry otrzymujemy, ¿e najkrótszy mo¿liwy czas przejazdu z punktu (0,0) do punktu (10,10) to ok. 3.623. Jak widaæ, wynik ten jest lepszy ni¿ otrzymane w naszym eksperymencie: od czasu jazdy po æwiartce ko³a o ok. 0.05 s., co nie jest ró¿nic± bardzo du¿±, ale znacz±c± dla zwyciêstwa.
+Pozostaje jeszcze pytanie jaka jest najlepsza linia poruszania siê pomiêdzy dwoma punktami. Problem ten zosta³ ju¿ rozwi±zany - linia najszybsza jest fragmentem cykloidy. Dok³adniejsze informacje mo¿na znale¼æ m.in. w \cite{brach1} oraz \cite{brach2}. W \cite{brach2} znajduje siê wzór na czas przejazdu pomiêdzy dwoma punktami. Korzystaj±c z tego wzoru, podstawiaj±c odpowiednio wyliczone parametry otrzymujemy, ¿e najkrótszy mo¿liwy czas przejazdu z punktu (0,0) do punktu (10,10) to ok. 3.623 s. Jak widaæ, wynik ten jest lepszy ni¿ otrzymane w naszym eksperymencie: od czasu jazdy po æwiartce ko³a o ok. 0.05 s., co nie jest ró¿nic± bardzo du¿±, ale znacz±c± dla zwyciêstwa.
 
 \subsection{Jazda po ³amanej}
 \label{sec:lamana}
-Kolejnym krokiem by³o sprawdzenie, ¿e rzeczywi¶cie mo¿emy przybli¿aæ jazdê narciarza jako poruszanie siê po ³amanej. Wa¿ne jest stwierdzenie jakie ró¿nice w czasie bêd± wystêpowaæ pomiêdzy jazd± po ³uku, a jazd± po ³amanej. Ró¿nice te oczywi¶cie bêd± zale¿eæ od tego jak dok³adne przybli¿enie zrobimy.
+Kolejnym krokiem by³o sprawdzenie, ¿e rzeczywi¶cie mo¿emy przybli¿aæ jazdê narciarza jako poruszanie siê po ³amanej. Wa¿ne jest stwierdzenie jakie ró¿nice w czasie bêd± wystêpowaæ pomiêdzy jazd± po ³uku, a jazd± po ³amanej. Ró¿nice te oczywi¶cie bêd± zale¿eæ od tego, z ilu segmentów sk³adaæ siê bêdzie ³amana.
 
 \subsubsection{Opis eksperymentu}
 W eksperymencie sprawdzaæ bêdziemy jak zmienia siê czas przejazdu w zale¿no¶ci od dok³adno¶ci przybli¿enia ³amanej. Jako tor przejazdu przyjêta zosta³a najszybsza linia przejazdu do punktu (10,10), po której przejechanie zajmuje 3.623 s (jak wspomniano w poprzednim eksperymencie \ref{sec:torJazdy}).
 
-Wybieraj±c okre¶lon± liczbê punktów znajduj±cych siê na linii ³uku sprawdzimy ile czasu zajmuje przejechanie po ³amanej utworzonej z tych punktów w porównaniu z jazd± po ³uku. Nale¿y równie¿ okre¶liæ jak czêsto musz± znajdowaæ siê punkty, aby ró¿nica w czasie by³a zaniedbywalnie ma³a. Sterowanie odbywa siê poprzez ustalenie jak gêsto w pionie maj± znajdowaæ siê punkty - w ten sposób równie¿ mo¿emy sterowaæ ilo¶ci± punktów.
+Wybieraj±c okre¶lon± liczbê punktów znajduj±cych siê na linii ³uku sprawdzimy, ile czasu zajmuje przejechanie po ³amanej utworzonej z tych punktów w porównaniu z jazd± po ³uku. Nale¿y równie¿ okre¶liæ, jak gêsto musz± znajdowaæ siê punkty, aby ró¿nica w czasie by³a zaniedbywalnie ma³a. Sterowanie odbywa siê poprzez ustalenie w jakiej odleg³o¶ci od siebie w pionie maj± znajdowaæ siê kolejne punkty - w ten sposób równie¿ mo¿emy sterowaæ liczb± punktów.
 
 \subsubsection{Rezultaty eksperymentu}
 
-Poni¿ej znajduj± siê obrazki (Rysunek \ref{fig:brachSteps}) przedstawiaj±ce poszczególne próby przejazdu po ³amanej sk³adaj±cej siê odpowiednio z 2-6 punktów po¶rednich (linia szara) oraz pierwotn± liniê najszybszego przejazdu (linia niebieska). Ilo¶æ punktów na ³amanej nie bierze pod uwagê punktu startowego, a jedynie kolejne punkty w³±cznie z punktem na mecie.
+Poni¿ej znajduj± siê obrazki (Rysunek \ref{fig:brachSteps}) przedstawiaj±ce poszczególne próby przejazdu po ³amanej sk³adaj±cej siê odpowiednio z 2-6 punktów po¶rednich (linia szara) oraz pierwotn± liniê najszybszego przejazdu (linia niebieska). Liczba punktów na ³amanej nie bierze pod uwagê punktu startowego, a jedynie kolejne punkty w³±cznie z punktem na mecie.
 
 \begin{figure}[hp]
 \centering
@@ -141,7 +153,7 @@ Poni¿ej znajduj± siê obrazki (Rysunek \ref{fig:brachSteps}) przedstawiaj±ce posz
 \label{fig:brachSteps}
 \end{figure}
 
-W tabeli \ref{tab:punktyPrzelamania} przedstawione s± uzyskane wyniki w zale¿no¶ci od ilo¶ci punktów po¶rednich oraz ró¿nica czasu w porównaniu do najkrótszego czasu przejazdu - 3.623.
+W tabeli \ref{tab:punktyPrzelamania} przedstawione s± uzyskane wyniki w zale¿no¶ci od ilo¶ci punktów po¶rednich oraz ró¿nica czasu w porównaniu do najkrótszego czasu przejazdu - 3.623 s.
 
 \begin{table}[h]
 \caption{Czasy przejazdu po ³amanej w zale¿no¶ci od liczby punktów prze³amania}
@@ -158,7 +170,7 @@ W tabeli \ref{tab:punktyPrzelamania} przedstawione s± uzyskane wyniki w zale¿no¶
 \end{tabular}
 \end{table}
 
-Ró¿nice w czasie wahaj± siê od 0.003 do 0.064 s, jest to odpowiednio od 0.08\% do ok. 1.8\% ró¿nicy w stosunku do czasu najszybszego. Wydaje siê, ¿e wystarczaj±cym powinno byæ, aby odcinku takiej d³ugo¶ci okre¶liæ trzy punkty po¶rednie, gdy¿ ró¿nica dla tego przypadku wynosi ok. 0.023 s co stanowi ok. 100.6\% czasu najszybszego, a wiêc ró¿nica nie przekracza 1\%. Zreszt± to samo mo¿na stwierdziæ z rysunków - ju¿ dla trzech punktów praktycznie nie widaæ ró¿nicy pomiêdzy liniami. Zatem na takiej trasie, której odleg³o¶æ w pionie wynosi 10 m mo¿na okre¶liæ 3-4 punktów po¶rednich, które z przybli¿eniem nie wnosz±cym zbyt du¿ych ró¿nic do wyniku bêd± wyznacza³y trasê koñcow±. Oznacza to, ¿e punkty te powinny znajdowaæ siê w odleg³o¶ciach 2-4 m. Wiedz±c, ¿e pomiary przejazdu na zawodach s± z dok³adno¶ci± do setnych czê¶ci sekundy, mo¿na stwierdziæ, ¿e dopiero 5 punktów po¶rednich daje nam a¿ tak± precyzjê obliczeñ. Oczywi¶cie je¶li trasa nie bêdzie zawieraæ zbyt ostrych k±tów za³amania, mo¿na bêdzie zmniejszyæ gêsto¶æ punktów.
+Ró¿nice w czasie wahaj± siê od 0.003 do 0.064 s, jest to odpowiednio od 0.08\% do ok. 1.8\% ró¿nicy w stosunku do czasu najszybszego. Wydaje siê, ¿e wystarczaj±cym powinno byæ, aby na odcinku takiej d³ugo¶ci okre¶liæ trzy punkty po¶rednie, gdy¿ ró¿nica dla tego przypadku wynosi ok. 0.023 s co stanowi ok. 100.6\% czasu najszybszego, a wiêc ró¿nica nie przekracza 1\%. To samo mo¿na stwierdziæ z rysunków - ju¿ dla trzech punktów praktycznie nie widaæ ró¿nicy pomiêdzy liniami. Zatem na takiej trasie, której odleg³o¶æ w pionie wynosi 10 m mo¿na okre¶liæ 3-4 punktów po¶rednich, które z przybli¿eniem nie wnosz±cym zbyt du¿ych ró¿nic do wyniku bêd± wyznacza³y trasê koñcow±. Oznacza to, ¿e punkty te powinny znajdowaæ siê w odleg³o¶ciach 2-4 m. Wiedz±c, ¿e pomiary przejazdu na zawodach s± z dok³adno¶ci± do setnych czê¶ci sekundy, mo¿na stwierdziæ, ¿e dopiero 5 punktów po¶rednich daje nam a¿ tak± precyzjê obliczeñ. Oczywi¶cie je¶li trasa nie bêdzie zawieraæ zbyt ostrych k±tów za³amania, mo¿na bêdzie zmniejszyæ gêsto¶æ punktów.
 
 \section{Eksperymenty w terenie}
 \label{sec:eksperymenty}
@@ -377,29 +389,29 @@ Na stoku oznaczony zosta³ punkt startowy (A) oraz linia mety z oznaczonym ¶rodki
 \section{Optymalizacja}
 \label{sec:optWyniki}
 
-W tej czê¶ci zostan± pokazane wyniki jakie zosta³y otrzymane jako efekt dzia³ania algorytmu ewolucyjnego w celu znalezienia optymalnej trasy przejazdu. Sprawdzimy jak poszczególne parametry algorytmu wp³ywaj± na czas jego dzia³ania oraz uzyskiwane wyniki. Spróbujemy tak¿e rozwi±zaæ problem dla trudniejszych przypadków zwiêkszaj±c ilo¶æ punktów, które stanowi± rozwi±zanie oraz wykonuj±c algorytm na d³u¿szej trasie. Nastêpnie zobaczymy jak optymalizacja lokalna przyspieszy wykonanie programu.
+W tej czê¶ci zostan± pokazane wyniki jakie zosta³y otrzymane jako efekt dzia³ania algorytmu ewolucyjnego w celu znalezienia optymalnej trasy przejazdu. Sprawdzimy, jak poszczególne parametry algorytmu wp³ywaj± na czas jego dzia³ania oraz uzyskiwane wyniki. Spróbujemy tak¿e rozwi±zaæ problem dla trudniejszych przypadków: zwiêkszaj±c liczbê punktów, które stanowi± rozwi±zanie oraz optymalizuj±c trasê d³u¿szego slalomu. Nastêpnie zobaczymy, jak optymalizacja lokalna przyspieszy wykonanie programu.
 
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjnyWyniki}
-Wiedz±c, ¿e za³o¿enia dotycz±ce modelu oraz sposób poruszania siê narciarza mo¿na uznaæ za poprawne i zbli¿one do tego co rzeczywi¶cie dzieje siê podczas jazdy na stoku, przetestujemy teraz jak sprawdza siê algorytm genetyczny do celów optymalizacji trasy slalomu.
+Wiedz±c, ¿e za³o¿enia dotycz±ce modelu oraz sposób poruszania siê narciarza mo¿na uznaæ za poprawne i zbli¿one do tego co rzeczywi¶cie dzieje siê podczas jazdy na stoku, przetestujemy teraz, jak sprawdza siê algorytm ewolucyjny do celów optymalizacji trasy slalomu.
 
 W poni¿szych eksperymentach wykorzystane zostanie nastêpuj±ce ustawienie bramek: (5,13), (0,26), (5,39), (4,44), (11,57), (0,70). Ustawienie to jest podobne do tych, które s± wybierane w rzeczywisto¶ci. Posiada tak¿e wertikal, figurê slalomow±, szerzej opisan± w sekcji \ref{sec:alpineSkiing}, czêsto stosowan± w slalomie, która ma wymuszaæ zmianê rytmu, a wiêc bêdzie dobrym sprawdzianem dla zastosowanego algorytmu.
 
-Zak³adamy, ¿e narciarz startuj±c ma prêdko¶æ pocz±tkow± $1\frac{m}{s}$. Jest to kierowane tym, ¿e przy starcie zawodnicy zaczynaj± od odepchniêcia siê kijami od ¶niegu nadaj±c sobie prêdko¶æ pocz±tkow±. Najwa¿niejsze jest to, ¿e warto¶æ ta bêdzie sta³a dla wszystkich eksperymentów.
+Zak³adamy, ¿e narciarz startuj±c ma prêdko¶æ pocz±tkow± $1\frac{m}{s}$. Wynika to z tego, ¿e przy starcie zawodnicy zaczynaj± od odepchniêcia siê kijami od ¶niegu nadaj±c sobie prêdko¶æ pocz±tkow±. Najwa¿niejsze jest to, ¿e warto¶æ ta bêdzie sta³a dla wszystkich eksperymentów.
 
 W eksperymencie \ref{sec:lamana} zosta³o stwierdzone, ¿e odleg³o¶ci w pionie pomiêdzy kolejnymi punktami wyznaczaj±cymi trasê powinna wynosiæ 2-4 m. Zatem przyjmijmy, ¿e bêd± to 3 m, co dla wy¿ej podanego slalomu daje nam nieca³e 30 punktów do optymalizacji.
 
-Warto¶ci parametrów algorytmu genetycznego s± takie jak wymienione wcze¶niej w rozdziale \ref{sec:ewolucyjnyRozw}. Korzystamy z algorytmu $(\mu + \lambda)$, gdzie $\mu = 30$, a $\lambda = 100$. W ka¿dej iteracji najpierw krzy¿ujemy osobniki z populacji tymczasowej, losuj±c pary rodzicielskie, a w wyniku krzy¿owania powstaje znów 100 osobników. Nastêpnie mutacji podlegaj± wszystkie z tych osobników. Jedynym dodatkowym za³o¿eniem jest nie zmienianie pozycji punktów przejazdu przez bramki - chcemy, aby narciarz przejecha³ zawsze jak najbli¿ej bramki. Je¶li która¶ z warto¶ci lub zastosowanych algorytmów zmienia siê, jest to zaznaczone w eksperymencie.
+Warto¶ci parametrów algorytmu ewolucyjnego s± takie, jak wymienione wcze¶niej w rozdziale \ref{sec:ewolucyjnyRozw}. Korzystamy z algorytmu $(\mu + \lambda)$, gdzie $\mu = 30$, a $\lambda = 100$. W ka¿dej iteracji najpierw krzy¿ujemy osobniki z populacji tymczasowej, losuj±c pary rodzicielskie, a w wyniku krzy¿owania powstaje znów 100 osobników. Nastêpnie mutacji podlegaj± wszystkie z tych osobników. Jedynym dodatkowym za³o¿eniem jest nie zmienianie pozycji punktów przejazdu przez bramki - chcemy, aby narciarz przejecha³ zawsze jak najbli¿ej bramki. Je¶li która¶ z warto¶ci lub zastosowanych algorytmów zmienia siê, jest to zaznaczone w eksperymencie.
 
 
 \subsubsection{Warunek zakoñczenia}
-Warunkiem stopu w zastosowanym algorytmie genetycznym jest sprawdzenie czy populacja, na której dzia³amy przesta³a byæ ju¿ zró¿nicowana. Dodatkowo, je¶li ró¿nica pomiêdzy najlepszym, a najgorszym osobnikiem jest ma³a, czekamy przez okre¶lon± liczbê iteracji, aby sprawdziæ czy uzyskujemy jeszcze jak±¶ poprawê najlepszego osobnika, ale wiêksz± ni¿ zadana granica. Je¶li taka sytuacja nie zachodzi, oznacza to, ¿e szanse na poprawê wyniku s± niewielkie i mo¿na zakoñczyæ dzia³anie algorytmu. W rozwi±zaniu tym istniej± jednak trzy parametry, których wp³yw na ostateczny wynik zbadamy w tym eksperymencie. 
+Warunkiem stopu w zastosowanym algorytmie ewolucyjnym jest sprawdzenie, czy populacja, na której dzia³amy przesta³a byæ ju¿ zró¿nicowana. Dodatkowo, je¶li ró¿nica pomiêdzy najlepszym a najgorszym osobnikiem jest ma³a, czekamy przez okre¶lon± liczbê iteracji, aby sprawdziæ, czy uzyskujemy jeszcze jak±¶ poprawê najlepszego osobnika, ale wiêksz± ni¿ zadana granica. Je¶li taka sytuacja nie zachodzi, oznacza to, ¿e szanse na poprawê wyniku s± niewielkie i mo¿na zakoñczyæ dzia³anie algorytmu. W rozwi±zaniu tym istniej± jednak trzy parametry, których wp³yw na ostateczny wynik zbadamy w tym eksperymencie. 
 
 \paragraph{Eksperyment 1.} W pierwszym eksperymencie parametry zakoñczenia algorytmu wynosz±:
 \begin{itemize}
-\item dla zró¿nicowania populacji przyjmujemy na pocz±tek warto¶æ 0.1, czyli 10\%, gdzie warto¶æ ta obliczana jest na podstawie najlepszej i najgorszej warto¶ci fitness w populacji, poprzez znalezienie ró¿nicy tych warto¶ci i podzielenie otrzymanej warto¶ci przez warto¶æ najlepsz± (aby uzyskaæ warto¶æ w \% mno¿ymy przez 100\%)
-\item zmiana najlepszego osobnika jest uznawana za wystarczaj±co du¿± je¶li wyniesie przynajmniej 0.3 s
-\item ilo¶æ iteracji przez które czekamy na zmianê najlepszego osobnika to na pocz±tek 7
+\item dla zró¿nicowania populacji przyjmujemy na pocz±tek warto¶æ 0.1, czyli 10\%, gdzie warto¶æ ta obliczana jest na podstawie najlepszej i najgorszej warto¶ci fitness w populacji, poprzez znalezienie ró¿nicy tych warto¶ci i podzielenie otrzymanej warto¶ci przez warto¶æ najlepsz± (aby uzyskaæ warto¶æ w \% mno¿ymy przez 100\%),
+\item zmiana najlepszego osobnika jest uznawana za wystarczaj±co du¿±, je¶li wyniesie przynajmniej 0.3 s,
+\item liczba iteracji przez które czekamy na zmianê najlepszego osobnika, to na pocz±tek 7.
 \end{itemize}
 
 W zwi±zku z tym, ¿e zachowanie algorytmu jest niedeterministyczne, dla ka¿dego zestawu parametrów zosta³y przeprowadzone po trzy eksperymenty, aby mo¿na by³o u¶redniæ wyniki i porównaæ eksperymenty miêdzy sob±.
@@ -425,11 +437,11 @@ Poni¿ej (rysunki \ref{fig:w1s} oraz \ref{fig:w1w}) znajduj± siê wyniki wizualne 
 Oto otrzymane czasy przejazdu dla kolejnych prób:
 
 \begin{table}[H]
-\caption{Czasy przejazdu dla kolejnych prób wraz z ilo¶ci± iteracji oraz czasem dzia³ania algorytmu}
+\caption{Czasy przejazdu dla kolejnych prób wraz z liczb± iteracji oraz czasem dzia³ania algorytmu}
 \centering
 \begin{tabular}{ | c | c | c | c |}
   \hline                        
-  numer próby & czas przejazdu [s] & ilo¶æ iteracji & czas dzia³ania [s] \\ \hline  
+  numer próby & czas przejazdu [s] & liczba iteracji & czas dzia³ania [s] \\ \hline  
 1 & 7.968 & 7 & 18 \\ \hline
 2 & 8.039 & 7 & 19 \\ \hline
 3 & 7.917 & 9 & 21 \\ \hline
@@ -438,21 +450,21 @@ Oto otrzymane czasy przejazdu dla kolejnych prób:
 
 Zatem ¶redni czas przejazdu w tych trzech próbach wyniós³ 7.975 s.
 
-Ilo¶æ iteracji w przypadku tych wyników wynios³a 7-9. Algorytm bardzo szybko dochodzi do rozwi±zania, a czas dzia³ania to tylko ok. 20 s. Trzeba jednak pamiêtaæ, ¿e algorytm musi dzia³aæ wystarczaj±co d³ugo, aby mia³o sens przesy³anie problemu z serwera - najlepiej oko³o kilku minut. Wtedy czas obliczeñ bêdzie znacz±co d³u¿szy w stosunku do czasu przesy³u danych.
+Liczba iteracji w przypadku tych wyników wynios³a 7-9. Algorytm bardzo szybko dochodzi³ do rozwi±zania, a czas dzia³ania to tylko ok. 20 s. Trzeba jednak pamiêtaæ, ¿e czas dzia³ania algorytmu musi byæ wystarczaj±co du¿y, aby mia³o sens przesy³anie problemu z serwera - najlepiej oko³o kilku minut. Wtedy czas obliczeñ bêdzie znacz±co d³u¿szy w stosunku do czasu przesy³u danych.
 
-Jednocze¶nie, jak widaæ wyra¼nie na obrazkach, wyniki nie s± satysfakcjonuj±ce - trasa przejazdu nie jest g³adka i z pewno¶ci± istnieje lepsze rozwi±zanie. Jednak skoro zosta³o wykonanych tylko kilka iteracji algorytmu, oznacza to, ¿e mo¿na spróbowaæ uzyskaæ lepsze wyniki poprzez wyd³u¿enie czasu dzia³ania algorytmu.
+Jednocze¶nie, co obserwujemy na rysunkach, wyniki nie s± satysfakcjonuj±ce - trasa przejazdu nie jest g³adka i z pewno¶ci± istnieje lepsze rozwi±zanie. Jednak skoro zosta³o wykonanych tylko kilka iteracji algorytmu, oznacza to, ¿e mo¿na spróbowaæ uzyskaæ lepsze wyniki poprzez wyd³u¿enie czasu dzia³ania algorytmu.
 
-\paragraph{Eksperyment 2.} Wprowadzamy teraz zmianê w warto¶ci parametru oznaczaj±cego ró¿nicê w fitness najlepszego osobnika. Zamiast warto¶ci 0.3 s teraz bêdzie to 0.1 s. Nie ma Sprawdzimy zarówno czy czas dzia³ania algorytmu siê wyd³u¿y jak i czy uda siê przez to otrzymaæ lepszy wynik.
+\paragraph{Eksperyment 2.} Wprowadzamy teraz zmianê w warto¶ci parametru oznaczaj±cego ró¿nicê w fitness najlepszego osobnika. Zamiast warto¶ci 0.3 s teraz bêdzie to 0.1 s. Sprawdzimy zarówno, czy czas dzia³ania algorytmu siê wyd³u¿y jak i czy uda siê przez to otrzymaæ lepszy wynik.
 
 Na rysunkach \ref{fig:w2s} oraz \ref{fig:w2w} a tak¿e w tabeli \ref{tab:tab2} zebrane s± wyniki eksperymentu.
 
 \begin{table}[H]
-\caption{Czasy przejazdu dla kolejnych prób wraz z ilo¶ci± iteracji oraz czasem dzia³ania algorytmu}
+\caption{Czasy przejazdu dla kolejnych prób wraz z liczb± iteracji oraz czasem dzia³ania algorytmu}
 \label{tab:tab2}
 \centering
 \begin{tabular}{ | c | c | c | c |}
   \hline                        
-  numer próby & czas przejazdu [s] & ilo¶æ iteracji & czas dzia³ania [s] \\ \hline  
+  numer próby & czas przejazdu [s] & liczba iteracji & czas dzia³ania [s] \\ \hline  
 1 & 7.916 & 15 & 49 \\ \hline
 2 & 7.809 & 14 & 46 \\ \hline
 3 & 7.777 & 16 & 51 \\ \hline
@@ -477,19 +489,19 @@ Na rysunkach \ref{fig:w2s} oraz \ref{fig:w2w} a tak¿e w tabeli \ref{tab:tab2} ze
 \end{figure}
 
 \newpage
-Wyniki poprawi³y siê, linia przejazdu jest du¿o g³adsza, a czasy poprawi³y siê o ok. 0.15 s, czyli o ok. kilka procent. Jednak czas dzia³ania algorytmu wyd³u¿y³ siê do 45-50 s, a ilo¶æ iteracji wynios³a 14-16. Oczywi¶cie czas ten jest wci±¿ na tyle ma³y, ¿e mo¿emy wprowadzaæ dalsze zmiany, które wyd³u¿± czas dzia³ania i jednocze¶nie umo¿liwi± znalezienie lepszego rozwi±zania.
+Wyniki poprawi³y siê, linia przejazdu jest du¿o g³adsza, a czasy poprawi³y siê o ok. 0.15 s, czyli o ok. 2\%. Jednak czas dzia³ania algorytmu wyd³u¿y³ siê do 45-50 s, a liczba iteracji wynios³a 14-16. Oczywi¶cie czas ten jest wci±¿ na tyle ma³y, ¿e mo¿emy wprowadzaæ dalsze zmiany, które wyd³u¿± czas dzia³ania i jednocze¶nie umo¿liwi± znalezienie lepszego rozwi±zania.
 
 \paragraph{Eksperyment 3.} Spróbujmy w takim razie zmieniæ równie¿ parametr dotycz±cy zró¿nicowania populacji - niech bêdzie to teraz nie 10\%, a 1\%.
 
 Poni¿ej znajduj± siê zebrane wyniki w tabeli \ref{tab:tab3} oraz na rysunkach \ref{fig:w3s} oraz \ref{fig:w3w}.
 
 \begin{table}[H]
-\caption{Czasy przejazdu dla kolejnych prób wraz z ilo¶ci± iteracji oraz czasem dzia³ania algorytmu}
+\caption{Czasy przejazdu dla kolejnych prób wraz z liczb± iteracji oraz czasem dzia³ania algorytmu}
 \centering
 \label{tab:tab3}
 \begin{tabular}{ | c | c | c | c |}
   \hline                        
-  numer próby & czas przejazdu [s] & ilo¶æ iteracji & czas dzia³ania [s] \\ \hline  
+  numer próby & czas przejazdu [s] & liczba iteracji & czas dzia³ania [s] \\ \hline  
 1 & 7.818 & 17 & 55 \\ \hline
 2 & 7.822 & 14 & 45 \\ \hline
 3 & 7.817 & 14 & 47 \\ \hline
@@ -512,24 +524,24 @@ Poni¿ej znajduj± siê zebrane wyniki w tabeli \ref{tab:tab3} oraz na rysunkach \r
 \label{fig:w3w}
 \end{figure}
 
-Jak widaæ wyniki s± niewiele lepsze ni¿ te poprzednie. Zatem ten warunek praktycznie nie zmieni³ zachowania. Pozosta³ natomiast jeszcze warunek ilo¶ci iteracji, przez które sprawdzamy czy poprawia siê fitness najlepszego osobnika.
+Jak widaæ wyniki s± niewiele lepsze ni¿ te poprzednie. Zatem ten warunek praktycznie nie zmieni³ zachowania. Pozosta³ natomiast jeszcze warunek liczby iteracji, przez które sprawdzamy, czy poprawia siê fitness najlepszego osobnika.
 
-\paragraph{Eksperyment 4.} Zmieniamy teraz warto¶æ ilo¶ci iteracji, przez które czekamy na zmianê najlepszego osobnika z 7 na 10.
+\paragraph{Eksperyment 4.} Zmieniamy teraz warto¶æ liczby iteracji, przez które czekamy na zmianê najlepszego osobnika z 7 na 10.
 
 \begin{table}[H]
-\caption{Czasy przejazdu dla kolejnych prób wraz z ilo¶ci± iteracji oraz czasem dzia³ania algorytmu}
+\caption{Czasy przejazdu dla kolejnych prób wraz z liczb± iteracji oraz czasem dzia³ania algorytmu}
 \centering
 \label{tab:tab4}
 \begin{tabular}{ | c | c | c | c |}
   \hline                        
-  numer próby & czas przejazdu [s] & ilo¶æ iteracji & czas dzia³ania [s] \\ \hline  
+  numer próby & czas przejazdu [s] & liczba iteracji & czas dzia³ania [s] \\ \hline  
 1 & 7.892 & 13 & 41 \\ \hline
 2 & 7.743 & 19 & 60 \\ \hline
 3 & 7.837 & 13 & 41 \\ \hline
 \end{tabular}
 \end{table}
 
-¦rednia wyników wynosi: 7.824 s.
+¦rednia wyników wynosi: 7.824 s. Warto zwróciæ uwagê, ¿e ¶rednio w ka¿dym eksperymencie wykonywanych jest 1950 symulacji. Zale¿y to od liczby osobników w populacji oraz populacji tymczasowej, a wiêc parametrów $\mu$ i $\lambda$, a tak¿e od liczby iteracji wykonywanych w ka¿dym eksperymencie.
 
 \begin{figure}[H]
 \centering
@@ -546,17 +558,16 @@ Jak widaæ wyniki s± niewiele lepsze ni¿ te poprzednie. Zatem ten warunek praktyc
 \label{fig:w4s}
 \end{figure}
 
-Jak widaæ, równie¿ zmiana tego parametru nie wnosi poprawy, choæ uda³o siê otrzymaæ dotychczas najlepszy wynik - 7.743 s. Poniewa¿ algorytm ten jest niedeterministyczny trudno oceniæ jakie warto¶ci parametrów s± optymalne. Oczywi¶cie mo¿na dalej zmniejszaæ ich warto¶ci w poszukiwaniu lepszego wyniku.
+Jak widaæ, równie¿ zmiana tego parametru nie wnosi poprawy, choæ uda³o siê otrzymaæ dotychczas najlepszy wynik - 7.743 s. Poniewa¿ algorytm ten jest niedeterministyczny, trudno oceniæ, jakie warto¶ci parametrów s± optymalne. Oczywi¶cie mo¿na dalej zmniejszaæ ich warto¶ci w poszukiwaniu lepszego wyniku.
 
-Warto jednak zauwa¿yæ, jaka jest charakterystyka trasy otrzymanej tu jako najlepsze rozwi±zanie (o numerze próby 2). Tor jazdy jest po prostu ³aman±, której wierzcho³ki znajduj± siê w miejscach bramek - pomiêdzy kolejnymi bramkami linie s± w³a¶ciwie odcinkami. Tym problemem zajmiemy siê w dalszej czê¶ci, w rozdziale \ref{sec:wynikiStrategieKarania} opisuj±cym wyniki zastosowania strategii tzw. karania.
+Warto jednak zauwa¿yæ, jaka jest charakterystyka trasy otrzymanej tu jako najlepsze rozwi±zanie (o numerze próby 2). Tor jazdy jest po prostu ³aman±, której wierzcho³ki znajduj± siê w miejscach bramek - pomiêdzy kolejnymi bramkami linie s± w³a¶ciwie odcinkami. Tym problemem zajmiemy siê w dalszej czê¶ci, w rozdziale \ref{sec:wynikiStrategieKarania} opisuj±cym wyniki zastosowania funkcji kary.
 
-W trakcie szczegó³owej analizy wyników z kolejnych iteracji (widocznych na wykresach), ³atwo zauwa¿yæ, ¿e na pocz±tku poprawa wyników jest znacz±ca z ka¿d± iteracj±, a pod koniec zmiany s± ju¿ niewielkie. Mo¿na zatem pomy¶leæ o wprowadzeniu innego algorytmu kiedy zmiany s± ju¿ s³abo widoczne, który skuteczniej znajdzie lepsze rozwi±zanie. Takim rozwi±zaniem jest na przyk³ad zastosowanie lokalnej optymalizacji. Wyniki tego podej¶cia opisane s± w sekcji \ref{sec:lokalnaWyniki}.
+W trakcie szczegó³owej analizy wyników z kolejnych iteracji (widocznych na wykresach), ³atwo zauwa¿yæ, ¿e na pocz±tku poprawa wyników jest znacz±ca z ka¿d± iteracj±, a pod koniec zmiany s± ju¿ niewielkie. Mo¿na zatem pomy¶leæ o wprowadzeniu innego algorytmu, kiedy zmiany s± ju¿ s³abo widoczne, który skuteczniej znajdzie lepsze rozwi±zanie. Takim rozwi±zaniem jest na przyk³ad zastosowanie lokalnej optymalizacji. Wyniki tego podej¶cia opisane s± w sekcji \ref{sec:lokalnaWyniki}.
 
-Zanim przejdziemy jednak do wyników wprowadzenia lokalnej optymalizacji pozostaje jeszcze sprawdziæ ostatnie parametry algorytmu genetycznego: $\mu$ i $\lambda$, a nastêpnie spróbowaæ rozwi±zaæ trudniejsze zadania, zwiêkszaj±c ilo¶æ punktów stanowi±cych rozwi±zanie.
+Zanim przejdziemy jednak do wyników wprowadzenia lokalnej optymalizacji pozostaje jeszcze sprawdziæ ostatnie parametry algorytmu ewolucyjnego: $\mu$ i $\lambda$, a nastêpnie spróbowaæ rozwi±zaæ trudniejsze zadania, zwiêkszaj±c liczbê punktów stanowi±cych rozwi±zanie.
 
-%TODO biblio o warto¶ciach \mu i \lambda
 \subsubsection{Parametry $\mu$ i $\lambda$}
-Do tej pory pocz±tkowa populacja liczy³a 30 osobników, a populacja tymczasowa - 100. W literaturze najczê¶ciej wymienia siê w³a¶nie takie warto¶ci, jednak teoretycznie warto spróbowaæ zwiêkszyæ te parametry, by sprawdziæ wiêcej przypadków rozwi±zañ. Pozosta³e parametry pozostaj± jak w poprzednim eksperymencie.
+Do tej pory pocz±tkowa populacja liczy³a 30 osobników, a populacja tymczasowa - 100. W literaturze najczê¶ciej wymienia siê warto¶ci oko³o 50 i 200 \cite{arabas}, warto zatem spróbowaæ zwiêkszyæ te parametry, by sprawdziæ wiêcej przypadków rozwi±zañ. Pozosta³e parametry pozostaj± jak w poprzednim eksperymencie.
 
 \paragraph{Eksperyment 1.}
 Sprawdzimy teraz jak wp³ywa na wyniki zmiana tych parametrów, na pocz±tek spróbujemy dla warto¶ci odpowiednio 50 i 150.
@@ -576,21 +587,21 @@ Sprawdzimy teraz jak wp³ywa na wyniki zmiana tych parametrów, na pocz±tek spróbu
 \end{figure}
 
 \begin{table}[h]
-\caption{Czasy przejazdu dla kolejnych prób wraz z ilo¶ci± iteracji oraz czasem dzia³ania algorytmu ($\mu=50$ i $\lambda=150$)}
+\caption{Czasy przejazdu dla kolejnych prób wraz z liczb± iteracji oraz czasem dzia³ania algorytmu ($\mu=50$ i $\lambda=150$)}
 \centering
 \label{tab:miLambda}
 \begin{tabular}{ | c | c | c | c |}
   \hline                        
-  numer próby & czas przejazdu [s] & ilo¶æ iteracji & czas dzia³ania [s] \\ \hline  
+  numer próby & czas przejazdu [s] & liczba iteracji & czas dzia³ania [s] \\ \hline  
 1 & 7.780 & 17 & 81 \\ \hline
 2 & 7.814 & 21 & 109 \\ \hline
 3 & 7.804 & 17 & 88 \\ \hline
 \end{tabular}
 \end{table}
 
-¦rednia wyników podanych w tabeli \ref{tab:miLambda} wynosi: 7.802 s.
+¦rednia wyników podanych w tabeli \ref{tab:miLambda} wynosi: 7.799 s. W tym przypadku ¶rednio w ka¿dym eksperymencie zosta³o wykonanych oko³o 3670 symulacji.
 
-Mo¿na siê by³o spodziewaæ poprawy wyników, jako, ¿e rozpatrujemy naraz wiêcej osobników przeszukuj±c wiêksz± przestrzeñ rozwi±zañ, a wiêc zwiêkszaj±c prawdopodobieñstwo znalezienia lepszego rozwi±zania. Jednak poprawa jest niewielka, ale wa¿ne jest to, ¿e do tej pory nie uda³o nam siê uzyskaæ tak dobrego ¶redniego wyniku. Pokazuje to, ¿e uda³o nam siê doprowadziæ do sytuacji, w której algorytm daje rzeczywi¶cie czê¶ciej lepsze wyniki, a uzyskane czasy s± zbli¿one do siebie.
+Mo¿na siê by³o spodziewaæ poprawy wyników, jako, ¿e rozpatrujemy naraz wiêcej osobników sprawdzaj±c wiêcej mo¿liwych rozwi±zañ, a wiêc zwiêkszaj±c prawdopodobieñstwo znalezienia lepszego rozwi±zania. Jednak poprawa jest niewielka, ale wa¿ne jest to, ¿e do tej pory nie uda³o nam siê uzyskaæ tak dobrego ¶redniego wyniku. Pokazuje to, ¿e uda³o nam siê doprowadziæ do sytuacji, w której algorytm daje rzeczywi¶cie czê¶ciej lepsze wyniki, a uzyskane czasy s± zbli¿one do siebie.
 Takie wyniki zosta³y poniesione kosztem czasu wykonania algorytmu, który wzrós³ do ponad 80 s, a w jednym przypadku nawet 110 s.
 
 
@@ -612,40 +623,40 @@ Zobaczmy jak zmieni± siê wyniki je¶li warto¶ci $\mu$ i $\lambda$ wynios± odpowie
 \end{figure}
 
 \begin{table}[h]
-\caption{Czasy przejazdu dla kolejnych prób wraz z ilo¶ci± iteracji oraz czasem dzia³ania algorytmu ($\mu=60$ i $\lambda=200$)}
+\caption{Czasy przejazdu dla kolejnych prób wraz z liczb± iteracji oraz czasem dzia³ania algorytmu ($\mu=60$ i $\lambda=200$)}
 \centering
 \begin{tabular}{ | c | c | c | c |}
   \hline                        
-  numer próby & czas przejazdu [s] & ilo¶æ iteracji & czas dzia³ania [s] \\ \hline  
+  numer próby & czas przejazdu [s] & liczba iteracji & czas dzia³ania [s] \\ \hline  
 1 & 7.729 & 19 & 127 \\ \hline
 2 & 7.783 & 15 & 118 \\ \hline
 3 & 7.774 & 20 & 170 \\ \hline
 \end{tabular}
 \end{table}
 
-¦rednia wyników wynosi: 7.762 s.
+¦rednia wyników wynosi: 7.762 s. ¦rednio w ka¿dym eksperymencie zosta³o wykonanych 4680 symulacji.
 
-W tym przypadku wszystkie otrzymane czasy s± mniejsze ni¿ 7.8 s, a otrzymane linie przejazdu wygl±daj± bardzo dobrze. Warto równie¿ zauwa¿yæ, ¿e w pierwszym przypadku otrzymali¶my najlepszy czas - 7.729 s. Widzimy równie¿, ¿e zgodnie z oczekiwaniami, wyd³u¿y³ siê znów czas dzia³ania algorytmu. Minimalny czas to 118 s, czyli oko³o 2 minuty, a maksymalnie wykonanie trwa³o prawie 3 minuty. Takie czasy ju¿ mo¿na uznaæ za wystarczaj±ce, aby warto by³o stosowaæ rozproszon± architekturê - rozsy³aæ obliczenia, by by³y rozwi±zywane na innych wêz³ach obliczeniowych.
+W tym przypadku wszystkie otrzymane czasy s± mniejsze ni¿ 7.8 s, a otrzymane linie przejazdu wygl±daj± bardzo dobrze. Warto równie¿ zauwa¿yæ, ¿e w pierwszym przypadku otrzymali¶my najlepszy czas - 7.729 s. Widzimy równie¿, ¿e zgodnie z oczekiwaniami, wyd³u¿y³ siê znów czas dzia³ania algorytmu. Minimalny czas to 118 s, czyli oko³o 2 minuty, a wykonanie trwa³o maksymalnie prawie 3 minuty. Takie czasy ju¿ mo¿na uznaæ za wystarczaj±ce, aby warto by³o rozsy³aæ obliczenia, by by³y rozwi±zywane na innych wêz³ach obliczeniowych.
 
-Dla porównania przeanalizujmy jak wp³ynê³y zmiany parametrów $\mu$ i $\lambda$ na uzyskiwane wyniki na podstawie zebranych wyników na wykresie \ref{fig:w6wyk}.
+Dla porównania przeanalizujmy jak wp³ynê³y zmiany parametrów $\mu$ i $\lambda$ na uzyskiwane wyniki na podstawie zebranych wyników na wykresie \ref{fig:w6wyk}. Uwzglêdniona jest tak¿e ¶rednia liczba symulacji koniecznych do osi±gniêcia wyniku dla ka¿dej pary ($\mu$ + $\lambda$).
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.8]{wyniki/wynik6-wyk}
+\includegraphics[scale=0.7]{wyniki/miLambda}
 \caption{¦redni czas przejazdu z wykonanych prób dla ró¿nych parametrów $\mu$ i $\lambda$}
 \label{fig:w6wyk}
 \end{figure}
 
-Wykres \ref{fig:w6wyk} pokazuje jak zmieni³ siê ¶redni czas uzyskanych wyników odpowiednio dla kolejnych warto¶ci parametrów $\mu$ i $\lambda$. Widaæ, ¿e choæ poprawa jest niewielka, bo o oko³o 0.05 s, to jednak widoczny jest trend wskazuj±cy, ¿e zwiêkszenie populacji wp³ywa pozytywnie na znajdowane rozwi±zanie.
+Wykres \ref{fig:w6wyk} pokazuje jak zmieni³ siê ¶redni czas uzyskanych wyników odpowiednio dla kolejnych warto¶ci parametrów $\mu$ i $\lambda$. Widaæ, ¿e choæ poprawa jest niewielka, bo o oko³o 0.05 s, to jednak widoczny jest trend wskazuj±cy, ¿e zwiêkszenie populacji wp³ywa pozytywnie na znajdowane rozwi±zanie. Poprawa jest lepsza w drugiej czê¶ci wykresu, bior±c pod uwagê jak zmienia siê liczba symulacji koniecznych do osi±gniêcia wyniku w porównaniu z popraw± uzyskanego ¶redniego czasu przejazdu.
 
 \subsubsection{Gêsto¶æ siatki}
-Aby uzyskaæ dok³adniejsze rozwi±zania zawsze mo¿na spróbowaæ zagê¶ciæ poziome linie wyznaczaj±ce ilo¶æ punktów stanowi±cych reprezentacjê trasy. Do tej pory linie te by³y w odleg³o¶ci 3 m. Po zmianie na 2 m czas dzia³ania algorytmu powinien siê znacznie wyd³u¿yæ ze wzglêdu na wiêksz± ilo¶æ rozpatrywanych punktów rozwi±zania. 
+Aby uzyskaæ dok³adniejsze rozwi±zania mo¿na spróbowaæ zagê¶ciæ poziome linie wyznaczaj±ce ilo¶æ punktów stanowi±cych reprezentacjê trasy. Do tej pory linie te by³y w odleg³o¶ci 3 m. Po zmianie na 2 m czas dzia³ania algorytmu powinien siê znacznie wyd³u¿yæ ze wzglêdu na wiêksz± liczba rozpatrywanych punktów rozwi±zania. 
 
 W eksperymencie warto¶ci parametrów wynosz± dla warunku zakoñczenia: 
 \begin{itemize}
-\item dla zró¿nicowania populacji przyjmujemy na warto¶æ 0.01, czyli 1\%
-\item zmiana najlepszego osobnika jest uznawana za wystarczaj±co du¿± je¶li wyniesie przynajmniej 0.05 s
-\item ilo¶æ iteracji, przez które czekamy na zmianê najlepszego osobnika - 10
+\item dla zró¿nicowania populacji przyjmujemy na warto¶æ 0.01, czyli 1\%,
+\item zmiana najlepszego osobnika jest uznawana za wystarczaj±co du¿± je¶li wyniesie przynajmniej 0.05 s,
+\item liczba iteracji, przez które czekamy na zmianê najlepszego osobnika - 10.
 \end{itemize}
 
 Natomiast parametry $\mu$ i $\lambda$ przyjmijmy 30 i 100.
@@ -666,18 +677,18 @@ Na rysunkach \ref{fig:w7s} oraz \ref{fig:w7w} przedstawione s± wyniki z trzech p
 \label{fig:w7s}
 \end{figure}
 
-Czas wykonania wyd³u¿y³ siê do 100-150 s, a ilo¶æ iteracji zwiêkszy³a siê do ok. 20. Mimo zwiêkszenia dok³adno¶ci, wci±¿ istniej± na trasie zbyt ostre zmiany kierunku, które w rzeczywisto¶ci s± niemo¿liwe do wykonania bez dodatkowego czasu oraz zmniejszenia prêdko¶ci - obliczona trasa jest zbyt kanciasta. Wydaje siê, ¿e taki sposób optymalizacji nie umo¿liwia nam znalezienia rzeczywi¶cie najszybszej trasy. Zachodzi zatem konieczno¶æ wprowadzenia mechanizmu, który wyeliminuje zbyt ostre zmiany kierunku np. poprzez uwzglêdnienie konieczno¶ci zmniejszenia prêdko¶ci w miejscach o zbyt du¿ym k±cie za³amania. Szczegó³owo, mechanizm ten opisany jest w sekcji \ref{sec:karanie} na stronie \pageref{sec:karanie}.
+Czas wykonania wyd³u¿y³ siê do 100-150 s, a liczba iteracji zwiêkszy³a siê do ok. 20. Mimo zwiêkszenia dok³adno¶ci, wci±¿ istniej± na trasie zbyt ostre zmiany kierunku, które w rzeczywisto¶ci s± niemo¿liwe do wykonania bez dodatkowego czasu oraz zmniejszenia prêdko¶ci - obliczona trasa jest zbyt ``kanciasta''. Wydaje siê, ¿e taki sposób optymalizacji nie umo¿liwia nam znalezienia rzeczywi¶cie najszybszej trasy. Zachodzi zatem konieczno¶æ wprowadzenia mechanizmu, który wyeliminuje zbyt ostre zmiany kierunku np. poprzez uwzglêdnienie konieczno¶ci zmniejszenia prêdko¶ci w miejscach o zbyt du¿ym k±cie za³amania. Szczegó³owo, mechanizm ten opisany jest w sekcji \ref{sec:karanie} na stronie \pageref{sec:karanie}.
 
 \subsubsection{D³uga trasa}
 \label{dlugaTrasa}
-Dotychczas rozpatrywany slalom by³ jedynie fragmentem standardowego slalomu, czas przejazdu wynosi³ mniej ni¿ 8 s. Pozostaje pytanie, czy dla wiêkszej ilo¶ci bramek algorytm nadal bêdzie w stanie znale¼æ rozwi±zanie zbli¿one do optymalnego oraz jak du¿o czasu bêdzie potrzebne do jego znalezienia. Mo¿liwe te¿, ¿e algorytm bêdzie potrzebowa³ zmiany parametrów, aby znale¼æ rozwi±zanie.
+Dotychczas rozpatrywany slalom by³ jedynie fragmentem standardowego slalomu, czas przejazdu wynosi³ mniej ni¿ 8 s. Pozostaje pytanie, czy dla wiêkszej liczby bramek algorytm nadal bêdzie w stanie znale¼æ rozwi±zanie zbli¿one do optymalnego oraz jak du¿o czasu bêdzie potrzebne do jego znalezienia. Mo¿liwe te¿, ¿e algorytm bêdzie potrzebowa³ zmiany parametrów, aby znale¼æ rozwi±zanie.
 
 Sprawdzone zostanie teraz jakie wyniki otrzymamy dla d³u¿szego slalomu: (19,10),(11,30),(20,50),(12,65), (0,80), (10,100), (3,120), (6,135)). Parametry $\mu$ i $\lambda$ pozostaj± ustawione na 30 i 100. Parametry zatrzymania algorytmu zostawiamy ustawione tak, aby algorytm dzia³a³ d³u¿ej:
 
 \begin{itemize}
-\item dla zró¿nicowania populacji przyjmujemy na warto¶æ 0.01, czyli 1\%
-\item zmiana najlepszego osobnika jest uznawana za wystarczaj±co du¿± je¶li wyniesie przynajmniej 0.05 s
-\item ilo¶æ iteracji przez które czekamy na zmianê najlepszego osobnika - 10
+\item dla zró¿nicowania populacji przyjmujemy na warto¶æ 0.01, czyli 1\%,
+\item zmiana najlepszego osobnika jest uznawana za wystarczaj±co du¿± je¶li wyniesie przynajmniej 0.05 s,
+\item liczba iteracji przez które czekamy na zmianê najlepszego osobnika - 10.
 \end{itemize}
 
 Kolejne punkty rozwi±zania znajduj± siê w odleg³o¶ci 3 m w pionie, co dla tej trasy daje 48 punktów do optymalizacji.
@@ -689,13 +700,13 @@ Kolejne punkty rozwi±zania znajduj± siê w odleg³o¶ci 3 m w pionie, co dla tej tr
 \label{fig:w8ws}
 \end{figure}
 
-Otrzymany wynik to 11.087 s. Obliczenia trwa³y 170 s, a algorytm potrzebowa³ 23 iteracje do zakoñczenia obliczeñ. Znów mo¿na powiedzieæ, ¿e wynik nie jest wynikiem z³ym, jednak pozostawia wiele do ¿yczenia - istnieje wiele ostrych zakrêtów, zw³aszcza w okolicach bramek, rozwi±zanie nie jest idealne.
+Otrzymany wynik to 11.087 s. Obliczenia trwa³y 170 s, a algorytm potrzebowa³ 23 iteracje do zakoñczenia obliczeñ. Znów mo¿na powiedzieæ, ¿e wynik jest dobry, jednak na pewno móg³by byæ lepszy - istnieje wiele ostrych zakrêtów, zw³aszcza w okolicach bramek, rozwi±zanie nie jest idealne.
 
-Warto zauwa¿yæ, ¿e wyd³u¿enie trasy nie spowodowa³o natomiast wiêkszych problemów je¶li chodzi o znalezienie trasy, mimo zastosowanych warunków zakoñczenia i zwiêkszenia ilo¶ci punktów z oko³o 30 na prawie 50.
+Warto zauwa¿yæ, ¿e wyd³u¿enie trasy nie spowodowa³o natomiast wiêkszych problemów je¶li chodzi o znalezienie trasy, mimo zastosowanych warunków zakoñczenia i zwiêkszenia liczby punktów z oko³o 30 na prawie 50.
 
 \subsection{Lokalna optymalizacja}
 \label{sec:lokalnaWyniki}
-Algorytm genetyczny ma problem ze znalezieniem lepszych rozwi±zañ zw³aszcza kiedy dotychczas znalezione rozwi±zanie daje ju¿ dosyæ dobry wynik, ale wci±¿ mo¿na go³ym okiem zobaczyæ miejsca, które negatywnie wp³ywaj± na jako¶æ wyniku. Skoro algorytm nie radzi sobie bêd±c blisko rozwi±zania, mo¿na spróbowaæ dodaæ jaki¶ rodzaj algorytmu optymalizacji lokalnej, bazuj±c na rozwi±zaniu znalezionym przez algorytm genetyczny. Mamy wtedy pewno¶æ, ¿e znajdziemy rozwi±zanie nie gorsze od tego, na którym bazujemy i dodatkowo, ¿e bêdzie ono najlepszym lokalnym rozwi±zaniem. Mo¿emy mieæ tak¿e nadziejê, ¿e bêdzie to równie¿ rozwi±zanie globalnie optymalne, ale pewno¶ci takiej mieæ nie mo¿emy.
+Algorytm ewolucyjny ma problem ze znalezieniem lepszych rozwi±zañ, zw³aszcza kiedy dotychczas znalezione rozwi±zanie daje ju¿ dosyæ dobry wynik, ale wci±¿ mo¿na go³ym okiem zobaczyæ miejsca, które negatywnie wp³ywaj± na jako¶æ wyniku. Skoro algorytm nie radzi sobie bêd±c blisko rozwi±zania, mo¿na spróbowaæ zastosowaæ algorytm memetyczny - bazuj±c na rozwi±zaniu znalezionym przez algorytm ewolucyjny, dokonujemy dalszej optymalizacji wykorzystuj±c algorytm lokalnej optymalizacji. Mamy wtedy pewno¶æ, ¿e znajdziemy rozwi±zanie nie gorsze od tego, na którym bazujemy i dodatkowo, ¿e bêdzie ono najlepszym lokalnym rozwi±zaniem. Mo¿emy mieæ tak¿e nadziejê, ¿e bêdzie to równie¿ rozwi±zanie globalnie optymalne, ale pewno¶ci takiej mieæ nie mo¿emy.
 
 \paragraph{Eksperyment 1.}
 Spróbujmy zatem, bazuj±c na eksperymencie ``D³uga trasa'' w sekcji \ref{sec:ewolucyjnyWyniki} porównaæ jak poprawi siê otrzymany wynik dodaj±c na koniec obliczeñ optymalizacjê lokaln± algorytmem Hill climbing. Wszystkie parametry oraz trasa przejazdu pozostaj± takie same jak w eksperymencie, do którego siê odwo³ujemy.
@@ -703,7 +714,7 @@ Spróbujmy zatem, bazuj±c na eksperymencie ``D³uga trasa'' w sekcji \ref{sec:ewol
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.7]{wyniki/wynik9-wyk}
-\caption{Wykres zmian czasu przejazdu w kolejnych iteracjach algorytmu Hill climbing}
+\caption{Wykres zmian czasu przejazdu w kolejnych iteracjach algorytmu HC}
 \label{fig:w9wyk}
 \end{figure}
 
@@ -711,23 +722,23 @@ Spróbujmy zatem, bazuj±c na eksperymencie ``D³uga trasa'' w sekcji \ref{sec:ewol
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.9]{wyniki/wynik9-ws}
-\caption{Porównanie wyników algorytmu genetycznego oraz lokalnej optymalizacji wraz z wykresem dla eksperymentu na d³u¿szej trasie}
+\caption{Porównanie wyników ES oraz HC wraz z wykresem dla eksperymentu na d³u¿szej trasie}
 \label{fig:w9ws}
 \end{figure}
 
-Na wykresie \ref{fig:w9ws} wci±¿ znajduj± siê zmiany wy³±cznie dotycz±ce algorytmu genetycznego. Czarna linia trasy jest rezultatem otrzymanym po dzia³aniu samego algorytmu genetycznego, czas przejazdu po takiej trasie wynosi 11.06 s, a wiêc jest to czas zbli¿ony do otrzymanego w eksperymencie bazowym. Algorytm genetyczny dzia³a³ przez 21 iteracji.
+Na wykresie \ref{fig:w9ws} znajduje siê porównanie wyniku algorytmu ewolucyjnego oraz lokalnej optymalizacji. Czarna linia trasy jest rezultatem otrzymanym po dzia³aniu samego algorytmu ewolucyjnego, czas przejazdu po takiej trasie wynosi 11.06 s, a wiêc jest to czas zbli¿ony do otrzymanego w eksperymencie bazowym. Algorytm ewolucyjny dzia³a³ przez 21 iteracji.
 
-Czerwona linia stanowi trasê uzyskan± po zaaplikowaniu algorytmu optymalizacji lokalnej na trasie znalezionej przez algorytm genetyczny. Na wykresie \ref{fig:w9wyk} mo¿emy zobaczyæ jak dok³adnie zmienia³ siê czas przejazdu w ka¿dej iteracji algorytmu lokalnego. Iteracja numer 0 to wynik otrzymany przez algorytm genetyczny. Po 7 iteracjach otrzymali¶my wynik 10.825 s, co stanowi poprawê o 0.235 s, czyli ok. 2\%. Poprawa ta jest zdecydowanie zauwa¿alna tak¿e w kszta³cie slalomu i na pewno na tyle znacz±ca, ¿e decyduje o zwyciêstwie zawodnika.
+Czerwona linia stanowi trasê uzyskan± po zastosowaniu algorytmu optymalizacji lokalnej na trasie znalezionej przez algorytm ewolucyjny. Na wykresie \ref{fig:w9wyk} mo¿emy zobaczyæ jak dok³adnie zmienia³ siê czas przejazdu w ka¿dej iteracji algorytmu lokalnego. Iteracja numer 0 to wynik otrzymany przez algorytm genetyczny. Po 7 iteracjach otrzymali¶my wynik 10.825 s, co stanowi poprawê o 0.235 s, czyli ok. 2\%. Poprawa ta jest zdecydowanie zauwa¿alna tak¿e w kszta³cie slalomu i na pewno na tyle znacz±ca, ¿e decyduje o zwyciêstwie zawodnika.
 
 \paragraph{Eksperyment 2.}
 W eksperymencie pierwszym sprawdzili¶my dzia³anie algorytmu lokalnego dla domy¶lnie ustawionych parametrów. W zastosowanym algorytmie Hill Climbing mamy mo¿liwo¶æ zmiany dwóch parametrów:
 
 \begin{itemize}
-\item rozmiar kroku%
-\item tzw. przyspieszenie (ang. \textit{acceleration}) 
+\item rozmiar kroku,
+\item tzw. przyspieszenie (ang. \textit{acceleration}).
 \end{itemize}
 
-Szczegó³owy opis parametrów mo¿na znale¼æ w podrozdziale \ref{sec:hill}. W domy¶lnym ustawieniu warto¶ci tych parametrów wynosz± odpowiednio 0.5 (odpowiadaj±ca 0.5 metrom na rzeczywistej trasie) oraz 1.2 dla przyspieszenia. W przeprowadzonym eksperymencie poka¿em%y jak te parametry wp³ywaj± na ostateczne rozwi±zanie. Na tym samym rezultacie dzia³ania algorytmu genetycznego uruchomimy trzy razy algorytm lokalnej optymalizacji, ale z zestawami parametrów przedstawionymi w tabeli \ref{tab:paramHill}.
+Szczegó³owy opis parametrów mo¿na znale¼æ w podrozdziale \ref{sec:hill}. W domy¶lnym ustawieniu warto¶ci tych parametrów wynosz± odpowiednio 0.5 (odpowiadaj±ca 0.5 metra na rzeczywistej trasie) oraz 1.2 dla przyspieszenia. W przeprowadzonym eksperymencie poka¿emy jak te parametry wp³ywaj± na ostateczne rozwi±zanie. Na tym samym rezultacie dzia³ania algorytmu genetycznego uruchomimy trzy razy algorytm lokalnej optymalizacji, ale z zestawami parametrów przedstawionymi w tabeli \ref{tab:paramHill}.
 
 Jak zostanie pokazane w nastêpnym eksperymencie, stosowanie mechanizmu karania poprawia otrzymywane wyniki, wiêc ten sam eksperyment wykonamy tak¿e z zastosowaniem tego mechanizmu.
 
@@ -748,38 +759,38 @@ Jak zostanie pokazane w nastêpnym eksperymencie, stosowanie mechanizmu karania p
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{wyniki/wynik11-ws1}
-\caption{Wyniki kolejnych prób eksperymentu z ró¿nymi warto¶ciami parametrów algorytmu}
+\caption{Wyniki kolejnych prób eksperymentu z ró¿nymi warto¶ciami parametrów algorytmu HC}
 \label{fig:w11ws}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{wyniki/wynik11-ws2}
-\caption{Wyniki kolejnych prób eksperymentu z ró¿nymi warto¶ciami parametrów algorytmu z zastosowaniem mechanizmu karania}
+\caption{Wyniki kolejnych prób eksperymentu z ró¿nymi warto¶ciami parametrów algorytmu HC z zastosowaniem PF}
 \label{fig:w11ws2}
 \end{figure}
 
 Rysunki \ref{fig:w11ws} i \ref{fig:w11ws2} pokazuje otrzymane trasy dla ró¿nych algorytmów i parametrów:
 \begin{itemize}
-\item trasa czarna - trasa uzyskana w wyniki dzia³ania algorytmu genetycznego
-\item trasa czerwona - optymalizacja lokalna z parametrami domy¶lnymi
-\item trasa niebieska - optymalizacja lokalna z krokiem 0.3 m
-\item trasa zielona - optymalizacja lokalna z krokiem 0.3 m oraz przyspieszeniem 1.1
+\item trasa czarna - trasa uzyskana w wyniki dzia³ania algorytmu ewolucyjnego,
+\item trasa czerwona - optymalizacja lokalna z parametrami domy¶lnymi,
+\item trasa niebieska - optymalizacja lokalna z krokiem 0.3 m,
+\item trasa zielona - optymalizacja lokalna z krokiem 0.3 m oraz przyspieszeniem 1.1.
 \end{itemize}
 
 Trasy otrzymane w wyniku dzia³ania algorytmu optymalizacji lokalnej ró¿ni± siê miejscami od siebie, choæ w niewielkim stopniu. Ma³e zró¿nicowanie wynika z tego, ¿e pocz±tkowa trasa, któr± nale¿a³o zoptymalizowaæ by³a w ka¿dym przypadku taka sama. Algorytm Hill Climbing jest algorytmem deterministycznym, ale zmiana parametrów tego algorytmu wp³ywa na otrzymywany wynik koñcowy. W przypadku pierwszym, bez zastosowania mechanizmu karania zmiany s± minimalne, a otrzymywany wynik tak naprawdê mo¿na sprowadziæ do jazdy od bramki do bramki po liniach prostych. W drugim te¶cie wyniki ró¿ni± siê zw³aszcza w okolicach bramek, gdzie podejmowane s± decyzje o wcze¶niejszym lub pó¼niejszym skrêcie - to tam mo¿na najwiêcej zyskaæ lub straciæ.
 
 Przeanalizujmy teraz dok³adniej otrzymane wyniki zebrane w tabelach \ref{tab:paramHillTab} oraz \ref{tab:paramHillTabPunish}.
 
-Czas dzia³ania algorytmu genetycznego w pierwszym przypadku to 181 s, w eksperymencie z karaniem 253 s. Czasy uzyskane w wyniku dzia³ania algorytmu genetycznego w ka¿dej z prób wynosz± odpowiednio 10.974 s oraz 10.895 s.
+Czas dzia³ania algorytmu ewolucyjnego w pierwszym przypadku to 181 s, w eksperymencie z karaniem 253 s. Czasy uzyskane w wyniku dzia³ania algorytmu ewolucyjnego w ka¿dej z prób wynosz± odpowiednio 10.974 s oraz 10.895 s.
 
 \begin{table}[h]
-\caption{Wyniki dla ró¿nych parametrów algorytmu lokalnego bez mechanizmu karania}
+\caption{Wyniki dla ró¿nych parametrów HC bez mechanizmu karania}
 \centering
 \label{tab:paramHillTab}
 \begin{tabular}{ | c | c | c |}
   \hline                        
-  nr & otrzymany czas przejazdu [s] & ilo¶æ iteracji\\ \hline  
+  nr & otrzymany czas przejazdu [s] & liczba iteracji\\ \hline  
   1 & 10.829 & 6 \\ \hline
   2 & 10.819 & 8 \\ \hline
   3 & 10.824 & 8 \\ \hline
@@ -787,28 +798,28 @@ Czas dzia³ania algorytmu genetycznego w pierwszym przypadku to 181 s, w eksperym
 \end{table}
 
 \begin{table}[h]
-\caption{Wyniki dla ró¿nych parametrów algorytmu lokalnego z mechanizmem karania}
+\caption{Wyniki dla ró¿nych parametrów HC z PF}
 \centering
 \label{tab:paramHillTabPunish}
 \begin{tabular}{ | c | c | c |}
   \hline                        
-  nr &  otrzymany czas przejazdu [s] & ilo¶æ iteracji\\ \hline  
+  nr &  otrzymany czas przejazdu [s] & liczba iteracji\\ \hline  
   1 & 11.036 & 11 \\ \hline
   2 & 11.050 & 14 \\ \hline
   3 & 11.024 & 10 \\ \hline
 \end{tabular}
 \end{table}
 
-W pierwszej czê¶ci eksperymentu najlepszy czas otrzymany zosta³ dla drugiego przypadku, a wiêc przy zmniejszeniu wy³±cznie kroku. Poprawa w stosunku do pozosta³ych przypadków to 0.005-0.01 s czyli mniej ni¿ 0.1\%, ale widzimy, ¿e nawet tak niewielkie zmiany na trasie przejazdu mog± wp³ywaæ na koñcowy wynik.
+W pierwszej czê¶ci eksperymentu najlepszy czas uzyskany zosta³ dla drugiego przypadku, a wiêc przy zmniejszeniu wy³±cznie kroku. Poprawa w stosunku do pozosta³ych przypadków to 0.005-0.01 s czyli mniej ni¿ 0.1\%, ale widzimy, ¿e nawet tak niewielkie zmiany na trasie przejazdu mog± wp³ywaæ na koñcowy wynik.
 
-Drugi przypadek jest trudniejszy do analizy, poniewa¿ wprowadzenie karania powoduje, ¿e nie jeste¶my w stanie przenie¶æ uzyskiwanych ocen do rzeczywisto¶ci. Wed³ug nich, znów najlepszy okazuje siê byæ zestaw parametrów z drugiego przypadku, kiedy jednak sprawdzimy w tabeli uzyskiwane czasy, widzimy, ¿e s± one gorsze ni¿ najlepszy uzyskany wynik z algorytmu genetycznego, a w dodatku kolejno¶æ rezultatów nie pokrywa siê z kolejno¶ci± ocen - najlepszy czas uzyskany zosta³ w ostatnim przypadku.
+Drugi przypadek jest trudniejszy do analizy, poniewa¿ wprowadzenie karania powoduje, ¿e nie jeste¶my w stanie przenie¶æ uzyskiwanych ocen do rzeczywisto¶ci. Wed³ug nich, znów najlepszy okazuje siê byæ zestaw parametrów z drugiego przypadku, kiedy jednak sprawdzimy w tabeli uzyskiwane czasy, widzimy, ¿e s± one gorsze ni¿ najlepszy uzyskany wynik z algorytmu ewolucyjnego, a w dodatku kolejno¶æ rezultatów nie pokrywa siê z kolejno¶ci± ocen - najlepszy czas uzyskany zosta³ w ostatnim przypadku.
 
-Uzasadnieniem tego zachowania jest fakt uwzglêdniania w karaniu zbyt ostrych zakrêtów, które fizycznie nie s± mo¿liwe do wykonania lub musia³yby zabraæ dodatkowy czas. W rzeczywisto¶ci wyniki z pierwszego eksperymentu s± niemo¿liwe do otrzymania - przy ka¿dej bramce musieliby¶my straciæ dodatkowy czas na przestawienie nart poprzez konieczno¶æ przyhamowania.
+Uzasadnieniem tego zachowania jest fakt uwzglêdniania w karaniu zbyt ostrych zakrêtów, które fizycznie nie s± mo¿liwe do wykonania lub musia³yby zabraæ dodatkowy czas. W rzeczywisto¶ci wyniki z pierwszego eksperymentu s± niemo¿liwe do otrzymania - przy ka¿dej bramce musieliby¶my straciæ dodatkowy czas na przestawienie nart w odpowiednim kierunku, co jest niemo¿liwe bez utraty prêdko¶ci.
 
 \subsection{Strategie karania}
 \label{sec:wynikiStrategieKarania}
 
-Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} na stronie \pageref{sec:karanie} strategie karania. Testy mia³y na celu zorientowaæ siê, czy wszystkie strategie bêd± przede wszystkim prowadziæ do poprawnego wyniku - tj. wizualnie poprawnej i p³ynnej trasy. Przy okazji sprawdzany by³ wp³yw kolejnych strategi karania na szybko¶æ zbie¿no¶ci algorytmu genetycznego oraz lokalnej optymalizacji, a co za tym idzie do najszybszego znajdowania wyników. Dla ka¿dej testowanej strategii, ta sama strategia karania by³a u¿yta w algorytmie genetycznym, jak i w lokalnej optymalizacji.
+Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} na stronie \pageref{sec:karanie} strategie karania. Testy mia³y na celu zorientowaæ siê, czy wszystkie strategie bêd± przede wszystkim prowadziæ do poprawnego wyniku - tj. wizualnie poprawnej i p³ynnej trasy. Przy okazji sprawdzany by³ wp³yw kolejnych strategii karania na szybko¶æ zbie¿no¶ci algorytmu ewolucyjnego oraz lokalnej optymalizacji, a co za tym idzie do najszybszego znajdowania wyników. Dla ka¿dej testowanej strategii, ta sama strategia karania by³a u¿yta w algorytmie ewolucyjnym, jak i w lokalnej optymalizacji.
 
 \subsubsection{Poprawno¶æ strategii}
 \label{poprawnoscKarania}
@@ -820,12 +831,12 @@ Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} na stronie \pa
 \label{fig:punishment}
 \end{figure}
 
-Rycina \ref{fig:punishment} przedstawia znalezione tory przejazdu przy zastosowaniu ka¿dej z tych strategii. Jak widaæ, mo¿na dostrzec znacz±c± ró¿nicê w torach znalezionych przez algorytm genetyczny (czarna linia) w zale¿no¶ci od wyboru strategii. W przypadku lokalnej optymalizacji ró¿nice s± ju¿ mniejsze, jednak pierwsze dwie strategie wypadaj± w tym przypadku lepiej ni¿ pozosta³e, zw³aszcza na pierwszym odcinku trasy.
+Rysunek \ref{fig:punishment} przedstawia znalezione tory przejazdu przy zastosowaniu ka¿dej z tych strategii. Jak widaæ, mo¿na dostrzec znacz±c± ró¿nicê w torach znalezionych przez algorytm ewolucyjny (czarna linia) w zale¿no¶ci od wyboru strategii. W przypadku lokalnej optymalizacji ró¿nice s± ju¿ mniejsze, jednak pierwsze dwie strategie wypadaj± w tym przypadku lepiej ni¿ pozosta³e, zw³aszcza na pierwszym odcinku trasy.
 
 \subsubsection{Szybko¶æ obliczeñ}
 \label{szybkoscObliczenKaranie}
 
-Tabela \ref{tab:porownanieKarania} na stronie \pageref{tab:porownanieKarania} pokazuje ¶redni czas dochodzenia do wyniku dla ka¿dej ze strategii jak równie¿ dla braku zastosowania strategii. Najszybsz± zbie¿no¶æ maj± metody, które prowadz± do najgorszych jako¶ciowo rozwi±zañ (C i D z rysunku \ref{fig:punish}). Jak widaæ najszybsz± zbie¿no¶æ algorytmu genetycznego uzyskuje siê dla karania poprzez zliczanie ilo¶ci przekrawêdziowañ. Ró¿nice pomiêdzy ¶rednimi szybko¶ciami s± znaczne, bo nawet czterokrotne. Zastosowanie strategii A prowadzi do uzyskania bardzo dobrego jako¶ciowo wyniku, dobrego do tego stopnia, ¿e lokalna optymalizacja nie wprowadza znacznej poprawy. Strategia B, nie do¶æ, ¿e prowadzi do bardzo dobrego wyniku jako¶ciowego, to zbiega siê do¶æ szybko w porównaniu ze strategi± A - o ponad 40\%.
+Tabela \ref{tab:porownanieKarania} na stronie \pageref{tab:porownanieKarania} pokazuje ¶redni czas uzyskania wyniku dla ka¿dej ze strategii jak równie¿ dla braku zastosowania strategii. Najszybsz± zbie¿no¶æ maj± metody, które prowadz± do najgorszych jako¶ciowo rozwi±zañ (C i D z rysunku \ref{fig:punish}). Jak widaæ najszybsz± zbie¿no¶æ algorytmu ewolucyjnego uzyskuje siê dla karania poprzez zliczanie ilo¶ci przekrawêdziowañ. Ró¿nice pomiêdzy ¶rednimi szybko¶ciami s± znaczne, bo nawet czterokrotne. Zastosowanie strategii A prowadzi do uzyskania bardzo dobrego jako¶ciowo wyniku, dobrego do tego stopnia, ¿e lokalna optymalizacja nie wprowadza znacznej poprawy. Strategia B, nie do¶æ, ¿e prowadzi do bardzo dobrego wyniku jako¶ciowego, to zbiega siê do¶æ szybko w porównaniu ze strategi± A - o ponad 40\%.
 
 \begin{table}[h] 
 \caption{Porównanie d³ugo¶ci trwania obliczeñ instancji problemu dla u¿ytych ró¿nych strategii karania. Obliczenia prowadzone s± na maszynie o nastêpuj±cych parametrach: Procesor Intel Core i5-2410M, 2.3 GHz, 8 GB pamiêci RAM, System Windows 7 Home Premium, zminimalizowane obci±¿enie procesora przez inne procesy, obliczenia prowadzi jedna zak³adka przegl±darki Chrome}

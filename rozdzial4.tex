@@ -39,7 +39,7 @@ Narciarz poruszaj±cy siê w dó³ stoku jest modelowany jako punkt materialny porus
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=1]{model/inclinedPlane}
+\includegraphics[scale=0.4]{model/inclinedPlane}
 \caption{Rozk³ad si³ dzia³aj±cych na narciarza przemieszczaj±cego siê na równi pochy³ej}
 \label{fig:inclinedPlane}
 \end{figure}
@@ -87,13 +87,25 @@ Wiêcej o sile oporu powietrza jest opisane w sekcji \ref{sec:oporPowietrza} na s
 \section{Numeryczne rozwi±zanie problemu}
 \label{sec:numeryczneRozwiazanie}
 
-Rozpatruj±c wszystkie si³y dzia³aj±ce na narciarza równoleg³e do powierzchni stoku, a wiêc powoduj±ce jego ruch w dó³, otrzymujemy nastêpuj±ce równanie:
+Z drugiej zasady dynamiki Newton'a wiemy, ¿e:
+
+\begin{equation}
+m\overrightarrow{a} = \sum\limits_i{\overrightarrow{F_i}}
+\end{equation}
+
+Rozpatruj±c wszystkie si³y dzia³aj±ce na narciarza równoleg³e do powierzchni stoku, a wiêc powoduj±ce jego ruch w dó³, otrzymujemy nastêpuj±ce równanie ruchu:
+
+\begin{equation}
+m\overrightarrow{a} = \overrightarrow{Q_a} + \overrightarrow{F_f} + \overrightarrow{F_d}
+\end{equation}
+
+A zatem, uwzglêdniaj±c kierunek si³ otrzymujemy:
 
 \begin{equation}
 ma = Q_a - F_f - F_d
 \end{equation}
 
-Wypadkowa si³a dzia³aj±ce na narciarza jest sum± si³: ¶ci±gaj±cej oraz oporów (tarcia i oporu powietrza).
+Wypadkowa si³a dzia³aj±ca na narciarza jest sum± si³: ¶ci±gaj±cej oraz oporów (tarcia i oporu powietrza).
 
 Korzystaj±c z wcze¶niejszych równañ \ref{eq:Qa}, \ref{eq:Ff} i \ref{eq:Fd} opisuj±cych si³y $ Q_a $, $F_f$ oraz $ F_d $ otrzymujemy:
 
@@ -141,7 +153,7 @@ v = \dot{x}
 
 W wielu jêzykach programowania dostêpne s± funkcje biblioteczne, które potrafi± znale¼æ rozwi±zanie uk³adu równañ ró¿niczkowych zwyczajnych pierwszego rzêdu, takich jak nasz uk³ad \ref{eq:ur2d}. W celu jego rozwi±zania zosta³a wykorzystana funkcja dopri (ang. \textit{Numerical integration of ODE using Dormand-Prince RK method}) z biblioteki Numeric Javascript.
 
-\subsection{Rozwi±zanie w 3D}
+\subsection{Rozwi±zanie na p³aszczy¼nie stoku}
 \label{subsec:3d}
 Powy¿szy uk³ad równañ (\ref{eq:ur2d}) opisuje poruszanie siê punktu materialnego po równi pochy³ej. Jednak w przypadku narciarza przemieszczaj±cego siê po stoku musimy uwzglêdniæ równie¿ mo¿liwo¶æ poruszania siê w poprzek stoku, a nie tylko w dó³.\\
 Za³ó¿my, ¿e narciarz porusza siê tylko po liniach prostych. W dalszej czê¶ci pracy poka¿emy, ¿e takie ograniczenie mo¿e byæ dobrym sposobem na przybli¿enie rzeczywistego toru jazdy, które jednocze¶nie znacznie u³atwia sterowanie ruchem narciarza. \\
@@ -213,7 +225,7 @@ v_y = \dot{x_y}\\
 \end{array} \right. 
 \end{equation}\\
 
-Taki uk³ad równañ ró¿niczkowych mo¿na rozwi±zaæ wymieni± wcze¶niej funkcjê dopri. 
+Taki uk³ad równañ ró¿niczkowych mo¿na rozwi±zaæ wymieni± wcze¶niej funkcj± dopri. 
 
 %---------------------------------------------------------------------------
 
@@ -229,11 +241,11 @@ Zatem pozostaje okre¶liæ w jaki sposób mo¿emy stwierdziæ, ¿e dane rozwi±zanie je
 
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjnyRozw}
-Opisana w poprzednim podrozdziale reprezentacja rozwi±zania to w zastosowanym algorytmie ewolucyjnym pojedynczy osobnik, a punkty sk³adaj±ce siê na to rozwi±zanie, a ¶ci¶lej, ich po³o¿enie w pozycji poziomej okre¶laj± genotyp ka¿dego osobnika. Nie wprowadzamy tu typowego dla algorytmów genetycznych kodowania binarnego, pozycja ka¿dego punktu jest zapamiêtywana jako warto¶æ rzeczywista.
+Opisana w poprzednim podrozdziale reprezentacja rozwi±zania to w zastosowanym algorytmie ewolucyjnym pojedynczy osobnik, a punkty sk³adaj±ce siê na to rozwi±zanie, a ¶ci¶lej, ich po³o¿enie w pozycji poziomej okre¶laj± genotyp ka¿dego osobnika. Poniewa¿ korzystamy ze strategii ewolucyjnych, nie wprowadzamy tu kodowania binarnego, pozycja ka¿dego punktu jest zapamiêtywana jako warto¶æ rzeczywista.
 
-Dodatkowo do genotypu wchodzi tak¿e zestaw parametrów $\sigma$, które w strategiach ewolucyjnych u¿ywane s± podczas mutacji, tak jak opisano to w rozdziale \ref{sec:ewolucyjny} w czê¶ci o ``Typy algorytmów ewolucyjnych'' w opisie strategii ewolucyjnych. Ka¿demu punktowi przypisana jest osobna warto¶æ $\sigma$ - reprezentuj±ca odchylenie standardowe.
+Dodatkowo do genotypu wchodzi tak¿e zestaw parametrów $\sigma$, które w strategiach ewolucyjnych u¿ywane s± podczas mutacji, tak jak opisano to w rozdziale \ref{sec:ewolucyjny} w czê¶ci o ``Typy algorytmów ewolucyjnych'' w opisie strategii ewolucyjnych. Ka¿demu punktowi przypisana jest osobna warto¶æ $\sigma$ - reprezentuj±ca odchylenie standardowe warto¶ci $y$ tego punktu.
 
-Zastosowany algorytm opiera siê na strategii ($\mu$ + $\lambda$) opisanej w rozdziale \ref{sec:ewolucyjny}. Jako pocz±tkow± populacjê wybieramy losowe osobniki - poziome warto¶ci punktów s± ograniczone jedynie przez warto¶ci poziome po³o¿enia dwóch najbli¿szych bramek. Jest to kierowane konieczno¶ci± zadbania o szybsze znalezienie rozwi±zania - zbyt du¿e odleg³o¶ci mo¿na z góry odrzuciæ opieraj±c siê na do¶wiadczeniach z rzeczywistej jazdy narciarza po slalomie. Wielko¶æ populacji bazowej $\mu$ jest jednym z parametrów programu, ale najczê¶ciej warto¶æ ta wynosi 30. Warto¶æ parametru $\lambda$ tak¿e jest parametrem, jednak w testach przewa¿nie u¿yto wielko¶ci 100.
+Zastosowany algorytm wykorzystuje strategiê ($\mu$ + $\lambda$) opisan± w rozdziale \ref{sec:ewolucyjny}. Jako pocz±tkow± populacjê wybieramy losowe osobniki - warto¶ci $y$ punktów s± ograniczone jedynie przez warto¶ci $y$ po³o¿enia dwóch najbli¿szych bramek. Jest to kierowane konieczno¶ci± zadbania o szybsze znalezienie rozwi±zania - zbyt du¿e odleg³o¶ci mo¿na z góry odrzuciæ opieraj±c siê na do¶wiadczeniach z rzeczywistej jazdy narciarza po slalomie. Wielko¶æ populacji bazowej $\mu$ jest jednym z parametrów programu, warto¶æ ta wynosi w testach 30 - 60. Warto¶æ parametru $\lambda$ tak¿e jest parametrem, w testach u¿yto wielko¶ci 100 - 200. Warto¶ci te porównywalne s± z sugerowanymi w literaturze. \cite{arabas}
 
 Szkielet algorytmu zgodny jest z zastosowan± strategi±, po wylosowaniu z istniej±cej populacji populacji tymczasowej o wielko¶ci $\lambda$, dokonuje siê na jej osobnikach operacji genetycznych, najpierw krzy¿owania, a nastêpnie mutacji na osobnikach otrzymanych z krzy¿owania. Kolejnym krokiem jest ocenienie nowych osobników i wybranie spo¶ród nich oraz populacji pocz±tkowej osobników o najlepszym przystosowaniu i to one stanowi± now± populacjê bazow±.
 
@@ -246,10 +258,10 @@ Po krzy¿owaniu mamy znowu w populacji tymczasowej $\lambda$ osobników. Mutacja o
 \subsubsection{Warunek zakoñczenia}
 Wybór warunku zakoñczenia algorytmu zawsze sprawia wiele problemów. Nie jest ³atwo zdecydowaæ na jakiej podstawie zatrzymywaæ jego dzia³anie. Czêsto korzysta siê z informacji o rozrzucie przystosowania w populacji - obliczamy go na podstawie ró¿nicy pomiêdzy najlepszym i najgorszym osobnikiem. Je¶li rozrzut ten jest niewielki mo¿e oznaczaæ stagnacjê algorytmu. Niekoniecznie ¶wiadczy to o znalezieniu dobrego rozwi±zania, ale w po³±czeniu z dodatkowymi mechanizmami mo¿e byæ skuteczn± metod± podjêcia decyzji o zakoñczeniu optymalizacji.
 
-W naszym rozwi±zaniu bierzemy zatem równie¿ pod uwagê taki wska¼nik jak poprawa najlepszego obecnego rozwi±zania. Je¶li przez okre¶lon± liczbê iteracji, najczê¶ciej kilka lub kilkana¶cie najlepsze rozwi±zanie nie poprawia siê w ogóle, a populacja jest bardzo ma³o zró¿nicowana to jest to znak, ¿e znalezione rozwi±zanie powinno byæ wystarczaj±co bliskie najlepszemu. Oczywi¶cie steruj±c liczb± iteracji, przez które sprawdzamy zmiany, oraz wielko¶ci± rozrzutu populacji mo¿emy znajdowaæ lepsze lub gorsze rozwi±zania kosztem wyd³u¿enia lub skrócenia czasu dzia³ania algorytmu.
+W naszym rozwi±zaniu bierzemy zatem równie¿ pod uwagê taki wska¼nik jak poprawa najlepszego obecnego rozwi±zania. Je¶li przez okre¶lon± liczbê iteracji, najczê¶ciej kilka lub kilkana¶cie najlepsze rozwi±zanie nie poprawia siê w ogóle, a populacja jest bardzo ma³o zró¿nicowana to jest to znak, ¿e znalezione rozwi±zanie powinno byæ wystarczaj±co bliskie najlepszego. Oczywi¶cie steruj±c liczb± iteracji, przez które sprawdzamy zmiany, oraz wielko¶ci± rozrzutu populacji mo¿emy znajdowaæ lepsze lub gorsze rozwi±zania kosztem wyd³u¿enia lub skrócenia czasu obliczeñ.
 
 \subsection{Hill climbing}
-Zastosowanie algorytmu genetycznego sprawdza siê w przypadku problemu optymalizacji trasy narciarza, co zostanie pokazane w rozdziale z wynikami (rozdzia³ \ref{cha:wyniki}), jednak problemem mo¿e byæ d³ugi czas wykonywania siê programu. Zw³aszcza s³aba poprawa wyników mo¿e wystêpowaæ w koñcowej fazie dzia³ania. Widoczne s± wtedy niepotrzebne próby przeszukiwania zbyt odleg³ych rozwi±zañ, a jednak wci±¿ znalezione rozwi±zanie nie jest jeszcze tak dobre jak mo¿na by tego oczekiwaæ. Wiedz±c, ¿e rozwi±zanie jest ju¿ dosyæ bliskie najlepszemu mo¿na z du¿ym prawdopodobieñstwem za³o¿yæ, ¿e wystarczy znale¼æ rozwi±zanie lokalnie optymalne, aby by³o ono satysfakcjonuj±ce. Oczywi¶cie nie mamy pewno¶ci, ¿e bêdzie to rozwi±zanie globalnie optymalne, ale takiej pewno¶ci nie mo¿emy mieæ nigdy. Problemem mo¿e wci±¿ byæ jednak decyzja kiedy nale¿y przej¶æ na algorytm lokalnej optymalizacji.
+Problem optymalizacji trasy narciarza mo¿na rozwi±zywaæ stosuj±c algorytm ewolucyjny, jednak problemem mo¿e byæ d³ugi czas wykonywania siê programu. S³aba poprawa wyników mo¿e wystêpowaæ zw³aszcza w koñcowej fazie dzia³ania. Widoczne s± wtedy niepotrzebne próby przeszukiwania zbyt odleg³ych rozwi±zañ, a jednak wci±¿ znalezione rozwi±zanie nie jest jeszcze tak dobre, jak mo¿na by tego oczekiwaæ. Wiedz±c, ¿e rozwi±zanie jest ju¿ dosyæ bliskie najlepszemu mo¿na z du¿ym prawdopodobieñstwem za³o¿yæ, ¿e wystarczy znale¼æ rozwi±zanie lokalnie optymalne, aby by³o ono satysfakcjonuj±ce. Oczywi¶cie nie mamy pewno¶ci, ¿e bêdzie to rozwi±zanie globalnie optymalne, ale najczê¶ciej takiej pewno¶ci mieæ nie mo¿emy. Problemem mo¿e wci±¿ byæ jednak decyzja kiedy nale¿y przej¶æ na algorytm lokalnej optymalizacji.
 
 Zastosowanie algorytmu lokalnej optymalizacji powinno pomóc w koñcowej fazie poszukiwañ. Z tego powodu u¿yty zosta³ algorytm Hill climbing opisany w rozdziale \ref{sec:hill}. W ka¿dym kroku algorytmu sprawdzane jest czy zmiana pojedynczej zmiennej - w tym wypadku poziomej pozycji punktu przejazdu, daje poprawê wyniku. Je¶li zmiany te nie przynosz± znacz±cych rezultatów, s± mniejsze ni¿ narzucony parametr $\epsilon$, algorytm zatrzymuje swoje dzia³anie. Warto¶æ $\epsilon$ wynosi przewa¿nie w testach 0.00001. W przypadku parametrów typowych dla tego algorytmu postanowiono wybraæ warto¶ci: dla przyspieszenia standardowa - 1.2, natomiast dla kroku, mniejsz± ni¿ zwykle, bo wynosz±c± 0.5 (odpowiada to wielko¶ci 0.5 metra). Zmiana ta wynika z za³o¿enia, ¿e rozwi±zanie nie powinno potrzebowaæ wiêkszych zmian, aby znale¼æ rozwi±zanie jak najlepsze - zak³adamy, ¿e bêd± one raczej mniejsze ni¿ wybrane 0.5 m.
 
