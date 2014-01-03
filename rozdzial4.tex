@@ -346,42 +346,42 @@ Architektura naszego systemu sk³ada siê z dwóch g³ównych, niezale¿nych czê¶ci sk
 
 \subsection{Aplikacja kliencka}
 
-Aplikacja kliencka to aplikacja webowa stworzona przy u¿yciu frameworku Chaplin, wprowadzaj±cego dobre praktyki w strukturyzowaniu aplikacji Java Script'owych opartych o bibliotekê Backbone.js. Aplikacja w ca³o¶ci napisana jest w jêzyku Coffee Script. Coffee Script to przyjazny w sk³adni jêzyk programowania, kompiluj±cy siê do Java Script'u. Powsta³y po kompilacji kod Java Script jest czytelny i przyjazny do debugowania. Programuj±c w Coffee Script mo¿na u¿ywaæ wszystkich bibliotek i modu³ów napisanych w Java Script, co daje wiele mo¿liwo¶ci z powodu szerokiego zakresu dostêpnych bibliotek w tym jêzyku. Zdecydowa³y¶my siê u¿ywaæ tego jêzyka przede wszystkim z uwagi na sk³adniê przypominaj±c± dobrze znany nam jêzyk Python, wiêksz± przejrzysto¶æ i czytelno¶æ kodu ni¿ Java Script, jednocze¶nie zachowuj±c szerokie mo¿liwo¶ci tego jêzyka.
+Aplikacja kliencka to aplikacja webowa stworzona przy u¿yciu frameworku Chaplin, wprowadzaj±cego dobre praktyki w strukturyzowaniu aplikacji Java Scriptowych wykorzystuj±cych bibliotekê Backbone.js. Aplikacja w ca³o¶ci napisana jest w jêzyku Coffee Script. Coffee Script jêzyk programowania ze sk³adni± podobn± do sk³±dni Pythona, kompiluj±cy siê do Java Scriptu. Powsta³y po kompilacji kod Java Script jest czytelny i przyjazny do debugowania. Programuj±c w Coffee Script mo¿na u¿ywaæ wszystkich bibliotek i modu³ów napisanych w Java Script, co daje wiele mo¿liwo¶ci z powodu szerokiego zakresu dostêpnych bibliotek w tym jêzyku. Zdecydowa³y¶my siê u¿ywaæ tego jêzyka przede wszystkim z uwagi na sk³adniê przypominaj±c± dobrze znany nam jêzyk Python, wiêksz± przejrzysto¶æ i czytelno¶æ kodu ni¿ Java Script, jednocze¶nie zachowuj±c szerokie mo¿liwo¶ci tego jêzyka.
 
 Aplikacja ma zasadniczo trzy warstwy:
 \begin{itemize}
-\item warstwê prezentacyjn± i wizualizacyjn± dla rozwi±zywanego problemu
-\item warstwê komunikacji z serwerem
-\item warstwê obliczeniow±
+\item warstwê prezentacyjn± i wizualizacyjn± dla rozwi±zywanego problemu,
+\item warstwê komunikacji z serwerem,
+\item warstwê obliczeniow±.
 \end{itemize}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=360px]{diagramClientLayers}
-\caption{Sekwencja komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej}
+\caption{Uproszczony diagram sekwencji komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej}
 \label{diagramClientLayers}
 \end{figure}
 
-Sekwencjê komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej przedstawia Diagram \ref{diagramClientLayers} na stronie \pageref{diagramClientLayers}.
+Komunikacje pomiêdzy poszczególnymi warstwami aplikacji klienckiej w postaci diagramu sekwencji przedstawia Diagram \ref{diagramClientLayers} na stronie \pageref{diagramClientLayers}.
 
 \subsubsection{Warstwa prezentacji}
 
 Wizualizacja zaimplementowana jest na elemencie Canvas ze specyfikacji HTML5. Wykresy wizualizuj±ce przebieg obliczeñ stworzone s± przy u¿yciu biblioteki Highcharts. Warstwa spe³nia nastêpuj±ce funkcje:
 \begin{itemize}
-\item wyja¶nienie u¿ytkownikowi jaki problem jest rozwi±zywany oraz jak mo¿e pomóc
-\item umo¿liwienie rozpoczêcia wziêcia udzia³u w obliczeniu
-\item prezentowanie trasy narciarskiej (uk³adu bramek), pobranej z serwera do obliczeñ
-\item wizualizacja na bie¿±co wyników obliczeñ w postaci rozwa¿anego jako najlepszy toru przejazdu
-\item wizualizacja statystyk algorytmu obliczaj±cego w postaci wykresów
+\item wyja¶nienie u¿ytkownikowi jaki problem jest rozwi±zywany oraz jak mo¿e pomóc,
+\item umo¿liwienie rozpoczêcia wziêcia udzia³u w obliczeniu,
+\item prezentowanie trasy narciarskiej (uk³adu bramek), pobranej z serwera do obliczeñ,
+\item wizualizacja na bie¿±co wyników obliczeñ w postaci rozwa¿anego jako najlepszy toru przejazdu,
+\item wizualizacja statystyk algorytmu obliczaj±cego w postaci wykresów.
 \end{itemize}
 
 \subsubsection{Warstwa komunikacyjna}
 
 Komunikacja z serwerem odbywa siê poprzez REST-owe API, wykorzystuj±ce JSON-owy format do wymiany danych. Warstwa spe³nia nastêpuj±ce funkcje:
 \begin{itemize}
-\item pobieranie instancji problemu do obliczenia 
-\item wysy³anie na serwer rozwi±zania zadanego problemu
-\item pobierania z serwera informacji o obecnie najlepszym rozwi±zaniu tego problemu
+\item pobieranie instancji problemu do obliczenia,
+\item wysy³anie na serwer rozwi±zania zadanego problemu,
+\item pobierania z serwera informacji o obecnie najlepszym rozwi±zaniu tego problemu.
 \end{itemize}
 
 \subsubsection{Warstwa obliczeniowa}
@@ -390,47 +390,47 @@ Zastosowanie w naszej architekturze Web Workerów do wykonywania obliczeñ jest do
 
 \subsection{Aplikacja serwerowa}
 
-Aplikacja jest lekkim serwerem Http napisanym w ¶rodowisku Node.js. U¿ytym jêzykiem programowania, podobnie jak w aplikacji klienckiej, jest Coffee Script. Serwer wystawia REST-owe API, u¿ywaj±c do wymiany danych JSON-owego formatu serializacji. Serwer komunikuje siê z dokumentow±, nierelacyjn± baz± danych CouchDB. Podstawowymi funkcjami serwera s±:
+Aplikacja jest lekkim serwerem Http napisanym w ¶rodowisku Node.js. U¿ytym jêzykiem programowania, podobnie jak w aplikacji klienckiej, jest Coffee Script. Serwer wystawia REST-owe API, u¿ywaj±c do wymiany danych JSON-owego formatu serializacji. Serwer komunikuje siê z dokumentow± baz± danych CouchDB. Podstawowymi funkcjami serwera s±:
 
 \begin{itemize}
-\item umo¿liwienie dodania instancji problemu obliczeniowego do bazy danych
-\item zwracanie na ¿±danie problemu obliczeniowego do rozwi±zania 
-\item zwracania informacji o obecnych dostêpnych rozwi±zaniach ka¿dego z problemów obliczeniowych
+\item umo¿liwienie dodania instancji problemu obliczeniowego do bazy danych,
+\item zwracanie na ¿±danie problemu obliczeniowego do rozwi±zania ,
+\item zwracania informacji o obecnych dostêpnych rozwi±zaniach ka¿dego z problemów obliczeniowych.
 \end{itemize} 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=360px]{diagramClientServerDb}
-\caption{Sekwencja komunikacji pomiêdzy poszczególnymi komponentami systemu oraz warstw± persystencji}
+\caption{Uproszczony diagram sekwencji pomiêdzy poszczególnymi komponentami systemu oraz warstw± persystencji}
 \label{diagramClientServerDb}
 \end{figure}
 
 Diagram \ref{diagramClientServerDb} na stronie \pageref{diagramClientServerDb} pokazuje sekwencjê komunikacji pomiêdzy komponentami systemu oraz warstw± persystencji.
 
-\subsection{Efekt koñcowy}
+\subsection{Interfejs systemu udostêpniony u¿ytkownikowi}
 
-Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tego projektu aplikacji jest strona www, dostêpna pod dobrze znanym adresem URL - http://giant-client.herokuapp.com/. Na stronie jest krótko wyt³umaczone o co chodzi w projekcie i w jaki sposób ka¿dy odwiedzaj±cy mo¿e pomóc w obliczeniach. Na stronie znajduje siê jedno wyra¼ne tzw. ``call to action'' - du¿y przycisk zachêcaj±cy do rozpoczêcia obliczeñ.
+Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tego projektu aplikacji jest strona www, dostêpna pod adresem URL - http://giant-client.herokuapp.com/. Na stronie, poza krótkim wyt³umaczone celu projektu i sposobu w jaki ka¿dy odwiedzaj±cy mo¿e pomóc w obliczeniach, znajduje siê jedno wyra¼ne tzw. ``call to action'' - du¿y przycisk zachêcaj±cy do rozpoczêcia obliczeñ.
 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=400px]{interfejs-1}
-\caption{Nasza strona zachêcaj±c± do uruchomienia obliczeñ}
+\caption{Strona g³ówna zachêcaj±c± do uruchomienia obliczeñ}
 \label{fig:interfejs-1}
 \end{figure}
 
 Po uruchomieniu obliczeñ osoba odwiedzaj±ca stronê dostaje na bie¿±co informacje zwrotne dotycz±ce efektów jej wspó³pracy. Na stronie:
 
 \begin{itemize}
-\item rysowana jest ca³y czas aktualnie rozwa¿ana jako najlepsza trasa przejazdu
-\item wy¶wietla siê obliczony czas przejazdu po aktualnie rozwa¿anym torze przejazdu
-\item wy¶wietla siê najlepszy, dotychczas znaleziony, czas przejazdu dla aktualnie rozwa¿anej konfiguracji trasy
-\item rysowane s± wykresy przedstawiaj±ce statystyki algorytmu genetycznego (aktualny Fitness populacji - najlepszy, najgorszy oraz ¶rednia dla wszystkich osobników) 
+\item rysowana jest ca³y czas aktualnie rozwa¿ana jako najlepsza trasa przejazdu,
+\item wy¶wietla siê obliczony czas przejazdu po aktualnie rozwa¿anym torze przejazdu,
+\item wy¶wietla siê najlepszy, dotychczas znaleziony, czas przejazdu dla aktualnie rozwa¿anej konfiguracji trasy,
+\item rysowane s± wykresy przedstawiaj±ce statystyki algorytmu ewolucyjnego (aktualny Fitness populacji - najlepszy, najgorszy oraz ¶rednia dla wszystkich osobników).
 \end{itemize}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=500px]{interfejs-2}
-\caption{Nasza strona podczas prowadzonych obliczeñ}
+\caption{Aplikacja w trakcie prowadzenia obliczeñ}
 \label{fig:interfejs-2}
 \end{figure}
