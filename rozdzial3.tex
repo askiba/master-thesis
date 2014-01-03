@@ -56,7 +56,7 @@ Web Workery nie maj± dostêpu do struktury DOM, obiektu \textit{window} ani \text
 Wed³ug specyfikacji, stworzonej przez WHATWG, Web Workery powinny byæ u¿ywane do zadañ trwaj±cych d³u¿szy czas, maj±cych du¿y narzut startowy i spory narzut pamiêciowy. Nie jest wiêc odpowiednim tworzenie bardzo wielu workerów zajmuj±cych siê obliczeniami trwaj±cymi marginalnie krótki czas, gdy¿ sam narzut na stworzenie przez przegl±darkê osobnego procesu mo¿e byæ zbyt du¿y, by uzasadniæ jego u¿ycie.
 
 
-\section{Platformy do Volunteer Computing}
+\section{Platformy Volunteer Computing}
 \label{sec:platformyDoVolunteerComputing}
 
 Klasyczny model obliczeñ Volunteer Computing sk³ada³a siê z aplikacji klienckich, pobieranych z internetu oraz zainstalowanych na komputerze osobistym, oraz serwera, zarz±dzaj±cego wysy³aniem zadañ i odbieraniem rozwi±zañ. 
@@ -71,15 +71,15 @@ W tym rozdziale zaprezentujemy przekrój obecnie najbardziej znacz±cych projektów
 
 \subsection{Great Internet Mersenne Prime Searchy}
 \label{sec:gimps}
-Pierwszym projektem wykorzystuj±cym Volunteer Computing jest rozpoczêty na pocz±tku 1996 roku a trwaj±cy do dzi¶ \textit{GIMPS} (Great Internet Mersenne Prime Search), którego celem jest znalezienie jak najwiêkszej ilo¶ci specyficznych liczb pierwszych - tzn. Liczb Pierwszych Marsenne'a. Do tej pory kolaboracyjne wysi³ki doprowadzi³y do odnalezienia czternastu takich liczb. Moc systemu da³aby teoretycznie, wg. danych na listopad 2012 roku - 330-te miejsce w rankingu TOP500 - rankingu najmocniejszych komputerów na ¶wiecie. 
+Pierwszym projektem wykorzystuj±cym Volunteer Computing jest \textit{GIMPS} (Great Internet Mersenne Prime Search) - rozpoczêty na pocz±tku 1996 roku a trwaj±cy do dzi¶ projekt, którego celem jest znalezienie jak najwiêkszej ilo¶ci specyficznych liczb pierwszych - tzn. Liczb Pierwszych Marsenne'a. Do tej pory kolektywny wysi³ek doprowadzi³ do odnalezienia czternastu takich liczb. Zsumowana moc obliczeniowa systemu da³aby teoretycznie, wg. danych na listopad 2013 roku, 330-te miejsce w rankingu TOP500 - rankingu najmocniejszych komputerów na ¶wiecie. 
 
-System sk³ada siê z aplikacji klienckich stworzonych dla 9 platform i konfiguracji systemów. Twórcy zapewniaj±, ¿e kod programu jest wysoce zoptymalizowanym kodem asemblerowym Intela. Po uruchomieniu, program nawi±zuje kontakt z serwerem nazwanym \textit{PrimeNet}, aby otrzymaæ czê¶æ pracy.
+System sk³ada siê z aplikacji klienckich stworzonych dla 9 ró¿nych wersji systemów operacyjnych (m.in. Windows 32/64-bit, Mac OS X, Linux 32/64-bit, FreeBSD 32/64-bit). Twórcy zapewniaj±, ¿e kod programu jest wysoce zoptymalizowanym kodem asemblerowym. Po uruchomieniu, program nawi±zuje kontakt z serwerem nazwanym \textit{PrimeNet}, aby otrzymaæ porcjê zadania obliczeniowego do przetworzenia.
 
-\textit{GIMPS} jest ciekawym projektem, który ma swoje sukcesy i skalê, co potwierdzaj± publikowane regularnie informacje o nowych znaleziskach oraz wielko¶ci sieci komputerów bior±cych udzia³ w obliczeniach. Interfejs i wygoda u¿ytkowania (ang. \textit{User Experience}), które oferuje platforma s± jednak bardzo s³abe i archaiczne i zupe³nie nieprzystosowane do u¿ytkowników wspó³czesnego internetu.  
+\textit{GIMPS} jest ciekawym projektem, który ma ju¿ na swoim koncie sukcesy i osi±gn±³ du¿y zasiêg i skalê, co potwierdzaj± publikowane regularnie informacje o nowych znaleziskach oraz wielko¶ci sieci komputerów bior±cych udzia³ w obliczeniach. Interfejs i wygoda u¿ytkowania (ang. \textit{User Experience}), które oferuje platforma, s± jednak ma³o atrakcyjne i archaiczne i zupe³nie nieprzystosowane do u¿ytkowników wspó³czesnego internetu.  
 
 \subsection{Distributed.net}
 \label{sec:DistributedNet}
-Kolejn± znacz±c± platform± do Volunteer Computing jest stworzony w 1997 roku \textit{distributed.net}. Platforma to powsta³a oryginalnie w celu brania udzia³u w konkursach organizowanych przez RSA Laboratory, tzw. RSA Secret-Key Challenge. Konkursy te polega³y na uhonorowaniu pierwszej osoby, która znalaz³a klucz u¿yty do szyfrowania tekstu oraz odszyfrowa³a za jego pomoc± tekst zaszyfrowany jednym ze znanych algorytmów szyfruj±cych. Konkursy mia³y na celu zademonstrowanie stopnia bezpieczeñstwa algorytmu szyfruj±cego u¿ywaj±cego kluczy o ró¿nej d³ugo¶ci. Nagrod± by³o 10000 dolarów. Sieæ ochotników podpiêtych do systemu \textit{distributed.net} z³ama³a 56 bitowy klucz u¿yty przez szyfr blokowy RC5 do zaszyfrowania zdania: \textit{``The unknown message is: It's time to move to a longer key length''}. Metod± przyjêt± do z³amania tego szyfru by³ najprostszy algorytm typu \textit{brute-force}, która to dziêki metodologii Volunteer Computing przynios³a pozytywne skutki po 250 dniach poszukiwañ ca³ej przestrzeni rozwi±zañ.
+Kolejn± znacz±c± platform± do Volunteer Computing jest stworzony w 1997 roku \textit{distributed.net}. Platforma powsta³a oryginalnie w celu brania udzia³u w konkursach organizowanych przez RSA Laboratory, tzw. RSA Secret-Key Challenge. Konkursy te polega³y na uhonorowaniu pierwszej osoby, która znalaz³a klucz u¿yty do szyfrowania tekstu oraz odszyfrowa³a za jego pomoc± tekst zaszyfrowany jednym ze znanych algorytmów szyfruj±cych. Konkursy mia³y na celu zademonstrowanie stopnia bezpieczeñstwa algorytmu szyfruj±cego u¿ywaj±cego kluczy o ró¿nej d³ugo¶ci. Nagrod± by³o 10000 dolarów. Sieæ ochotników podpiêtych do systemu \textit{distributed.net} z³ama³a 56 bitowy klucz u¿yty przez szyfr blokowy RC5 do zaszyfrowania zdania: \textit{``The unknown message is: It's time to move to a longer key length''}. Metod± przyjêt± do z³amania tego szyfru by³ najprostszy algorytm typu \textit{brute-force}, która to dziêki modelowi Volunteer Computing przynios³a pozytywne skutki po 250 dniach poszukiwañ ca³ej przestrzeni rozwi±zañ.
 
 \begin{figure}[h]
 \centering
@@ -88,9 +88,9 @@ Kolejn± znacz±c± platform± do Volunteer Computing jest stworzony w 1997 roku \te
 \label{fig:distributedNet}
 \end{figure}
 
-Program \textit{distributed.net} trwa dalej mimo, ¿e RSA Laboratory wycofa³o siê ju¿ z fundowania nagród za ³amanie kolejnych coraz to d³u¿szych kluczy. Osoba chc±ca do³±czyæ do ochotników nie ma jednak bardzo ³atwego zadania i do³±czanie do programu nie nale¿y do przyjemnych. Nale¿y wej¶æ na stronê \textit{distributed.net} i wybraæ odpowiedni dla swojego systemu operacyjnego program kliencki. Wybór jest spory i mo¿e przysporzyæ problemów mniej obeznanym w komputerach osobom, gdy¿ wyró¿nione s± nie tylko nazwy systemów, ale i architektury (np. Windows x86/CUDA-2.2, x86/CUDA-3.1). Po zdecydowaniu siê ju¿ na który¶ z programów i po zakoñczeniu pobierania, mo¿e  dostaæ gro¼nie wygl±daj±cy komunikat w którym jego system operacyjny ostrze¿e go ¿e program jest potencjalnie szkodliwy dla komputera, jak przedstawiono na rycinie \ref{fig:distributedNet} na stronie ~\pageref{fig:distributedNet}.
+Program \textit{distributed.net} trwa dalej mimo, ¿e RSA Laboratory wycofa³o siê ju¿ z fundowania nagród za ³amanie kolejnych coraz to d³u¿szych kluczy. Osoba chc±ca do³±czyæ do ochotników nie ma jednak ³atwego zadania i proces do³±czania do programu nie jest przyjemnym do¶wiadczeniem. Nale¿y wej¶æ na stronê \textit{distributed.net} i wybraæ odpowiedni dla swojego systemu operacyjnego program kliencki. Wybór jest spory i mo¿e przysporzyæ problemów mniej obeznanym w komputerach osobom, gdy¿ wyró¿nione s± nie tylko nazwy systemów, ale i architektury (np. Windows x86/CUDA-2.2, x86/CUDA-3.1). Po zdecydowaniu siê ju¿ na który¶ z programów i po zakoñczonym pobieraniu, u¿ytkownik mo¿e dostaæ gro¼nie wygl±daj±cy komunikat, w którym zostanie ostrze¿ony przez system operacyjny, ¿e program jest potencjalnie szkodliwy dla komputera, jak przedstawiono na rysunku \ref{fig:distributedNet} na stronie ~\pageref{fig:distributedNet}.
 
-Ufaj±c dostawcy, po zdecydowaniu siê na zainstalowanie programu, otwiera siê bardzo ma³o przyjazny interfejs konsolowy, który widaæ na rycinie \ref{fig:distributedNetConsole} na stronie ~\pageref{fig:distributedNetConsole}.
+Ufaj±c dostawcy, po zdecydowaniu siê na zainstalowanie programu, otwiera siê ma³o przyjazny interfejs konsolowy, który widaæ na rysunku \ref{fig:distributedNetConsole} na stronie ~\pageref{fig:distributedNetConsole}.
 
 \begin{figure}[h]
 \centering
@@ -98,8 +98,6 @@ Ufaj±c dostawcy, po zdecydowaniu siê na zainstalowanie programu, otwiera siê bar
 \caption{Ma³o przyjazny interfejs konsolowy programu \textit{distributed.net}}
 \label{fig:distributedNetConsole}
 \end{figure}
-
-Nasz wniosek jest taki, ¿e przestarza³e i nieatrakcyjne systemy do Volunteer Computing nie maj± racji bytu w dzisiejszym ¶wiecie i prêdzej czy pó¼niej wygin± na rzecz rozwi±zañ bardziej przyjaznych u¿ytkownikowi.
 
 \subsection{Berkeley Open Infrastructure for Network Computing}
 \label{sec:BOINC}
