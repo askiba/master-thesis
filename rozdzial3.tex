@@ -101,35 +101,38 @@ Ufaj±c dostawcy, po zdecydowaniu siê na zainstalowanie programu, otwiera siê ma³
 
 \subsection{Berkeley Open Infrastructure for Network Computing}
 \label{sec:BOINC}
-Do stworzenia platformy BOINC (Berkeley Open Infrastructure for Network Computing), obecnie najbardziej znacz±cego open-source'owego middleware'u do obliczeñ typu volunteer i grid computing, przyczyni³ siê projekt SETI@home.
+Do stworzenia platformy BOINC (Berkeley Open Infrastructure for Network Computing), obecnie najbardziej znacz±cego open-source'owego middleware'u do obliczeñ w modelu volunteer i grid computing, przyczyni³ siê projekt SETI@home.
 
-SETI@home to program rozpoczêty w maju 1999 roku na uniwersytecie Berkeley, maj±cy na celu analizê kosmicznego szumu radiowego i odnalezienie w nim sygna³ów pochodz±cych od pozaziemskich cywilizacji. Przed migracj± do BOINC, projekt obs³ugiwa³ system posiadaj±cy wiele luk bezpieczeñstwa. Kwestie, na które na pocz±tku nie by³o nacisku, czyli wiarygodno¶æ zwracanych przez 'wolontariuszy' wyników, wraz z rozwojem projektu zaczê³y odgrywaæ coraz wiêksze znaczenie, gdy¿ zauwa¿ono, ¿e niektóre rozwi±zanie by³y w ca³o¶ci fa³szowane. 
+SETI@home to program rozpoczêty w maju 1999 roku na uniwersytecie Berkeley, maj±cy na celu analizê kosmicznego szumu radiowego i odnalezienie w nim sygna³ów pochodz±cych od pozaziemskich cywilizacji. Przed migracj± do BOINC, projekt obs³ugiwa³ system posiadaj±cy wiele luk bezpieczeñstwa. Kwestie na które na pocz±tku nie by³o nacisku, czyli wiarygodno¶æ zwracanych przez 'wolontariuszy' wyników, wraz z rozwojem projektu zaczê³y odgrywaæ coraz wiêksze znaczenie, gdy¿ zauwa¿ono, ¿e niektóre rozwi±zania by³y w ca³o¶ci fa³szowane. 
 
 Obecnie platforma BOINC umo¿liwia weryfikacjê wyników. Opiera siê ona przede wszystkim na wysy³aniu tych samych zadañ do wielu klientów i porównywaniu wyników. W programie jest obecnie ponad 40 projektów. Instaluj±c klienta na swojej maszynie mo¿na braæ udzia³ w wybranych przez siebie projektach. 
 
 Serwer BOINC mo¿e byæ uruchomiony na jednej lub wielu maszynach z systemem operacyjnym Linux, a oparty jest na technologiach Apache, PHP i MySQL.
 
-Struktura klienta sk³ada siê z 
+Struktura klienta sk³ada siê z:
 
 \begin{itemize}
-\item programu \textit{boinc}, który zajmuje siê komunikacj± z serwerem oraz zarz±dzaniem aplikacjami naukowymi, które wykonuj± ju¿ konkretne obliczenia
-\item jednej lub wielu aplikacji naukowych. Aplikacja naukowa zwi±zana jest z konkretnym projektem, w którym klient bierze udzia³ i zajmuje siê obliczeniami dla dostarczonych jej czê¶ci obliczeñ. Uaktualnianiem aplikacji zajmuje siê \textit{boinc}
-\item programu \textit{boincmgr} - GUI, które komunikuje siê z \textit{boinc} przy u¿yciu zdalnego wywo³ania procedur. GUI napisane jest w cross-platformowym toolkicie \textit{WxWidgets}. Poprzez GUI u¿ytkownik mo¿e wybraæ nowe aplikacje naukowe, monitorowaæ postêp prowadzonych przez siebie obliczeñ oraz przegl±daæ logi systemu BOINC
-\item BOINC'owego wygaszacza ekranu. Jest to framework dziêki któremu aplikacje naukowe mog± wy¶wietlaæ w atrakcyjny graficznie sposób np. animacje czy te¿ wykresy wyja¶niaj±ce prowadzone obliczenia
+\item programu \textit{boinc}, który zajmuje siê komunikacj± z serwerem oraz zarz±dzaniem aplikacjami naukowymi, które wykonuj± ju¿ konkretne obliczenia,
+\item jednej lub wielu aplikacji naukowych. Aplikacja naukowa zwi±zana jest z konkretnym projektem, w którym klient bierze udzia³ i zajmuje siê obliczeniami dla dostarczonych jej czê¶ci obliczeñ. Uaktualnianiem aplikacji zajmuje siê \textit{boinc},
+\item programu \textit{boincmgr} - GUI, które komunikuje siê z \textit{boinc} przy u¿yciu zdalnego wywo³ania procedur. GUI napisane jest w cross-platformowym toolkicie \textit{WxWidgets}. Poprzez GUI u¿ytkownik mo¿e wybraæ nowe aplikacje naukowe, monitorowaæ postêp prowadzonych przez siebie obliczeñ oraz przegl±daæ logi systemu BOINC,
+\item BOINC'owego wygaszacza ekranu. Jest to framework dziêki któremu aplikacje naukowe mog± wy¶wietlaæ w atrakcyjny graficznie sposób np. animacje czy te¿ wykresy wyja¶niaj±ce prowadzone obliczenia.
 \end{itemize}
 
 Obecnie prawie trzy miliony ludzi udostêpnia zasoby swoich osobistych komputerów do obliczeñ zwi±zanych tyko z projektem \textit{SETI@home}. Opiekunom projektu BOINC zale¿y na rozwoju kultury udostêpniania swoich zasobów na rzecz naukowych obliczeñ. Interfejs systemu jest przyjazny, a sam system ³atwy w instalacji.
 
 \subsection{Urz±dzenia mobilne w rozproszonych obliczeniach naukowych}
 \label{sec:mobilne}
+
+Sekcja napisana na podstawie \citep{BOINCAndroid}.
+
 Przez dziesiêciolecia miliony ludzi udostêpnia³y zasoby swoich maszyn, aby wspomóc naukê. Jednak komputery typu PC s± coraz mniej popularne, a ich sprzeda¿ spada o prawie 8 procent rocznie. Prognozy jasno wskazuj± na to, ¿e ten trend siê utrzyma. Z drugiej strony, bardzo dynamicznie rozwija siê rynek urz±dzeñ mobilnych, w tym smartphonów. Wed³ug serwisu Bloomberg, do koñca roku 2013, na rynek zostanie dostarczonych 919 milionów nowych urz±dzeñ, co jest 27 procentowym wzrostem w stosunku do roku 2012. \cite{BOINCAndroid}
 
-Do niedawna, telefony tego typu nie mia³y wystarczaj±cych zasobów, by prowadziæ naukowe obliczenia. Obecnie maj± nawet cztery rdzenie i mog± wykonywaæ pó³tora miliarda operacji numerycznych na sekundê, co odpowiada oko³o jednej pi±tej tego co potrafi± wspó³czesne komputery osobiste. David Anderson, naukowiec z Berkeley, który wspó³tworzy mobiln± aplikacjê, która jest furtk± do naukowych obliczeñ na smartphonach, twierdzi, ¿e jako, ¿e hardware mobilnych urz±dzeñ jest obecnie najbardziej rozwijan± ga³êzi± urz±dzeñ elektronicznych, ju¿ wkrótce, moc obliczeniowa tych urz±dzeñ mo¿e wyrównaæ obecne osi±gi komputerów osobistych. Miêdzy innymi z tego powodu warto zacz±æ uwzglêdniaæ urz±dzenia mobilne w roli potencjalnego wykonawcy intensywnych obliczeñ.
+Do niedawna, telefony tego typu nie mia³y wystarczaj±cych zasobów, by prowadziæ obliczenia naukowe. Obecnie maj± nawet cztery rdzenie i mog± wykonywaæ pó³tora miliarda operacji numerycznych na sekundê (1.5 giga FLOPSów), co odpowiada oko³o jednej pi±tej tego co potrafi± wspó³czesne komputery osobiste. David Anderson, naukowiec z Berkeley, który wspó³tworzy mobiln± aplikacjê, która jest furtk± do naukowych obliczeñ na smartphonach, twierdzi, ¿e jako ¿e hardware mobilnych urz±dzeñ jest obecnie najbardziej rozwijan± ga³êzi± urz±dzeñ elektronicznych, ju¿ wkrótc moc obliczeniowa tych urz±dzeñ mo¿e wyrównaæ obecne osi±gi komputerów osobistych. Miêdzy innymi z tego powodu warto zacz±æ uwzglêdniaæ urz±dzenia mobilne w roli potencjalnego wykonawcy intensywnych obliczeñ.
 
-Ciekawym konceptem jest obliczeniowa sieæ stworzona z ogromnej liczby urz±dzeñ, która mog³aby rywalizowaæ z takimi dostawcami us³ug jak Amazon Web Services. W tym momencie warto¶æ rynku komercyjnych obliczeñ w chmurze osi±ga 131 miliardów dolarów. Sieæ stworzona z telefonów mo¿e byæ tanim odpowiednikiem i umo¿liwiæ na przyk³ad firmie farmaceutycznej p³aciæ po kilkadziesi±t centów miesiêcznie za udostêpnienie swojego urz±dzenia np. przez noc do potrzebnych jej obliczeñ. Wizjê t± roztacza Bernie Meyerson, wiceprezydent innowacji w firmie IBM. \cite{BOINCAndroid}
+Ciekawym koncepcj± jest obliczeniowa sieæ stworzona z ogromnej liczby urz±dzeñ, która mog³aby rywalizowaæ z takimi dostawcami us³ug jak Amazon Web Services. W tym momencie warto¶æ rynku komercyjnych obliczeñ w chmurze osi±gnê³a 131 miliardów dolarów. Sieæ stworzona z telefonów mo¿e byæ jego tañszym odpowiednikiem i umo¿liwiæ na przyk³ad firmie farmaceutycznej p³acenie po kilkadziesi±t centów miesiêcznie za udostêpnienie swojego urz±dzenia np. przez noc do potrzebnych jej obliczeñ. Wizjê t± roztacza Bernie Meyerson, wiceprezydent innowacji w firmie IBM. \cite{BOINCAndroid}
 
 W sierpniu 2013 w g³ównym sklepie z aplikacjami na system Android - Google Play, pojawi³a siê oficjalna aplikacja stworzona przez zespó³ BOINC z Berkeley. Aplikacja umo¿liwia posiadaczowi smartphona w bardzo przyjazny sposób na do³±czenie do obliczeñ. 
-Rozwa¿anie u¿ycia urz±dzeñ mobilnych do obliczeñ wywo³uje pytanie o zu¿ycie baterii. Aplikacja zaprojektowana jest tak, by daæ u¿ytkownikowi pe³n± kontrolê nad tym jakie warunki musz± zaj¶æ, aby prowadzone by³y obliczenia (implikuj±ce szybsze zu¿ycie baterii). Warunkami tymi mo¿e byæ np. pod³±czenie do ¼ród³a zasilania oraz poziom zu¿ycia baterii powy¿ej zadanego progu.
+Rozwa¿anie u¿ycia urz±dzeñ mobilnych do obliczeñ wywo³uje pytanie o zu¿ycie baterii. Aplikacja zaprojektowana jest tak, by daæ u¿ytkownikowi pe³n± kontrolê nad tym jakie warunki musz± zaj¶æ, aby prowadzone by³y obliczenia (prowadz±ce do szybszego zu¿ycia baterii). Warunkami tymi mo¿e byæ np. pod³±czenie do ¼ród³a zasilania oraz poziom zu¿ycia baterii powy¿ej zadanego progu.
 
 \begin{figure}[h]
 \centering
@@ -147,7 +150,7 @@ Rozwa¿anie u¿ycia urz±dzeñ mobilnych do obliczeñ wywo³uje pytanie o zu¿ycie bate
 
 \subsection{Folding@home}
 \label{sec:folfingathome}
-Projekt wywodz±cy siê z Amerykañskiego Uniwersytetu Stanford by³ pierwszym, który zauwa¿y³, ¿e potencja³ Volunteer Computing nie zamyka siê tylko na komputery osobiste i wykorzystanie jednostek CPU, ale tak¿e coraz bardziej rozwijanych jednostek GPU, procesorów na PlayStation 3. Jako pierwszy du¿y projekt wykorzysta³ te¿ model Message Passing Interface. Pojedynczy klienci dostaj± z serwera czê¶æ symulacji i po jej wykonaniu odsy³aj± j± z powrotem do serwera, w którym czê¶ci s± ³±czone i stwarzaj± ca³o¶ciow± symulacjê. Co ciekawe, ochotnicy bior±cy udzia³ w symulacjach, mog± ¶ledziæ swój wk³ad w projekt Folding@home poprzez stronê internetow±. Obserwujemy, ¿e techniki rywalizacyjne zaczê³y byæ coraz szerzej wprowadzane do projektów Volunteer Computing w celu utrzymania zainteresowania ochotników w braniu udzia³u w projekcie.
+Projekt Folding@home wywodz±cy siê z Amerykañskiego Uniwersytetu Stanford by³ pierwszym projektem w modelu Volunteer Computing, w który wziêto pod uwagê, ¿e potencja³ Volunteer Computing nie zamyka siê tylko na komputery osobiste i wykorzystanie jednostek CPU, ale tak¿e coraz bardziej rozwijanych jednostek GPU, procesorów na PlayStation 3. Jako pierwszy du¿y projekt wykorzysta³ te¿ model Message Passing Interface. Pojedynczy klienci dostaj± z serwera czê¶æ symulacji i po jej wykonaniu odsy³aj± j± z powrotem do serwera, w którym czê¶ci s± ³±czone i stwarzaj± ca³o¶ciow± symulacjê. Co ciekawe, ochotnicy bior±cy udzia³ w symulacjach, mog± ¶ledziæ swój wk³ad w projekt Folding@home poprzez stronê internetow±. Obserwujemy, ¿e techniki grywalizacyjne zaczê³y byæ coraz szerzej wprowadzane do projektów Volunteer Computing w celu utrzymania zainteresowania ochotników w braniu udzia³u w projekcie.
 
 \begin{figure}[h]
 \centering
@@ -163,11 +166,11 @@ Projekt wywodz±cy siê z Amerykañskiego Uniwersytetu Stanford by³ pierwszym, któr
 \label{fig:foldingMonitor}
 \end{figure}
 
-Folding@home jest jednym z najwiêkszych systemów komputerowych na ¶wiecie. Jego szybko¶æ szacuje siê na oko³o 14 petaflops'ów na sekundê, wiêcej ni¿ wszystkich projektów, które s± przetwarzane na wywodz±cej siê z Berkeley platformie BOINC. W 2007 zosta³ wpisany do ksiêgi rekordów Guinessa jako system rozproszonych obliczeñ o najwiêkszej mocy obliczeniowej. Stan na Czerwiec 2013 wskazuje prawie pó³ miliona aktywnych CPU oraz prawie 25 tysiêcy aktywnych GPU.
+Folding@home jest jednym z najwiêkszych systemów komputerowych na ¶wiecie. Jego moc obliczeniow± szacuje siê na oko³o 14 petaFLOSPów, czyli na wiêksz± warto¶æ ni¿ moc wszystkich projektów, które s± przetwarzane na wywodz±cej siê z Berkeley platformie BOINC. W 2007 r. zosta³ wpisany do ksiêgi rekordów Guinessa jako system rozproszony o najwiêkszej mocy obliczeniowej. Stan na Czerwiec 2013 r. wskazuje prawie pó³ miliona aktywnych CPU oraz prawie 25 tysiêcy aktywnych GPU.
 
-Folding@home wprowadza elementy rywalizacyjne poprzez wprowadzenie systemu punktowego. Osoby udostêpniaj±ce swoje zasoby dostaj± punkty za ka¿de wykonane zadanie, dodatkowe punkty mo¿na zdobywaæ za szybkie wykonanie pewnych zadañ, które s± szczególnie wymagaj±ce obliczeniowo albo maj± wiêkszy priorytet ze wzglêdu na warto¶æ naukow±. Gromadziæ wiêcej punków mo¿na dziêki w³±czeniu do programu, pod jednym loginem, wielu swoich maszyn. Ogólnym za³o¿eniem systemu punktowego jest motywowanie ochotników do coraz wiêkszego zaanga¿owania i w³±czania znajomych do wspólnej zabawy ³±czonej z rywalizacj±. Statystyki, zarówno poszczególnych dru¿yn, jak i indywidualnych osób s± widoczne na stronie g³ównej projektu.
+Folding@home wprowadza elementy grywalizacyjne poprzez wprowadzenie systemu punktowego. Osoby udostêpniaj±ce swoje zasoby dostaj± punkty za ka¿de wykonane zadanie, dodatkowe punkty mo¿na zdobywaæ za szybkie wykonanie pewnych zadañ, które s± szczególnie wymagaj±ce obliczeniowo albo maj± wiêkszy priorytet ze wzglêdu na warto¶æ naukow±. Dziêki w³±czeniu do programu, pod jednym loginem, wielu swoich maszyn, mo¿na gromadziæ wiêcej punków . Ogólnym za³o¿eniem systemu punktowego jest motywowanie ochotników do coraz wiêkszego zaanga¿owania i w³±czania znajomych do wspólnej zabawy ³±czonej z rywalizacj±. Statystyki, zarówno poszczególnych dru¿yn, jak i indywidualnych osób s± widoczne na stronie g³ównej projektu.
 
-Oprogramowanie Folding@Home jest przyjazne. ¦ci±gniêcie i instalacja nie powoduje ¿adnych niepokoj±cych ostrze¿eñ ze strony systemu operacyjnego. Interfejs kliencki jest interfejsem webowym, ³±cz±cym siê z nadaj±c± na lokalnej maszynie aplikacj± klienck± wykonuj±c± obliczenia. Twórcy platformy staraj± siê u³atwiæ rozprzestrzenianie siê informacji o mo¿liwo¶ci kontrybuowania do naukowego projektu daj±c mo¿liwo¶æ udostêpniania informacji o programie poprzez portale spo³eczno¶ciowe takie jak Facebook czy Twitter.
+Oprogramowanie Folding@Home jest przyjazne. ¦ci±gniêcie i instalacja nie powoduje ¿adnych niepokoj±cych ostrze¿eñ ze strony systemu operacyjnego. Interfejs kliencki jest interfejsem webowym, daj±cym warstwê komunikacji z uruchomion± na lokalnej maszynie aplikacj± klienck± wykonuj±c± obliczenia. Twórcy platformy staraj± siê u³atwiæ rozprzestrzenianie siê informacji o mo¿liwo¶ci w³±czania siê do naukowego projektu daj±c mo¿liwo¶æ udostêpniania informacji o programie poprzez portale spo³eczno¶ciowe takie jak Facebook czy Twitter.
 
 
 \begin{figure}[h]
