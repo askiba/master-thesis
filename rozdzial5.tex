@@ -826,7 +826,7 @@ Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} na stronie \pa
 \begin{figure}[h]
 \centering
 \includegraphics[height=300px]{punish-test}
-\caption{Tor A przedstawia trasê obliczon± przy u¿yciu strategii sumowania pochodnych, Tor B przy strategii zmniejszania wektorów, Tor C strategii karania za przekrawêdziowanie a Tor D trasê bez zastosowania ¿adnej strategii karania}
+\caption{Tor A przedstawia trasy obliczone przy u¿yciu strategii sumowania pochodnych, Tor B przy strategii zmniejszania wektorów, Tor C strategii karania za przekrawêdziowanie. Dla torów zarówno A, B i C  - czarny tor to wed³ug wprowadzonych wcze¶niej oznaczeñ ES + PF, czerwony tor to ES + HC + PF. Tor D przedstawia trasy bez zastosowania ¿adnej strategii karania  - czarny tor to ES, czerwony tor to ES + HC}
 \label{fig:punishment}
 \end{figure}
 
@@ -868,10 +868,10 @@ Rozwa¿aj±c wszystkie strategie, zosta³o przyjête, ¿e najlepszym modelem jest mod
 \section{Architektura systemu}
 \label{sec:architektura-podsumownanie}
 
-Aby zweryfikowaæ funkcjonalno¶æ zaproponowanej architektury zaplanowany zosta³ szereg eksperymentów, maj±cych na celu zbadanie:
+Aby zweryfikowaæ zaproponowane rozwi±zanie architektoniczne zaplanowany zosta³ szereg eksperymentów, maj±cych na celu zbadanie:
 
 \begin{itemize}
-\item wydajno¶ci poszczególnych przegl±darek dla intensywnych obliczeñ (Chrome, Firefox, Internet Explorer) oraz znalezienie maksymalnej prêdko¶ci obliczeñ na jednej maszynie, poprzez znalezienie optymalnej konfiguracji - ilo¶ci uruchomionych na raz kart przegl±darki
+\item wydajno¶ci poszczególnych przegl±darek dla intensywnych obliczeñ (Chrome, Firefox, Internet Explorer) oraz znalezienie maksymalnej prêdko¶ci obliczeñ na jednej maszynie, poprzez znalezienie optymalnej konfiguracji - liczby uruchomionych na raz kart przegl±darki
 \item skuteczno¶ci rekrutowania ochotników do obliczeñ typu Volunteer Computing w przegl±darce, poprzez internetowe media spo³eczno¶ciowe
 \end{itemize}
 
@@ -879,23 +879,23 @@ Aby zweryfikowaæ funkcjonalno¶æ zaproponowanej architektury zaplanowany zosta³ s
 \label{sec:wydajnoscSilnikow}
 W celu zbadania wydajno¶ci silników \textit{JavaScript} dla rozwi±zywania naszego problemu zosta³ przeprowadzony nastêpuj±cy eksperyment. 
 
-\paragraph{Niezmienne warunki przeprowadzanego eksperymentu}
+Niezmienne warunki przeprowadzanego eksperymentu
 \begin{itemize}
-\item ta sama maszyna - Procesor Intel Core i5-2410M, 2.3 GHz, 8 GB pamiêci RAM, System Windows 7 Home Premium
-\item bardzo zbli¿one i zminimalizowane obci±¿enie procesora przez inne procesy
-\item obliczana jest ta sama instancja problemu (ta sama konfiguracja slalomu)
-\item dana przegl±darka ma uruchomion± tylko jedn± instancjê
-\item instancja uruchomionej przegl±darki ma otwart± tylko okre¶lon± liczbê zak³adek
-\item wszystkie zak³adki prowadz± obliczenia
+\item ta sama maszyna - Procesor Intel Core i5-2410M, 2.3 GHz, 8 GB pamiêci RAM, System Windows 7 Home Premium,
+\item bardzo zbli¿one i zminimalizowane obci±¿enie procesora przez inne procesy,
+\item rozwi±zywana jest ta sama instancja problemu (ta sama konfiguracja slalomu),
+\item dana przegl±darka ma uruchomion± tylko jedn± instancjê (liczbê niezale¿nych okien),
+\item instancja uruchomionej przegl±darki ma otwart± tylko okre¶lon± liczbê zak³adek,
+\item wszystkie zak³adki prowadz± obliczenia.
 \end{itemize}
 
-\paragraph{Zmienne warunki przeprowadzanego eksperymentu}
+Zmienne warunki przeprowadzanego eksperymentu
 \begin{itemize}
-\item model przegl±darki
+\item model przegl±darki:
 \begin{itemize}
-\item Internet Explorer v.10
-\item Chrome v.29
-\item Firefox v.23
+\item Internet Explorer v.10,
+\item Chrome v.29,
+\item Firefox v.23,
 \end{itemize}
 
 \item docelowa liczba kart, w których równocze¶nie maj± byæ prowadzone obliczenia (1-15)
@@ -909,22 +909,22 @@ W celu zbadania wydajno¶ci silników \textit{JavaScript} dla rozwi±zywania naszeg
 
 \end{itemize}
 
-\paragraph{Sposób przeprowadzania eksperymentu}
+Sposób przeprowadzania eksperymentu
 \begin{itemize}
-\item manualnie, wiêc z oko³o 1 sekundowym opó¼nieniem na ka¿d± zak³adkê przegl±darki, uruchomione s± obliczenia
-\item na konsoli przegl±darki wypisywany jest czas po¶wiêcony na obliczenie kolejno znajdowanego rozwi±zania
-\item notowane s± wyniki, gdy sumaryczna liczba rozwi±zañ problemu (\textit{A}) wynosi co najmniej 10
-\item sumowany jest czas po¶wiêcony przez ka¿d± z zak³adek na obliczenia
-\item od wyniku ka¿dej kolejnej zak³adki odejmowana jest jedna sekunda, razy numer zak³adki. Zak³adki s± numerowane od 0. Ma to na celu zminimalizowanie b³êdu wynikaj±cego z opó¼nienia uruchomienia obliczenia wynikaj±cego z manualnego uruchamiania
-\item z powy¿szej sumy, wybierane jest maksimum - $T_{MAX}$. $T_{MAX}$ jest czasem w którym sumarycznie, przegl±darki uzyska³y \textit{A} wyników
-\item obliczane jest tempo obliczeñ:
+\item manualnie, wiêc z oko³o 1 sekundowym opó¼nieniem na ka¿d± zak³adkê przegl±darki, uruchomione s± obliczenia,
+\item na konsoli przegl±darki wypisywany jest czas po¶wiêcony na obliczenie kolejno znajdowanego rozwi±zania,
+\item notowane s± wyniki, gdy w sumie, licz±c wszystkie zak³adki przegl±darki, liczba obliczonych rozwi±zañ problemu (\textit{A}) wynosi co najmniej dziesiêæ,
+\item sumowany jest czas po¶wiêcony przez ka¿d± z zak³adek na obliczenia,
+\item od wyniku ka¿dej kolejnej zak³adki odejmowana jest jedna sekunda, razy numer zak³adki. Zak³adki s± numerowane od 0. Ma to na celu zminimalizowanie b³êdu wynikaj±cego z opó¼nienia uruchomienia obliczenia wynikaj±cego z manualnego uruchamiania,
+\item z powy¿szej sumy, wybierane jest maksimum - $T_{MAX}$. $T_{MAX}$ jest czasem w którym sumarycznie, przegl±darki uzyska³y \textit{A} wyników,
+\item wyliczane jest tempo prowadzonych obliczeñ - liczbê sekund potrzebnych na rozwi±zanie jednego problemu:
 
 $P=\frac{T_{MAX}}{A}[\frac{s}{rozwiazanie}]$
 
 \end{itemize}
 
 \begin{table}[h]
-\caption{Niezale¿nie uruchomione obliczenia na ka¿dej z przegl±darek. W ka¿dej z przegl±darek obliczenia prowadzone w jednej zak³adce.}
+\caption{Niezale¿nie uruchomione obliczenia w ka¿dej z przegl±darek, prowadzone w jednej zak³adce.}
 \label{tab:jednaZakladka}
 \centering
 \begin{tabular}{|l|l|l|l|}
@@ -944,7 +944,8 @@ Numer zak³adki                                                                  
 \textbf{Suma czasów}                                                                                                           & 551.444                & 2235.314                & 1354.803          \\ \hline
 \textbf{\begin{tabular}[l]{@{}l@{}}Suma czasów z uwzglêdnieniem \\opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}}        & 551                    & 2235                    & 1355              \\ \hline
 \textbf{$T_{max} [s]$}                                                                                                           & 551                    & 2235                    & 1355              \\ \hline
-\textbf{A - Ilo¶æ obliczonych rozwi±zañ}                                                                                       & 10                     & 10                      & 10                \\ \hline
+\textbf{A - Liczba obliczonych rozwi±zañ}                                                                                      
+ & \multicolumn{3}{|c|}{10}                                 \\ \hline
 \textbf{P - Tempo [s/rozwi±zanie]}                                                                                             & 55.1                   & 223.5                   & 135.5             \\ \hline
 \end{tabular}
 \end{table}
@@ -964,7 +965,7 @@ Numer zak³adki                                                                  
 \textbf{Suma czasów}                                                                                                     & 616.975 & 514.698 & 670.84  & 670.84  & 490.21  & 667.572 \\ \hline
 \textbf{\begin{tabular}[l]{@{}l@{}}Suma czasów z uwzglêdnieniem \\opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}} & 617     & 514     & 669     & 668     & 486     & 663     \\ \hline
 \textbf{$T_{max} [s]$}                                                                                                     & \multicolumn{6}{|c|}{669}                                 \\ \hline
-\textbf{A - Ilo¶æ obliczonych rozwi±zañ}                                                                                 & \multicolumn{6}{|c|}{24}                                  \\ \hline
+\textbf{A - Liczba obliczonych rozwi±zañ}                                                                                 & \multicolumn{6}{|c|}{24}                                  \\ \hline
 \textbf{P - Tempo [s/rozwi±zanie]}                                                                                       & \multicolumn{6}{|c|}{27.9}                                \\ \hline
 \end{tabular}
 \end{table}
@@ -983,7 +984,7 @@ Numer zak³adki                                                                  
 \textbf{Suma czasów}                                                                                                                                          & 2149.872 & 2058.458 & 2038.309 & 1974.759 & 2018.588 & 1676.117 \\ \hline
 \textbf{\begin{tabular}[l]{@{}l@{}}Suma czasów z uwzglêdnieniem \\opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}}                                      & 2150     & 2057     & 2036     & 1972     & 2015     & 1671     \\ \hline
 \textbf{$T_{max} [s]$}                                                                                                                                          & \multicolumn{6}{|c|}{2150}                                      \\ \hline
-\textbf{A - Ilo¶æ obliczonych rozwi±zañ}                                                                                                                      & \multicolumn{6}{|c|}{14}                                        \\ \hline
+\textbf{A - Liczba obliczonych rozwi±zañ}                                                                                                                      & \multicolumn{6}{|c|}{14}                                        \\ \hline
 \textbf{P - Tempo [s/rozwi±zanie]}                                                                                                                            & \multicolumn{6}{|c|}{153.6}                                     \\ \hline
 \end{tabular}
 \end{table}
@@ -1003,7 +1004,7 @@ Numer zak³adki                                                                  
 \textbf{Suma czasów}                                                                                                    & 1253.165 & 834.635 & 367.762 & 1158.994 & 1062.188 & 751.728 \\ \hline
 \textbf{\begin{tabular}[l]{@{}l@{}}Suma czasów z uwzglêdnieniem\\ opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}} & 1253     & 834     & 366     & 1156     & 1058     & 747     \\ \hline
 \textbf{$T_{max} [s]$}                                                                                                    & \multicolumn{6}{|c|}{1253}                                   \\ \hline
-\textbf{A - Ilo¶æ obliczonych rozwi±zañ}                                                                                & \multicolumn{6}{|c|}{21}                                     \\ \hline
+\textbf{A - Liczba obliczonych rozwi±zañ}                                                                                & \multicolumn{6}{|c|}{21}                                     \\ \hline
 \textbf{P - Tempo [s/rozwi±zanie]}                                                                                      & \multicolumn{6}{|c|}{59.7}                                   \\ \hline
 \end{tabular}
 \end{table}
@@ -1016,9 +1017,9 @@ Numer zak³adki                                                                  
 \end{figure}
 
 \paragraph{Wnioski}
-Eksperyment wykaza³, ¿e wydajno¶æ obliczeñ drastycznie ró¿ni siê w zale¿no¶ci od modelu przegl±darki, a wiêc od u¿ytego silnika JavaScript. Ca³o¶ciowe wyniki eksperymentu dobrze obrazuje wykres \ref{fig:wydajnoscZakladki} na stronie \pageref{fig:wydajnoscZakladki}. Najlepiej wypad³a przegl±darka Chrome, ponad dwa razy wolniejsza okaza³a siê najnowsza przegl±darka Internet Explorer, a ponad 4 razy gorsza przegl±darka Firefox. Ciekawe wyniki dotycz± wydajno¶ci dla obliczeñ prowadzonych w wielu kartach przegl±darki jednocze¶nie. Dla ka¿dej z przegl±darek, zdecydowanie wydajniej jest uruchamiaæ obliczenia w dwóch zamiast w jednej zak³adce jednocze¶nie. Równoleg³e obliczenia w dwóch oknach, prawie ¿e nie wp³ywaj± na spowolnienie obliczeñ w którym¶ z nich, przez co uzyskuje siê prawie dwukrotny skok w tempie rozwi±zywania problemów. Replikowanie obliczeñ na kolejne zak³adki nie przynosi ju¿ jednak istotnego przyspieszenia. W przypadku przegl±darki Chrome, najlepsze tempo uzyskuje siê przy 9-14 otwartych równolegle zak³adkach. Przy 15 otwartych instancjach prowadz±cych obliczenia, wyniki zaczynaj± siê ju¿ pogarszaæ. W przypadku Internet Explorer'a, optymalna ilo¶æ zak³adek, to miêdzy 6 a 8. Przy 9 zak³adkach, tempo istotnie spad³o - bo o prawie 80 procent, w stosunku do 8 okien. Najgorzej poradzi³ sobie z równoleg³ym przetwarzaniem Firefox. Najbardziej optymaln± dla tego silnika konfiguracj± s± 4 zak³adki dokonuj±ce równolegle obliczeñ. Ju¿ przy 5, 6 zak³adkach ca³o¶ciowe tempo spada. Uruchomienie obliczeñ w 9 zak³adkach równocze¶nie okaza³o siê na testowej maszynie niemo¿liwe, gdy¿ powodowa³o awaryjne zakoñczenie dzia³ania programy Firefox. 
+Eksperyment wykaza³, ¿e wydajno¶æ obliczeñ drastycznie ró¿ni siê w zale¿no¶ci od modelu przegl±darki, a wiêc od u¿ytego silnika JavaScript. Ca³o¶ciowe wyniki eksperymentu dobrze obrazuje wykres \ref{fig:wydajnoscZakladki} na stronie \pageref{fig:wydajnoscZakladki}. Najlepiej wypad³a przegl±darka Chrome, ponad dwa razy wolniejsza okaza³a siê najnowsza przegl±darka Internet Explorer, a ponad 4 razy gorsza przegl±darka Firefox. Ciekawe wyniki dotycz± wydajno¶ci dla obliczeñ prowadzonych w wielu kartach przegl±darki jednocze¶nie. Dla ka¿dej z przegl±darek, zdecydowanie wydajniej jest uruchamiaæ obliczenia w dwóch zamiast w jednej zak³adce jednocze¶nie. Równoleg³e obliczenia w dwóch oknach, prawie ¿e nie wp³ywaj± na spowolnienie obliczeñ w którym¶ z nich, przez co uzyskuje siê prawie dwukrotny skok w tempie rozwi±zywania problemów. Replikowanie obliczeñ na kolejne zak³adki nie przynosi ju¿ jednak istotnego przyspieszenia. W przypadku przegl±darki Chrome, najlepsze wyniki uzyskuje siê przy 9-14 otwartych równolegle zak³adkach. Przy 15 otwartych instancjach prowadz±cych obliczenia, wyniki zaczynaj± siê ju¿ pogarszaæ. W przypadku Internet Explorer'a, optymalna liczba zak³adek, to miêdzy 6 a 8. Przy 9 zak³adkach, tempo istotnie spad³o - bo prawie o 80 procent, w stosunku do 8 okien. Najgorzej poradzi³ sobie z równoleg³ym przetwarzaniem Firefox. Najbardziej optymaln± dla tego silnika konfiguracj± s± 4 zak³adki dokonuj±ce równolegle obliczeñ. Ju¿ przy 5, 6 zak³adkach ca³o¶ciowe tempo spada. Uruchomienie obliczeñ w 9 zak³adkach równocze¶nie okaza³o siê na testowej maszynie niemo¿liwe, gdy¿ powodowa³o awaryjne zakoñczenie dzia³ania programu Firefox. 
 
-Ciekawym wnioskiem jest te¿ fakt, ¿e przegl±darki przydzielaj± podobne zasoby do obliczeñ w tle, prowadzonych przez wiele kart równocze¶nie, i nie ma istotnego znaczenia, która z kart jest kart± otwart±. Obserwacjê t± ilustruj± zrzuty ekranu \ref{fig:taskManager4} i \ref{fig:taskManager15} na stronie \pageref{fig:taskManager4} z managera zadañ systemu podczas prowadzenia obliczeñ oraz wyniki w tabelach \ref{tab:szescZakladekCh}, \ref{tab:szescZakladekFF} i \ref{tab:szescZakladekIE} na stronie \pageref{tab:szescZakladekCh} na których widaæ, ¿e czas rozwi±zywania problemu jest zbli¿ony dla ka¿dej z kart.
+Ciekawym wnioskiem jest te¿ fakt, ¿e przegl±darki przydzielaj± podobne zasoby do obliczeñ w tle, prowadzonych przez wiele kart równocze¶nie, i nie ma istotnego znaczenia, która z kart jest kart± otwart±. Obserwacjê tê ilustruj± zrzuty ekranu \ref{fig:taskManager4} i \ref{fig:taskManager15} na stronie \pageref{fig:taskManager4} z managera zadañ systemu podczas prowadzenia obliczeñ oraz wyniki w tabelach \ref{tab:szescZakladekCh}, \ref{tab:szescZakladekFF} i \ref{tab:szescZakladekIE} na stronie \pageref{tab:szescZakladekCh} na których widaæ, ¿e czas rozwi±zywania problemu jest zbli¿ony dla ka¿dej z kart.
 
 \begin{figure}[h]
 \centering
@@ -1040,20 +1041,20 @@ Ciekawym wnioskiem jest te¿ fakt, ¿e przegl±darki przydzielaj± podobne zasoby do
 Celem eksperymentu by³o sprawdzenie ile rozwi±zañ uda siê zebraæ udostêpniaj±c link prowadz±cy do strony internetowej, dziêki której mo¿na do³±czyæ do obliczeñ. Link zosta³ udostêpniony poprzez kilka internetowych kana³ów spo³eczno¶ciowych:
 
 \begin{itemize}
-\item na prywatnej tablicy w serwisie Facebook (520 znajomych)
-\item na tablicy Studenckiego Klubu Narciarskiego FIRN AGH w serwisie Facebook (180 obserwuj±cych)
-\item w serwisie Wykop.pl
-\item z prywatnego konta w serwisie Twitter  (120 obserwuj±cych)
+\item na prywatnej tablicy w serwisie Facebook (520 znajomych),
+\item na tablicy Studenckiego Klubu Narciarskiego FIRN AGH w serwisie Facebook (180 obserwuj±cych),
+\item w serwisie Wykop.pl,
+\item z prywatnego konta w serwisie Twitter  (120 obserwuj±cych).
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[height=220px]{real-time-ga}
-\caption{Zrzut ekranu z panelu Google Analitics pokazuj±cy aktualn± wówczas ilo¶æ kontrybuuj±cych w obliczeniach ochotników oraz ¼ród³a z jakich trafili na stronê}
+\caption{Zrzut ekranu z panelu Google Analitics pokazuj±cy aktualn± wówczas liczbê kontrybuuj±cych w obliczeniach ochotników oraz ¼ród³a z jakich trafili na stronê}
 \label{fig:real-time-ga}
 \end{figure}
 
-Przez 6 h od udostêpnienia linku, stronê odwiedzi³o 221 unikatowych odwiedzaj±cych podczas 259 wizyt. W tym czasie do naszej bazy danych wp³ynê³o ponad 2000 rozwi±zañ. W ci±gu kolejnych 24 godzin, do bazy sp³ynê³o jeszcze ponad 2500 rozwi±zañ, co pokazuje, ¿e czê¶æ ludzi raz zarekrutowanych do obliczeñ, zosta³a wierna eksperymentowi przez nastêpny dzieñ. Po tygodniu od akcji promuj±cej, w bazie by³o ponad 6 tysiêcy nowych rozwi±zañ.
+Przez sze¶æ godzin od udostêpnienia linku, stronê odwiedzi³o 221 unikatowych odwiedzaj±cych podczas 259 wizyt. W tym czasie do naszej bazy danych wp³ynê³o ponad 2000 rozwi±zañ. W ci±gu kolejnych 24 godzin, do bazy sp³ynê³o jeszcze ponad 2500 rozwi±zañ, co pokazuje, ¿e czê¶æ ludzi raz zarekrutowanych do obliczeñ, zosta³a wierna eksperymentowi przez nastêpny dzieñ. Po tygodniu od akcji promuj±cej, w bazie by³o ponad 6 tysiêcy nowych rozwi±zañ.
 
 Przy najbardziej efektywnym u¿yciu zasobów ¶redniej klasy komputera typu laptop (procesor Intel Core i5, 4 rdzenie), 6 h obliczeñ w najbardziej wydajnym modelu (równolegle uruchomione 9 zak³adek przegl±darki Chrome) przyniesie oko³o 900 rozwi±zañ (6 h = 21600 s; Tempo 23.9 s / 1 rozwi±zanie) Ten sam efekt uda³o siê uzyskaæ, dziêki zaprzêgniêciu do obliczeñ ochotników, w nieca³e 2 godziny. Nie jest to wielkie przyspieszanie, ale nale¿y zwróciæ uwagê, ¿e podjêcie obliczeñ by³o czysto dobrowolne, a osoby bior±ce w nich udzia³ nie by³y o to personalnie proszone, tylko same zdecydowa³y siê do³±czyæ do projektu.
 
@@ -1065,27 +1066,27 @@ Ciekawym efektem by³o to, ¿e osoby bior±ce udzia³ w obliczeniach, poczu³y nutkê 
 
 %---------------------------------------------------------------------------
 
-Podsumowuj±c zaproponowane przez nas rozwi±zanie architektoniczne, czyli platformê Volunteer Computing dostêpn± i wykonuj±ca obliczenia wewn±trz przegl±darki internetowej wymienimy zalety i wady tego rozwi±zania.
+W tej sekcji, zostan± wymienione wady i zalety zaproponowanego rozwi±zania architektonicznego opieraj±cego siê na modelu Volunteer Computing udostêpnianego za pomoc± przegl±darek internetowych.
 
 \subsection{Zalety}
 \label{sec:zalety}
 
 \begin{itemize}
-\item ³atwa dostêpno¶æ
+\item ³atwa dostêpno¶æ,
 \begin{itemize}
-\item brak konieczno¶ci instalacji dodatkowego oprogramowania po stronie ochotników
-\item brak bariery wej¶cia do u¿ywania nowego oprogramowania - wszystko dzieje siê z znanym ¶rodowisku przegl±darki i wygl±da jak standardowa strona internetowa
-\item prostota promowania platformy w portalach spo³eczno¶ciowych
+\item brak konieczno¶ci instalacji dodatkowego oprogramowania po stronie ochotników,
+\item brak bariery wej¶cia do u¿ywania nowego oprogramowania - wszystko dzieje siê w znanym ¶rodowisku przegl±darki i wygl±da jak standardowa strona internetowa,
+\item prostota promowania platformy w portalach spo³eczno¶ciowych,
 \end{itemize}
 
-\item prosta i szybka implementacja
+\item prosta i szybka implementacja,
 \begin{itemize}
-\item ³atwa do zaimplementowania wizualizacja zjawisk/ obliczeñ
-\item wieloplatformowo¶æ
+\item ³atwa do zaimplementowania wizualizacja zjawisk/ obliczeñ,
+\item wieloplatformowo¶æ.
 \end{itemize}
 \end{itemize}
 
-Dziêki tym zaletom technicznym, zosta³y uwidocznione fakty przemawiaj±ce za stosowaniem zaproponowanej architektury do analogicznych obliczeñ. Jest to przede wszystkim propagowanie wiedzy o problemach naukowych - ³atwy dostêp i atrakcyjna wizualizacja, która pozwala na wyt³umaczenie istoty rozwi±zywanego problemu. 
+Dziêki tym zaletom technicznym, zosta³y uwidocznione fakty przemawiaj±ce za stosowaniem zaproponowanego rozwi±zania do analogicznych obliczeñ. Jest to przede wszystkim propagowanie wiedzy o problemach naukowych - ³atwy dostêp i atrakcyjna wizualizacja, która pozwala na wyt³umaczenie istoty rozwi±zywanego problemu. 
 
 \subsection{Wady}
 \label{sec:wady}
@@ -1093,14 +1094,16 @@ Dziêki tym zaletom technicznym, zosta³y uwidocznione fakty przemawiaj±ce za stos
 
 \begin{itemize}
 \item brak mo¿liwo¶ci automatycznego uruchamiania i przerywania obliczeñ w zale¿no¶ci od aktualnego zu¿ycia procesora
-\item brak mo¿liwo¶ci programowania konfiguracji przeprowadzanych obliczeñ (np. równoczesnego uruchamiania obliczeñ w X zak³adkach przegl±darki)
-\item nie optymalna pod wzglêdem wydajno¶ci implementacja obliczeñ - implementacja w jêzyku JavaScript
-\item niewielka ilo¶æ bibliotek numerycznych i naukowych do obliczeñ w ¶rodowisku JavaScript
+\item brak mo¿liwo¶ci programowania konfiguracji przeprowadzanych obliczeñ (np. równoczesnego uruchamiania obliczeñ w zadanej liczbie zak³adek przegl±darki),
+\item ma³o wydajna implementacja obliczeñ - implementacja w jêzyku JavaScript,
+\item niewielka ilo¶æ bibliotek numerycznych i naukowych do obliczeñ w ¶rodowisku JavaScript.
 \end{itemize}
 
 \subsection{Wnioski}
 \label{sec:wnioski}
 
-Podsumowuj±c, dochodzimy do wniosku, ¿e zaproponowana przez nas architektura nie jest w tym momencie konkurencyjna dla obecnie funkcjonuj±cych platform ze wzglêdu na wydajno¶æ i ograniczon± konfigurowalno¶æ. Jest natomiast ciekawym, komplementarnym do tradycyjnego podej¶cia rozwi±zaniem, które, dziêki ³atwej dostêpno¶ci i braku bariery wej¶cia mo¿e byæ u¿ywane chocia¿by do promowania koncepcji Volunteer Computing czy te¿ faktycznego prowadzenia obliczeñ dla ma³ych, amatorskich projektów.
+Zaproponowana przez nas architektura nie jest w tym momencie konkurencyjna dla obecnie funkcjonuj±cych platform ze wzglêdu na wydajno¶æ i ograniczon± konfigurowalno¶æ. Jednakowo¿, mimo, ¿e wydajno¶æ pojedynczego wêz³a jest znacz±co mniejsza w stosunku do tradycyjnej architektury, potencja³ sieci wêz³ów jest du¿y, bior±c pod uwagê, ¿e rekrutacja ochotników jest bardzo prosta. 
 
-Rozwa¿my mo¿liwy scenariusz promowania idei Volunteer Computing na przyk³adzie projektu fightAIDS@home, którego celem jest znalezienie lekarstwa na AIDS. Aby przyst±piæ do obliczeñ nale¿y ¶ci±gn±æ specjaln± aplikacjê klienck±, analogiczn± do aplikacji opisywanych w rozdziale \ref{sec:BOINC} na stronie \pageref{sec:BOINC}. Dziêki niej mo¿emy nie tylko kontrybuowaæ swoimi zasobami, ale równie¿ na bie¿±co ¶ledziæ wizualizowane w 3D postêpy obliczeñ. Najwiêksz± barier± jest w³a¶nie bariera wej¶cia. Proponujemy zatem, by stworzyæ prosty prototyp, który bêdzie symulowa³ przyst±pienie do obliczeñ za po¶rednictwem przegl±darki internetowej, oraz wykonywa³ i wizualizowa³ - najprostsze choæby operacja w jakikolwiek sposób zwi±zane z projektem fightAIDS@home. Osoba, która trafi na stronê internetow± z takim ``lekkim'' klientem Volunteer Computing odczuje - choæby przez to, ¿e us³yszy, ¿e procesor jej PC-ta zacz±³ intensywnie pracowaæ - jak to jest kontrybuowaæ do projektu w szczytnym celu. Taka osoba, powinna dostaæ bardzo szybki feedback dotycz±cy postêpu i tego w jak niewielkim stopniu przyczyni³a siê do realizacji celu projektu. Nastêpnie powinna dostaæ zestawienie, jak du¿o bardziej mo¿e pomóc, ¶ci±gaj±c specjalistyczne oprogramowanie i do³±czaj±c do ju¿ prawdziwej wersji obliczeñ. Oczywi¶cie mo¿na sobie wyobraziæ, ¿e w tej wersji demonstracyjnej, po stronie klienta nie s± wykonywane ¿adne konkretne obliczenia a ca³o¶æ ma tylko za zadanie zachêciæ do ¶ci±gniêcia oprogramowania do prawdziwych obliczeñ.
+Zaproponowane rozwi±zanie jest ciekawym, komplementarnym do tradycyjnego podej¶cia rozwi±zaniem. Sziêki ³atwej dostêpno¶ci i braku bariery wej¶cia mo¿e mieæ dodatkowe zastosowanie chocia¿by do promowania koncepcji Volunteer Computing.
+
+Rozwa¿my mo¿liwy scenariusz promowania idei Volunteer Computing na przyk³adzie projektu fightAIDS@home, którego celem jest znalezienie lekarstwa na AIDS. Aby przyst±piæ do obliczeñ nale¿y ¶ci±gn±æ specjaln± aplikacjê klienck±, analogiczn± do aplikacji opisywanych w rozdziale \ref{sec:BOINC} na stronie \pageref{sec:BOINC}. Dziêki niej mo¿emy nie tylko wspomagaæ projekt swoimi zasobami, ale równie¿ na bie¿±co ¶ledziæ wizualizowane w 3D postêpy obliczeñ. Najwiêkszym problemem jest w³a¶nie bariera wej¶cia. Proponujemy zatem, by stworzyæ prosty prototyp, który bêdzie symulowa³ przyst±pienie do obliczeñ za po¶rednictwem przegl±darki internetowej, oraz wykonywa³ i wizualizowa³ - najprostsze choæby operacje w jakikolwiek sposób zwi±zane z projektem fightAIDS@home. Osoba, która trafi na stronê internetow± z takim ``lekkim'' klientem Volunteer Computing odczuje - choæby przez to, ¿e us³yszy, ¿e procesor jej PC-ta zacz±³ intensywnie pracowaæ - jak to jest wspomagaæ projekt swoimi zasobami w szczytnym celu. Taka osoba, powinna dostaæ bardzo szybko informacjê zwrotn±, dotycz±cy postêpu i tego w jak niewielkim stopniu przyczyni³a siê do realizacji celu projektu. Nastêpnie powinna dostaæ zestawienie, jak du¿o bardziej mo¿e pomóc, ¶ci±gaj±c specjalistyczne oprogramowanie i do³±czaj±c do ju¿ prawdziwej wersji obliczeñ. Oczywi¶cie mo¿na sobie wyobraziæ, ¿e w tej wersji demonstracyjnej, po stronie klienta nie s± wykonywane ¿adne konkretne obliczenia a ca³o¶æ ma tylko za zadanie zachêciæ do ¶ci±gniêcia oprogramowania do prawdziwych obliczeñ.

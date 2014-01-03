@@ -270,7 +270,7 @@ Zastosowanie algorytmu lokalnej optymalizacji powinno pomóc w koñcowej fazie pos
 \section{Modelowanie karania}
 \label{sec:karanie}
 
-W celu jak najdok³adniejszego zamodelowania zmian prêdko¶ci podczas poruszania siê po ³amanej, testowany by³ szereg modeli. Konieczno¶æ wprowadzenia takich mechanizmów staje siê oczywista, gdy u¶wiadomimy sobie, ¿e im mniejszy jest k±t pomiêdzy kolejnymi odcinkami pokonywanej ³amanej, tym bardziej jest to kosztowne w realnej sytuacji pod wzglêdem utraty prêdko¶ci. Dla zobrazowania sytuacji, rozwa¿my k±t 90 stopni. Aby przej¶æ ze stanu jazdy w linii spadku stoku do jazdy w skos stoku, narciarz musi przyhamowaæ do zera. Z kolei im k±t jest bardziej zbli¿ony do 180 stopni, nie ma efektu przyhamowania, b±d¼ przyhamowanie jest minimalne, gdy¿ w realnym przypadku, zmiana kierunku jazdy jest wykonywana w p³ynnym ³uku.
+W celu jak najdok³adniejszego zamodelowania zmian prêdko¶ci podczas poruszania siê po ³amanej, testowany by³ szereg modeli. Konieczno¶æ wprowadzenia takich mechanizmów staje siê oczywista, gdy u¶wiadomimy sobie, ¿e im mniejszy jest k±t pomiêdzy kolejnymi odcinkami pokonywanej ³amanej, tym bardziej jest to kosztowne w realnej sytuacji pod wzglêdem utraty prêdko¶ci. Dla zobrazowania sytuacji, rozwa¿my przej¶cie ze stanu jazdy w linii spadku stoku do jazdy prostopad³ej do linii spadku stoku. Aby tego dokonaæ narciarz musi przyhamowaæ do zera. Z kolei im k±t jest bardziej zbli¿ony do 180 stopni tym mniejszy jest efekt przyhamowania, gdy¿ w realnym przypadku, zmiana kierunku jazdy jest wykonywana w p³ynnym ³uku.
 
 \begin{figure}[h]
 \centering
@@ -282,7 +282,7 @@ W celu jak najdok³adniejszego zamodelowania zmian prêdko¶ci podczas poruszania s
 \subsection{Strategia sumowania pochodnych}
 \label{sec:strategiaPochodnych}
 
-Pierwsza strategia opiera siê na obliczaniu kolejno drugich pochodnych funkcji w ka¿dym kolejnym punkcie trasy a nastêpnie zsumowaniu ich bezwzglêdnych warto¶ci. 
+Pierwsza strategia opiera siê na obliczaniu kolejno przybli¿enia drugich pochodnych funkcji za pomoc± ilorazów ró¿nicowych w ka¿dym kolejnym punkcie trasy a nastêpnie zsumowaniu ich bezwzglêdnych warto¶ci. 
 
 \begin{equation}
 \ddot{d_i} = \frac{x_1 + x_3 - 2x_2}{(y_3 -y_2) (y_2-y_1) }
@@ -292,12 +292,12 @@ Pierwsza strategia opiera siê na obliczaniu kolejno drugich pochodnych funkcji w
 k =  \sum\limits_{i=1}^{n-1} |\ddot{d_i}|^{3} 
 \end{equation}
 
-Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna warto¶æ oznacza bardzo ³agodne k±ty przej¶cia na ca³ej trasie natomiast im wiêksz± kanciasto¶æ trasy tym wiêksza warto¶æ tego wspó³czynnika. Aby wzmocniæ efektywno¶æ wspó³czynnika, dodatkowo, przed zsumowaniem, warto¶æ bezwzglêdna drugiej pochodnej jest podnoszona do trzeciej potêgi. Wyliczony wspó³czynnik dla ka¿dej z rozwa¿anych w algorytmie tras jest mno¿ony przez obliczony czas przejazdu tej trasy. Dopiero taka liczba jest traktowana jako warto¶æ funkcji celu algorytmu genetycznego. Minusem tej strategii jest kompletne zniekszta³cenie wyników tj. realnego czasu przejazdu narciarza po zadanym torze.
+Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna warto¶æ oznacza bardzo ³agodne k±ty przej¶cia na ca³ej trasie natomiast im wiêksz± ,,kanciasto¶æ'' trasy tym wiêksza warto¶æ tego wspó³czynnika. Dodatkowo, przed zsumowaniem, warto¶æ bezwzglêdna przybli¿onej drugiej pochodnej jest podnoszona do trzeciej potêgi. Wyliczony wspó³czynnik dla ka¿dej z rozwa¿anych w algorytmie tras jest mno¿ony przez obliczony czas przejazdu tej trasy. Dopiero taka liczba jest traktowana jako warto¶æ funkcji celu algorytmu genetycznego. Minusem tej strategii jest przeskalowanie realnego czasu przejazdu narciarza po zadanym torze, brak mo¿liwo¶ci porównania go do wyników uzyskiwanych innymi metodami.
 
 \subsection{Strategia proporcjonalnego zmniejszania warto¶ci wektora prêdko¶ci}
 \label{sec:strategiaZmniejszania}
 
-W tej strategii, dla ka¿dego prze³amania ³amanej, obliczamy indywidualny wspó³czynnik kary $m$ z zakresu od 0 do 1. D³ugo¶æ wektora prêdko¶ci w ka¿dym kolejnym punkcie bêdzie mno¿ona przez wspó³czynnik dla tego punktu. Modelowane bêdzie zatem przyhamowywanie - tym wiêksze, im wiêkszy jest k±t pomiêdzy kolejnymi punktami ³amanej. Wspó³czynnik w danym punkcie zale¿y od k±ta ABC z rysunku \ref{fig:punish} pomiêdzy poprzednim a nastêpuj±cym punktem. Zaproponowana zosta³a nastêpuj±ca funkcja, zmierzaj±ca do zera dla k±ta 90 stopni i mniejszego, i zmierzaj±ca do jedynki dla 180 stopni.
+W tej strategii, dla ka¿dego wierzcho³ka ³amanej, obliczamy indywidualny wspó³czynnik kary $m$ z zakresu od 0 do 1. D³ugo¶æ wektora prêdko¶ci w ka¿dym kolejnym punkcie bêdzie mno¿ona przez wspó³czynnik dla tego punktu. Modelowane bêdzie zatem przyhamowywanie - tym wiêksze, im wiêkszy jest k±t pomiêdzy kolejnymi punktami ³amanej. Wspó³czynnik w danym punkcie zale¿y od k±ta ABC z rysunku \ref{fig:punish} pomiêdzy poprzednim a nastêpuj±cym punktem. Zaproponowana zosta³a nastêpuj±ca funkcja, zmierzaj±ca do zera dla k±ta 90 stopni i mniejszego, i zmierzaj±ca do jedynki dla 180 stopni.
 
 
 \begin{equation}
