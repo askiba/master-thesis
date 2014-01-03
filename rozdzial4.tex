@@ -315,7 +315,7 @@ m\left(\alpha\right) = \left \{ {{0.01, \alpha \in \left( 0, 90\right)} \atop {1
 \subsection{Strategia karania za ka¿d± zmianê krawêdzi}
 \label{sec:strategiaKrawedzi}
 
-Ostatnia strategia przyjmuje, ¿e nie ma potrzeby wykonywaæ dodatkowych skrêtów pomiêdzy bramkami. Choæ teoretycznie jest mo¿liwe, by taki dodatkowy skrêt pozwala³ uzyskaæ lepszy czas, to jednak jest to niespotykane podczas rzeczywistej jazdy po slalomach. Dlatego w strategii tej zlicza siê ilo¶æ zmian kierunku jazdy na testowanym torze i porównanie j± z ilo¶ci± bramek wymuszaj±cych skrêt na trasie. Otrzymujemy zatem ilo¶æ nadprogramowych zmian krawêdzi, które w ka¿dym przypadku powoduj± gorszy czas przejazdu ni¿ gdyby ich nie by³o. Aby to zatem zamodelowaæ, w tej strategii dodajemy do wyliczonego czasu przejazdu sta³± ilo¶æ sekund kary za ka¿d± niepotrzebn± zmianê krawêdzi i to traktujemy jako warto¶æ funkcji celu algorytmu genetycznego.
+Ostatnia strategia przyjmuje, ¿e nie ma potrzeby wykonywaæ dodatkowych skrêtów pomiêdzy bramkami. Choæ teoretycznie jest mo¿liwe, by taki dodatkowy skrêt pozwala³ uzyskaæ lepszy czas, to jednak jest to niespotykane podczas rzeczywistej jazdy po slalomach. Dlatego w strategii tej zlicza siê liczbê zmian kierunku jazdy na testowanym torze i porównuje j± z ilo¶ci± bramek wymuszaj±cych skrêt na trasie. Otrzymujemy zatem liczbê nadmiarowych zmian krawêdzi, które w ka¿dym przypadku powoduj± gorszy czas przejazdu ni¿ gdyby ich nie by³o. Aby to zatem zamodelowaæ, w tej strategii dodajemy do wyliczonego czasu przejazdu sta³± liczbê sekund kary za ka¿d± niepotrzebn± zmianê krawêdzi i to traktujemy jako warto¶æ funkcji celu algorytmu ewolucyjnego.
 
 %---------------------------------------------------------------------------
 
@@ -328,13 +328,21 @@ Wybór docelowej architektury dla naszego systemu zosta³ poprzedzony eksperymento
 
 Pierwszym wybranym przez nas ¶rodowiskiem tworzenia systemu by³ jêzyk Python i dostêpne dla niego modu³y: VPython umo¿liwiaj±cy wizualizacjê w 2D i 3D oraz biblioteki numeryczne NumPy i SciPy wykorzystywane do rozwi±zywania równañ ró¿niczkowych. 
 
-Dobrze znany nam jêzyk pozwoli³ nam na szybkie prototypowanie i testowanie pierwszego fizycznego modelu narciarza. Wizualizacja by³a prosta w implementacji, a biblioteki numeryczne wystarczaj±co dobrze udokumentowane i powszechnie u¿ywane, co zapewnia³o ich stabilno¶æ i jako¶æ. Szybko ujawni³y siê jednak wady wybranego ¶rodowiska - uruchomienie naszego programu wymaga³o od u¿ytkownika instalacji z³o¿onego ¶rodowiska do obs³ugi jêzyka Python oraz graficznych i numerycznych bibliotek co by³o istotn± barier±. Stanowi³o to powa¿ny problem, bior±c pod uwagê potencjaln± mo¿liwo¶æ rozpraszania obliczeñ. Zda³y¶my sobie sprawê, ¿e rozwi±zywany przez nas problem i otrzymywane przez nas wyniki s± atrakcyjne wizualnie i ludzie zwi±zani z narciarstwem z chêci± mog± wzi±æ udzia³ w obliczeniach i udostêpniæ nam zasoby obliczeniowe swoich komputerów. Warunkiem koniecznym by by³o to mo¿liwe jest ³atwo¶æ w do³±czaniu do obliczeñ, wizualizacji wyników i bezproblemowa konfiguracja. Bior±c to pod uwagê, zdecydowa³y¶my, ¿e potrzebujemy innego ¶rodowiska.
+Dobrze znany nam jêzyk pozwoli³ nam na szybkie prototypowanie i testowanie pierwszego fizycznego modelu narciarza. Wizualizacja by³a prosta w implementacji, a biblioteki numeryczne wystarczaj±co dobrze udokumentowane i powszechnie u¿ywane, co zapewnia³o ich stabilno¶æ i jako¶æ. Szybko ujawni³y siê jednak wady wybranego ¶rodowiska - uruchomienie naszego programu wymaga³o od u¿ytkownika instalacji z³o¿onego ¶rodowiska do obs³ugi jêzyka Python oraz graficznych i numerycznych bibliotek, co by³o istotn± barier±. Stanowi³o to powa¿ny problem, bior±c pod uwagê potencjaln± mo¿liwo¶æ rozpraszania obliczeñ. Zda³y¶my sobie sprawê, ¿e rozwi±zywany przez nas problem i otrzymywane przez nas wyniki s± atrakcyjne wizualnie i ludzie zwi±zani z narciarstwem z chêci± mog± wzi±æ udzia³ w obliczeniach i udostêpniæ nam zasoby obliczeniowe swoich komputerów. Wiedzia³y¶my, ¿e warunkiem koniecznym by zrealizowaæ t± wizjê jest ³atwo¶æ w do³±czaniu do obliczeñ, wizualizacji wyników i bezproblemowa konfiguracja. Bior±c to pod uwagê, zdecydowa³y¶my, ¿e potrzebujemy innego ¶rodowiska.
 
 \subsection{Architektura docelowa}
 
-Potrzeba ³atwo¶ci do³±czania do obliczeñ sk³oni³a nas do stworzenia systemu, w którym klientami obliczeniowymi s± przegl±darki internetowe. Klienci chc±cy pod³±czyæ siê do obliczeñ wchodz± na dobrze znany adres internetowy sk±d serwowana jest strona g³ówna i skrypty, które dokonuj± obliczeñ. Na ¿±danie klienta, dostaje on ze zdalnego serwisu instancjê problemu, która jest nastêpnie lokalnie przetwarzana i wizualizowana klientowi na bie¿±co. Po skoñczonym obliczeniu, rozwi±zanie jest umieszczane na serwerze, a klient mo¿e przej¶æ do obliczania kolejnego problemu lub jeszcze raz tego samego problemu.
+Potrzeba ³atwo¶ci do³±czania do obliczeñ sk³oni³a nas do stworzenia systemu, w którym klientami obliczeniowymi s± przegl±darki internetowe. Klienci chc±cy pod³±czyæ siê do obliczeñ wchodz± na dobrze znany adres internetowy sk±d serwowana jest strona g³ówna i skrypty, które dokonuj± obliczeñ. Na ¿±danie klienta, dostaje on ze zdalnego serwisu egzemplarz problemu, która jest nastêpnie lokalnie przetwarzana i wizualizowana klientowi na bie¿±co. Po skoñczonym obliczeniu, rozwi±zanie jest umieszczane na serwerze, a klient mo¿e przej¶æ do obliczania kolejnego lub jeszcze raz tego samego problemu.
 
-Architektura naszego systemu sk³ada siê z dwóch g³ównych, niezale¿nych komponentów. Pierwszym jest aplikacja kliencka przeprowadzaj±ca obliczenia i wizualizacjê oraz komunikuj±ca siê z serwerem zarz±dzaj±cym obliczeniami. Drugim jest aplikacja lekkiego serwera http, jako warstwa wystawiaj±ca REST-owe API. Warstw± persystentn± jest dokumentowa, nierelacyjna baza danych CouchDB. 
+Architektura naszego systemu sk³ada siê z dwóch g³ównych, niezale¿nych czê¶ci sk³adowych. Pierwsz± z czê¶ci jest aplikacja kliencka przeprowadzaj±ca obliczenia i wizualizacjê oraz komunikuj±ca siê z serwerem zarz±dzaj±cym obliczeniami. Drugim jest aplikacja \textit{lekkiego} serwera http, jako warstwa wystawiaj±ca REST API. Warstw± persystentn± jest dokumentowa, nierelacyjna baza danych CouchDB. Schemat prezentuje rysunek \ref{fig:architektureSimple}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=360px]{architekture-simple}
+\caption{Uproszczony schemat architektury docelowej}
+\label{fig:architektureSimple}
+\end{figure}
+
 
 \subsection{Aplikacja kliencka}
 
