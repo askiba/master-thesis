@@ -270,7 +270,7 @@ Zastosowanie algorytmu lokalnej optymalizacji powinno pomóc w koñcowej fazie pos
 \section{Modelowanie karania}
 \label{sec:karanie}
 
-W celu jak najdok³adniejszego zamodelowania zmian prêdko¶ci podczas poruszania siê po ³amanej, testowany by³ szereg modeli. Konieczno¶æ wprowadzenia takich mechanizmów staje siê oczywista, gdy u¶wiadomimy sobie, ¿e im mniejszy jest k±t pomiêdzy kolejnymi odcinkami pokonywanej ³amanej, tym bardziej jest to kosztowne w realnej sytuacji pod wzglêdem utraty prêdko¶ci. Dla zobrazowania sytuacji, rozwa¿my k±t 90 stopni. Aby przej¶æ ze stanu jazdy w linii spadku stoku do jazdy w skos stoku, narciarz musi przyhamowaæ do zera. Z kolei im k±t jest bardziej zbli¿ony do 180 stopni, nie ma efektu przyhamowania, b±d¼ przyhamowanie jest minimalne, gdy¿ w realnym przypadku, zmiana kierunku jazdy jest wykonywana w p³ynnym ³uku.
+W celu jak najdok³adniejszego zamodelowania zmian prêdko¶ci podczas poruszania siê po ³amanej, testowany by³ szereg modeli. Konieczno¶æ wprowadzenia takich mechanizmów staje siê oczywista, gdy u¶wiadomimy sobie, ¿e im mniejszy jest k±t pomiêdzy kolejnymi odcinkami pokonywanej ³amanej, tym bardziej jest to kosztowne w realnej sytuacji pod wzglêdem utraty prêdko¶ci. Dla zobrazowania sytuacji, rozwa¿my przej¶cie ze stanu jazdy w linii spadku stoku do jazdy prostopad³ej do linii spadku stoku. Aby tego dokonaæ narciarz musi przyhamowaæ do zera. Z kolei im k±t jest bardziej zbli¿ony do 180 stopni tym mniejszy jest efekt przyhamowania, gdy¿ w realnym przypadku, zmiana kierunku jazdy jest wykonywana w p³ynnym ³uku.
 
 \begin{figure}[h]
 \centering
@@ -282,7 +282,7 @@ W celu jak najdok³adniejszego zamodelowania zmian prêdko¶ci podczas poruszania s
 \subsection{Strategia sumowania pochodnych}
 \label{sec:strategiaPochodnych}
 
-Pierwsza strategia opiera siê na obliczaniu kolejno drugich pochodnych funkcji w ka¿dym kolejnym punkcie trasy a nastêpnie zsumowaniu ich bezwzglêdnych warto¶ci. 
+Pierwsza strategia opiera siê na obliczaniu kolejno przybli¿enia drugich pochodnych funkcji za pomoc± ilorazów ró¿nicowych w ka¿dym kolejnym punkcie trasy a nastêpnie zsumowaniu ich bezwzglêdnych warto¶ci. 
 
 \begin{equation}
 \ddot{d_i} = \frac{x_1 + x_3 - 2x_2}{(y_3 -y_2) (y_2-y_1) }
@@ -292,12 +292,12 @@ Pierwsza strategia opiera siê na obliczaniu kolejno drugich pochodnych funkcji w
 k =  \sum\limits_{i=1}^{n-1} |\ddot{d_i}|^{3} 
 \end{equation}
 
-Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna warto¶æ oznacza bardzo ³agodne k±ty przej¶cia na ca³ej trasie natomiast im wiêksz± kanciasto¶æ trasy tym wiêksza warto¶æ tego wspó³czynnika. Aby wzmocniæ efektywno¶æ wspó³czynnika, dodatkowo, przed zsumowaniem, warto¶æ bezwzglêdna drugiej pochodnej jest podnoszona do trzeciej potêgi. Wyliczony wspó³czynnik dla ka¿dej z rozwa¿anych w algorytmie tras jest mno¿ony przez obliczony czas przejazdu tej trasy. Dopiero taka liczba jest traktowana jako warto¶æ funkcji celu algorytmu genetycznego. Minusem tej strategii jest kompletne zniekszta³cenie wyników tj. realnego czasu przejazdu narciarza po zadanym torze.
+Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna warto¶æ oznacza bardzo ³agodne k±ty przej¶cia na ca³ej trasie natomiast im wiêksz± ,,kanciasto¶æ'' trasy tym wiêksza warto¶æ tego wspó³czynnika. Dodatkowo, przed zsumowaniem, warto¶æ bezwzglêdna przybli¿onej drugiej pochodnej jest podnoszona do trzeciej potêgi. Wyliczony wspó³czynnik dla ka¿dej z rozwa¿anych w algorytmie tras jest mno¿ony przez obliczony czas przejazdu tej trasy. Dopiero taka liczba jest traktowana jako warto¶æ funkcji celu algorytmu genetycznego. Minusem tej strategii jest przeskalowanie realnego czasu przejazdu narciarza po zadanym torze, brak mo¿liwo¶ci porównania go do wyników uzyskiwanych innymi metodami.
 
 \subsection{Strategia proporcjonalnego zmniejszania warto¶ci wektora prêdko¶ci}
 \label{sec:strategiaZmniejszania}
 
-W tej strategii, dla ka¿dego prze³amania ³amanej, obliczamy indywidualny wspó³czynnik kary $m$ z zakresu od 0 do 1. D³ugo¶æ wektora prêdko¶ci w ka¿dym kolejnym punkcie bêdzie mno¿ona przez wspó³czynnik dla tego punktu. Modelowane bêdzie zatem przyhamowywanie - tym wiêksze, im wiêkszy jest k±t pomiêdzy kolejnymi punktami ³amanej. Wspó³czynnik w danym punkcie zale¿y od k±ta ABC z rysunku \ref{fig:punish} pomiêdzy poprzednim a nastêpuj±cym punktem. Zaproponowana zosta³a nastêpuj±ca funkcja, zmierzaj±ca do zera dla k±ta 90 stopni i mniejszego, i zmierzaj±ca do jedynki dla 180 stopni.
+W tej strategii, dla ka¿dego wierzcho³ka ³amanej, obliczamy indywidualny wspó³czynnik kary $m$ z zakresu od 0 do 1. D³ugo¶æ wektora prêdko¶ci w ka¿dym kolejnym punkcie bêdzie mno¿ona przez wspó³czynnik dla tego punktu. Modelowane bêdzie zatem przyhamowywanie - tym wiêksze, im wiêkszy jest k±t pomiêdzy kolejnymi punktami ³amanej. Wspó³czynnik w danym punkcie zale¿y od k±ta ABC z rysunku \ref{fig:punish} pomiêdzy poprzednim a nastêpuj±cym punktem. Zaproponowana zosta³a nastêpuj±ca funkcja, zmierzaj±ca do zera dla k±ta 90 stopni i mniejszego, i zmierzaj±ca do jedynki dla 180 stopni.
 
 
 \begin{equation}
@@ -315,7 +315,7 @@ m\left(\alpha\right) = \left \{ {{0.01, \alpha \in \left( 0, 90\right)} \atop {1
 \subsection{Strategia karania za ka¿d± zmianê krawêdzi}
 \label{sec:strategiaKrawedzi}
 
-Ostatnia strategia przyjmuje, ¿e nie ma potrzeby wykonywaæ dodatkowych skrêtów pomiêdzy bramkami. Choæ teoretycznie jest mo¿liwe, by taki dodatkowy skrêt pozwala³ uzyskaæ lepszy czas, to jednak jest to niespotykane podczas rzeczywistej jazdy po slalomach. Dlatego w strategii tej zlicza siê ilo¶æ zmian kierunku jazdy na testowanym torze i porównanie j± z ilo¶ci± bramek wymuszaj±cych skrêt na trasie. Otrzymujemy zatem ilo¶æ nadprogramowych zmian krawêdzi, które w ka¿dym przypadku powoduj± gorszy czas przejazdu ni¿ gdyby ich nie by³o. Aby to zatem zamodelowaæ, w tej strategii dodajemy do wyliczonego czasu przejazdu sta³± ilo¶æ sekund kary za ka¿d± niepotrzebn± zmianê krawêdzi i to traktujemy jako warto¶æ funkcji celu algorytmu genetycznego.
+Ostatnia strategia przyjmuje, ¿e nie ma potrzeby wykonywaæ dodatkowych skrêtów pomiêdzy bramkami. Choæ teoretycznie jest mo¿liwe, by taki dodatkowy skrêt pozwala³ uzyskaæ lepszy czas, to jednak jest to niespotykane podczas rzeczywistej jazdy po slalomach. Dlatego w strategii tej zlicza siê liczbê zmian kierunku jazdy na testowanym torze i porównuje j± z ilo¶ci± bramek wymuszaj±cych skrêt na trasie. Otrzymujemy zatem liczbê nadmiarowych zmian krawêdzi, które w ka¿dym przypadku powoduj± gorszy czas przejazdu ni¿ gdyby ich nie by³o. Aby to zatem zamodelowaæ, w tej strategii dodajemy do wyliczonego czasu przejazdu sta³± liczbê sekund kary za ka¿d± niepotrzebn± zmianê krawêdzi i to traktujemy jako warto¶æ funkcji celu algorytmu ewolucyjnego.
 
 %---------------------------------------------------------------------------
 
@@ -328,52 +328,60 @@ Wybór docelowej architektury dla naszego systemu zosta³ poprzedzony eksperymento
 
 Pierwszym wybranym przez nas ¶rodowiskiem tworzenia systemu by³ jêzyk Python i dostêpne dla niego modu³y: VPython umo¿liwiaj±cy wizualizacjê w 2D i 3D oraz biblioteki numeryczne NumPy i SciPy wykorzystywane do rozwi±zywania równañ ró¿niczkowych. 
 
-Dobrze znany nam jêzyk pozwoli³ nam na szybkie prototypowanie i testowanie pierwszego fizycznego modelu narciarza. Wizualizacja by³a prosta w implementacji, a biblioteki numeryczne wystarczaj±co dobrze udokumentowane i powszechnie u¿ywane, co zapewnia³o ich stabilno¶æ i jako¶æ. Szybko ujawni³y siê jednak wady wybranego ¶rodowiska - uruchomienie naszego programu wymaga³o od u¿ytkownika instalacji z³o¿onego ¶rodowiska do obs³ugi jêzyka Python oraz graficznych i numerycznych bibliotek co by³o istotn± barier±. Stanowi³o to powa¿ny problem, bior±c pod uwagê potencjaln± mo¿liwo¶æ rozpraszania obliczeñ. Zda³y¶my sobie sprawê, ¿e rozwi±zywany przez nas problem i otrzymywane przez nas wyniki s± atrakcyjne wizualnie i ludzie zwi±zani z narciarstwem z chêci± mog± wzi±æ udzia³ w obliczeniach i udostêpniæ nam zasoby obliczeniowe swoich komputerów. Warunkiem koniecznym by by³o to mo¿liwe jest ³atwo¶æ w do³±czaniu do obliczeñ, wizualizacji wyników i bezproblemowa konfiguracja. Bior±c to pod uwagê, zdecydowa³y¶my, ¿e potrzebujemy innego ¶rodowiska.
+Dobrze znany nam jêzyk pozwoli³ nam na szybkie prototypowanie i testowanie pierwszego fizycznego modelu narciarza. Wizualizacja by³a prosta w implementacji, a biblioteki numeryczne wystarczaj±co dobrze udokumentowane i powszechnie u¿ywane, co zapewnia³o ich stabilno¶æ i jako¶æ. Szybko ujawni³y siê jednak wady wybranego ¶rodowiska - uruchomienie naszego programu wymaga³o od u¿ytkownika instalacji z³o¿onego ¶rodowiska do obs³ugi jêzyka Python oraz graficznych i numerycznych bibliotek, co by³o istotn± barier±. Stanowi³o to powa¿ny problem, bior±c pod uwagê potencjaln± mo¿liwo¶æ rozpraszania obliczeñ. Zda³y¶my sobie sprawê, ¿e rozwi±zywany przez nas problem i otrzymywane przez nas wyniki s± atrakcyjne wizualnie i ludzie zwi±zani z narciarstwem z chêci± mog± wzi±æ udzia³ w obliczeniach i udostêpniæ nam zasoby obliczeniowe swoich komputerów. Wiedzia³y¶my, ¿e warunkiem koniecznym by zrealizowaæ t± wizjê jest ³atwo¶æ w do³±czaniu do obliczeñ, wizualizacji wyników i bezproblemowa konfiguracja. Bior±c to pod uwagê, zdecydowa³y¶my, ¿e potrzebujemy innego ¶rodowiska.
 
 \subsection{Architektura docelowa}
 
-Potrzeba ³atwo¶ci do³±czania do obliczeñ sk³oni³a nas do stworzenia systemu, w którym klientami obliczeniowymi s± przegl±darki internetowe. Klienci chc±cy pod³±czyæ siê do obliczeñ wchodz± na dobrze znany adres internetowy sk±d serwowana jest strona g³ówna i skrypty, które dokonuj± obliczeñ. Na ¿±danie klienta, dostaje on ze zdalnego serwisu instancjê problemu, która jest nastêpnie lokalnie przetwarzana i wizualizowana klientowi na bie¿±co. Po skoñczonym obliczeniu, rozwi±zanie jest umieszczane na serwerze, a klient mo¿e przej¶æ do obliczania kolejnego problemu lub jeszcze raz tego samego problemu.
+Potrzeba ³atwo¶ci do³±czania do obliczeñ sk³oni³a nas do stworzenia systemu, w którym klientami obliczeniowymi s± przegl±darki internetowe. Klienci chc±cy pod³±czyæ siê do obliczeñ wchodz± na dobrze znany adres internetowy sk±d serwowana jest strona g³ówna i skrypty, które dokonuj± obliczeñ. Na ¿±danie klienta, dostaje on ze zdalnego serwisu egzemplarz problemu, która jest nastêpnie lokalnie przetwarzana i wizualizowana klientowi na bie¿±co. Po skoñczonym obliczeniu, rozwi±zanie jest umieszczane na serwerze, a klient mo¿e przej¶æ do obliczania kolejnego lub jeszcze raz tego samego problemu.
 
-Architektura naszego systemu sk³ada siê z dwóch g³ównych, niezale¿nych komponentów. Pierwszym jest aplikacja kliencka przeprowadzaj±ca obliczenia i wizualizacjê oraz komunikuj±ca siê z serwerem zarz±dzaj±cym obliczeniami. Drugim jest aplikacja lekkiego serwera http, jako warstwa wystawiaj±ca REST-owe API. Warstw± persystentn± jest dokumentowa, nierelacyjna baza danych CouchDB. 
+Architektura naszego systemu sk³ada siê z dwóch g³ównych, niezale¿nych czê¶ci sk³adowych. Pierwsz± z czê¶ci jest aplikacja kliencka przeprowadzaj±ca obliczenia i wizualizacjê oraz komunikuj±ca siê z serwerem zarz±dzaj±cym obliczeniami. Drugim jest aplikacja \textit{lekkiego} serwera http, jako warstwa wystawiaj±ca REST API. Warstw± persystentn± jest dokumentowa, nierelacyjna baza danych CouchDB. Schemat prezentuje rysunek \ref{fig:architektureSimple}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=360px]{architekture-simple}
+\caption{Uproszczony schemat architektury docelowej}
+\label{fig:architektureSimple}
+\end{figure}
+
 
 \subsection{Aplikacja kliencka}
 
-Aplikacja kliencka to aplikacja webowa stworzona przy u¿yciu frameworku Chaplin, wprowadzaj±cego dobre praktyki w strukturyzowaniu aplikacji Java Script'owych opartych o bibliotekê Backbone.js. Aplikacja w ca³o¶ci napisana jest w jêzyku Coffee Script. Coffee Script to przyjazny w sk³adni jêzyk programowania, kompiluj±cy siê do Java Script'u. Powsta³y po kompilacji kod Java Script jest czytelny i przyjazny do debugowania. Programuj±c w Coffee Script mo¿na u¿ywaæ wszystkich bibliotek i modu³ów napisanych w Java Script, co daje wiele mo¿liwo¶ci z powodu szerokiego zakresu dostêpnych bibliotek w tym jêzyku. Zdecydowa³y¶my siê u¿ywaæ tego jêzyka przede wszystkim z uwagi na sk³adniê przypominaj±c± dobrze znany nam jêzyk Python, wiêksz± przejrzysto¶æ i czytelno¶æ kodu ni¿ Java Script, jednocze¶nie zachowuj±c szerokie mo¿liwo¶ci tego jêzyka.
+Aplikacja kliencka to aplikacja webowa stworzona przy u¿yciu frameworku Chaplin, wprowadzaj±cego dobre praktyki w strukturyzowaniu aplikacji Java Scriptowych wykorzystuj±cych bibliotekê Backbone.js. Aplikacja w ca³o¶ci napisana jest w jêzyku Coffee Script. Coffee Script jêzyk programowania ze sk³adni± podobn± do sk³±dni Pythona, kompiluj±cy siê do Java Scriptu. Powsta³y po kompilacji kod Java Script jest czytelny i przyjazny do debugowania. Programuj±c w Coffee Script mo¿na u¿ywaæ wszystkich bibliotek i modu³ów napisanych w Java Script, co daje wiele mo¿liwo¶ci z powodu szerokiego zakresu dostêpnych bibliotek w tym jêzyku. Zdecydowa³y¶my siê u¿ywaæ tego jêzyka przede wszystkim z uwagi na sk³adniê przypominaj±c± dobrze znany nam jêzyk Python, wiêksz± przejrzysto¶æ i czytelno¶æ kodu ni¿ Java Script, jednocze¶nie zachowuj±c szerokie mo¿liwo¶ci tego jêzyka.
 
 Aplikacja ma zasadniczo trzy warstwy:
 \begin{itemize}
-\item warstwê prezentacyjn± i wizualizacyjn± dla rozwi±zywanego problemu
-\item warstwê komunikacji z serwerem
-\item warstwê obliczeniow±
+\item warstwê prezentacyjn± i wizualizacyjn± dla rozwi±zywanego problemu,
+\item warstwê komunikacji z serwerem,
+\item warstwê obliczeniow±.
 \end{itemize}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=360px]{diagramClientLayers}
-\caption{Sekwencja komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej}
+\caption{Uproszczony diagram sekwencji komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej}
 \label{diagramClientLayers}
 \end{figure}
 
-Sekwencjê komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej przedstawia Diagram \ref{diagramClientLayers} na stronie \pageref{diagramClientLayers}.
+Komunikacje pomiêdzy poszczególnymi warstwami aplikacji klienckiej w postaci diagramu sekwencji przedstawia Diagram \ref{diagramClientLayers} na stronie \pageref{diagramClientLayers}.
 
 \subsubsection{Warstwa prezentacji}
 
 Wizualizacja zaimplementowana jest na elemencie Canvas ze specyfikacji HTML5. Wykresy wizualizuj±ce przebieg obliczeñ stworzone s± przy u¿yciu biblioteki Highcharts. Warstwa spe³nia nastêpuj±ce funkcje:
 \begin{itemize}
-\item wyja¶nienie u¿ytkownikowi jaki problem jest rozwi±zywany oraz jak mo¿e pomóc
-\item umo¿liwienie rozpoczêcia wziêcia udzia³u w obliczeniu
-\item prezentowanie trasy narciarskiej (uk³adu bramek), pobranej z serwera do obliczeñ
-\item wizualizacja na bie¿±co wyników obliczeñ w postaci rozwa¿anego jako najlepszy toru przejazdu
-\item wizualizacja statystyk algorytmu obliczaj±cego w postaci wykresów
+\item wyja¶nienie u¿ytkownikowi jaki problem jest rozwi±zywany oraz jak mo¿e pomóc,
+\item umo¿liwienie rozpoczêcia wziêcia udzia³u w obliczeniu,
+\item prezentowanie trasy narciarskiej (uk³adu bramek), pobranej z serwera do obliczeñ,
+\item wizualizacja na bie¿±co wyników obliczeñ w postaci rozwa¿anego jako najlepszy toru przejazdu,
+\item wizualizacja statystyk algorytmu obliczaj±cego w postaci wykresów.
 \end{itemize}
 
 \subsubsection{Warstwa komunikacyjna}
 
 Komunikacja z serwerem odbywa siê poprzez REST-owe API, wykorzystuj±ce JSON-owy format do wymiany danych. Warstwa spe³nia nastêpuj±ce funkcje:
 \begin{itemize}
-\item pobieranie instancji problemu do obliczenia 
-\item wysy³anie na serwer rozwi±zania zadanego problemu
-\item pobierania z serwera informacji o obecnie najlepszym rozwi±zaniu tego problemu
+\item pobieranie instancji problemu do obliczenia,
+\item wysy³anie na serwer rozwi±zania zadanego problemu,
+\item pobierania z serwera informacji o obecnie najlepszym rozwi±zaniu tego problemu.
 \end{itemize}
 
 \subsubsection{Warstwa obliczeniowa}
@@ -382,47 +390,47 @@ Zastosowanie w naszej architekturze Web Workerów do wykonywania obliczeñ jest do
 
 \subsection{Aplikacja serwerowa}
 
-Aplikacja jest lekkim serwerem Http napisanym w ¶rodowisku Node.js. U¿ytym jêzykiem programowania, podobnie jak w aplikacji klienckiej, jest Coffee Script. Serwer wystawia REST-owe API, u¿ywaj±c do wymiany danych JSON-owego formatu serializacji. Serwer komunikuje siê z dokumentow±, nierelacyjn± baz± danych CouchDB. Podstawowymi funkcjami serwera s±:
+Aplikacja jest lekkim serwerem Http napisanym w ¶rodowisku Node.js. U¿ytym jêzykiem programowania, podobnie jak w aplikacji klienckiej, jest Coffee Script. Serwer wystawia REST-owe API, u¿ywaj±c do wymiany danych JSON-owego formatu serializacji. Serwer komunikuje siê z dokumentow± baz± danych CouchDB. Podstawowymi funkcjami serwera s±:
 
 \begin{itemize}
-\item umo¿liwienie dodania instancji problemu obliczeniowego do bazy danych
-\item zwracanie na ¿±danie problemu obliczeniowego do rozwi±zania 
-\item zwracania informacji o obecnych dostêpnych rozwi±zaniach ka¿dego z problemów obliczeniowych
+\item umo¿liwienie dodania instancji problemu obliczeniowego do bazy danych,
+\item zwracanie na ¿±danie problemu obliczeniowego do rozwi±zania ,
+\item zwracania informacji o obecnych dostêpnych rozwi±zaniach ka¿dego z problemów obliczeniowych.
 \end{itemize} 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=360px]{diagramClientServerDb}
-\caption{Sekwencja komunikacji pomiêdzy poszczególnymi komponentami systemu oraz warstw± persystencji}
+\caption{Uproszczony diagram sekwencji pomiêdzy poszczególnymi komponentami systemu oraz warstw± persystencji}
 \label{diagramClientServerDb}
 \end{figure}
 
 Diagram \ref{diagramClientServerDb} na stronie \pageref{diagramClientServerDb} pokazuje sekwencjê komunikacji pomiêdzy komponentami systemu oraz warstw± persystencji.
 
-\subsection{Efekt koñcowy}
+\subsection{Interfejs systemu udostêpniony u¿ytkownikowi}
 
-Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tego projektu aplikacji jest strona www, dostêpna pod dobrze znanym adresem URL - http://giant-client.herokuapp.com/. Na stronie jest krótko wyt³umaczone o co chodzi w projekcie i w jaki sposób ka¿dy odwiedzaj±cy mo¿e pomóc w obliczeniach. Na stronie znajduje siê jedno wyra¼ne tzw. ``call to action'' - du¿y przycisk zachêcaj±cy do rozpoczêcia obliczeñ.
+Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tego projektu aplikacji jest strona www, dostêpna pod adresem URL - http://giant-client.herokuapp.com/. Na stronie, poza krótkim wyt³umaczone celu projektu i sposobu w jaki ka¿dy odwiedzaj±cy mo¿e pomóc w obliczeniach, znajduje siê jedno wyra¼ne tzw. ``call to action'' - du¿y przycisk zachêcaj±cy do rozpoczêcia obliczeñ.
 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=400px]{interfejs-1}
-\caption{Nasza strona zachêcaj±c± do uruchomienia obliczeñ}
+\caption{Strona g³ówna zachêcaj±c± do uruchomienia obliczeñ}
 \label{fig:interfejs-1}
 \end{figure}
 
 Po uruchomieniu obliczeñ osoba odwiedzaj±ca stronê dostaje na bie¿±co informacje zwrotne dotycz±ce efektów jej wspó³pracy. Na stronie:
 
 \begin{itemize}
-\item rysowana jest ca³y czas aktualnie rozwa¿ana jako najlepsza trasa przejazdu
-\item wy¶wietla siê obliczony czas przejazdu po aktualnie rozwa¿anym torze przejazdu
-\item wy¶wietla siê najlepszy, dotychczas znaleziony, czas przejazdu dla aktualnie rozwa¿anej konfiguracji trasy
-\item rysowane s± wykresy przedstawiaj±ce statystyki algorytmu genetycznego (aktualny Fitness populacji - najlepszy, najgorszy oraz ¶rednia dla wszystkich osobników) 
+\item rysowana jest ca³y czas aktualnie rozwa¿ana jako najlepsza trasa przejazdu,
+\item wy¶wietla siê obliczony czas przejazdu po aktualnie rozwa¿anym torze przejazdu,
+\item wy¶wietla siê najlepszy, dotychczas znaleziony, czas przejazdu dla aktualnie rozwa¿anej konfiguracji trasy,
+\item rysowane s± wykresy przedstawiaj±ce statystyki algorytmu ewolucyjnego (aktualny Fitness populacji - najlepszy, najgorszy oraz ¶rednia dla wszystkich osobników).
 \end{itemize}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=500px]{interfejs-2}
-\caption{Nasza strona podczas prowadzonych obliczeñ}
+\caption{Aplikacja w trakcie prowadzenia obliczeñ}
 \label{fig:interfejs-2}
 \end{figure}
