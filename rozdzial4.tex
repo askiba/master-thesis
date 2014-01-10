@@ -168,7 +168,7 @@ Rozpatrzmy teraz jak bêdzie wygl±da³ uk³ad si³ dzia³aj±cych na narciarza (\ref{f
 \label{fig:stok3d}
 \end{figure}
 
-Na p³aszczy¼nie stoku zosta³y oznaczone trzy punkty - $A, B i C$, przez które kolejno przeje¿d¿a narciarz. Zak³adaj±c, ¿e narciarz znajduje siê w punkcie $B$, oznaczona zosta³a si³a grawitacji $Q$, dzia³aj±ca na niego i skierowana pionowo (w stosunku do powierzchni ziemi). Sk³adowa tej si³y - $Q_a$, jest rzutem na powierzchniê stoku i jest równa (jak w przypadku równania \ref{eq:Qa}):
+Na p³aszczy¼nie stoku zosta³y oznaczone trzy punkty - $A$, $B$ i $C$, przez które kolejno przeje¿d¿a narciarz. Zak³adaj±c, ¿e narciarz znajduje siê w punkcie $B$, oznaczona zosta³a si³a grawitacji $Q$, dzia³aj±ca na niego i skierowana pionowo (w stosunku do powierzchni ziemi). Sk³adowa tej si³y - $Q_a$, jest rzutem na powierzchniê stoku i jest równa (jak w przypadku równania \ref{eq:Qa}):
 
 \begin{equation}
 Q_a = g\sin\alpha
@@ -183,7 +183,7 @@ $\alpha$ jest k±tem nachylenia p³aszczyzny stoku. Po zrzutowaniu si³y $Q_a$ na o
 \label{fig:stok2d}
 \end{figure}
 
-Na rysunku \ref{fig:stok2d} przedstawiona zosta³a p³aszczyzna stoku z punktami $B i C$ oraz si³ami $Q_a$ oraz jej sk³adowymi $Q_a^\|$ oraz $Q_a^\bot$. K±t $\beta$ jest k±tem pomiêdzy wektorem przemieszczenia a poziom± lini± na p³aszczy¼nie stoku. Warto¶æ si³y ¶ci±gaj±cej wynosi w tym przypadku:
+Na rysunku \ref{fig:stok2d} przedstawiona zosta³a p³aszczyzna stoku z punktami $B$ i $C$ oraz si³ami $Q_a$ oraz jej sk³adowymi $Q_a^\|$ oraz $Q_a^\bot$. K±t $\beta$ jest k±tem pomiêdzy wektorem przemieszczenia a poziom± lini± na p³aszczy¼nie stoku. Warto¶æ si³y ¶ci±gaj±cej wynosi w tym przypadku:
 
 \begin{equation}
 Q_a^\| = g\sin\alpha \sin\beta
@@ -214,8 +214,6 @@ Zatem:
 \end{equation}
 
 W programie zastosowany zosta³ zaznaczony na rysunku uk³ad wspó³rzêdnych XY. Powy¿sze równanie zapiszmy teraz uwzglêdniaj±c przemieszczanie siê narciarza w oznaczonych kierunkach - wzd³u¿ i wszerz stoku. Otrzymamy wtedy nastêpuj±ce równania:
-
-%TODO Ania sprawdzic x i y 
 
 \begin{equation}
 \label{eq:ur2rzedu}
@@ -261,13 +259,18 @@ Taki uk³ad równañ ró¿niczkowych mo¿na rozwi±zaæ wymieni± wcze¶niej funkcj± dopri
 
 \section{Optymalizacja toru przejazdu}
 \label{sec:optymalizacja}
-Aby znale¼æ rozwi±zanie problemu optymalizacji, nale¿y przyj±æ jaki¶ sposób reprezentacji ka¿dego z rozwi±zañ. Tor przejazdu narciarza w rzeczywisto¶ci to ¶lad, który pozostawiaj± narty na ¶niegu w trakcie przemieszczania siê po stoku. Jak opisano w podrozdziale \ref{subsec:3d}, w celu uproszczenia sposobu przemieszczania siê narciarza, zosta³o zdecydowane, ¿e jako przybli¿enie mo¿na przyj±æ poruszanie siê po ³amanej. Zatem do reprezentacji rozwi±zania mo¿na przyj±æ zbiór punktów, przez które kolejno przeje¿d¿a narciarz, poruszaj±c siê miêdzy tymi punktami wy³±cznie po linii prostej.
+Aby znale¼æ rozwi±zanie problemu optymalizacji, nale¿y przyj±æ jaki¶ sposób reprezentacji ka¿dego z rozwi±zañ. Tor przejazdu narciarza w rzeczywisto¶ci to ¶lad, który pozostawiaj± narty na ¶niegu w trakcie przemieszczania siê po stoku. Jak opisano w podrozdziale \ref{subsec:3d}, w celu uproszczenia sposobu przemieszczania siê narciarza, zdecydowano, ¿e bêdzie siê on poruszaæ po ³amanej. Zatem do reprezentacji rozwi±zania mo¿na przyj±æ zbiór punktów, przez które kolejno przeje¿d¿a narciarz, poruszaj±c siê miêdzy tymi punktami wy³±cznie po linii prostej.
 
-Jednak wci±¿ takie podej¶cie jest niewystarczaj±ce, poniewa¿ w algorytmach optymalizacyjnych potrzebujemy ¶ci¶lejszego opisu, aby wiedzieæ jak skutecznie przeszukiwaæ przestrzeñ rozwi±zañ. Zatem w zaproponowanym rozwi±zaniu narzucamy z góry co ile metrów w pionie stoku ma pojawiæ siê punkt przez który bêdzie musia³ przejechaæ narciarz. Mo¿na wyobraziæ to sobie jako zbiór poziomych linii, z której ka¿da wyznacza mo¿liwe po³o¿enie pojedynczego punktu. 
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{model/lamana}
+\caption{Sposób reprezentacji rozwi±zañ problemu}
+\label{fig:lamana}
+\end{figure}
 
-Oprócz tego, narzucone zosta³o, ¿e narciarz musi przejechaæ jak najbli¿ej ka¿dej wewnêtrznej bramki, co indukuje do³o¿enie punktów w miejscu ka¿dej wewnêtrznej bramki. Warunek ten jest spowodowany tym, ¿e ogranicza to znacznie ilo¶æ rozwi±zañ, które nale¿y sprawdziæ i dziêki temu przyspiesza dzia³anie algorytmu. Takie za³o¿enie oparte jest tak¿e na do¶wiadczeniu z rzeczywistych slalomów, gdy¿ jest wiadome, ¿e przeje¿d¿anie tu¿ przy bramkach jest najkorzystniejsze. Istniej± oczywi¶cie przypadki, w których to za³o¿enie nie jest prawdziwe, ale jest to raczej rzadko¶ci±. Tak naprawdê zdarza siê to jedynie w przypadku tzw. bramek otwartych opisanych w rozdziale \ref{sec:alpineSkiing}. W tych pojedynczych przypadkach konieczne jest zrezygnowanie z takiego ograniczenia.
+W zaproponowanym rozwi±zaniu narzucamy z góry, co ile metrów w pionie stoku ma znajdowaæ siê punkt, przez który bêdzie musia³ przejechaæ narciarz. Mo¿na wyobraziæ to sobie jako zbiór poziomych linii, z której ka¿da wyznacza mo¿liwe po³o¿enie pojedynczego punktu. Na rysunku \ref{fig:lamana} zosta³y przedstawione te linie oraz bramki (kolor niebieski). Strza³ki pokazuj± jak mo¿na przesuwaæ ka¿dy z tych punktów w celu zmiany trasy przejazdu i otrzymania nowego rozwi±zania. Zosta³o narzucone, ¿e narciarz musi przejechaæ jak najbli¿ej ka¿dej wewnêtrznej czê¶ci bramki, co oznacza do³o¿enie punktów w tym miejscu. Ogranicza to znacznie liczbê rozwi±zañ, które nale¿y sprawdziæ i dziêki temu przyspiesza dzia³anie algorytmu. Takie za³o¿enie oparte jest tak¿e na do¶wiadczeniu narciarzy z jazdy po slalomach, gdy¿ w wiêkszo¶ci przypadków przeje¿d¿anie tu¿ przy bramkach jest najkorzystniejsze. Zdarza siê oczywi¶cie, ¿e np. dla tzw. bramek otwartych opisanych w rozdziale \ref{sec:alpineSkiing} czêsto lepiej wybraæ trochê inn± trasê. W tych przypadkach konieczne jest zrezygnowanie z takiego ograniczenia, jednak nale¿y liczyæ siê z tym, ¿e czas poszukiwania najlepszego rozwi±zania wyd³u¿y siê, zw³aszcza je¶li takich miejsc jest wiêcej.
 
-Zatem pozostaje okre¶liæ w jaki sposób mo¿emy stwierdziæ, ¿e dane rozwi±zanie jest najlepsze. W przypadku algorytmów optymalizacyjnych zawsze nale¿y okre¶liæ funkcjê celu. W naszym przypadku interesuje nas, aby narciarz w jak najkrótszym czasie dotar³ do mety prawid³owo przeje¿d¿aj±c przez wszystkie bramki. Maj±c dane rozwi±zanie w postaci punktów wyznaczaj±cych ³aman±, obliczamy ile czasu zajmie narciarzowi przejechanie po tej trasie. Im mniejsza warto¶æ tym rozwi±zanie jest lepsze.
+Zatem pozostaje okre¶liæ, w jaki sposób mo¿emy stwierdziæ, ¿e dane rozwi±zanie jest najlepsze. W tym przypadku chcemy, aby narciarz w jak najkrótszym czasie dotar³ do mety prawid³owo przeje¿d¿aj±c przez wszystkie bramki. Maj±c dane rozwi±zanie w postaci punktów wyznaczaj±cych ³aman±, obliczamy ile czasu zajmie narciarzowi przejechanie po tej trasie. Im mniejsza warto¶æ tym rozwi±zanie jest lepsze. Zatem funkcja celu dla tego problemu maj±c na wej¶ciu ci±g punktów wyznaczaj±cych trasê przejazdu, zwraca czas potrzebny na jej pokonanie.
 
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjnyRozw}
