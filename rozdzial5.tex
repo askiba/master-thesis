@@ -91,8 +91,15 @@ Optymalizacja trasy narciarza polega na znalezieniu linii najszybszego przejazdu
 
 Je¶li rozwa¿ymy przyk³ad bez bramek, gdzie najkrótsza linia przejazdu nie powoduje jazdy w skos stoku, a jedynie w dó³, to w takim przypadku, jest to jednocze¶nie najszybsza trasa przejazdu. Jednak w pozosta³ych przypadkach, je¶li rozwa¿amy uk³ad bez dzia³ania oporów, tory te bêd± ró¿ne.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.2]{trasy}
+\caption{Przyk³adowe tory przejazdu od punktu (0,0) do punktu (10,10)}
+\label{fig:trasy}
+\end{figure}
+
 \subsubsection{Opis eksperymentu}
-Chcemy sprawdziæ, ile czasu zajmie narciarzowi przejechanie z punktu (0,0) do punktu (10,10). Aby upro¶ciæ przyk³ad, sprawdzimy wyniki pomijaj±c wk³ad wszystkich oporów. Gdyby narciarz porusza³ siê po linii prostej, bezpo¶rednio do punktu koñcowego, czas przejazdu mo¿na wyliczyæ przekszta³caj±c wzór:
+Chcemy sprawdziæ, ile czasu zajmie narciarzowi przejechanie z punktu (0,0) do punktu (10,10). Na rysunku \ref{fig:trasy} pokazane s± przyk³adowe trasy przejazdu pomiêdzy tymi punktami. Aby upro¶ciæ eksperyment, sprawdzimy wyniki pomijaj±c wk³ad wszystkich oporów. Gdyby narciarz porusza³ siê po linii prostej, bezpo¶rednio do punktu koñcowego, czas przejazdu mo¿na wyliczyæ przekszta³caj±c wzór:
 
 \begin{equation}
 s = \frac{at^2}{2}
@@ -127,11 +134,11 @@ Sprawdzimy teraz jakie czasy otrzymamy wykorzystuj±c program, sprawdzaj±c porusz
 \subsubsection{Rezultaty eksperymentu}
 W tym przypadku otrzymali¶my wyniki odpowiednio dla narciarza jad±cego po prostej 3.965 s, a dla poruszaj±cego siê po czarnej linii 3.671 s.
 
-Po pierwsze, warto zwróciæ uwagê, ¿e czas jazdy po prostej minimalnie ró¿ni siê od czasu teoretycznego, obliczonego ze wzoru - ró¿nica ta wynosi ok. 0.1\%, co jest dopuszczalne i mo¿liwe do zaniedbania, gdy¿ nie ma znacz±cego wp³ywu na wyniki eksperymentów. Ró¿nica ta wynika z niedok³adno¶ci obliczeñ numerycznych. Dodatkowym problemem jest fakt, ¿e nie mo¿emy wyliczyæ dok³adnego czasu jakiego potrzebuje narciarz na dojechanie do okre¶lonego punktu - mo¿emy jedynie  ale tak¿e z trudno¶ci trafienia przez narciarza idealnie w punkt koñcowy, w którym powinien siê znale¼æ.
+Po pierwsze, warto zwróciæ uwagê, ¿e czas jazdy po prostej minimalnie ró¿ni siê od czasu teoretycznego, obliczonego ze wzoru - ró¿nica ta wynosi ok. 0.1\%, co jest dopuszczalne i mo¿liwe do zaniedbania, gdy¿ nie ma znacz±cego wp³ywu na wyniki eksperymentów. Ró¿nica ta wynika z niedok³adno¶ci obliczeñ numerycznych. Dodatkowym problemem jest fakt, ¿e nie mo¿emy wyliczyæ dok³adnego czasu potrzebnego narciarzowi na dojechanie do okre¶lonego punktu - mo¿emy jedynie próbowaæ zbli¿aæ siê do punktu koñcowego, robi±c coraz mniejsze ``kroki'', staraj±c siê znale¼æ jak najbli¿ej niego.
 
 Wyra¼nie widaæ równie¿, ¿e czas przejazdu po linii czarnej jest krótszy ni¿ czas przejazdu po linii niebieskiej. Trasê po prostej narciarz przebywa w ok. 7\% d³u¿szym czasie ni¿ trasê d³u¿sz±. Na tak krótkim odcinku narciarz by³ w stanie zdobyæ przewagê ok. 0.3 s. Wa¿ne jest to, ¿e w prawdziwych przejazdach slalomowych nawet najmniejsza ró¿nica czasu mo¿e decydowaæ o wygranej, oczywi¶cie zale¿y to od dok³adno¶ci pomiaru, który zawsze jest sprawdzany do setnych czê¶ci sekundy. Dlatego ogromne znaczenie ma tor po jakim porusza siê narciarz i nawet najmniejsza zmiana mo¿e powodowaæ kluczow± poprawê czasu na ca³ej trasie. Czasami warto jednak pojechaæ d³u¿sz± tras±, ale tak±, na której nabierzemy wiêkszej prêdko¶ci i pó¼niej zyskamy na kolejnym odcinku.
 
-Pozostaje jeszcze pytanie jaka jest najlepsza linia poruszania siê pomiêdzy dwoma punktami. Problem ten zosta³ ju¿ rozwi±zany - linia najszybsza jest fragmentem cykloidy. Dok³adniejsze informacje mo¿na znale¼æ m.in. w \cite{brach1} oraz \cite{brach2}. W \cite{brach2} znajduje siê wzór na czas przejazdu pomiêdzy dwoma punktami. Korzystaj±c z tego wzoru, podstawiaj±c odpowiednio wyliczone parametry otrzymujemy, ¿e najkrótszy mo¿liwy czas przejazdu z punktu (0,0) do punktu (10,10) to ok. 3.623 s. Jak widaæ, wynik ten jest lepszy ni¿ otrzymane w naszym eksperymencie: od czasu jazdy po æwiartce ko³a o ok. 0.05 s., co nie jest ró¿nic± bardzo du¿±, ale znacz±c± dla zwyciêstwa.
+Pozostaje jeszcze pytanie, jaka jest najlepsza linia poruszania siê pomiêdzy dwoma punktami. Problem ten zosta³ ju¿ rozwi±zany - linia najszybsza jest fragmentem cykloidy. Dok³adniejsze informacje mo¿na znale¼æ m.in. w \cite{brach1} oraz \cite{brach2}. W \cite{brach2} znajduje siê wzór na czas przejazdu pomiêdzy dwoma punktami. Korzystaj±c z tego wzoru, podstawiaj±c odpowiednio wyliczone parametry otrzymujemy, ¿e najkrótszy mo¿liwy czas przejazdu z punktu (0,0) do punktu (10,10) to ok. 3.623 s. Jak widaæ, wynik ten jest lepszy ni¿ otrzymane w naszym eksperymencie: od czasu jazdy po æwiartce ko³a o ok. 0.05 s., co nie jest ró¿nic± bardzo du¿±, ale znacz±c± dla zwyciêstwa.
 
 \subsection{Jazda po ³amanej}
 \label{sec:lamana}

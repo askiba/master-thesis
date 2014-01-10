@@ -8,7 +8,7 @@ W rozdziale tym przedstawiono informacje dotycz±ce zastosowanego rozwi±zania. Op
 \section{Model narciarza i ¶rodowiska}
 \label{sec:model}
 
-W zaproponowanym rozwi±zaniu trzeba by³a podj±æ pewne decyzje odno¶nie reprezentacji ¶rodowiska oraz narciarza.
+W zaproponowanym rozwi±zaniu zosta³y podjête pewne decyzje odno¶nie reprezentacji ¶rodowiska oraz narciarza.
 
 Zosta³o przyjête, ¿e stok traktowany jest jako p³aszczyzna, która jest nachylona pod okre¶lonym przez sta³± $\alpha$ k±tem do powierzchni ziemi. Za³o¿enie co do p³askiej powierzchni jest tylko ograniczeniem przyjêtym do testów. Umo¿liwia to ³atwiejsz± analizê wyników, niezaburzonych zmianami nachylenia terenu. Jednak stworzony program mo¿e zostaæ w prosty sposób zmodyfikowany tak, aby zamodelowaæ równie¿ bardziej skomplikowan± powierzchniê.
 
@@ -156,46 +156,76 @@ W wielu jêzykach programowania dostêpne s± funkcje biblioteczne, które potrafi± 
 \subsection{Rozwi±zanie na p³aszczy¼nie stoku}
 \label{subsec:3d}
 Powy¿szy uk³ad równañ (\ref{eq:ur2d}) opisuje poruszanie siê punktu materialnego po równi pochy³ej. Jednak w przypadku narciarza przemieszczaj±cego siê po stoku musimy uwzglêdniæ równie¿ mo¿liwo¶æ poruszania siê w poprzek stoku, a nie tylko w dó³.\\
-Za³ó¿my, ¿e narciarz porusza siê tylko po liniach prostych. W dalszej czê¶ci pracy poka¿emy, ¿e takie ograniczenie mo¿e byæ dobrym sposobem na przybli¿enie rzeczywistego toru jazdy, które jednocze¶nie znacznie u³atwia sterowanie ruchem narciarza. \\
+Za³ó¿my, ¿e narciarz porusza siê tylko po liniach prostych. W dalszej czê¶ci pracy zostanie pokazane, ¿e takie ograniczenie mo¿e byæ dobrym sposobem na przybli¿enie rzeczywistego toru jazdy, które jednocze¶nie znacznie u³atwia sterowanie ruchem narciarza. \\
 
-Rozpatrzmy teraz jak bêdzie wygl±da³ uk³ad si³ dzia³aj±cych na narciarza:\\
+Rozpatrzmy teraz jak bêdzie wygl±da³ uk³ad si³ dzia³aj±cych na narciarza (\ref{fig:stok3d}):\\
 
-%TODO Ania
-% obrazek
+%TODO Marta zmieniæ stok2d na 3d jak ju¿ wkleisz rysunek
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{model/stok2d}
+\caption{Rozk³ad wybranych si³ dzia³aj±cych na narciarza przemieszczaj±cego siê na p³aszczy¼nie stoku}
+\label{fig:stok3d}
+\end{figure}
 
-OBRAZEK
-
-Na naszego narciarza dzia³aj± si³y: grawitacji - w kierunku pionowym oraz si³y oporu - w kierunku linii jazdy narciarza. Je¶li rozpatrzymy teraz uk³ad wspó³rzêdnych zorientowany wzglêdem kierunku jazdy, musimy najpierw zrzutowaæ si³ê grawitacji otrzymuj±c si³ê ¶ci±gaj±ca narciarza:
-
-\begin{equation}
-g\sin\alpha \sin\beta
-\end{equation}
-
-Zatem nasze równanie ruchu \ref{eq:rownRuchu} bêdzie wygl±da³o nastêpuj±co:
+Na p³aszczy¼nie stoku zosta³y oznaczone trzy punkty - $A, B i C$, przez które kolejno przeje¿d¿a narciarz. Zak³adaj±c, ¿e narciarz znajduje siê w punkcie $B$, oznaczona zosta³a si³a grawitacji $Q$, dzia³aj±ca na niego i skierowana pionowo (w stosunku do powierzchni ziemi). Sk³adowa tej si³y - $Q_a$, jest rzutem na powierzchniê stoku i jest równa (jak w przypadku równania \ref{eq:Qa}):
 
 \begin{equation}
-\ddot{x} = g\sin\alpha \sin\beta - (\mu F_n  + \frac{k_2}{m}\dot{x}^2 )
+Q_a = g\sin\alpha
 \end{equation}
 
-gdzie $F_n$ to si³a nacisku narciarza, która pozostaje taka sama jak w przypadku 2D (\ref{eq:Fn}):
+$\alpha$ jest k±tem nachylenia p³aszczyzny stoku. Po zrzutowaniu si³y $Q_a$ na odcinek $BC$ otrzymujemy si³ê $Q_a^\|$ - jej kierunek jest zgodny z kierunkiem poruszania siê narciarza. Pozosta³e sk³adowe si³ $Q$ oraz $Q_a$ s± równowa¿one przez si³ê reakcji pod³o¿a wywieran± na narciarza.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{model/stok2d}
+\caption{Rozk³ad wybranych si³ dzia³aj±cych na narciarza przemieszczaj±cego siê na p³aszczy¼nie stoku}
+\label{fig:stok2d}
+\end{figure}
+
+Na rysunku \ref{fig:stok2d} przedstawiona zosta³a p³aszczyzna stoku z punktami $B i C$ oraz si³ami $Q_a$ oraz jej sk³adowymi $Q_a^\|$ oraz $Q_a^\bot$. K±t $\beta$ jest k±tem pomiêdzy wektorem przemieszczenia a poziom± lini± na p³aszczy¼nie stoku. Warto¶æ si³y ¶ci±gaj±cej wynosi w tym przypadku:
 
 \begin{equation}
-F_n = g\cos\alpha
+Q_a^\| = g\sin\alpha \sin\beta
 \end{equation}
 
-Transformuj±c powy¿sze równanie na uk³ad wspó³rzêdnych zorientowany wzd³u¿ i wszerz stoku otrzymamy nastêpuj±ce równania:
+Zaznaczone zosta³a równie¿ si³a stanowi±ca sumê si³ oporów $F_f + F_d$. Zatem nasze równanie ruchu \ref{eq:rownRuchu} bêdzie wygl±da³o nastêpuj±co:
+
+\begin{equation}
+\ddot{x} = g\sin\alpha \sin\beta - \frac{F_f + F_d}{m}
+\end{equation}
+
+Wykorzystuj±c wzory na si³y oporów (\ref{eq:Ff} oraz \ref{eq:Fd}) otrzymamy:
+
+\begin{equation}
+\ddot{x} = g\sin\alpha \sin\beta - \frac{\mu F_n  + k_2\dot{x}^2}{m}
+\end{equation}
+
+gdzie $F_n$ to si³a nacisku narciarza, która pozostaje taka sama jak w przypadku równi pochy³ej (\ref{eq:Fn}):
+
+\begin{equation}
+F_n = mg\cos\alpha
+\end{equation}
+
+Zatem:
+
+\begin{equation}
+\ddot{x} = g\sin\alpha \sin\beta - (\mu g\cos\alpha  + \frac{k_2}{m}\dot{x}^2)
+\end{equation}
+
+W programie zastosowany zosta³ zaznaczony na rysunku uk³ad wspó³rzêdnych XY. Powy¿sze równanie zapiszmy teraz uwzglêdniaj±c przemieszczanie siê narciarza w oznaczonych kierunkach - wzd³u¿ i wszerz stoku. Otrzymamy wtedy nastêpuj±ce równania:
 
 %TODO Ania sprawdzic x i y 
 
 \begin{equation}
 \label{eq:ur2rzedu}
 \left\{ \begin{array}{ll}
-\ddot{x_x} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_2}{m}\dot{x}^2))\sin\beta\\
-\ddot{x_y} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_2}{m}\dot{x}^2))\cos\beta
+\ddot{x_x} = (g\sin\alpha\sin\beta - (\mu g\cos\alpha + \frac{k_2}{m}\dot{x}^2))\sin\beta\\
+\ddot{x_y} = (g\sin\alpha\sin\beta - (\mu g\cos\alpha + \frac{k_2}{m}\dot{x}^2))\cos\beta
 \end{array} \right.
 \end{equation}
 
-Po wprowadzeniu jak poprzednio dodatkowych zmiennych, aby zredukowaæ równania jak poprzednio do równañ ró¿niczkowych zwyczajnych pierwszego rzêdu, wprowadzamy dodatkowe zmienne, w tym wypadku prêdko¶ci $v_x$ i $v_y$ oraz pamiêtamy o zale¿no¶ci miêdzy nimi a pochodn± przemieszczenia:
+Po wprowadzeniu jak poprzednio dodatkowych zmiennych, aby zredukowaæ równania do równañ ró¿niczkowych zwyczajnych pierwszego rzêdu, wprowadzamy dodatkowe zmienne, w tym wypadku prêdko¶ci $v_x$ i $v_y$ oraz pamiêtamy o zale¿no¶ci miêdzy nimi a pochodn± przemieszczenia:
 
 \begin{equation}
 \left\{ \begin{array}{ll}
@@ -220,8 +250,8 @@ Wprowadzaj±c te informacje do uk³adu równañ \ref{eq:ur2rzedu}, otrzymujemy:
 \left\{ \begin{array}{ll}
 v_x = \dot{x_x}\\
 v_y = \dot{x_y}\\
-\dot{v_x} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_2}{m}\dot{x}^2))\sin\beta\\
-\dot{v_y} = (g\sin\alpha\sin\beta - (\mu F_n + \frac{k_2}{m}\dot{x}^2))\cos\beta
+\dot{v_x} = (g\sin\alpha\sin\beta - (\mu g\cos\alpha + \frac{k_2}{m}\dot{x}^2))\sin\beta\\
+\dot{v_y} = (g\sin\alpha\sin\beta - (\mu g\cos\alpha + \frac{k_2}{m}\dot{x}^2))\cos\beta
 \end{array} \right. 
 \end{equation}\\
 
