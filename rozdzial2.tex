@@ -280,6 +280,17 @@ W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie 
 
 \end{enumerate}
 
+\subsection{Algorytm memetyczny}
+Richard Dawkins zaproponowa³ w \cite{dawkins89} pojêcie memu - ``the basic unit of cultural transmission, or imitation''. Algorytmy ewolucyjne opieraj± siê na ewolucji biologicznej, Dawkins zaproponowa³, ¿e istnieje równie¿ rozwój kulturowy. Na tej podstawie wprowadzono algorytmy memetyczne, które stanowi± rozwiniêcie algorytmów ewolucyjnych poprzez dodanie do nich lokalnej optymalizacji. Mo¿e byæ ona wprowadzana na ró¿nych etapach algorytmu (\cite{ChenOLT11}):
+
+\begin{itemize}
+\item na pocz±tku, w celu wygenerowanie potencjalnie lepszej populacji pocz±tkowej
+\item w fazie oceny przystosowania
+\item po mutacji i krzy¿owaniu
+\item po zakoñczeniu fazy ewolucyjnej do ostatecznego poprawienia rozwi±zania
+\end{itemize}
+
+£±cz±c te dwa algorytmy ze sob±, mo¿emy wykorzystaæ i po³±czyæ ich zalety. Uwzglêdnienie algorytmu lokalnej optymalizacji pomaga w skutecznym znajdowaniu optimum lokalnego, jednak aby móc przeszukiwaæ wszystkie optima w celu znalezienia najlepszego - globalnego, potrzebujemy eksploracji jak± daje nam algorytm ewolucyjny.
 
 \subsection{Hill Climbing}
 \label{sec:hill}
