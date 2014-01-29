@@ -160,10 +160,9 @@ Za³ó¿my, ¿e narciarz porusza siê tylko po liniach prostych. W dalszej czê¶ci pra
 
 Rozpatrzmy teraz jak bêdzie wygl±da³ uk³ad si³ dzia³aj±cych na narciarza (\ref{fig:stok3d}):\\
 
-%TODO Marta zmieniæ stok2d na 3d jak ju¿ wkleisz rysunek
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.3]{model/stok2d}
+\includegraphics[scale=1]{model/stok3d}
 \caption{Rozk³ad wybranych si³ dzia³aj±cych na narciarza przemieszczaj±cego siê na p³aszczy¼nie stoku}
 \label{fig:stok3d}
 \end{figure}
@@ -178,7 +177,7 @@ $\alpha$ jest k±tem nachylenia p³aszczyzny stoku. Po zrzutowaniu si³y $Q_a$ na o
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.3]{model/stok2d}
+\includegraphics[scale=0.5]{model/stok2d}
 \caption{Rozk³ad wybranych si³ dzia³aj±cych na narciarza przemieszczaj±cego siê na p³aszczy¼nie stoku}
 \label{fig:stok2d}
 \end{figure}
@@ -253,7 +252,7 @@ v_y = \dot{x_y}\\
 \end{array} \right. 
 \end{equation}\\
 
-Taki uk³ad równañ ró¿niczkowych mo¿na rozwi±zaæ wymieni± wcze¶niej funkcj± dopri. 
+Taki uk³ad równañ ró¿niczkowych mo¿na rozwi±zaæ wspomnian± wcze¶niej funkcj± \textit{dopri}. 
 
 %---------------------------------------------------------------------------
 
@@ -263,7 +262,7 @@ Aby znale¼æ rozwi±zanie problemu optymalizacji, nale¿y przyj±æ jaki¶ sposób repr
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{model/lamana}
+\includegraphics[scale=0.5]{model/lamana}
 \caption{Sposób reprezentacji rozwi±zañ problemu}
 \label{fig:lamana}
 \end{figure}
@@ -276,7 +275,7 @@ Zatem pozostaje okre¶liæ, w jaki sposób mo¿emy stwierdziæ, ¿e dane rozwi±zanie j
 \label{sec:ewolucyjnyRozw}
 Opisana w poprzednim podrozdziale reprezentacja rozwi±zania to w zastosowanym algorytmie ewolucyjnym pojedynczy osobnik, a punkty sk³adaj±ce siê na to rozwi±zanie, a ¶ci¶lej, ich po³o¿enie w pozycji poziomej okre¶laj± genotyp ka¿dego osobnika. Poniewa¿ korzystamy ze strategii ewolucyjnych, nie wprowadzamy tu kodowania binarnego, pozycja ka¿dego punktu jest zapamiêtywana jako warto¶æ rzeczywista.
 
-Dodatkowo do genotypu wchodzi tak¿e zestaw parametrów $\sigma$, które w strategiach ewolucyjnych u¿ywane s± podczas mutacji, tak jak opisano to w rozdziale \ref{sec:ewolucyjny} w czê¶ci o ``Typy algorytmów ewolucyjnych'' w opisie strategii ewolucyjnych. Ka¿demu punktowi przypisana jest osobna warto¶æ $\sigma$ - reprezentuj±ca odchylenie standardowe warto¶ci $y$ tego punktu.
+Dodatkowo do genotypu wchodzi tak¿e zestaw parametrów $\sigma$, które w strategiach ewolucyjnych u¿ywane s± podczas mutacji, tak jak opisano to w rozdziale \ref{sec:ewolucyjny} w czê¶ci ``Typy algorytmów ewolucyjnych'' w opisie strategii ewolucyjnych. Ka¿demu punktowi przypisana jest osobna warto¶æ $\sigma$ - reprezentuj±ca odchylenie standardowe warto¶ci $y$ tego punktu.
 
 Zastosowany algorytm wykorzystuje strategiê ($\mu$ + $\lambda$) opisan± w rozdziale \ref{sec:ewolucyjny}. Jako pocz±tkow± populacjê wybieramy losowe osobniki - warto¶ci $y$ punktów s± ograniczone jedynie przez warto¶ci $y$ po³o¿enia dwóch najbli¿szych bramek. Jest to kierowane konieczno¶ci± zadbania o szybsze znalezienie rozwi±zania - zbyt du¿e odleg³o¶ci mo¿na z góry odrzuciæ opieraj±c siê na do¶wiadczeniach z rzeczywistej jazdy narciarza po slalomie. Wielko¶æ populacji bazowej $\mu$ jest jednym z parametrów programu, warto¶æ ta wynosi w testach 30 - 60. Warto¶æ parametru $\lambda$ tak¿e jest parametrem, w testach u¿yto wielko¶ci 100 - 200. Warto¶ci te porównywalne s± z sugerowanymi w literaturze. \cite{arabas}
 
