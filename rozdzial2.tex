@@ -1,12 +1,12 @@
 \chapter{Wprowadzenie teoretyczne i istniej±ce rozwi±zania - Optymalizacja}
 \label{cha:wstepTeoretyczny}
 
-Zrozumienie istoty przedstawionego w tej pracy rozwi±zania doboru optymalnej trasy narciarza, zarówno pod wzglêdem algorytmicznym jak i architektonicznym, wymaga zaznajomienia siê z istotnymi pojêciami. W tym rozdziale, przedstawimy i opiszemy te pojêcia.
+Zrozumienie istoty przedstawionego w tej pracy rozwi±zania doboru optymalnej trasy narciarza, zarówno pod wzglêdem algorytmicznym jak i architektonicznym, wymaga zaznajomienia siê z istotnymi pojêciami. W tym rozdziale przedstawimy i opiszemy te pojêcia.
 
 \section{Jazda po zadanym torze w narciarstwie alpejskim}
 \label{sec:alpineSkiing}
 
-Sportowa jazda na nartach zjazdowych podzielona jest na kilka dyscyplin. S± to: slalom (SL), slalom gigant (GS), super gigant (GS) oraz zjazd (DH). Elementem wspólnym ka¿dej z nich jest konieczno¶æ pokonania trasy, od startu do mety, w jak najkrótszym czasie i przy prawid³owym przejechaniu ka¿dej z bramek znajduj±cych siê na trasie przejazdu. Szczegó³owe zasady dotycz±ce parametrów stoku i sprzêtu okre¶la regulamin organizacji FIS (Federation International du Ski), z po¶ród których najbardziej istotnymi s±:
+Sportowa jazda na nartach zjazdowych podzielona jest na kilka dyscyplin. S± to: slalom (SL), slalom gigant (GS), super gigant (GS) oraz zjazd (DH). Elementem wspólnym ka¿dej z nich jest konieczno¶æ pokonania trasy, od startu do mety, w jak najkrótszym czasie i przy prawid³owym przejechaniu ka¿dej z bramek znajduj±cych siê na trasie przejazdu. Szczegó³owe zasady dotycz±ce parametrów stoku i sprzêtu okre¶la regulamin organizacji FIS (Federation International du Ski), spo¶ród których najbardziej istotnymi s±:
 
 \begin{itemize}
 \item minimalna i maksymalna ró¿nica wzniesieñ na trasie
@@ -18,9 +18,9 @@ Sportowa jazda na nartach zjazdowych podzielona jest na kilka dyscyplin. S± to: 
 
 Parametry te ró¿ni± siê w zale¿no¶ci od dyscypliny. Najbardziej techniczn± dyscyplin± jest slalom, nazywany wcze¶niej slalomem specjalnym. Wyró¿nikiem tej dyscypliny jest du¿a liczba bramek znajduj±cych siê w niewielkiej odleg³o¶ci od siebie. Gêste ustawienie bramek wymusza czêste skrêty, bardzo liczy siê zatem technika i zwinno¶æ narciarza.  Zawodnicy je¿d¿± slalom na nartach o bardzo ma³ym promieniu skrêtu, rzêdu 11 metrów. Bramka w slalomie sk³ada siê z dwóch tyczek tego samego koloru. W slalomie gigancie, odleg³o¶ci miêdzy kolejnymi bramkami s± wiêksze, co implikuje szybsz± jazdê. Bramka w tej dyscyplinie sk³ada siê z czterech tyczek tego samego koloru, po dwie na ka¿dy koniec bramki. Dodatkowo ka¿de dwie tyczki z koñca bramki po³±czone s± p³acht± tego samego koloru co tyczki - czerwon± lub niebiesk±. Zawodnicy do tej dyscypliny u¿ywaj± nart o promieniu nawet 35 metrów. Kolejne dyscypliny s± jeszcze szybsze a promienie nart coraz wiêksze. Bramki zarówno w super gigancie jak i zje¼dzie, s± analogiczne do tych gigantowych, ró¿ni± siê tylko szeroko¶ci± p³acht. Super gigant to konkurencja podobna do slalomu giganta, z tym, ¿e odleg³o¶ci miêdzy bramkami s± bardzo du¿e, a zatem zawodnicy uzyskuj± podczas przejazdu du¿o wiêksze prêdko¶ci. Zjazd to ju¿ typowa dyscyplina szybko¶ciowa. Na trasie zakrêty wynikaj± prawie tylko z konfiguracji terenu. Dodatkowo zdarzaj± siê na trasie elementy ukszta³towania terenu na których zawodnicy wybijaj± siê i skacz± po nawet 80 metrów.
 
-Aby poprawnie przejechaæ przez bramkê na trasie, w ka¿dej z opisywanych wy¿ej dyscyplin, nale¿y przejechaæ pomiêdzy tyczkami wyznaczaj±cymi tzw. \textit{¶wiat³o bramki}. Bramki wymuszaj± skrêty, ale nie jest tak, ¿e ustawione s± zawsze rytmicznie tzn. wymuszaj±c skrêty raz w praw±, raz w lew± stronê o tym samym promieniu. Najczê¶ciej spotykanym rodzajem bramki jest tzw. \textit{bramka otwarta}. Bramka otwarta charakteryzuje siê tym, ¿e ¶wiat³o bramki znajduje siê prostopadle do linii spadku stoku. Poza bramkami otwartymi, bramki mog± byæ ustawione w tzw. figury slalomowe. Pierwsz± z nich jest \textit{przelot} i mo¿e wystêpowaæ w ka¿dej z dyscyplin. Przelot polega na ustawieniu dwóch kolejnych bramek w taki sposób, by nie wymuszaæ skrêtu pomiêdzy nimi. Przelot stosowany jest w celu lepszego dostosowania ustawienia trasy przejazdu do konfiguracji terenu, np. gdy na trasie naturalnie wystêpuje d³u¿szy skrêt w jedn± ze stron lub aby daæ zawodnikowi mo¿liwo¶æ rozpêdzenia siê. Kolejn± figur±, stosowan± ju¿ tylko w slalomie, jest \textit{³okieæ}. £okieæ to dwie bramki ustawione w bliskiej odleg³o¶ci jedna pod drug± w linii spadku stoku. S± to bramki zamkniête, czyli takie, w których ¶wiat³o bramki jest równoleg³e do linii spadku stoku. Figura ta wprowadza zmianê rytmu i równie¿ pozwala na dostosowanie trasy do konfiguracji terenu. Ostatni± z figur, równie¿ stosowan± tylko w slalomie, jest \textit{wertikal}. Wertikal to bramki ustawione tak samo jak w przypadku ³okcia, czyli jedna pod drug±, w linii spadku stoku, z tym, ¿e zamiast dwóch, mog± to byæ trzy, cztery czy nawet piêæ kolejno tak ustawianych bramek.
+Aby poprawnie przejechaæ przez bramkê na trasie, w ka¿dej z opisywanych wy¿ej dyscyplin, nale¿y przejechaæ pomiêdzy tyczkami wyznaczaj±cymi tzw. \textit{¶wiat³o bramki}. Bramki wymuszaj± skrêty, ale nie zawsze ich ustawienie jest rytmicznie tzn. wymuszaj±c skrêty raz w praw±, raz w lew± stronê o tym samym promieniu. Najczê¶ciej spotykanym rodzajem bramki jest tzw. \textit{bramka otwarta}. Bramka otwarta charakteryzuje siê tym, ¿e ¶wiat³o bramki znajduje siê prostopadle do linii spadku stoku. Poza bramkami otwartymi, bramki mog± byæ ustawione w tzw. figury slalomowe. Pierwsz± z nich jest \textit{przelot}, który mo¿e wystêpowaæ w ka¿dej z dyscyplin. Przelot polega na ustawieniu dwóch kolejnych bramek w taki sposób, by nie wymuszaæ skrêtu pomiêdzy nimi. Przelot stosowany jest w celu lepszego dostosowania ustawienia trasy przejazdu do konfiguracji terenu, np. gdy na trasie naturalnie wystêpuje d³u¿szy skrêt w jedn± ze stron lub aby daæ zawodnikowi mo¿liwo¶æ rozpêdzenia siê. Kolejn± figur±, stosowan± ju¿ tylko w slalomie, jest \textit{³okieæ}. £okieæ to dwie bramki ustawione w bliskiej odleg³o¶ci jedna pod drug± w linii spadku stoku. S± to bramki zamkniête, czyli takie, w których ¶wiat³o bramki jest równoleg³e do linii spadku stoku. Figura ta wprowadza zmianê rytmu i równie¿ pozwala na dostosowanie trasy do konfiguracji terenu. Ostatni± z figur, równie¿ stosowan± tylko w slalomie, jest \textit{wertikal}. Wertikal to bramki ustawione tak samo jak w przypadku ³okcia, czyli jedna pod drug±, w linii spadku stoku, z tym, ¿e zamiast dwóch, mog± to byæ trzy, cztery czy nawet piêæ kolejno tak ustawianych bramek.
 
-Podczas ogl±dania trasy, przed zawodami czy te¿ podczas treningów, zawodnicy zwracaj± du¿± uwagê na zapamiêtanie wystêpuj±cych po sobie figur i przewidywanie, na podstawie do¶wiadczenia, w jaki sposób nale¿y najechaæ na dan± figurê, by zmie¶ciæ siê, czy te¿ najszybciej pokonaæ kolejne, nastêpuj±ce po danej figurze bramki. Poprzez najazd na figurê, rozumiemy moment rozpoczêcia i sposób prowadzenia skrêtu przed figur±. Im wcze¶niej narciarz zrobi najazd, tym szybciej, po poprawnym przejechaniu bramki, bêdzie móg³ zmieniæ kierunek jazdy do kolejnych tyczek. Czasem warto skrêt rozpocz±æ wcze¶niej, tak by zmie¶ciæ siê w kolejnej podkrêconej bramce, czasem z kolei bardziej optymalne jest rozpêdzenie siê i rozpoczêcie skrêtu z opó¼nieniem, je¶li tylko dalsza konfiguracja slalomu pozwoli na zmieszczenie siê w kolejnych bramkach, mimo posiadania znacznej prêdko¶ci.
+Podczas ogl±dania trasy, przed zawodami czy te¿ podczas treningów, zawodnicy zwracaj± du¿± uwagê na zapamiêtanie wystêpuj±cych po sobie figur i przewidywanie na podstawie do¶wiadczenia, w jaki sposób nale¿y najechaæ na dan± figurê, by zmie¶ciæ siê, czy te¿ najszybciej pokonaæ kolejne, nastêpuj±ce po danej figurze bramki. Poprzez najazd na figurê, rozumiemy moment rozpoczêcia i sposób prowadzenia skrêtu przed figur±. Im wcze¶niej narciarz zrobi najazd, tym szybciej, po poprawnym przejechaniu bramki, bêdzie móg³ zmieniæ kierunek jazdy do kolejnych tyczek. Czasem warto skrêt rozpocz±æ wcze¶niej, tak by zmie¶ciæ siê w kolejnej podkrêconej bramce, czasem z kolei bardziej optymalne jest rozpêdzenie siê i rozpoczêcie skrêtu z opó¼nieniem, je¶li tylko dalsza konfiguracja slalomu pozwoli na zmieszczenie siê w kolejnych bramkach, mimo posiadania znacznej prêdko¶ci.
 
 %---------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ Aby dobrze odwzorowaæ jazdê narciarza po slalomie, nale¿y mieæ na uwadze zachodz
 
 \subsubsection{Si³a oporu powietrza}
 \label{sec:oporPowietrza}
-Si³a oporu powietrza jest przyk³adem si³y tarcia p³ynu. Zale¿no¶æ warto¶ci tej si³y od prêdko¶ci mo¿e byæ bardzo z³o¿ona. Tylko w specjalnych przypadkach równanie opisuj±ce si³ê oporu powietrza mo¿e byæ rozwi±zana analitycznie. Si³a oporu powietrza jest w dobrym przybli¿eniu proporcjonalna do kwadratu prêdko¶ci poruszaj±cego siê obiektu i zale¿no¶æ t±, mo¿na opisaæ równaniem:
+Si³a oporu powietrza jest przyk³adem si³y tarcia p³ynu. Zale¿no¶æ warto¶ci tej si³y od prêdko¶ci mo¿e byæ bardzo z³o¿ona. Tylko w specjalnych przypadkach równanie opisuj±ce si³ê oporu powietrza mo¿e byæ rozwi±zane analitycznie. Si³a oporu powietrza jest w przybli¿eniu proporcjonalna do kwadratu prêdko¶ci poruszaj±cego siê obiektu i zale¿no¶æ t±, mo¿na opisaæ równaniem:
 
 
 \begin{equation}
@@ -42,7 +42,7 @@ C - wspó³czynnik oporu powietrza, typowe warto¶ci oscyluj± miêdzy 0.4 a 1. Warto
 
 $\rho$ - gêsto¶æ powietrza w jednostce $\frac{kg}{m^3}$. Warto¶ci gêsto¶ci powietrza przy przeciêtnym ci¶nieniu wahaj± siê miêdzy 1.26 a 1.42 w zale¿no¶ci od temperatury.
 
-A - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶ci narciarza wyra¿ona w $m^{2}$.
+A - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶ci narciarza wyra¿ona w $m^{2}$.\\
 
 \begin{figure}[h]
 \label{fig:airDrag}
@@ -51,11 +51,11 @@ A - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶
 \includegraphics{airDrag}
 \end{figure}
 
-Pozycja narciarza ma znacz±cy wp³yw na warto¶æ wspó³czynnika $A$, co widaæ na rysunku \ref{fig:airDrag} na stronie \pageref{fig:airDrag}. Przyjêcie pozycji zjazdowej redukuje w stosunku do pozycji podniesionej, warto¶æ wspó³czynnika nawet o jedn± trzeci±. Warto nadmieniæ równie¿, ¿e narciarze, nawet na amatorskich zawodach ubrani s± w specjalne kombinezony tzw. \textit{gumy narciarskie}. Kombinezony te s± jednoczê¶ciowe i ¶ci¶le przylegaj± do cia³a. Nie posiadaj± ¿adnych odstaj±cych elementów, czasami zawieraj± tylko wewnêtrzne ochraniacze w miejscach w których narciarz uderza przy ka¿dym skrêcie cia³em w tyczkê. Powodem dla którego strój ten jest tak popularny równie¿ w amatorskim sporcie jest fakt, ¿e znacz±co zmniejsza opór powietrza, w stosunku do klasycznego stroju narciarskiego i potrafi na kilkudziesiêciu sekundowej trasie, gdzie liczy siê ka¿da setna sekundy, redukowaæ czas przejazdu nawet o kilkadziesi±t setnych sekundy.
+Pozycja narciarza ma znacz±cy wp³yw na warto¶æ wspó³czynnika $A$, co widaæ na rysunku \ref{fig:airDrag} na stronie \pageref{fig:airDrag}. Przyjêcie pozycji zjazdowej redukuje, w stosunku do pozycji podniesionej, warto¶æ wspó³czynnika nawet o jedn± trzeci±. Warto nadmieniæ równie¿, ¿e narciarze, nawet na amatorskich zawodach ubrani s± w specjalne kombinezony tzw. \textit{gumy narciarskie}. Kombinezony te s± jednoczê¶ciowe i ¶ci¶le przylegaj± do cia³a. Nie posiadaj± ¿adnych odstaj±cych elementów, czasami zawieraj± tylko wewnêtrzne ochraniacze w miejscach, w których narciarz uderza przy ka¿dym skrêcie cia³em w tyczkê. Powodem, dla którego strój ten jest tak popularny równie¿ w amatorskim sporcie jest fakt, ¿e znacz±co zmniejsza opór powietrza w stosunku do klasycznego stroju narciarskiego i potrafi na kilkudziesiêciu sekundowej trasie, gdzie liczy siê ka¿da setna sekundy, redukowaæ czas przejazdu nawet o kilkadziesi±t setnych sekundy.
 
-\subsubsection{Interakcje miedzy ¶niegiem a nartami}
+\subsubsection{Interakcja miedzy ¶niegiem a nartami}
 \label{sec:interakcje}
-To, ¿e narty ¶lizgaj± siê na ¶niegu zawdziêczamy skomplikowanym oddzia³ywaniom miêdzy powierzchni± narty a ¶niegiem czy lodem. Liczba czynników jakie wp³ywaj± na t± interakcjê jest bardzo du¿a, a z po¶ród nich warto wymieniæ:
+To, ¿e narty ¶lizgaj± siê na ¶niegu zawdziêczamy skomplikowanym oddzia³ywaniom miêdzy powierzchni± narty a ¶niegiem czy lodem. Liczba czynników jakie wp³ywaj± na tê interakcjê jest bardzo du¿a, a spo¶ród nich warto wymieniæ:
 
 \begin{itemize}
 \item materia³ wykonania ¶lizgu narty
@@ -67,13 +67,13 @@ To, ¿e narty ¶lizgaj± siê na ¶niegu zawdziêczamy skomplikowanym oddzia³ywaniom m
 \end{itemize}
 
 
-Jest jeszcze jeden czynnik wp³ywaj±cy na tê interakcjê, tzw. \textit{water suction} (w wolnym t³umaczeniu zasysanie wody). W temperaturze powy¿ej -3 stopni Celsjusza, ciep³o powstaj±ce na skutek tarcia, topi cienk± warstwê ¶niegu pod nartami. Aby zredukowaæ ten negatywnie wp³ywaj±cy na po¶lizg efekt, ¶lizg narty ma perforowan± strukturê, któr± nale¿y zachowywaæ i odkrywaæ po ka¿dym smarowaniu, aby odprowadzaæ wodê. 
+Jest jeszcze jeden czynnik wp³ywaj±cy na tê interakcjê, tzw. \textit{water suction} (w wolnym t³umaczeniu zasysanie wody). W temperaturze powy¿ej $-3^\circ C$, ciep³o powstaj±ce na skutek tarcia, topi cienk± warstwê ¶niegu pod nartami. Aby zredukowaæ ten negatywnie wp³ywaj±cy na po¶lizg efekt, ¶lizg narty ma perforowan± strukturê, któr± nale¿y zachowywaæ i odkrywaæ po ka¿dym smarowaniu, aby odprowadzaæ wodê. 
 
 Wed³ug badañ przeprowadzonych przez Chris'a Talbot'a z European Space Agency \cite{Skiwaxes}, tarcie o ¶nieg ma du¿o wiêkszy wp³yw na czas przejazdu ni¿ si³y oporu powietrza.
 
 \subsubsection{Tarcie kinetyczne}
 \label{sec:tarcieKinetyczne}
-Tarcie kinetyczne ma du¿o wiêksze znaczenie ni¿ tarcie statyczne poniewa¿ determinuje jak du¿a si³a musi dzia³aæ, ¿eby zachowaæ po¿±dan± prêdko¶æ podczas zjazdu. Wspó³czynnik tarcia kinetycznego miêdzy ¶niegiem a nasmarowanymi nartami wynosi ¶rednio 0.05 \cite{Skiwaxes}. Wspó³czynnik ten jednak mo¿e siê znacz±co zmieniaæ i w zale¿no¶ci od rodzaju smarów, sposobu smarowania oraz jako¶ci ¶niegu wynosi miêdzy 0.001 a 0.3 \cite{Skiwaxes}. Ju¿ na amatorskich zawodach, mo¿na zaobserwowaæ staranne przygotowanie ¶lizgów przed ka¿dym zjazdem i u¿ywanie smarów, których cena wynosi nawet kilkaset z³otych, a które s± zu¿ywane w ci±gu jednego sezonu startów. 
+Tarcie kinetyczne ma du¿o wiêksze znaczenie ni¿ tarcie statyczne poniewa¿ determinuje jak du¿a si³a musi dzia³aæ, ¿eby zachowaæ po¿±dan± prêdko¶æ podczas zjazdu. Wspó³czynnik tarcia kinetycznego miêdzy ¶niegiem a nasmarowanymi nartami wynosi ¶rednio 0.05 \cite{Skiwaxes}. Wspó³czynnik ten jednak mo¿e siê znacz±co zmieniaæ i w zale¿no¶ci od rodzaju smarów, sposobu smarowania oraz jako¶ci ¶niegu wynosi miêdzy 0.001 a 0.3 \cite{Skiwaxes}. Ju¿ na amatorskich zawodach mo¿na zaobserwowaæ staranne przygotowanie ¶lizgów przed ka¿dym zjazdem i u¿ywanie smarów, których cena wynosi nawet kilkaset z³otych, a które s± zu¿ywane w ci±gu jednego sezonu startów. 
 
 %---------------------------------------------------------------------------
 
@@ -102,7 +102,7 @@ Algorytm ewolucyjny jest przyk³adem algorytmu optymalizacyjnego, przeszukuj±cego
 Funkcja przystosowania okre¶la warto¶æ przystosowania osobnika na podstawie jego fenotypu, który jest tworzony z genotypu. Genotyp okre¶la zestaw cech danego osobnika i sk³ada siê z chromosomów (najczê¶ciej z jednego). Natomiast ka¿dy z chromosomów sk³ada siê z elementarnych jednostek - genów.\\
 
 \subsubsection{Schemat dzia³ania algorytmu ewolucyjnego}
-Na pocz±tku algorytmu ewolucyjnego generowana jest populacja bazowa oraz obliczane przystosowanie ka¿dego z jej osobników. Przewa¿nie osobniki te generowane s± ca³kowicie losowo, ale mo¿na tak¿e wprowadziæ konkretne osobniki np. o znanym dobrym przystosowaniu do ¶rodowiska.
+Na pocz±tku dzia³ania algorytmu ewolucyjnego generowana jest populacja bazowa oraz obliczane przystosowanie ka¿dego z jej osobników. Przewa¿nie osobniki te generowane s± ca³kowicie losowo, ale mo¿na tak¿e wprowadziæ konkretne osobniki np. o znanym dobrym przystosowaniu do ¶rodowiska.
 
 G³ówna czê¶æ algorytmu opiera siê na powtarzaniu pêtli, w której wykonywane s± kolejne kroki przedstawione w \ref{alg:glowny}.
 
@@ -301,7 +301,7 @@ Algorytm Hill Climbing jest jedn± z metod przeszukiwania lokalnego. W podstawowe
 Istnieje wiele rodzajów algorytmu rozwijaj±cych wersjê podstawow±:
 
 \begin{itemize}
-\item \textit{Stochastic hill climbing} - wybiera kolejny punkt losowo, prawdopodobieñstwo wyboru mo¿e zale¿eæ od tego jak stromy jest krok,
+\item \textit{Stochastic hill climbing} - wybiera kolejny punkt losowo, prawdopodobieñstwo wyboru mo¿e zale¿eæ od tego jak du¿a poprawa wi±¿e siê z wybraniem danego punktu,
 \item \textit{First-choice hill climbing} - wybiera pierwszego z generowanych kolejno s±siadów, którego warto¶æ jest lepsza ni¿ obecny stan. Rozwi±zanie to warto stosowaæ je¶li istnieje wielu s±siadów,
 \item \textit{Random-restart hill climbing} - uruchamiaj±c wielokrotnie algorytm rozpoczynaj±c w losowych punktach mo¿emy zwiêkszyæ prawdopodobieñstwo znalezienia rozwi±zania globalnego.
 \end{itemize}
@@ -368,31 +368,31 @@ W przestrzeni ci±g³ej konieczne jest dobranie kroku, który wyznacza punkty przes
 \section{Inne podej¶cia do problemu znajdowania optymalnego toru przejazdu}
 \label{sec:innePodejscia}
 
-Matthew Brodie z Massey University w Nowej Zelandii jako pierwszy na ¶wiecie wykorzysta³ w³asnorêcznie zaprojektowany i wykonany system sk³adaj±cy siê z sieci miniaturowych czujników mocowanych na ciele zawodnika-narciarza, po³±czony z GPS, w celu ¶ledzenia i analizy ruchu narciarza jad±cego po slalomie. System, nazywaj±cy siê Motion Capture Fusion (FMC), zosta³ stworzony, by jak twierdzi autor, pomóc narciarzom ze ¶wiatowej czo³ówki lepiej rozumieæ, co dzieje siê z nimi podczas jazdy, zoptymalizowaæ jazdê, a w konsekwencji doprowadziæ ich do wiêkszej liczby zwyciêstw i z³otych medali. Opis systemu oraz wnioski zamie¶ci³ w swojej pracy doktorskiej pod tytu³em \textit{Optimisation of Performance in Alpine Ski Racing with Fusion Motion Capture} \cite{FMCNewZeland}. Prezentacjê systemu oraz jego funkcjonowania mo¿na obejrzeæ w kanale Matthew'a w serwisie YouTube.
+Matthew Brodie z Massey University w Nowej Zelandii jako pierwszy na ¶wiecie wykorzysta³ w³asnorêcznie zaprojektowany i wykonany system sk³adaj±cy siê z sieci miniaturowych czujników mocowanych na ciele zawodnika-narciarza, po³±czony z GPS w celu ¶ledzenia i analizy ruchu narciarza jad±cego po slalomie. System, nazywaj±cy siê Motion Capture Fusion (FMC), zosta³ stworzony, by jak twierdzi autor, pomóc narciarzom ze ¶wiatowej czo³ówki lepiej rozumieæ, co dzieje siê z nimi podczas jazdy, zoptymalizowaæ jazdê, a w konsekwencji doprowadziæ ich do wiêkszej liczby zwyciêstw i z³otych medali. Opis systemu oraz wnioski zamie¶ci³ w swojej pracy doktorskiej pod tytu³em \textit{Optimisation of Performance in Alpine Ski Racing with Fusion Motion Capture} \cite{FMCNewZeland}. Prezentacjê systemu oraz jego funkcjonowania mo¿na obejrzeæ w kanale Matthew'a w serwisie YouTube.
 
-\paragraph{Poni¿ej przedstawimy najwa¿niejsze wnioski Matthewa, zawarte w jego pracy doktorskiej}
+\paragraph{Poni¿ej przedstawimy najwa¿niejsze wnioski Matthew'a, zawarte w jego pracy doktorskiej}
 
 \begin{itemize}
 \item Optymalna strategia na pokonywanie trasy slalomu jest kompromisem miêdzy ciasnymi skrêtami, prowadz±cymi do toru o mniejszej d³ugo¶ci, a bardziej otwartymi skrêtami o wiêkszym promieniu, które umo¿liwiaj± utrzymanie wiêkszej prêdko¶ci w skrêcie.
 \item Najkrótsza droga wcale nie jest czêsto najszybsz± drog±. Ka¿da bramka ma inny optymalny sposób na jej przejechanie.
 \item Zawodnicy czêsto dobieraj± skrêty o identycznym promieniu skrêtu, bo jest to dla nich bardziej naturalne ni¿ skrêty o zmiennym promieniu. Tymczasem warto do ka¿dej bramki dobieraæ optymalny promieñ i punkt rozpoczêcia skrêtu.
 \item W niektórych konfiguracjach terenu, optymalny promieñ skrêtu jest ograniczony poprzez maksymalny k±t pomiêdzy krawêdziami nart a ¶niegiem, jaki narciarz mo¿e utrzymaæ.
-\item Wyniki do¶wiadczalne zaprzeczaj± wynikom laboratoryjnym i sugeruj±, ¿e podczas przejazdu slalomu giganta, opór ¶niegu ma tak samo du¿e znaczenia, co opór powietrza. 
-\item W pewnych warunkach, tj. przy prêdko¶ci mniejszej ni¿ 20 m/s i terenie o nachyleniu mniejszym ni¿ 25 procent, narciarz mo¿e poprzez pracê miê¶ni - tzw. \textit{pompowanie} - zwiêkszyæ przyspieszenie w zakrêtach, a wiêc w rezultacie zmniejszyæ czas przejazdu. 
+\item Wyniki do¶wiadczalne zaprzeczaj± wynikom laboratoryjnym i sugeruj±, ¿e podczas przejazdu slalomu giganta, opór ¶niegu ma tak samo du¿e znaczenie, co opór powietrza. 
+\item W pewnych warunkach, tj. przy prêdko¶ci mniejszej ni¿ $20\frac{m}{s}$ i terenie o nachyleniu mniejszym ni¿ 25\%, narciarz mo¿e poprzez pracê miê¶ni - tzw. \textit{pompowanie} - zwiêkszyæ przyspieszenie w zakrêtach, a wiêc w rezultacie zmniejszyæ czas przejazdu. 
 \item Dobór sprzêtu, dostosowanego zarówno do konkretnej trasy i jej nachylenia, jak i do warunków fizycznych zawodnika, ma znaczny wp³yw na otrzymywane przez niego wyniki.
 \end{itemize}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=250px]{matt-1} 
-\caption{Klatka z materia³u wideo na kanele Matthewa umieszczonego w serwisie YouTube, na którym pokazuje przygotowania do testowania systemu na stoku narciarskim. Na kasku narciarza widaæ zamontowany GPS}
+\caption{Klatka z materia³u wideo na kanele Matthew'a umieszczonego w serwisie YouTube, na którym pokazuje przygotowania do testowania systemu na stoku narciarskim. Na kasku narciarza widaæ zamontowany GPS}
 \label{fig:matt-1} 
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=250px]{matt-2} 
-\caption{Klatka z materia³u wideo na kanele Matthewa umieszczonego w serwisie YouTube, która przedstawia wizualizacjê zebranych na stoku danych w stworzonym przez Matthewa oprogramowaniu.}
+\caption{Klatka z materia³u wideo na kanele Matthew'a umieszczonego w serwisie YouTube, która przedstawia wizualizacjê zebranych na stoku danych w stworzonym przez Matthew'a oprogramowaniu.}
 \label{fig:matt-2} 
 \end{figure}
 
