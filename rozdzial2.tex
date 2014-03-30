@@ -27,7 +27,7 @@ Podczas ogl±dania trasy, przed zawodami czy te¿ podczas treningów, zawodnicy zwr
 \section{Fizyczny model narciarza}
 \label{sec:fizycznyModel}
 
-Aby dobrze odwzorowaæ jazdê narciarza po slalomie, nale¿y uwzglêdniæ wszystkie zachodz±ce w jego ¶rodowisku zjawiska fizyczne. W tym rozdziale pokazane zostanie w jaki sposób jest mo¿liwe zamodelowanie narciarza, stoku oraz trasu po którym siê porusza.
+Aby dobrze odwzorowaæ jazdê narciarza po slalomie, nale¿y mieæ na uwadze zachodz±ce w jego ¶rodowisku zjawiska fizyczne. W tym rozdziale przedstawione przekrojowo zostan± te zjawiska.
 
 \subsubsection{Si³a oporu powietrza}
 \label{sec:oporPowietrza}
@@ -35,7 +35,7 @@ Si³a oporu powietrza jest przyk³adem si³y tarcia p³ynu. Zale¿no¶æ warto¶ci tej s
 
 
 \begin{equation}
-F_d = \frac{1}{2}C\rho Av^2
+k_2 = \frac{1}{2}C\rho Av^2
 \end{equation}
 
 C - wspó³czynnik oporu powietrza, typowe warto¶ci oscyluj± miêdzy 0.4 a 1. Warto¶æ wspó³czynnika zale¿y miêdzy innymi od kszta³tu obiektu i mo¿na go wi±zaæ z tzw. ,,op³ywowo¶ci±'' obiektu
@@ -95,7 +95,7 @@ Je¶li natomiast funkcja celu posiada wiele optimów lokalnych (tzw. funkcja wielo
 
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjny}
-Algorytm ewolucyjny jest przyk³adem algorytmu optymalizacyjnego, przeszukuj±cego przestrzeñ rozwi±zañ w celu znalezienia najlepszego rozwi±zania problemu. Algorytm ten bazuje jest na obserwacjach ¶rodowiska i przystosowywania siê organizmów do jego warunków. Wiele terminów zapo¿yczonych jest zatem z genetyki.
+Algorytm ewolucyjny jest przyk³adem algorytmu optymalizacyjnego, przeszukuj±cego przestrzeñ rozwi±zañ w celu znalezienia najlepszego rozwi±zania problemu. Algorytm ten bazuje na obserwacjach ¶rodowiska i przystosowywania siê organizmów do jego warunków. Wiele terminów zapo¿yczonych jest zatem z genetyki.
 
 ``Algorytm ewolucyjny przetwarza populacjê osobników, z których ka¿dy jest propozycj± rozwi±zania postawionego problemu. Dzia³a on w ¶rodowisku, które mo¿na zdefiniowaæ na podstawie problemu rozwi±zywanego przez algorytm. W ¶rodowisku ka¿demu osobnikowi jest przyporz±dkowana warto¶æ liczbowa, okre¶laj±ca jako¶æ reprezentowanego przez niego rozwi±zania; warto¶æ ta jest nazywana przystosowaniem osobnika.'' \cite{arabas}
 
@@ -151,7 +151,7 @@ Algorytmy ewolucyjne wywodz± siê z kilku osobnych nurtów zajmuj±cych siê t± tema
 
 Prosty algorytm genetyczny zosta³ zaproponowany w roku 1975 przez John'a Holland'a w \cite{Holland1975}.
 
-Poni¿ej umieszczony jest schemat tego algorytmu (Algorytm \ref{alg:prostyGenetyczny} na podstawie algorytmu umieszczony w \cite{arabas}).
+Poni¿ej umieszczony jest schemat tego algorytmu (Algorytm \ref{alg:prostyGenetyczny} na podstawie algorytmu umieszczonego w \cite{arabas}).
 
 \begin{algorithm}
 \caption{Prosty algorytm genetyczny}

@@ -212,7 +212,7 @@ Zatem:
 \ddot{x} = g\sin\alpha \sin\beta - (\mu g\cos\alpha  + \frac{k_2}{m}\dot{x}^2)
 \end{equation}
 
-W programie zastosowany zosta³ zaznaczony na rysunku uk³ad wspó³rzêdnych XY. Powy¿sze równanie zapiszmy teraz uwzglêdniaj±c przemieszczanie siê narciarza w oznaczonych kierunkach - wzd³u¿ i wszerz stoku. Otrzymamy wtedy nastêpuj±ce równania:
+W naszym rozwi±zaniu zastosowany zosta³ zaznaczony na rysunku uk³ad wspó³rzêdnych XY. Powy¿sze równanie zapiszmy teraz uwzglêdniaj±c przemieszczanie siê narciarza w oznaczonych kierunkach - wzd³u¿ i wszerz stoku. Otrzymamy wtedy nastêpuj±ce równania:
 
 \begin{equation}
 \label{eq:ur2rzedu}
@@ -273,13 +273,13 @@ Zatem pozostaje okre¶liæ, w jaki sposób mo¿emy stwierdziæ, ¿e dane rozwi±zanie j
 
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjnyRozw}
-Opisana w poprzednim podrozdziale reprezentacja rozwi±zania to w zastosowanym algorytmie ewolucyjnym pojedynczy osobnik, a punkty sk³adaj±ce siê na to rozwi±zanie, a ¶ci¶lej, ich po³o¿enie w pozycji poziomej okre¶laj± genotyp ka¿dego osobnika. Poniewa¿ korzystamy ze strategii ewolucyjnych, nie wprowadzamy tu kodowania binarnego, pozycja ka¿dego punktu jest zapamiêtywana jako warto¶æ rzeczywista.
+Opisana w poprzednim podrozdziale reprezentacja rozwi±zania to w zastosowanym algorytmie ewolucyjnym pojedynczy osobnik, a punkty sk³adaj±ce siê na to rozwi±zanie, a ¶ci¶lej, ich po³o¿enie w pozycji poziomej, okre¶laj± genotyp ka¿dego osobnika. Poniewa¿ korzystamy ze strategii ewolucyjnych, nie wprowadzamy tu kodowania binarnego, pozycja ka¿dego punktu jest zapamiêtywana jako warto¶æ rzeczywista.
 
 Dodatkowo do genotypu wchodzi tak¿e zestaw parametrów $\sigma$, które w strategiach ewolucyjnych u¿ywane s± podczas mutacji, tak jak opisano to w rozdziale \ref{sec:ewolucyjny} w czê¶ci ``Typy algorytmów ewolucyjnych'' w opisie strategii ewolucyjnych. Ka¿demu punktowi przypisana jest osobna warto¶æ $\sigma$ - reprezentuj±ca odchylenie standardowe warto¶ci $y$ tego punktu.
 
 Zastosowany algorytm wykorzystuje strategiê ($\mu$ + $\lambda$) opisan± w rozdziale \ref{sec:ewolucyjny}. Jako pocz±tkow± populacjê wybieramy losowe osobniki - warto¶ci $y$ punktów s± ograniczone jedynie przez warto¶ci $y$ po³o¿enia dwóch najbli¿szych bramek. Jest to kierowane konieczno¶ci± zadbania o szybsze znalezienie rozwi±zania - zbyt du¿e odleg³o¶ci mo¿na z góry odrzuciæ opieraj±c siê na do¶wiadczeniach z rzeczywistej jazdy narciarza po slalomie. Wielko¶æ populacji bazowej $\mu$ jest jednym z parametrów programu, warto¶æ ta wynosi w testach 30 - 60. Warto¶æ parametru $\lambda$ tak¿e jest parametrem, w testach u¿yto wielko¶ci 100 - 200. Warto¶ci te porównywalne s± z sugerowanymi w literaturze. \cite{arabas}
 
-Szkielet algorytmu zgodny jest z zastosowan± strategi±, po wylosowaniu z istniej±cej populacji populacji tymczasowej o wielko¶ci $\lambda$, dokonuje siê na jej osobnikach operacji genetycznych, najpierw krzy¿owania, a nastêpnie mutacji na osobnikach otrzymanych z krzy¿owania. Kolejnym krokiem jest ocenienie nowych osobników i wybranie spo¶ród nich oraz populacji pocz±tkowej osobników o najlepszym przystosowaniu i to one stanowi± now± populacjê bazow±.
+Szkielet algorytmu zgodny jest z zastosowan± strategi±, po wylosowaniu z istniej±cej populacji populacji tymczasowej o wielko¶ci $\lambda$, dokonuje siê na jej osobnikach operacji genetycznych, najpierw krzy¿owania, a nastêpnie mutacji na osobnikach otrzymanych z krzy¿owania. Kolejnym krokiem jest ocenienie nowych osobników i wybranie spo¶ród nich oraz spo¶ród populacji pocz±tkowej osobników o najlepszym przystosowaniu, tak by one stanowi³y now± populacjê bazow±.
 
 \subsubsection{Krzy¿owanie}
 Aby dokonaæ krzy¿owania potrzebne s± pary rodziców dla ka¿dego nowego osobnika. Aby utrzymaæ wielko¶æ populacji tymczasowej, losujemy (ze zwracaniem) $\lambda$ par spo¶ród populacji tymczasowej. Krzy¿owanie rodziców sprowadza siê do obliczenia ¶redniej warto¶ci po³o¿enia odpowiadaj±cych sobie punktów oraz parametrów $\sigma$.
@@ -324,7 +324,7 @@ Pierwsza strategia opiera siê na obliczaniu kolejno przybli¿enia drugich pochodn
 k =  \sum\limits_{i=1}^{n-1} |\ddot{d_i}|^{3} 
 \end{equation}
 
-Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna warto¶æ oznacza bardzo ³agodne k±ty przej¶cia na ca³ej trasie natomiast im wiêksz± ,,kanciasto¶æ'' trasy tym wiêksza warto¶æ tego wspó³czynnika. Dodatkowo, przed zsumowaniem, warto¶æ bezwzglêdna przybli¿onej drugiej pochodnej jest podnoszona do trzeciej potêgi. Wyliczony wspó³czynnik dla ka¿dej z rozwa¿anych w algorytmie tras jest mno¿ony przez obliczony czas przejazdu tej trasy. Dopiero taka liczba jest traktowana jako warto¶æ funkcji celu algorytmu genetycznego. Minusem tej strategii jest przeskalowanie realnego czasu przejazdu narciarza po zadanym torze, brak mo¿liwo¶ci porównania go do wyników uzyskiwanych innymi metodami.
+Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna warto¶æ oznacza bardzo ³agodne k±ty przej¶cia na ca³ej trasie natomiast im wiêksz± ,,kanciasto¶æ'' trasy tym wiêksza warto¶æ tego wspó³czynnika. Dodatkowo, przed zsumowaniem, warto¶æ bezwzglêdna przybli¿onej drugiej pochodnej jest podnoszona do trzeciej potêgi. Wyliczony wspó³czynnik dla ka¿dej z rozwa¿anych w algorytmie tras jest mno¿ony przez obliczony czas przejazdu tej trasy. Dopiero taka liczba jest traktowana jako warto¶æ funkcji celu algorytmu genetycznego. Minusem tej strategii jest przeskalowanie realnego czasu przejazdu narciarza po zadanym torze, a wiêc brak mo¿liwo¶ci porównania go do wyników uzyskiwanych innymi metodami.
 
 \subsection{Strategia proporcjonalnego zmniejszania warto¶ci wektora prêdko¶ci}
 \label{sec:strategiaZmniejszania}
@@ -441,7 +441,7 @@ Diagram \ref{diagramClientServerDb} na stronie \pageref{diagramClientServerDb} p
 
 \subsection{Interfejs systemu udostêpniony u¿ytkownikowi}
 
-Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tego projektu aplikacji jest strona www, dostêpna pod adresem URL - \textit{http://giant-client.herokuapp.com/}. Na stronie, poza krótkim wyt³umaczeniem celu projektu i sposobu w jaki ka¿dy odwiedzaj±cy mo¿e pomóc w obliczeniach, znajduje siê jedno wyra¼ne tzw. ``call to action'' - du¿y przycisk zachêcaj±cy do rozpoczêcia obliczeñ.
+Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tej pracy aplikacji jest strona www, dostêpna pod adresem URL - \textit{http://giant-client.herokuapp.com/}. Na stronie, poza krótkim wyt³umaczeniem celu projektu i sposobu w jaki ka¿dy odwiedzaj±cy mo¿e pomóc w obliczeniach, znajduje siê jedno wyra¼ne tzw. ``call to action'' - du¿y przycisk zachêcaj±cy do rozpoczêcia obliczeñ.
 
 
 \begin{figure}[h]
