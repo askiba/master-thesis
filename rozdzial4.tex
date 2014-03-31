@@ -212,7 +212,7 @@ Zatem:
 \ddot{x} = g\sin\alpha \sin\beta - (\mu g\cos\alpha  + \frac{k}{m}\dot{x}^2)
 \end{equation}
 
-W programie zastosowany zosta³ zaznaczony na rysunku uk³ad wspó³rzêdnych XY. Powy¿sze równanie zapiszmy teraz uwzglêdniaj±c przemieszczanie siê narciarza w oznaczonych kierunkach - wzd³u¿ i wszerz stoku. Otrzymamy wtedy nastêpuj±ce równania:
+W naszym rozwi±zaniu zastosowany zosta³ zaznaczony na rysunku uk³ad wspó³rzêdnych XY. Powy¿sze równanie zapiszmy teraz uwzglêdniaj±c przemieszczanie siê narciarza w oznaczonych kierunkach - wzd³u¿ i wszerz stoku. Otrzymamy wtedy nastêpuj±ce równania:
 
 \begin{equation}
 \label{eq:ur2rzedu}
@@ -267,13 +267,13 @@ Aby znale¼æ rozwi±zanie problemu optymalizacji, nale¿y przyj±æ jaki¶ sposób repr
 \label{fig:lamana}
 \end{figure}
 
-W zaproponowanym rozwi±zaniu narzucamy z góry, co ile metrów w pionie stoku ma znajdowaæ siê punkt, przez który bêdzie musia³ przejechaæ narciarz. Mo¿na wyobraziæ to sobie jako zbiór poziomych linii, z której ka¿da wyznacza mo¿liwe po³o¿enie pojedynczego punktu. Na rysunku \ref{fig:lamana} zosta³y przedstawione te linie oraz bramki (kolor niebieski). Strza³ki pokazuj± jak mo¿na przesuwaæ ka¿dy z tych punktów w celu zmiany trasy przejazdu i otrzymania nowego rozwi±zania. Zosta³o narzucone, ¿e narciarz musi przejechaæ jak najbli¿ej ka¿dej wewnêtrznej czê¶ci bramki, co oznacza do³o¿enie punktów w tym miejscu. Ogranicza to znacznie liczbê rozwi±zañ, które nale¿y sprawdziæ i dziêki temu przyspiesza dzia³anie algorytmu. Takie za³o¿enie oparte jest tak¿e na do¶wiadczeniu narciarzy z jazdy po slalomach, gdy¿ w wiêkszo¶ci przypadków przeje¿d¿anie tu¿ przy bramkach jest najkorzystniejsze. Zdarza siê oczywi¶cie, ¿e np. dla tzw. bramek otwartych opisanych w rozdziale \ref{sec:alpineSkiing} czêsto lepiej wybraæ trochê inn± trasê. W tych przypadkach konieczne jest zrezygnowanie z takiego ograniczenia, jednak nale¿y liczyæ siê z tym, ¿e czas poszukiwania najlepszego rozwi±zania wyd³u¿y siê, zw³aszcza je¶li takich miejsc jest wiêcej.
+W zaproponowanym rozwi±zaniu narzucamy z góry, co ile metrów w pionie stoku ma znajdowaæ siê punkt, przez który bêdzie musia³ przejechaæ narciarz. Mo¿na wyobraziæ to sobie jako zbiór poziomych linii, z której ka¿da wyznacza mo¿liwe po³o¿enie pojedynczego punktu. Na rysunku \ref{fig:lamana} zosta³y przedstawione te linie oraz bramki (kolor niebieski). Strza³ki pokazuj± jak mo¿na przesuwaæ ka¿dy z tych punktów w celu zmiany trasy przejazdu i otrzymania nowego rozwi±zania. Zosta³o narzucone, ¿e narciarz musi przejechaæ jak najbli¿ej ka¿dej wewnêtrznej czê¶ci bramki, co oznacza do³o¿enie punktów w tym miejscu. Ogranicza to znacznie liczbê rozwi±zañ, które nale¿y sprawdziæ i dziêki temu przyspiesza dzia³anie algorytmu. Takie za³o¿enie bazuje równie¿ na do¶wiadczeniu narciarzy z jazdy po slalomach, gdy¿ w wiêkszo¶ci przypadków przeje¿d¿anie tu¿ przy bramkach jest najkorzystniejsze. Zdarza siê oczywi¶cie, ¿e np. dla tzw. bramek otwartych opisanych w rozdziale \ref{sec:alpineSkiing} czêsto lepiej wybraæ trochê inn± trasê. W tych przypadkach konieczne jest zrezygnowanie z takiego ograniczenia, jednak nale¿y liczyæ siê z tym, ¿e czas poszukiwania najlepszego rozwi±zania wyd³u¿y siê, zw³aszcza je¶li takich miejsc jest wiêcej.
 
 Zatem pozostaje okre¶liæ, w jaki sposób mo¿emy stwierdziæ, ¿e dane rozwi±zanie jest najlepsze. W tym przypadku chcemy, aby narciarz w jak najkrótszym czasie dotar³ do mety prawid³owo przeje¿d¿aj±c przez wszystkie bramki. Maj±c dane rozwi±zanie w postaci punktów wyznaczaj±cych ³aman±, obliczamy ile czasu zajmie narciarzowi przejechanie po tej trasie. Im mniejsza warto¶æ tym rozwi±zanie jest lepsze. Zatem funkcja celu dla tego problemu maj±c na wej¶ciu ci±g punktów wyznaczaj±cych trasê przejazdu, zwraca czas potrzebny na jej pokonanie.
 
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjnyRozw}
-Opisana w poprzednim podrozdziale reprezentacja rozwi±zania to w zastosowanym algorytmie ewolucyjnym pojedynczy osobnik, a punkty sk³adaj±ce siê na to rozwi±zanie, a ¶ci¶lej, ich po³o¿enie w pozycji poziomej okre¶laj± genotyp ka¿dego osobnika. Poniewa¿ korzystamy ze strategii ewolucyjnych, nie wprowadzamy tu kodowania binarnego, pozycja ka¿dego punktu jest zapamiêtywana jako warto¶æ rzeczywista.
+Opisana w poprzednim podrozdziale reprezentacja rozwi±zania to w zastosowanym algorytmie ewolucyjnym pojedynczy osobnik, a punkty sk³adaj±ce siê na to rozwi±zanie, a ¶ci¶lej, ich po³o¿enie w pozycji poziomej, okre¶laj± genotyp ka¿dego osobnika. Poniewa¿ korzystamy ze strategii ewolucyjnych, nie wprowadzamy tu kodowania binarnego, pozycja ka¿dego punktu jest zapamiêtywana jako warto¶æ rzeczywista.
 
 Dodatkowo do genotypu wchodzi tak¿e zestaw parametrów $\sigma$, które w strategiach ewolucyjnych u¿ywane s± podczas mutacji, tak jak opisano to w rozdziale \ref{sec:ewolucyjny} w czê¶ci ``Typy algorytmów ewolucyjnych'' w opisie strategii ewolucyjnych. Ka¿demu punktowi przypisana jest osobna warto¶æ $\sigma$ - reprezentuj±ca odchylenie standardowe warto¶ci $y$ tego punktu.
 
@@ -390,7 +390,7 @@ Aplikacja ma zasadniczo trzy warstwy:
 \begin{figure}[h]
 \centering
 \includegraphics[width=360px]{diagramClientLayers}
-\caption{Uproszczony diagram sekwencji komunikacji pomiêdzy poszczególnymi warstwami aplikacji klienckiej}
+\caption{Uproszczony diagram sekwencji pomiêdzy poszczególnymi warstwami aplikacji klienckiej. Warstwa obliczeniowa przekazuje do warstwy prezentacji wiele tymczasowych rozwi±zañ oraz, po zakoñczeniu pe³nego cyklu obliczeñ, finalne, najlepsze rozwi±zanie, które nastêpnie przekazywane jest na serwer.}
 \label{diagramClientLayers}
 \end{figure}
 
@@ -441,8 +441,7 @@ Diagram \ref{diagramClientServerDb} na stronie \pageref{diagramClientServerDb} p
 
 \subsection{Interfejs systemu udostêpniony u¿ytkownikowi}
 
-Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tego projektu aplikacji jest strona www, dostêpna pod adresem URL - http://giant-client.herokuapp.com/. Na stronie, poza krótkim wyt³umaczeniem celu projektu i sposobu w jaki ka¿dy odwiedzaj±cy mo¿e pomóc w obliczeniach, znajduje siê jedno wyra¼ne tzw. ``call to action'' - du¿y przycisk zachêcaj±cy do rozpoczêcia obliczeñ.
-
+Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tej pracy aplikacji jest strona www, dostêpna pod adresem URL - \textit{http://giant-client.herokuapp.com/}. Na stronie, poza krótkim wyt³umaczeniem celu projektu i sposobu w jaki ka¿dy odwiedzaj±cy mo¿e pomóc w obliczeniach, znajduje siê jedno wyra¼ne tzw. ``call to action'' - du¿y przycisk zachêcaj±cy do rozpoczêcia obliczeñ.
 
 \begin{figure}[h]
 \centering

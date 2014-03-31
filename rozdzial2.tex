@@ -27,7 +27,7 @@ Podczas ogl±dania trasy, przed zawodami czy te¿ podczas treningów, zawodnicy zwr
 \section{Fizyczny model narciarza}
 \label{sec:fizycznyModel}
 
-Aby dobrze odwzorowaæ jazdê narciarza po slalomie, nale¿y uwzglêdniæ wszystkie zachodz±ce w jego ¶rodowisku zjawiska fizyczne. W tym rozdziale pokazane zostanie w jaki sposób jest mo¿liwe zamodelowanie narciarza, stoku oraz toru, po którym siê porusza.
+Aby dobrze odwzorowaæ jazdê narciarza po slalomie, nale¿y mieæ na uwadze zachodz±ce w jego ¶rodowisku zjawiska fizyczne. W tym rozdziale przedstawione przekrojowo zostan± te zjawiska.
 
 \subsubsection{Si³a oporu powietrza}
 \label{sec:oporPowietrza}
@@ -35,7 +35,7 @@ Si³a oporu powietrza jest przyk³adem si³y tarcia p³ynu. Zale¿no¶æ warto¶ci tej s
 
 
 \begin{equation}
-F_d = \frac{1}{2}C\rho Av^2
+k_2 = \frac{1}{2}C\rho Av^2
 \end{equation}
 
 C - wspó³czynnik oporu powietrza, typowe warto¶ci oscyluj± miêdzy 0.4 a 1. Warto¶æ wspó³czynnika zale¿y miêdzy innymi od kszta³tu obiektu i mo¿na go wi±zaæ z tzw. ,,op³ywowo¶ci±'' obiektu
@@ -95,7 +95,7 @@ Je¶li natomiast funkcja celu posiada wiele optimów lokalnych (tzw. funkcja wielo
 
 \subsection{Algorytm ewolucyjny}
 \label{sec:ewolucyjny}
-Algorytm ewolucyjny jest przyk³adem algorytmu optymalizacyjnego, przeszukuj±cego przestrzeñ rozwi±zañ w celu znalezienia najlepszego rozwi±zania problemu. Algorytm ten oparty jest na obserwacjach ¶rodowiska i przystosowywania siê organizmów do jego warunków. Wiele terminów zapo¿yczonych jest zatem z genetyki.
+Algorytm ewolucyjny jest przyk³adem algorytmu optymalizacyjnego, przeszukuj±cego przestrzeñ rozwi±zañ w celu znalezienia najlepszego rozwi±zania problemu. Algorytm ten bazuje na obserwacjach ¶rodowiska i przystosowywania siê organizmów do jego warunków. Wiele terminów zapo¿yczonych jest zatem z genetyki.
 
 ``Algorytm ewolucyjny przetwarza populacjê osobników, z których ka¿dy jest propozycj± rozwi±zania postawionego problemu. Dzia³a on w ¶rodowisku, które mo¿na zdefiniowaæ na podstawie problemu rozwi±zywanego przez algorytm. W ¶rodowisku ka¿demu osobnikowi jest przyporz±dkowana warto¶æ liczbowa, okre¶laj±ca jako¶æ reprezentowanego przez niego rozwi±zania; warto¶æ ta jest nazywana przystosowaniem osobnika.'' \cite{arabas}
 
@@ -151,7 +151,7 @@ Algorytmy ewolucyjne wywodz± siê z kilku osobnych nurtów zajmuj±cych siê t± tema
 
 Prosty algorytm genetyczny zosta³ zaproponowany w roku 1975 przez John'a Holland'a w \cite{Holland1975}.
 
-Poni¿ej umieszczony jest schemat tego algorytmu (Algorytm \ref{alg:prostyGenetyczny} oparty o algorytm umieszczony w \cite{arabas}).
+Poni¿ej umieszczony jest schemat tego algorytmu (Algorytm \ref{alg:prostyGenetyczny} na podstawie algorytmu umieszczonego w \cite{arabas}).
 
 \begin{algorithm}
 \caption{Prosty algorytm genetyczny}
@@ -202,7 +202,7 @@ Opisane poni¿ej strategie s± rozwiniêciem strategii (1+1) i zosta³y zaproponowan
 
 Strategia ($\mu$ + $\lambda$) jest rozwiniêciem strategii (1+1). $\mu$ oznacza ilo¶æ osobników w populacji pocz±tkowej, a $\lambda$ ile osobników jest reprodukowanych i poddawanych operacjom genetycznym. Dodatkowo, zamiast regu³y 1/5 sukcesów wprowadzono mechanizm samoczynnej adaptacji zasiêgu mutacji, a tak¿e wprowadzono operator krzy¿owania.
 
-Oznaczenie $\mu$ + $\lambda$ oznacza, ¿e po wygenerowaniu populacji potomnej wybierane jest $\mu$ najlepszych osobników do nowej populacji bazowej - zarówno spo¶ród populacji potomnej, jak i starej populacji bazowej zawieraj±cych ³±cznie $\mu$ + $\lambda$ osobników. Algorytm \ref{alg:miPlusLambda} przedstawia schemat tej strategii (w oparciu o algorytm umieszczony w \cite{arabas}).
+Oznaczenie $\mu$ + $\lambda$ oznacza, ¿e po wygenerowaniu populacji potomnej wybierane jest $\mu$ najlepszych osobników do nowej populacji bazowej - zarówno spo¶ród populacji potomnej, jak i starej populacji bazowej zawieraj±cych ³±cznie $\mu$ + $\lambda$ osobników. Algorytm \ref{alg:miPlusLambda} przedstawia schemat tej strategii (bazuj±c na algorytmie umieszczonym w \cite{arabas}).
 
 \begin{algorithm}
 \caption{Strategia ewolucyjna ($\mu$ + $\lambda$)}
@@ -260,7 +260,7 @@ Krzy¿owanie wystêpuje w tym algorytmie pod nazw± ``rekombinacja''. Najczê¶ciej s
 \item{Strategia ($\mu$, $\lambda$)}
 
 Strategia ($\mu$ + $\lambda$) posiada pewne wady, które wyeliminowano za pomoc± nowej strategii ($\mu$, $\lambda$). Poprzedni algorytm sprawia problemy je¶li w populacji pojawia siê osobnik o wysokiej warto¶ci przystosowania, ale posiadaj±cy zbyt du¿e (albo zbyt ma³e) warto¶ci odchyleñ standardowych. Usuniêcie takiego osobnika z populacji czêsto nie jest procesem krótkotrwa³ym, gdy¿ wp³ywa on na powstaj±ce potomstwo, przekazuj±c mu podobne do jego, nieodpowiednie warto¶ci odchyleñ.\\
-W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie nie s± nigdy brane do kolejnej populacji bazowej. Podczas selekcji korzysta siê zatem tylko z powsta³ej populacji potomnej, z niej wybieraj±c osobniki do populacji bazowej w kolejnej iteracji. Algorytm \ref{alg:miLambda} prezentuje kolejne kroki schematu tego algorytmu (w oparciu o algorytm umieszczony w \cite{arabas}).
+W nowej strategii wprowadzono zmianê, która powoduje, ¿e osobniki rodzicielskie nie s± nigdy brane do kolejnej populacji bazowej. Podczas selekcji korzysta siê zatem tylko z powsta³ej populacji potomnej, z niej wybieraj±c osobniki do populacji bazowej w kolejnej iteracji. Algorytm \ref{alg:miLambda} prezentuje kolejne kroki schematu tego algorytmu (bazuj±c na algorytmie umieszczonym w \cite{arabas}).
 
 \begin{algorithm}
 \caption{Strategia ewolucyjna ($\mu$, $\lambda$)}
@@ -294,7 +294,7 @@ Richard Dawkins zaproponowa³ w \cite{dawkins89} pojêcie memu - ``the basic unit 
 
 \subsection{Hill Climbing}
 \label{sec:hill}
-Podrozdzia³ oparty jest o opis algorytmu Hill Climbing w \cite{russell}.
+Podrozdzia³ bazuje na opisie algorytmu Hill Climbing w \cite{russell}.
 
 Algorytm Hill Climbing jest jedn± z metod przeszukiwania lokalnego. W podstawowej wersji algorytmu zwanej \textit{Greedy local search}, w ka¿dej iteracji zmieniaj±c warto¶æ rozwi±zania w jednym z wymiarów sprawdzana jest warto¶æ funkcji celu dla nowego rozwi±zania i je¶li warto¶æ ta jest lepsza od dotychczas najlepszej znalezionej, zapamiêtujemy zmienione rozwi±zanie. Dopóki zmiany powoduj± poprawê rozwi±zania, algorytm nie jest zatrzymywany. Na koñcu wiemy, ¿e znalezione rozwi±zanie jest rozwi±zaniem lokalnie optymalnym.
 
