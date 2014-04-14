@@ -4,7 +4,7 @@
 %          
 % Author:  Marcin Szpyrka     (mszpyrka@agh.edu.pl)
 %          Grzegorz J. Nalepa (gjn@agh.edu.pl)
-%          AGH University of Science and Technology, Kraków, POLAND
+%          AGH University of Science and Technology, Krakï¿½w, POLAND
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -95,13 +95,13 @@ im. Stanis\l{}awa Staszica w Krakowie}}}
 \begin{flushright}
 \begin{minipage}[!h]{12cm}
 \mbox{\large{\scshape \textbf{O\'SWIADCZENIE AUTORA PRACY}}}\\[3mm] 
-{\scshape O\'swiadczam, \'swiadomy odpowiedzialno\'sci karnej za po\'swiadczenie nieprawdy, \.ze niniejsz\k{a} prac\k{e} dyplomow\k{a} wykona\l{}em osobi\'scie i samodzielnie, i nie korzysta\l{}em ze \'zr\'ode\l{} innych ni\.z wymienione w pracy.}\\
+{\scshape O\'swiadczamy, \'swiadomi odpowiedzialno\'sci karnej za po\'swiadczenie nieprawdy, \.ze niniejsz\k{a} prac\k{e} dyplomow\k{a} wykonali\'smy osobi\'scie i samodzielnie (w zakresie wyszczeg\'olnionym we wst\k{e}pie) i \.ze nie korzystali\'smy ze \'zr\'ode\l{} innych ni\.z wymienione w pracy.}\\
 \end{minipage}
 
 \vspace{2cm}
 
 \makebox[6cm][s]{\dotfill}\par
-\makebox[6cm][c]{\small PODPIS}
+\makebox[6cm][c]{\small PODPISY}
 
 \end{flushright}
 
@@ -184,13 +184,13 @@ University of Science and Technology in Krakow}}}
 \flushbottom
 
 %---------------------------------------------------------------------------
-% Ustawienia parametrów dla tytu³ów rozdzia³ów, podrozdzia³ów, itd.
+% Ustawienia parametrï¿½w dla tytuï¿½ï¿½w rozdziaï¿½ï¿½w, podrozdziaï¿½ï¿½w, itd.
 %---------------------------------------------------------------------------
 
 
 \titleformat{\chapter}[block]
 {\bfseries\LARGE}{\filright \LARGE\thechapter. }{0ex}{}
-%odstêpy: lewy, góra, dó³
+%odstï¿½py: lewy, gï¿½ra, dï¿½ï¿½
 \titlespacing{\chapter}{0pt}{17mm}{19mm}
 \titleformat{\section}[block]
 {\bfseries\Large}{\filright \Large\thesection. }{0ex}{}
@@ -203,7 +203,7 @@ University of Science and Technology in Krakow}}}
 \titlespacing{\subsubsection}{7mm}{3mm}{1.5mm}
 
 %---------------------------------------------------------------------------
-% Ustawienia parametrów generowania spisu tre¶ci i spisu rysunków
+% Ustawienia parametrï¿½w generowania spisu treï¿½ci i spisu rysunkï¿½w
 %---------------------------------------------------------------------------
 
 \renewcommand{\cfttoctitlefont}{\bfseries\Large}
