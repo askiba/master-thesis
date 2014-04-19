@@ -1,10 +1,10 @@
-\chapter{Wprowadzenie teoretyczne i istniej±ce rozwi±zania - Volunteer Computing}
+\chapter{Platformy Volunteer Computing}
 \label{cha:rozwiazania}
 
-W rozdziale tym przedstawimy istniej±ce rozwi±zania zarówno architektoniczne, które umo¿liwiaj± rozproszone obliczenia w modelu Volunteer Computing, jak i rozwi±zania dotykaj±ce problemu zwi±zanego z poszukiwaniem optymalnej trasy narciarza na slalomie. 
+W rozdziale tym przedstawimy istniej±ce rozwi±zania zarówno architektoniczne, które umo¿liwiaj± rozproszone obliczenia w modelu Volunteer Computing.
 
 %---------------------------------------------------------------------------
-\section{Volunteer Computing}
+\section{Wprowadzenie teoretyczne}
 \label{volunteerComputing}
 
 Volunteer Computing to model obliczeniowy, w którym zwykli ludzie czy te¿ organizacje, nazywani dalej ochotnikami, dobrowolnie udostêpniaj± swoje zasoby obliczeniowe, by uruchamiaæ na nich obliczenia zwi±zane z ró¿norakimi projektami. S± to przewa¿nie projekty naukowe, których celem jest rozwi±zanie problemów i zadañ matematycznych czy te¿ problemów dotykaj±cych ludzko¶æ, lub d±¿±cych do lepszego poznania ¶wiata i wszech¶wiata. Dziêki platformom u¿ywaj±cym modelu Volunteer Computing, ka¿dy cz³owiek mo¿e mieæ wk³ad w rozwi±zywanie tych problemów.
@@ -42,22 +42,6 @@ Wa¿nym aspektem, który istotnie wp³ywa na stosowanie modelu w praktyce, jest kos
 
 Na ten model mo¿na patrzyæ tak¿e w kategoriach edukacyjnych. Gdy ochotnik przystêpuje do projektu i udostêpnia swoje moce obliczeniowe, mo¿na za³o¿yæ, ¿e jest zainteresowany, b±d¼ chce siê zainteresowaæ problemem, który pomaga rozwi±zaæ. Warto to zainteresowanie wykorzystaæ, by za pomoc± przystêpnych wizualizacji przedstawiæ mu sedno rozwi±zywanego zadania, nakre¶liæ mu problem z ró¿nych perspektyw i wyja¶niæ mu jaki jest cel prowadzonych obliczeñ. Wyt³umaczony w atrakcyjnej formie problem z dziedziny fizyki czy biologii, po³±czony z niewymagaj±cym du¿ego wysi³ku wezwaniem do dzia³ania - do³±czeniem do obliczeñ - jest dobrym materia³em do udostêpniania w portalach spo³eczno¶ciowych, a wiêc ma spory potencja³ na organiczne rozprzestrzenianie siê i zwiêkszanie zasiêgu ca³ego przedsiêwziêcia obliczeniowego.
 
-\section{Web Workers}
-\label{webWorkers}
-Rozdzia³ napisany jest na bazie \cite{WebWorkersSpec}.
-
-Przeprowadzanie intensywnych obliczeñ w przegl±darkach internetowych nie by³o mo¿liwe do czasu wprowadzenia przez grupê WHATWG (Web Hypertext Application Technology Working Group) specyfikacji Web Worker. Ograniczenie wynika³o z faktu, ¿e jêzyk w którym wykonywane s± skrypty w silnikach przegl±darek internetowych to Java Script. Java Script to jednow±tkowy jêzyk programowania, co uniemo¿liwia wykonywane wielu zadañ równolegle. Zlecaj±c wiêc skryptowi intensywne obliczenia, na ca³y czas ich trwania, interfejs u¿ytkownika strony internetowej by³by zawieszany i nie odpowiada³by na akcje u¿ytkownika. Takie zachowanie by³oby nie do przyjêcia dla u¿ytkownika strony. Przegl±darki broni± u¿ytkownika przed takim zachowaniem skryptów na stronie i czasami zdarza siê jeszcze zobaczyæ okno z ostrze¿eniem, ¿e skrypt przesta³ odpowiadaæ i z mo¿liwo¶ci± manualnego jego zatrzymania.
-
-Web Workers definiuje API do tworzenia osobnych w±tków w tle. Workery wykorzystuj± do komunikacji z w±tkiem g³ównym klasyczny model przekazywania wiadomo¶ci. Nowoczesne przegl±darki umo¿liwiaj± przekazywanie zarówno tekstu jak i obiektów zserializowanych w formacie JSON. Nale¿y zwróciæ uwagê, ¿e obiekty te nie s± wspó³dzielone, ale w pe³ni kopiowane. 
-
-Web Workery nie maj± dostêpu do struktury DOM, obiektu \textit{window} ani \textit{document}. Zewnêtrzne skrypty wykorzystywane przez workera musz± byæ serwowane z tej samej domeny co kod workera. Ograniczenia to nazywane jest fachowo \textit{Same-origin policy}.
-
-Wed³ug specyfikacji stworzonej przez WHATWG, Web Workery powinny byæ u¿ywane do zadañ trwaj±cych d³u¿szy czas, maj±cych du¿y narzut startowy i spory narzut pamiêciowy. Nie jest wiêc odpowiednim tworzenie bardzo wielu workerów zajmuj±cych siê obliczeniami trwaj±cymi marginalnie krótki czas, gdy¿ sam narzut na stworzenie przez przegl±darkê osobnego procesu mo¿e byæ zbyt du¿y, by uzasadniæ jego u¿ycie.
-
-
-\section{Platformy Volunteer Computing}
-\label{sec:platformyDoVolunteerComputing}
-
 Klasyczny model obliczeñ Volunteer Computing sk³ada³a siê z aplikacji klienckich, pobieranych z internetu oraz zainstalowanych na komputerze osobistym, oraz serwera, zarz±dzaj±cego wysy³aniem zadañ i odbieraniem rozwi±zañ. 
 
 Konieczno¶æ pobierania i instalowania aplikacji na komputerze implikuje wymóg tworzenia i utrzymywania wersji aplikacji pod ka¿dy znacz±cy system operacyjny. Wybór odpowiedniej kompilacji programu klienckiego oraz proces jego instalacji jest pierwsz± barier± jak± napotyka osoba chc±ca mieæ swój wk³ad do naukowego projektu.
@@ -68,7 +52,7 @@ W ostatnich latach mo¿na zaobserwowaæ trend przenoszenia oprogramowania, które d
 
 W tym rozdziale zaprezentujemy przekrój obecnie najbardziej znacz±cych projektów korzystaj±cych z modelu Voluneteer Computing oraz platform, które te projekty wykorzystuj±.
 
-\subsection{Great Internet Mersenne Prime Searchy}
+\section{Great Internet Mersenne Prime Searchy}
 \label{sec:gimps}
 Pierwszym projektem wykorzystuj±cym Volunteer Computing jest \textit{GIMPS} (Great Internet Mersenne Prime Search) - rozpoczêty na pocz±tku 1996 roku a trwaj±cy do dzi¶ projekt, którego celem jest znalezienie jak najwiêkszej ilo¶ci specyficznych liczb pierwszych - tzn. Liczb Pierwszych Marsenne'a. Do tej pory kolektywny wysi³ek doprowadzi³ do odnalezienia czternastu takich liczb. Zsumowana moc obliczeniowa systemu da³aby teoretycznie, wg. danych na listopad 2013 roku, 330-te miejsce w rankingu TOP500 - rankingu najmocniejszych komputerów na ¶wiecie. 
 
@@ -76,7 +60,7 @@ System sk³ada siê z aplikacji klienckich stworzonych dla 9 ró¿nych wersji system
 
 \textit{GIMPS} jest ciekawym projektem, który ma ju¿ na swoim koncie sukcesy i osi±gn±³ du¿y zasiêg i skalê, co potwierdzaj± publikowane regularnie informacje o nowych znaleziskach oraz wielko¶ci sieci komputerów bior±cych udzia³ w obliczeniach. Interfejs i wygoda u¿ytkowania (ang. \textit{User Experience}), które oferuje platforma, s± jednak ma³o atrakcyjne i archaiczne i zupe³nie nieprzystosowane do u¿ytkowników wspó³czesnego internetu.  
 
-\subsection{Distributed.net}
+\section{Distributed.net}
 \label{sec:DistributedNet}
 Kolejn± znacz±c± platform± do Volunteer Computing jest stworzony w 1997 roku \textit{distributed.net}. Platforma powsta³a oryginalnie w celu brania udzia³u w konkursach organizowanych przez RSA Laboratory, tzw. RSA Secret-Key Challenge. Konkursy te polega³y na uhonorowaniu pierwszej osoby, która znalaz³a klucz u¿yty do szyfrowania tekstu oraz odszyfrowa³a za jego pomoc± tekst zaszyfrowany jednym ze znanych algorytmów szyfruj±cych. Konkursy mia³y na celu zademonstrowanie stopnia bezpieczeñstwa algorytmu szyfruj±cego u¿ywaj±cego kluczy o ró¿nej d³ugo¶ci. Nagrod± by³o 10000 dolarów. Sieæ ochotników podpiêtych do systemu \textit{distributed.net} z³ama³a 56 bitowy klucz u¿yty przez szyfr blokowy RC5 do zaszyfrowania zdania: \textit{``The unknown message is: It's time to move to a longer key length''}. Metod± przyjêt± do z³amania tego szyfru by³ najprostszy algorytm typu \textit{brute-force}, która to dziêki modelowi Volunteer Computing przynios³a pozytywne skutki po 250 dniach poszukiwañ ca³ej przestrzeni rozwi±zañ.
 
@@ -98,7 +82,7 @@ Ufaj±c dostawcy, po zdecydowaniu siê na zainstalowanie programu, otwiera siê ma³
 \label{fig:distributedNetConsole}
 \end{figure}
 
-\subsection{Berkeley Open Infrastructure for Network Computing}
+\section{Berkeley Open Infrastructure for Network Computing}
 \label{sec:BOINC}
 Do stworzenia platformy BOINC (Berkeley Open Infrastructure for Network Computing), obecnie najbardziej znacz±cego open-source'owego middleware'u do obliczeñ w modelu Volunteer i Grid Computing, przyczyni³ siê projekt SETI@home.
 
@@ -119,7 +103,7 @@ Struktura klienta sk³ada siê z:
 
 Obecnie prawie trzy miliony ludzi udostêpnia zasoby swoich osobistych komputerów do obliczeñ zwi±zanych tyko z projektem \textit{SETI@home}. Opiekunom projektu BOINC zale¿y na rozwoju kultury udostêpniania swoich zasobów na rzecz naukowych obliczeñ. Interfejs systemu jest przyjazny, a sam system ³atwy w instalacji.
 
-\subsection{Urz±dzenia mobilne w rozproszonych obliczeniach naukowych}
+\section{Urz±dzenia mobilne w rozproszonych obliczeniach naukowych}
 \label{sec:mobilne}
 
 Sekcja napisana na podstawie \cite{BOINCAndroid}.
@@ -147,7 +131,7 @@ Rozwa¿anie u¿ycia urz±dzeñ mobilnych do obliczeñ wywo³uje pytanie o zu¿ycie bate
 \label{fig:boinc-app}
 \end{figure}
 
-\subsection{Folding@home}
+\section{Folding@home}
 \label{sec:folfingathome}
 Projekt Folding@home wywodz±cy siê z Amerykañskiego Uniwersytetu Stanford by³ pierwszym projektem w modelu Volunteer Computing, w którym wziêto pod uwagê, ¿e potencja³ Volunteer Computing nie zamyka siê tylko na komputerach osobistych i wykorzystaniu jednostek CPU, ale tak¿e coraz bardziej rozwijanych jednostkach GPU, procesorach na PlayStation 3.
 
@@ -184,4 +168,16 @@ Oprogramowanie Folding@Home jest przyjazne. ¦ci±gniêcie i instalacja nie powoduj
 \caption{Zachêcanie do udostêpniania informacji o programie \textit{Folding@home} w sieciach spo³eczno¶ciowych}
 \label{fig:foldingShare}
 \end{figure}
+
+\section{Web Workers}
+\label{webWorkers}
+Podrozdzia³ napisany jest na bazie \cite{WebWorkersSpec}.
+
+Przeprowadzanie intensywnych obliczeñ w przegl±darkach internetowych nie by³o mo¿liwe do czasu wprowadzenia przez grupê WHATWG (Web Hypertext Application Technology Working Group) specyfikacji Web Worker. Ograniczenie wynika³o z faktu, ¿e jêzyk w którym wykonywane s± skrypty w silnikach przegl±darek internetowych to Java Script. Java Script to jednow±tkowy jêzyk programowania, co uniemo¿liwia wykonywane wielu zadañ równolegle. Zlecaj±c wiêc skryptowi intensywne obliczenia, na ca³y czas ich trwania, interfejs u¿ytkownika strony internetowej by³by zawieszany i nie odpowiada³by na akcje u¿ytkownika. Takie zachowanie by³oby nie do przyjêcia dla u¿ytkownika strony. Przegl±darki broni± u¿ytkownika przed takim zachowaniem skryptów na stronie i czasami zdarza siê jeszcze zobaczyæ okno z ostrze¿eniem, ¿e skrypt przesta³ odpowiadaæ i z mo¿liwo¶ci± manualnego jego zatrzymania.
+
+Web Workers definiuje API do tworzenia osobnych w±tków w tle. Workery wykorzystuj± do komunikacji z w±tkiem g³ównym klasyczny model przekazywania wiadomo¶ci. Nowoczesne przegl±darki umo¿liwiaj± przekazywanie zarówno tekstu jak i obiektów zserializowanych w formacie JSON. Nale¿y zwróciæ uwagê, ¿e obiekty te nie s± wspó³dzielone, ale w pe³ni kopiowane. 
+
+Web Workery nie maj± dostêpu do struktury DOM, obiektu \textit{window} ani \textit{document}. Zewnêtrzne skrypty wykorzystywane przez workera musz± byæ serwowane z tej samej domeny co kod workera. Ograniczenia to nazywane jest fachowo \textit{Same-origin policy}.
+
+Wed³ug specyfikacji stworzonej przez WHATWG, Web Workery powinny byæ u¿ywane do zadañ trwaj±cych d³u¿szy czas, maj±cych du¿y narzut startowy i spory narzut pamiêciowy. Nie jest wiêc odpowiednim tworzenie bardzo wielu workerów zajmuj±cych siê obliczeniami trwaj±cymi marginalnie krótki czas, gdy¿ sam narzut na stworzenie przez przegl±darkê osobnego procesu mo¿e byæ zbyt du¿y, by uzasadniæ jego u¿ycie.
 
