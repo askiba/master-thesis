@@ -82,7 +82,7 @@ im. Stanis\l{}awa Staszica w Krakowie}}}
 
 \begin{flushright}
 \begin{minipage}[!h]{6cm} 
-\large{\scshape Promotor:}\\ \@supervisorPL
+\large{\scshape Opiekun pracy:}\\ \@supervisorPL
 \end{minipage}
 \end{flushright}
 

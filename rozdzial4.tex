@@ -1,470 +1,187 @@
-\chapter{Proponowane rozwi±zanie}
-\label{cha:rozwiazanie}
+\chapter{Wprowadzenie teoretyczne i istniej±ce rozwi±zania - Volunteer Computing}
+\label{cha:rozwiazania}
 
-W rozdziale tym przedstawiono informacje dotycz±ce zastosowanego rozwi±zania. Opisane zosta³y przyjête za³o¿enia dotycz±ce modelu, matematyczny opis tego modelu oraz szczegó³y zastosowanego sposobu optymalizacji. Na koñcu rozdzia³u przedstawiona zosta³a architektura rozwi±zania wraz z opisem powsta³ej aplikacji koñcowej.
-
-%---------------------------------------------------------------------------
-
-\section{Model narciarza i ¶rodowiska}
-\label{sec:model}
-
-W zaproponowanym rozwi±zaniu zosta³y podjête pewne decyzje odno¶nie reprezentacji ¶rodowiska oraz narciarza.
-
-Zosta³o przyjête, ¿e stok traktowany jest jako p³aszczyzna, która jest nachylona do powierzchni ziemi pod k±tem pod okre¶lonym przez sta³± $\alpha$. Za³o¿enie co do p³askiej powierzchni stoku jest tylko ograniczeniem przyjêtym do testów. Umo¿liwia to ³atwiejsz± analizê wyników, niezaburzonych zmianami nachylenia terenu. Jednak stworzony program mo¿e zostaæ w prosty sposób zmodyfikowany tak, aby zamodelowaæ równie¿ bardziej skomplikowan± powierzchniê.
-
-Narciarz traktowany jest jako punkt materialny o masie m.
-%---------------------------------------------------------------------------
-
-\section{Opis matematyczny modelu}
-\label{sec:matematycznyModel}
-
-Oznaczenia:
-\begin{itemize}
-\item m - masa
-\item g - przyspieszenie ziemskie
-\item $\alpha$ - k±t nachylenia stoku
-\end{itemize}
-
-Si³a grawitacji dzia³aj±ca na obiekt o masie m:\\
-\begin{equation}
-Q = mg
-\end{equation}
-
-Si³a ta mo¿e zostaæ roz³o¿ona na dwie sk³adowe wzglêdem powierzchni stoku:
-\begin{itemize}
-\item równoleg³±, wynosz±c± $Q_a$,
-\item prostopad³± $F_n$.
-\end{itemize}
-Narciarz poruszaj±cy siê w dó³ stoku jest modelowany jako punkt materialny poruszaj±cego siê po równi pochy³ej. Rozk³ad si³ w takim przypadku rozrysowany jest na rysunku \ref{fig:inclinedPlane}.\\
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.4]{model/inclinedPlane}
-\caption{Rozk³ad si³ dzia³aj±cych na narciarza przemieszczaj±cego siê na równi pochy³ej}
-\label{fig:inclinedPlane}
-\end{figure}
-
-Sk³adowa si³y grawitacji równoleg³a do powierzchni stoku jest równa:\\
-\begin{equation}
-\label{eq:Qa}
-Q_a = mg\sin\alpha
-\end{equation}
-
-Si³a $Q_a$ jest si³± ¶ci±gaj±c± narciarza w dó³ stoku.
-
-Sk³adowa si³y grawitacji prostopad³a do powierzchni stoku, czyli nacisk jaki narciarz wywiera swoj± mas± na powierzchniê stoku, jest równa:\\
-\begin{equation}
-\label{eq:Fn}
-F_n = mg\cos\alpha
-\end{equation}
-
-Warto¶æ tej si³y wp³ywa na si³ê tarcia dzia³aj±cej na narciarza:\\
-\begin{equation}
-\label{eq:Ff}
-F_f = \mu F_n = \mu mg\cos\alpha
-\end{equation}
-
-Oprócz si³y tarcia uwzglêdniamy równie¿ si³ê oporu powietrza. Zale¿y ona od prêdko¶ci poruszania siê obiektu. Prêdko¶æ bêdziemy wyra¿aæ jako pierwsz± pochodn± po³o¿enia, oznaczan± przez $ \dot{x} $:\\
-\begin{equation}
-\label{eq:Fd}
-F_d = k\dot{x}^2
-\end{equation}
-
-
-\begin{equation}
-k = \frac{1}{2} C \rho A
-\end{equation}
-
-gdzie:\\
-$ C $ - wspó³czynnik oporu\\
-$ \rho $ - gêsto¶æ powietrza\\
-$ A $ - powierzchnia narciarza prostopad³a do kierunku ruchu
-
-Wiêcej o sile oporu powietrza jest opisane w sekcji \ref{sec:oporPowietrza} na stronie \pageref{sec:oporPowietrza}.
+W rozdziale tym przedstawimy istniej±ce rozwi±zania zarówno architektoniczne, które umo¿liwiaj± rozproszone obliczenia w modelu Volunteer Computing, jak i rozwi±zania dotykaj±ce problemu zwi±zanego z poszukiwaniem optymalnej trasy narciarza na slalomie. 
 
 %---------------------------------------------------------------------------
+\section{Volunteer Computing}
+\label{volunteerComputing}
 
-\section{Numeryczne rozwi±zanie problemu}
-\label{sec:numeryczneRozwiazanie}
+Volunteer Computing to model obliczeniowy, w którym zwykli ludzie czy te¿ organizacje, nazywani dalej ochotnikami, dobrowolnie udostêpniaj± swoje zasoby obliczeniowe, by uruchamiaæ na nich obliczenia zwi±zane z ró¿norakimi projektami. S± to przewa¿nie projekty naukowe, których celem jest rozwi±zanie problemów i zadañ matematycznych czy te¿ problemów dotykaj±cych ludzko¶æ, lub d±¿±cych do lepszego poznania ¶wiata i wszech¶wiata. Dziêki platformom u¿ywaj±cym modelu Volunteer Computing, ka¿dy cz³owiek mo¿e mieæ wk³ad w rozwi±zywanie tych problemów.
 
-Z drugiej zasady dynamiki Newton'a wiemy, ¿e:
+Procesory w komputerach osobistych s± bezczynne przez oko³o 80\% czasu. Równocze¶nie wiele naukowych problemów zwi±zanych na przyk³ad z modelowaniem zmian klimatu potrzebuje ogromnych zasobów obliczeniowych. U¿ywanie do tego celu superkomputerów jest bardzo drogie. Po³±czenie tych faktów doprowadzi³o do stworzenia modelu, wykorzystuj±cego zasoby obliczeniowe ochotników, którzy chc± siê nimi ¶wiadomie dzieliæ. 
 
-\begin{equation}
-m\overrightarrow{a} = \sum\limits_i{\overrightarrow{F_i}}
-\end{equation}
-
-Rozpatruj±c wszystkie si³y dzia³aj±ce na narciarza równoleg³e do powierzchni stoku, a wiêc powoduj±ce jego ruch w dó³, otrzymujemy nastêpuj±ce równanie ruchu:
-
-\begin{equation}
-m\overrightarrow{a} = \overrightarrow{Q_a} + \overrightarrow{F_f} + \overrightarrow{F_d}
-\end{equation}
-
-A zatem, uwzglêdniaj±c kierunek si³ otrzymujemy:
-
-\begin{equation}
-ma = Q_a - F_f - F_d
-\end{equation}
-
-Wypadkowa si³a dzia³aj±ca na narciarza jest sum± si³: ¶ci±gaj±cej oraz oporów (tarcia i oporu powietrza).
-
-Korzystaj±c z wcze¶niejszych równañ \ref{eq:Qa}, \ref{eq:Ff} i \ref{eq:Fd} opisuj±cych si³y $ Q_a $, $F_f$ oraz $ F_d $ otrzymujemy:
-
-\begin{equation}
-ma = mg\sin\alpha - \mu mg\cos\alpha - k\dot{x}^2
-\end{equation}
-
-Wyra¼my teraz przyspieszenie jako drug± pochodn± przemieszczenia:
-
-\begin{equation}
-a = \ddot{x} 
-\end{equation}
-
-Podstawiaj±c do równania:
-
-\begin{equation}
-m\ddot{x}=mg\sin\alpha-\mu mg\cos\alpha - k\dot{x}^2
-\end{equation}
-
-Zatem po podzieleniu przez m:
-
-\begin{equation}
-\label{eq:rownRuchu}
-\ddot{x}=g\sin\alpha-\mu g\cos\alpha - \frac{k}{m}\dot{x}^2
-\end{equation}
-
-Jest to równanie ró¿niczkowe zwyczajne drugiego rzêdu. Aby rozwi±zaæ to równanie numerycznie, przedstawimy to równanie jako uk³ad równañ ró¿niczkowych zwyczajnych rzêdu pierwszego. W tym celu wprowadzamy now± zmienn± v (odpowiadaj±c± prêdko¶ci) bêd±c± pierwsz± pochodn± przemieszczenia, a drug± pochodn± zastêpujemy pierwsz± pochodn± prêdko¶ci:
-
-\begin{equation}
-\left\{ \begin{array}{ll}
-v = \dot{x}	\\
-\ddot{x} = \dot{v}
-\end{array} \right. 
-\end{equation}
-
-Zatem wykorzystuj±c powy¿sze równania otrzymujemy nastêpuj±cy uk³ad równañ:\\
-\begin{equation}
-\label{eq:ur2d}
-\left\{ \begin{array}{ll}
-\dot{v} = gsin\alpha-\mu gcos\alpha-\frac{k}{m}v^{2} \\
-v = \dot{x}
-\end{array} \right. 
-\end{equation}
-
-
-W wielu jêzykach programowania dostêpne s± funkcje biblioteczne, które potrafi± znale¼æ rozwi±zanie uk³adu równañ ró¿niczkowych zwyczajnych pierwszego rzêdu, takich jak nasz uk³ad \ref{eq:ur2d}. W celu jego rozwi±zania zosta³a wykorzystana funkcja dopri (ang. \textit{Numerical integration of ODE using Dormand-Prince RK method}) z biblioteki Numeric Javascript.
-
-\subsection{Rozwi±zanie na p³aszczy¼nie stoku}
-\label{subsec:3d}
-Powy¿szy uk³ad równañ (\ref{eq:ur2d}) opisuje poruszanie siê punktu materialnego po równi pochy³ej. Jednak w przypadku narciarza przemieszczaj±cego siê po stoku musimy uwzglêdniæ równie¿ mo¿liwo¶æ poruszania siê w poprzek stoku, a nie tylko w dó³.\\
-Za³ó¿my, ¿e narciarz porusza siê po torze bêd±cym ³aman±. W dalszej czê¶ci pracy zostanie pokazane, ¿e takie ograniczenie mo¿e byæ dobrym sposobem na przybli¿enie rzeczywistego toru jazdy, które jednocze¶nie znacznie u³atwia sterowanie ruchem narciarza. \\
-
-Rozpatrzmy teraz jak bêdzie wygl±da³ uk³ad si³ dzia³aj±cych na narciarza (\ref{fig:stok3d}):\\
+Moc obliczeniowa najmocniejszego superkomputera z listy TOP500, na listopad 2013, jest tego samego rzêdu co moc obliczeniowa generowana przez ochotników u¿ywaj±cych platformy do Volunteer Computing'u - BOINC opisanej w rozdziale \pageref{sec:BOINC}, na dzieñ 26 Grudnia 2013. Moc ta wynosi oko³o 9 Peta flopsów dla BOINC i 33 Peta flopsów dla National Super Computer Center in Guangzhou, China z listy TOP500. Flops to jednostka wyra¿aj±ca moc obliczeniow± i wskazuj±ca ile operacji zmiennoprzecinkowych na jedn± sekundê komputer mo¿e wykonywaæ. Moc rzêdu 9 peta flops to ${9}*{10}^{15}$ operacji zmiennoprzecinkowych na sekundê 
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=1]{model/stok3d}
-\caption{Rozk³ad wybranych si³ dzia³aj±cych na narciarza przemieszczaj±cego siê na p³aszczy¼nie stoku}
-\label{fig:stok3d}
+\includegraphics[width=200px]{boinc-26-12}
+\caption{Zrzut ekranu ze strony internetowej https://boinc.berkeley.edu/, z dnia 26/12/2013 pokazuj±cy ¶redni± moc obliczeniow± systemu z ostatnich 24 godzin.}
+\label{fig:boinc-26-12}
 \end{figure}
 
-Na p³aszczy¼nie stoku zosta³y oznaczone trzy punkty - $A$, $B$ i $C$, przez które kolejno przeje¿d¿a narciarz. Zak³adaj±c, ¿e narciarz znajduje siê w punkcie $B$, oznaczona zosta³a si³a grawitacji $Q$, dzia³aj±ca na niego i skierowana pionowo (w stosunku do powierzchni ziemi). Sk³adowa tej si³y - $Q_a$, jest rzutem na powierzchniê stoku i jest równa (jak w przypadku równania \ref{eq:Qa}):
-
-\begin{equation}
-Q_a = mg\sin\alpha
-\end{equation}
-
-$\alpha$ jest k±tem nachylenia p³aszczyzny stoku. Po zrzutowaniu si³y $Q_a$ na odcinek $BC$ otrzymujemy si³ê $Q_a^\|$ - jej kierunek jest zgodny z kierunkiem poruszania siê narciarza. Pozosta³e sk³adowe si³ $Q$ oraz $Q_a$ s± równowa¿one przez si³ê reakcji pod³o¿a wywieran± na narciarza.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{model/stok2d}
-\caption{Rozk³ad wybranych si³ dzia³aj±cych na narciarza przemieszczaj±cego siê na p³aszczy¼nie stoku}
-\label{fig:stok2d}
+\includegraphics[width=300px]{top500-november2013}
+\caption{Zrzut ekranu ze strony http://www.top500.org/lists/2013/11/ pokazuj±cy pierwsze miejsce na li¶cie TOP500 z listopada 2013 roku.}
+\label{fig:top500-november2013}
 \end{figure}
 
-Na rysunku \ref{fig:stok2d} przedstawiona zosta³a p³aszczyzna stoku z punktami $B$ i $C$ oraz si³ami $Q_a$ oraz jej sk³adowymi $Q_a^\|$ oraz $Q_a^\bot$. K±t $\beta$ jest k±tem pomiêdzy wektorem przemieszczenia a poziom± lini± na p³aszczy¼nie stoku. Warto¶æ si³y ¶ci±gaj±cej wynosi w tym przypadku:
 
-\begin{equation}
-Q_a^\| = mg\sin\alpha \sin\beta
-\end{equation}
+Ochotnicy to osoby prywatne albo instytucje takie jak szko³y czy uniwersytety. Ochotnicy przewa¿nie pozostaj± anonimowi, choæ w niektórych projektach wymagane jest dostarczenie podstawowych danych kontaktowych jak np. adresu email. Czasem zdarza siê, ¿e ochotnicy z premedytacj± przek³amuj± wysy³ane do centralnego serwera wyniki swoich obliczeñ. Z uwagi na anonimowo¶æ ochotników, utrudnione jest w takich przypadkach ich dyscyplinowanie czy te¿ wy³±czenie z projektu. Ochotnicy nie s± wynagradzani finansowo za uczestnictwo w projekcie. 
 
-Zaznaczone zosta³a równie¿ si³a stanowi±ca sumê si³ oporów $F_f + F_d$. Zatem nasze równanie ruchu \ref{eq:rownRuchu} bêdzie wygl±da³o nastêpuj±co:
+Organizacja czy osoba chc±ca wykorzystaæ model Volunteer Computing do swoich projektów, musi byæ jednostk± zaufan± dla ochotników realizuj±cych obliczenia. Wynika to z prostego faktu, ¿e ochotnicy decyduj± siê, wed³ug standardowego modelu obliczeniowego, na zainstalowanie aplikacji udostêpnianej przez dostarczyciela zadañ obliczeniowych. Osoba instaluj±ca aplikacjê musi ufaæ, ¿e nie uszkodzi ona jej komputera, ani te¿ nie bêdzie wykorzystywaæ jej zasobów w sposób niezgodny z zapewnieniami zleceniodawcy obliczeñ. Ma te¿ prawo oczekiwaæ, ¿e aplikacja zosta³a napisana przestrzegaj±c dobrych praktyk bezpieczeñstwa, gdy¿ jako, ¿e aplikacja ta ³±czy siê z internetem i potencjalnie jest zainstalowana na du¿ej ilo¶ci maszyn, jest atrakcyjnym celem ataków zmierzaj±cych do przejêcia tych maszyn przez hakerów, do niezgodnych z prawem celów. 
 
-\begin{equation}
-\ddot{x} = g\sin\alpha \sin\beta - \frac{F_f + F_d}{m}
-\end{equation}
+Przewa¿nie model komunikacyjny systemu Volunteer Computing uwzglêdnia tylko komunikacjê poszczególnych klientów z centralnym serwerem i nie zak³ada bezpo¶redniej komunikacji miêdzy klientami.
+\cite{VolunteerIntro}
 
-Wykorzystuj±c wzory na si³y oporów (\ref{eq:Ff} oraz \ref{eq:Fd}) otrzymamy:
+Volunteer Computing pierwotnie zak³ada³, ¿e obliczenia s± wykonywane na zwyk³ych komputerach osobistych (PC). Liczba komputerów tego typu jest nieporównywalnie wiêksza od liczby wyspecjalizowanych komputerów o du¿ej mocy obliczeniowej i jest szacowana na ponad miliard, choæ obecnie liczba sprzedawanych komputerów tego typu z roku na rok spada. Dodatkowo, z przyczyn ekonomicznych, na rozwój tych maszyn producenci sprzêtu przeznaczaj± bardzo du¿e fundusze, wiêc ich moc i zdolno¶ci obliczeniowe stale rosn±. Warto jednak zwróciæ uwagê na fakt, ¿e obecnie najbardziej dynamiczny rozwój skierowany jest na urz±dzenia przeno¶ne, o czym mowa w kontek¶cie Volunteer Computing bêdzie w dalszej czê¶ci rozdzia³u.
 
-\begin{equation}
-\ddot{x} = g\sin\alpha \sin\beta - \frac{\mu F_n  + k\dot{x}^2}{m}
-\end{equation}
+Wa¿nym aspektem, który istotnie wp³ywa na stosowanie modelu w praktyce, jest koszt prowadzenia obliczeñ. Model zak³ada, ¿e do³±czanie siê do obliczeñ jest dobrowolne i nie dostaje siê za uczestnictwo w projekcie wynagrodzenia. Dziêki temu, projekty, które maj± poparcie i akceptacjê spo³eczn± mog± liczyæ na darmowe moce obliczeniowe udostêpnione przez zwyk³ych ludzi.
 
-gdzie $F_n$ to si³a nacisku narciarza, która pozostaje taka sama jak w przypadku równi pochy³ej (\ref{eq:Fn}):
+Na ten model mo¿na patrzyæ tak¿e w kategoriach edukacyjnych. Gdy ochotnik przystêpuje do projektu i udostêpnia swoje moce obliczeniowe, mo¿na za³o¿yæ, ¿e jest zainteresowany, b±d¼ chce siê zainteresowaæ problemem, który pomaga rozwi±zaæ. Warto to zainteresowanie wykorzystaæ, by za pomoc± przystêpnych wizualizacji przedstawiæ mu sedno rozwi±zywanego zadania, nakre¶liæ mu problem z ró¿nych perspektyw i wyja¶niæ mu jaki jest cel prowadzonych obliczeñ. Wyt³umaczony w atrakcyjnej formie problem z dziedziny fizyki czy biologii, po³±czony z niewymagaj±cym du¿ego wysi³ku wezwaniem do dzia³ania - do³±czeniem do obliczeñ - jest dobrym materia³em do udostêpniania w portalach spo³eczno¶ciowych, a wiêc ma spory potencja³ na organiczne rozprzestrzenianie siê i zwiêkszanie zasiêgu ca³ego przedsiêwziêcia obliczeniowego.
 
-\begin{equation}
-F_n = mg\cos\alpha
-\end{equation}
+\section{Web Workers}
+\label{webWorkers}
+Rozdzia³ napisany jest na bazie \cite{WebWorkersSpec}.
 
-Zatem:
+Przeprowadzanie intensywnych obliczeñ w przegl±darkach internetowych nie by³o mo¿liwe do czasu wprowadzenia przez grupê WHATWG (Web Hypertext Application Technology Working Group) specyfikacji Web Worker. Ograniczenie wynika³o z faktu, ¿e jêzyk w którym wykonywane s± skrypty w silnikach przegl±darek internetowych to Java Script. Java Script to jednow±tkowy jêzyk programowania, co uniemo¿liwia wykonywane wielu zadañ równolegle. Zlecaj±c wiêc skryptowi intensywne obliczenia, na ca³y czas ich trwania, interfejs u¿ytkownika strony internetowej by³by zawieszany i nie odpowiada³by na akcje u¿ytkownika. Takie zachowanie by³oby nie do przyjêcia dla u¿ytkownika strony. Przegl±darki broni± u¿ytkownika przed takim zachowaniem skryptów na stronie i czasami zdarza siê jeszcze zobaczyæ okno z ostrze¿eniem, ¿e skrypt przesta³ odpowiadaæ i z mo¿liwo¶ci± manualnego jego zatrzymania.
 
-\begin{equation}
-\ddot{x} = g\sin\alpha \sin\beta - (\mu g\cos\alpha  + \frac{k}{m}\dot{x}^2)
-\end{equation}
+Web Workers definiuje API do tworzenia osobnych w±tków w tle. Workery wykorzystuj± do komunikacji z w±tkiem g³ównym klasyczny model przekazywania wiadomo¶ci. Nowoczesne przegl±darki umo¿liwiaj± przekazywanie zarówno tekstu jak i obiektów zserializowanych w formacie JSON. Nale¿y zwróciæ uwagê, ¿e obiekty te nie s± wspó³dzielone, ale w pe³ni kopiowane. 
 
-W naszym rozwi±zaniu zastosowany zosta³ zaznaczony na rysunku uk³ad wspó³rzêdnych XY. Powy¿sze równanie zapiszmy teraz uwzglêdniaj±c przemieszczanie siê narciarza w oznaczonych kierunkach - wzd³u¿ i wszerz stoku. Otrzymamy wtedy nastêpuj±ce równania:
+Web Workery nie maj± dostêpu do struktury DOM, obiektu \textit{window} ani \textit{document}. Zewnêtrzne skrypty wykorzystywane przez workera musz± byæ serwowane z tej samej domeny co kod workera. Ograniczenia to nazywane jest fachowo \textit{Same-origin policy}.
 
-\begin{equation}
-\label{eq:ur2rzedu}
-\left\{ \begin{array}{ll}
-\ddot{x_x} = (g\sin\alpha\sin\beta - (\mu g\cos\alpha + \frac{k}{m}\dot{x}^2))\sin\beta\\
-\ddot{x_y} = (g\sin\alpha\sin\beta - (\mu g\cos\alpha + \frac{k}{m}\dot{x}^2))\cos\beta
-\end{array} \right.
-\end{equation}
-
-Po wprowadzeniu jak poprzednio dodatkowych zmiennych, aby zredukowaæ równania do równañ ró¿niczkowych zwyczajnych pierwszego rzêdu, wprowadzamy dodatkowe zmienne, w tym wypadku prêdko¶ci $v_x$ i $v_y$ oraz pamiêtamy o zale¿no¶ci miêdzy nimi a pochodn± przemieszczenia:
-
-\begin{equation}
-\left\{ \begin{array}{ll}
-v_x = \dot{x_x}\\
-v_y = \dot{x_y}\\
-\dot{x} = \sqrt{v_x^2 +v_y^2}
-\end{array} \right.
-\end{equation}
-
-Dodatkowo mo¿na zauwa¿yæ, ¿e je¶li $v_x$ stanowi pierwsz± pochodn± $ x_x $ to prawdziwe s± tak¿e poni¿sze równania:
- 
-\begin{equation}
-\left\{ \begin{array}{ll}
-\dot{v_x} = \ddot{x_x}\\
-\dot{v_y} = \ddot{x_y}\\
-\end{array} \right.
-\end{equation}
-
-Wprowadzaj±c te informacje do uk³adu równañ \ref{eq:ur2rzedu}, otrzymujemy:
-
-\begin{equation}
-\left\{ \begin{array}{ll}
-v_x = \dot{x_x}\\
-v_y = \dot{x_y}\\
-\dot{v_x} = (g\sin\alpha\sin\beta - (\mu g\cos\alpha + \frac{k}{m}\dot{x}^2))\sin\beta\\
-\dot{v_y} = (g\sin\alpha\sin\beta - (\mu g\cos\alpha + \frac{k}{m}\dot{x}^2))\cos\beta
-\end{array} \right. 
-\end{equation}\\
-
-Taki uk³ad równañ ró¿niczkowych mo¿na rozwi±zaæ wspomnian± wcze¶niej funkcj± \textit{dopri}. 
-
-Zainteresowani modelowaniem ruchu narciarza i optymalizacj± toru jazdy mog± przeczytaæ równie¿ pracê \cite{simDebski}.
+Wed³ug specyfikacji stworzonej przez WHATWG, Web Workery powinny byæ u¿ywane do zadañ trwaj±cych d³u¿szy czas, maj±cych du¿y narzut startowy i spory narzut pamiêciowy. Nie jest wiêc odpowiednim tworzenie bardzo wielu workerów zajmuj±cych siê obliczeniami trwaj±cymi marginalnie krótki czas, gdy¿ sam narzut na stworzenie przez przegl±darkê osobnego procesu mo¿e byæ zbyt du¿y, by uzasadniæ jego u¿ycie.
 
 
-%---------------------------------------------------------------------------
+\section{Platformy Volunteer Computing}
+\label{sec:platformyDoVolunteerComputing}
 
-\section{Optymalizacja toru przejazdu}
-\label{sec:optymalizacja}
-Aby znale¼æ rozwi±zanie problemu optymalizacji, nale¿y przyj±æ jaki¶ sposób reprezentacji ka¿dego z rozwi±zañ. W rzeczywisto¶ci tor przejazdu narciarza to ¶lad, który pozostawiaj± narty na ¶niegu w trakcie przemieszczania siê po stoku. Jak opisano w podrozdziale \ref{subsec:3d}, w celu uproszczenia sposobu przemieszczania siê narciarza, zdecydowano, ¿e bêdzie siê on poruszaæ po ³amanej. Zatem do reprezentacji rozwi±zania mo¿na przyj±æ zbiór punktów, przez które kolejno przeje¿d¿a narciarz, poruszaj±c siê miêdzy tymi punktami wy³±cznie po linii prostej.
+Klasyczny model obliczeñ Volunteer Computing sk³ada³a siê z aplikacji klienckich, pobieranych z internetu oraz zainstalowanych na komputerze osobistym, oraz serwera, zarz±dzaj±cego wysy³aniem zadañ i odbieraniem rozwi±zañ. 
+
+Konieczno¶æ pobierania i instalowania aplikacji na komputerze implikuje wymóg tworzenia i utrzymywania wersji aplikacji pod ka¿dy znacz±cy system operacyjny. Wybór odpowiedniej kompilacji programu klienckiego oraz proces jego instalacji jest pierwsz± barier± jak± napotyka osoba chc±ca mieæ swój wk³ad do naukowego projektu.
+
+Wobec stale rosn±cej popularno¶ci urz±dzeñ nie bêd±cych komputerami osobistymi, a równie¿ posiadaj±cymi niewykorzystywan± w pe³ni moc± obliczeniow±, równie¿ i one zaczynaj± byæ uwzglêdniane w modelu Volunteer Computing. Konsola Play Station 3 by³a pierwszym urz±dzeniem tego typu. W sierpniu 2013 udostêpniono natomiast aplikacjê do naukowych projektów, dziêki której mo¿na w³±czyæ siê do projektów obliczeniowych po¶wiêcaj±c zasoby obliczeniowe swojego urz±dzenia z systemem Android. \cite{BOINCAndroid}
+
+W ostatnich latach mo¿na zaobserwowaæ trend przenoszenia oprogramowania, które dotychczas zainstalowane by³o na komputerach jako natywna aplikacja, do modelu SAAS (Software As A Service). SAAS to model dostarczania oprogramowania, w którym wszelkie interakcje z oprogramowaniem dokonywane s± za po¶rednictwem przegl±darki internetowej, nie wymagaj±c instalacji dodatkowego oprogramowania po stronie u¿ytkownika. W modelu SAAS, aplikacji uruchomiona jest na zdalnym serwerze, a wszelkie dane, które przetwarza przechowywane s± równie¿ na serwerach w chmurze. Programy pocztowe, funkcjonalne systemy CRM, czy odtwarzacze muzyczne coraz czê¶ciej dostêpne s± w³asnie w modelu SAAS. Taka zmiana mo¿liwa by³a dziêki rozwojowi interpreterów Java Script we wspó³czesnych przegl±darkach, oraz implementacji zaawansowanych elementów ze specyfikacji HTML5, w tym, Web Workers.
+
+W tym rozdziale zaprezentujemy przekrój obecnie najbardziej znacz±cych projektów korzystaj±cych z modelu Voluneteer Computing oraz platform, które te projekty wykorzystuj±.
+
+\subsection{Great Internet Mersenne Prime Searchy}
+\label{sec:gimps}
+Pierwszym projektem wykorzystuj±cym Volunteer Computing jest \textit{GIMPS} (Great Internet Mersenne Prime Search) - rozpoczêty na pocz±tku 1996 roku a trwaj±cy do dzi¶ projekt, którego celem jest znalezienie jak najwiêkszej ilo¶ci specyficznych liczb pierwszych - tzn. Liczb Pierwszych Marsenne'a. Do tej pory kolektywny wysi³ek doprowadzi³ do odnalezienia czternastu takich liczb. Zsumowana moc obliczeniowa systemu da³aby teoretycznie, wg. danych na listopad 2013 roku, 330-te miejsce w rankingu TOP500 - rankingu najmocniejszych komputerów na ¶wiecie. 
+
+System sk³ada siê z aplikacji klienckich stworzonych dla 9 ró¿nych wersji systemów operacyjnych (m.in. Windows 32/64-bit, Mac OS X, Linux 32/64-bit, FreeBSD 32/64-bit). Twórcy zapewniaj±, ¿e kod programu jest wysoce zoptymalizowanym kodem asemblerowym. Po uruchomieniu, program nawi±zuje kontakt z serwerem nazwanym \textit{PrimeNet}, aby otrzymaæ porcjê zadania obliczeniowego do przetworzenia.
+
+\textit{GIMPS} jest ciekawym projektem, który ma ju¿ na swoim koncie sukcesy i osi±gn±³ du¿y zasiêg i skalê, co potwierdzaj± publikowane regularnie informacje o nowych znaleziskach oraz wielko¶ci sieci komputerów bior±cych udzia³ w obliczeniach. Interfejs i wygoda u¿ytkowania (ang. \textit{User Experience}), które oferuje platforma, s± jednak ma³o atrakcyjne i archaiczne i zupe³nie nieprzystosowane do u¿ytkowników wspó³czesnego internetu.  
+
+\subsection{Distributed.net}
+\label{sec:DistributedNet}
+Kolejn± znacz±c± platform± do Volunteer Computing jest stworzony w 1997 roku \textit{distributed.net}. Platforma powsta³a oryginalnie w celu brania udzia³u w konkursach organizowanych przez RSA Laboratory, tzw. RSA Secret-Key Challenge. Konkursy te polega³y na uhonorowaniu pierwszej osoby, która znalaz³a klucz u¿yty do szyfrowania tekstu oraz odszyfrowa³a za jego pomoc± tekst zaszyfrowany jednym ze znanych algorytmów szyfruj±cych. Konkursy mia³y na celu zademonstrowanie stopnia bezpieczeñstwa algorytmu szyfruj±cego u¿ywaj±cego kluczy o ró¿nej d³ugo¶ci. Nagrod± by³o 10000 dolarów. Sieæ ochotników podpiêtych do systemu \textit{distributed.net} z³ama³a 56 bitowy klucz u¿yty przez szyfr blokowy RC5 do zaszyfrowania zdania: \textit{``The unknown message is: It's time to move to a longer key length''}. Metod± przyjêt± do z³amania tego szyfru by³ najprostszy algorytm typu \textit{brute-force}, która to dziêki modelowi Volunteer Computing przynios³a pozytywne skutki po 250 dniach poszukiwañ ca³ej przestrzeni rozwi±zañ.
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{model/lamana}
-\caption{Sposób reprezentacji rozwi±zañ problemu}
-\label{fig:lamana}
+\includegraphics[width=0.5\textwidth]{distributedNet}
+\caption{Pobranie aplikacji klienckiej powoduje wygenerowanie ostrze¿enia dotycz±cego bezpieczeñstwa.}
+\label{fig:distributedNet}
 \end{figure}
 
-W zaproponowanym rozwi±zaniu narzucamy z góry, co ile metrów w pionie stoku ma znajdowaæ siê punkt, przez który bêdzie musia³ przejechaæ narciarz. Mo¿na wyobraziæ to sobie jako zbiór poziomych linii, z której ka¿da wyznacza mo¿liwe po³o¿enie pojedynczego punktu. Na rysunku \ref{fig:lamana} zosta³y przedstawione te linie oraz bramki (kolor niebieski). Strza³ki pokazuj± jak mo¿na przesuwaæ ka¿dy z tych punktów w celu zmiany trasy przejazdu i otrzymania nowego rozwi±zania. Zosta³o narzucone, ¿e narciarz musi przejechaæ jak najbli¿ej ka¿dej wewnêtrznej czê¶ci bramki, co oznacza do³o¿enie punktów w tym miejscu. Ogranicza to znacznie liczbê rozwi±zañ, które nale¿y sprawdziæ i dziêki temu przyspiesza dzia³anie algorytmu. Takie za³o¿enie bazuje równie¿ na do¶wiadczeniu narciarzy z jazdy po slalomach, gdy¿ w wiêkszo¶ci przypadków przeje¿d¿anie tu¿ przy bramkach jest najkorzystniejsze. Zdarza siê oczywi¶cie, ¿e np. dla tzw. bramek otwartych opisanych w rozdziale \ref{sec:alpineSkiing} czêsto lepiej wybraæ trochê inn± trasê. W tych przypadkach konieczne jest zrezygnowanie z takiego ograniczenia, jednak nale¿y liczyæ siê z tym, ¿e czas poszukiwania najlepszego rozwi±zania wyd³u¿y siê, zw³aszcza je¶li takich miejsc jest wiêcej.
+Program \textit{distributed.net} trwa dalej mimo, ¿e RSA Laboratory wycofa³o siê ju¿ z fundowania nagród za ³amanie kolejnych coraz to d³u¿szych kluczy. Osoba chc±ca do³±czyæ do ochotników nie ma jednak ³atwego zadania i proces do³±czania do programu nie jest przyjemnym do¶wiadczeniem. Nale¿y wej¶æ na stronê \textit{distributed.net} i wybraæ odpowiedni dla swojego systemu operacyjnego program kliencki. Wybór jest spory i mo¿e przysporzyæ problemów mniej obeznanym w komputerach osobom, gdy¿ wyró¿nione s± nie tylko nazwy systemów, ale i architektury (np. Windows x86/CUDA-2.2, x86/CUDA-3.1). Po zdecydowaniu siê ju¿ na który¶ z programów i po zakoñczonym pobieraniu, u¿ytkownik mo¿e dostaæ gro¼nie wygl±daj±cy komunikat, w którym zostanie ostrze¿ony przez system operacyjny, ¿e program jest potencjalnie szkodliwy dla komputera, jak przedstawiono na rysunku \ref{fig:distributedNet} na stronie ~\pageref{fig:distributedNet}.
 
-Zatem pozostaje okre¶liæ, w jaki sposób mo¿emy stwierdziæ, ¿e dane rozwi±zanie jest najlepsze. W tym przypadku chcemy, aby narciarz w jak najkrótszym czasie dotar³ do mety prawid³owo przeje¿d¿aj±c przez wszystkie bramki. Maj±c dane rozwi±zanie w postaci punktów wyznaczaj±cych ³aman±, obliczamy ile czasu zajmie narciarzowi przejechanie po tej trasie. Im mniejsza warto¶æ tym rozwi±zanie jest lepsze. Zatem funkcja celu dla tego problemu maj±c na wej¶ciu ci±g punktów wyznaczaj±cych trasê przejazdu, zwraca czas potrzebny na jej pokonanie.
-
-\subsection{Algorytm ewolucyjny}
-\label{sec:ewolucyjnyRozw}
-Opisana w poprzednim podrozdziale reprezentacja rozwi±zania to w zastosowanym algorytmie ewolucyjnym pojedynczy osobnik, a punkty sk³adaj±ce siê na to rozwi±zanie, a ¶ci¶lej, ich po³o¿enie w pozycji poziomej, okre¶laj± genotyp ka¿dego osobnika. Poniewa¿ korzystamy ze strategii ewolucyjnych, nie wprowadzamy tu kodowania binarnego, pozycja ka¿dego punktu jest zapamiêtywana jako warto¶æ rzeczywista.
-
-Dodatkowo do genotypu wchodzi tak¿e zestaw parametrów $\sigma$, które w strategiach ewolucyjnych u¿ywane s± podczas mutacji, tak jak opisano to w rozdziale \ref{sec:ewolucyjny} w czê¶ci ``Typy algorytmów ewolucyjnych'' w opisie strategii ewolucyjnych. Ka¿demu punktowi przypisana jest osobna warto¶æ $\sigma$ - reprezentuj±ca odchylenie standardowe warto¶ci $y$ tego punktu.
-
-Zastosowany algorytm wykorzystuje strategiê ($\mu$ + $\lambda$) opisan± w rozdziale \ref{sec:ewolucyjny}. Jako pocz±tkow± populacjê wybieramy losowe osobniki - warto¶ci $y$ punktów s± ograniczone jedynie przez warto¶ci $y$ po³o¿enia dwóch najbli¿szych bramek. Jest to kierowane konieczno¶ci± zadbania o szybsze znalezienie rozwi±zania - zbyt du¿e odleg³o¶ci mo¿na z góry odrzuciæ opieraj±c siê na do¶wiadczeniach z rzeczywistej jazdy narciarza po slalomie. Wielko¶æ populacji bazowej $\mu$ jest jednym z parametrów programu, warto¶æ ta wynosi w testach 30 - 60. Warto¶æ parametru $\lambda$ tak¿e jest parametrem, w testach u¿yto wielko¶ci 100 - 200. Warto¶ci te porównywalne s± z sugerowanymi w literaturze. \cite{arabas}
-
-Szkielet algorytmu zgodny jest z zastosowan± strategi± - po wylosowaniu z istniej±cej populacji populacji tymczasowej o wielko¶ci $\lambda$, dokonuje siê na jej osobnikach operacji genetycznych, najpierw krzy¿owania, a nastêpnie mutacji na osobnikach otrzymanych z krzy¿owania. Kolejnym krokiem jest ocenienie nowych osobników i wybranie spo¶ród nich oraz populacji pocz±tkowej osobników o najlepszym przystosowaniu, tak aby one stanowi³y now± populacjê bazow±.
-
-\subsubsection{Krzy¿owanie}
-Aby dokonaæ krzy¿owania potrzebne s± pary rodziców dla ka¿dego nowego osobnika. Aby utrzymaæ wielko¶æ populacji tymczasowej, losujemy (ze zwracaniem) $\lambda$ par spo¶ród populacji tymczasowej. Krzy¿owanie rodziców sprowadza siê do obliczenia ¶redniej warto¶ci $y$ po³o¿enia odpowiadaj±cych sobie punktów oraz parametrów $\sigma$.
-
-\subsubsection{Mutacja}
-Po krzy¿owaniu mamy znowu w populacji tymczasowej $\lambda$ osobników. Mutacja osobników przeprowadzana jest zgodnie ze strategi± - wykorzystywane s± warto¶ci odchyleñ standardowych odpowiadaj±cych kolejnym punktom. Jedynie punkty, które s± przy bramkach nie podlegaj± mutacji. Wynika to z wcze¶niejszego za³o¿enia, ¿e i tak te punkty nale¿± do rozwi±zania najlepszego.
-
-\subsubsection{Warunek zakoñczenia}
-Wybór warunku zakoñczenia algorytmu zawsze sprawia wiele problemów. Nie jest ³atwo zdecydowaæ na jakiej podstawie zatrzymywaæ jego dzia³anie. Czêsto korzysta siê z informacji o rozrzucie przystosowania w populacji - obliczamy go na podstawie ró¿nicy pomiêdzy najlepszym i najgorszym osobnikiem. Je¶li rozrzut ten jest niewielki mo¿e oznaczaæ stagnacjê algorytmu. Niekoniecznie ¶wiadczy to o znalezieniu dobrego rozwi±zania, ale w po³±czeniu z dodatkowymi mechanizmami mo¿e byæ skuteczn± metod± podjêcia decyzji o zakoñczeniu optymalizacji.
-
-W rozwi±zaniu brany jest zatem równie¿ pod uwagê taki wska¼nik jak poprawa najlepszego obecnego rozwi±zania. Je¶li przez okre¶lon± liczbê iteracji, najczê¶ciej kilka lub kilkana¶cie, najlepsze rozwi±zanie nie poprawia siê w ogóle, a populacja jest bardzo ma³o zró¿nicowana to jest to znak, ¿e znalezione rozwi±zanie powinno byæ wystarczaj±co bliskie najlepszego. Oczywi¶cie steruj±c liczb± iteracji, przez które sprawdzamy zmiany, oraz wielko¶ci± rozrzutu populacji mo¿emy znajdowaæ lepsze lub gorsze rozwi±zania kosztem wyd³u¿enia lub skrócenia czasu obliczeñ.
-
-\subsection{Hill climbing}
-Problem optymalizacji trasy narciarza mo¿na rozwi±zywaæ stosuj±c algorytm ewolucyjny, jednak problemem mo¿e byæ d³ugi czas wykonywania siê programu. S³aba poprawa wyników mo¿e wystêpowaæ zw³aszcza w koñcowej fazie dzia³ania. Widoczne s± wtedy niepotrzebne próby przeszukiwania zbyt odleg³ych rozwi±zañ, a jednak wci±¿ znalezione rozwi±zanie nie jest jeszcze tak dobre, jak mo¿na by tego oczekiwaæ. Wiedz±c, ¿e rozwi±zanie jest ju¿ dosyæ bliskie najlepszemu mo¿na z du¿ym prawdopodobieñstwem za³o¿yæ, ¿e wystarczy znale¼æ rozwi±zanie lokalnie optymalne, aby by³o ono satysfakcjonuj±ce. Oczywi¶cie nie mamy pewno¶ci, ¿e bêdzie to rozwi±zanie globalnie optymalne, ale najczê¶ciej takiej pewno¶ci mieæ nie mo¿emy. Problemem mo¿e wci±¿ byæ jednak decyzja kiedy nale¿y przej¶æ na algorytm lokalnej optymalizacji.
-
-Zastosowanie algorytmu lokalnej optymalizacji powinno pomóc w koñcowej fazie poszukiwañ. Z tego powodu u¿yty zosta³ algorytm Hill climbing opisany w rozdziale \ref{sec:hill}. W ka¿dym kroku algorytmu sprawdzane jest czy zmiana pojedynczej zmiennej - w tym wypadku poziomej pozycji punktu przejazdu, daje poprawê wyniku. Je¶li zmiany te nie przynosz± znacz±cych rezultatów, s± mniejsze ni¿ narzucony parametr $\epsilon$, algorytm zatrzymuje swoje dzia³anie. Warto¶æ $\epsilon$ wynosi przewa¿nie w testach 0.00001. W przypadku parametrów typowych dla tego algorytmu postanowiono wybraæ warto¶ci: dla przyspieszenia standardowa - 1.2, natomiast dla kroku, mniejsz± ni¿ zwykle, bo wynosz±c± 0.5 (odpowiada to wielko¶ci 0.5 metra). Zmiana ta wynika z za³o¿enia, ¿e aby znale¼æ rozwi±zanie jak najlepsze, nie trzeba zmieniaæ warto¶ci $y$ ¿adnego z punktów o wiêcej ni¿ wybrane 0.5 m.
-
-%---------------------------------------------------------------------------
-
-\section{Modelowanie karania}
-\label{sec:karanie}
-
-W celu jak najdok³adniejszego zamodelowania zmian prêdko¶ci podczas poruszania siê po ³amanej, testowany by³ szereg modeli. Konieczno¶æ wprowadzenia takich mechanizmów staje siê oczywista, gdy u¶wiadomimy sobie, ¿e im mniejszy jest k±t pomiêdzy kolejnymi odcinkami pokonywanej ³amanej, tym bardziej jest to kosztowne w realnej sytuacji pod wzglêdem utraty prêdko¶ci. Dla zobrazowania sytuacji, rozwa¿my przej¶cie ze stanu jazdy w linii spadku stoku do jazdy prostopad³ej do linii spadku stoku. Aby tego dokonaæ narciarz musi przyhamowaæ do zera. Z kolei im k±t jest bardziej zbli¿ony do 180 stopni tym mniejszy jest efekt przyhamowania, gdy¿ w realnym przypadku, zmiana kierunku jazdy jest wykonywana w p³ynnym ³uku.
+Ufaj±c dostawcy, po zdecydowaniu siê na zainstalowanie programu, otwiera siê ma³o przyjazny interfejs konsolowy, który widaæ na rysunku \ref{fig:distributedNetConsole} na stronie ~\pageref{fig:distributedNetConsole}.
 
 \begin{figure}[h]
 \centering
-\includegraphics[height=100px]{punish}
-\caption{Fragment ³amanej jako toru przejazdu}
-\label{fig:punish}
+\includegraphics[width=0.5\textwidth]{distributedNetConsole}
+\caption{Ma³o przyjazny interfejs konsolowy programu \textit{distributed.net}}
+\label{fig:distributedNetConsole}
 \end{figure}
 
-\subsection{Strategia sumowania pochodnych}
-\label{sec:strategiaPochodnych}
+\subsection{Berkeley Open Infrastructure for Network Computing}
+\label{sec:BOINC}
+Do stworzenia platformy BOINC (Berkeley Open Infrastructure for Network Computing), obecnie najbardziej znacz±cego open-source'owego middleware'u do obliczeñ w modelu Volunteer i Grid Computing, przyczyni³ siê projekt SETI@home.
 
-Pierwsza strategia opiera siê na obliczaniu kolejno przybli¿enia drugich pochodnych funkcji za pomoc± ilorazów ró¿nicowych w ka¿dym kolejnym punkcie trasy a nastêpnie zsumowaniu ich bezwzglêdnych warto¶ci. 
+SETI@home to program rozpoczêty w maju 1999 roku na uniwersytecie Berkeley, maj±cy na celu analizê kosmicznego szumu radiowego i odnalezienie w nim sygna³ów pochodz±cych od pozaziemskich cywilizacji. Przed migracj± do BOINC, projekt obs³ugiwa³ system posiadaj±cy wiele luk bezpieczeñstwa. Kwestie, na które na pocz±tku nie by³o nacisku, czyli wiarygodno¶æ zwracanych przez 'wolontariuszy' wyników, wraz z rozwojem projektu zaczê³y odgrywaæ coraz wiêksze znaczenie, gdy¿ zauwa¿ono, ¿e niektóre rozwi±zania by³y w ca³o¶ci fa³szowane. 
 
-\begin{equation}
-\ddot{d_i} = \frac{x_1 + x_3 - 2x_2}{(y_3 -y_2) (y_2-y_1) }
-\end{equation}
+Obecnie platforma BOINC umo¿liwia weryfikacjê wyników. Opiera siê ona przede wszystkim na wysy³aniu tych samych zadañ do wielu klientów i porównywaniu wyników. W programie jest obecnie ponad 40 projektów. Instaluj±c klienta na swojej maszynie mo¿na braæ udzia³ w wybranych przez siebie projektach. 
 
-\begin{equation}
-k =  \sum\limits_{i=1}^{n-1} |\ddot{d_i}|^{3} 
-\end{equation}
+Serwer BOINC mo¿e byæ uruchomiony na jednej lub wielu maszynach z systemem operacyjnym Linux, a bazuje na technologiach Apache, PHP i MySQL.
 
-Powsta³± liczbê $k$ mo¿na traktowaæ jako wspó³czynnik, którego ma³a bezwzglêdna warto¶æ oznacza bardzo ³agodne k±ty przej¶cia na ca³ej trasie natomiast im wiêksza ,,kanciasto¶æ'' trasy tym wiêksza warto¶æ tego wspó³czynnika. Dodatkowo, przed zsumowaniem, warto¶æ bezwzglêdna przybli¿onej drugiej pochodnej jest podnoszona do trzeciej potêgi. Wyliczony wspó³czynnik dla ka¿dej z rozwa¿anych w algorytmie tras jest mno¿ony przez obliczony czas przejazdu tej trasy. Dopiero taka liczba jest traktowana jako warto¶æ funkcji celu algorytmu genetycznego. Minusem tej strategii jest przeskalowanie realnego czasu przejazdu narciarza po zadanym torze, a zatem brak mo¿liwo¶ci porównania go do wyników uzyskiwanych innymi metodami.
+Struktura klienta sk³ada siê z:
 
-\subsection{Strategia proporcjonalnego zmniejszania warto¶ci wektora prêdko¶ci}
-\label{sec:strategiaZmniejszania}
+\begin{itemize}
+\item programu \textit{boinc}, który zajmuje siê komunikacj± z serwerem oraz zarz±dzaniem aplikacjami naukowymi, które wykonuj± ju¿ konkretne obliczenia,
+\item jednej lub wielu aplikacji naukowych. Aplikacja naukowa zwi±zana jest z konkretnym projektem, w którym klient bierze udzia³ i zajmuje siê obliczeniami dla dostarczonych jej czê¶ci obliczeñ. Uaktualnianiem aplikacji zajmuje siê \textit{boinc},
+\item programu \textit{boincmgr} - GUI, które komunikuje siê z \textit{boinc} przy u¿yciu zdalnego wywo³ania procedur. GUI napisane jest w cross-platformowym toolkicie \textit{WxWidgets}. Poprzez GUI u¿ytkownik mo¿e wybraæ nowe aplikacje naukowe, monitorowaæ postêp prowadzonych przez siebie obliczeñ oraz przegl±daæ logi systemu BOINC,
+\item BOINC'owego wygaszacza ekranu. Jest to framework, dziêki któremu aplikacje naukowe mog± wy¶wietlaæ w atrakcyjny graficznie sposób np. animacje czy te¿ wykresy wyja¶niaj±ce prowadzone obliczenia.
+\end{itemize}
 
-W tej strategii, dla ka¿dego wierzcho³ka ³amanej, obliczamy indywidualny wspó³czynnik kary $m$ z zakresu od 0 do 1. D³ugo¶æ wektora prêdko¶ci w ka¿dym kolejnym punkcie bêdzie mno¿ona przez wspó³czynnik dla tego punktu. Modelowane bêdzie zatem przyhamowywanie - tym wiêksze, im wiêkszy jest k±t pomiêdzy kolejnymi punktami ³amanej. Wspó³czynnik w danym punkcie zale¿y od k±ta ABC z rysunku \ref{fig:punish} pomiêdzy poprzednim a nastêpuj±cym punktem. Zaproponowana zosta³a nastêpuj±ca funkcja, zmierzaj±ca do zera dla k±ta 90 stopni i mniejszego, i zmierzaj±ca do jedynki dla 180 stopni.
+Obecnie prawie trzy miliony ludzi udostêpnia zasoby swoich osobistych komputerów do obliczeñ zwi±zanych tyko z projektem \textit{SETI@home}. Opiekunom projektu BOINC zale¿y na rozwoju kultury udostêpniania swoich zasobów na rzecz naukowych obliczeñ. Interfejs systemu jest przyjazny, a sam system ³atwy w instalacji.
 
+\subsection{Urz±dzenia mobilne w rozproszonych obliczeniach naukowych}
+\label{sec:mobilne}
 
-\begin{equation}
-m\left(\alpha\right) = \left \{ {{0.01, \alpha \in \left( 0, 90\right)} \atop {1- \left(  \frac{\alpha}{180} - 1.5  \right)^{6}, \alpha \in \left[ 90, 180\right) }} \right.
-\end{equation} 
-  
- 
+Sekcja napisana na podstawie \cite{BOINCAndroid}.
+
+Przez dziesiêciolecia miliony ludzi udostêpnia³y zasoby swoich maszyn, aby wspomóc naukê. Jednak komputery typu PC s± coraz mniej popularne, a ich sprzeda¿ spada o prawie 8\% rocznie. Prognozy jasno wskazuj± na to, ¿e ten trend siê utrzyma. Z drugiej strony, bardzo dynamicznie rozwija siê rynek urz±dzeñ mobilnych, w tym smartphonów. Wed³ug serwisu Bloomberg, do koñca roku 2013, na rynek zostanie dostarczonych 919 milionów nowych urz±dzeñ, co jest 27\%-owym wzrostem w stosunku do roku 2012. \cite{BOINCAndroid}
+
+Do niedawna, telefony tego typu nie mia³y wystarczaj±cych zasobów, by prowadziæ obliczenia naukowe. Obecnie maj± nawet cztery rdzenie i mog± wykonywaæ pó³tora miliarda operacji numerycznych na sekundê (1.5 giga FLOPSów), co odpowiada oko³o jednej pi±tej tego co potrafi± wspó³czesne komputery osobiste. David Anderson, naukowiec z Berkeley, który wspó³tworzy mobiln± aplikacjê, która jest furtk± do naukowych obliczeñ na smartphonach, twierdzi, ¿e jako ¿e hardware mobilnych urz±dzeñ jest obecnie najbardziej rozwijan± ga³êzi± urz±dzeñ elektronicznych, ju¿ wkrótce moc obliczeniowa tych urz±dzeñ mo¿e wyrównaæ obecne osi±gi komputerów osobistych. Miêdzy innymi z tego powodu warto zacz±æ uwzglêdniaæ urz±dzenia mobilne w roli potencjalnego wykonawcy intensywnych obliczeñ.
+
+Ciekaw± koncepcj± jest obliczeniowa sieæ stworzona z ogromnej liczby urz±dzeñ, która mog³aby rywalizowaæ z takimi dostawcami us³ug jak Amazon Web Services. W tym momencie warto¶æ rynku komercyjnych obliczeñ w chmurze osi±gnê³a 131 miliardów dolarów. Sieæ stworzona z telefonów mo¿e byæ jego tañszym odpowiednikiem i umo¿liwiæ na przyk³ad firmie farmaceutycznej p³acenie po kilkadziesi±t centów miesiêcznie za udostêpnienie swojego urz±dzenia np. przez noc do potrzebnych jej obliczeñ. Wizjê t± roztacza Bernie Meyerson, wiceprezydent innowacji w firmie IBM. \cite{BOINCAndroid}
+
+W sierpniu 2013 w g³ównym sklepie z aplikacjami na system Android - Google Play, pojawi³a siê oficjalna aplikacja stworzona przez zespó³ BOINC z Berkeley. Aplikacja umo¿liwia posiadaczowi smartphona w bardzo przyjazny sposób na do³±czenie do obliczeñ. 
+Rozwa¿anie u¿ycia urz±dzeñ mobilnych do obliczeñ wywo³uje pytanie o zu¿ycie baterii. Aplikacja zaprojektowana jest tak, by daæ u¿ytkownikowi pe³n± kontrolê nad tym jakie warunki musz± zaj¶æ, aby prowadzone by³y obliczenia (prowadz±ce do szybszego zu¿ycia baterii). Warunkami tymi mo¿e byæ np. pod³±czenie do ¼ród³a zasilania oraz poziom zu¿ycia baterii powy¿ej zadanego progu.
+
 \begin{figure}[h]
 \centering
-\includegraphics[height=70px]{punish-fun-1} 
-\caption{Wykres funkcji}
-\label{fig:punish} 
+\includegraphics[height=200px]{boinc-app-benchmark}
+\caption{Proces benchmarkowania urz±dzenia, po pierwszym uruchomieniu aplikacji BOINC na system Android}
+\label{fig:boinc-app-benchmark}
 \end{figure}
 
-\subsection{Strategia karania za ka¿d± zmianê krawêdzi}
-\label{sec:strategiaKrawedzi}
+\begin{figure}[h]
+\centering
+\includegraphics[height=200px]{boinc-app}
+\caption{Aplikacja BOINC w trakcie obliczeñ dokonywanych na platformie z systemem Android}
+\label{fig:boinc-app}
+\end{figure}
 
-Ostatnia strategia przyjmuje, ¿e nie ma potrzeby wykonywaæ dodatkowych skrêtów pomiêdzy bramkami. Choæ teoretycznie jest mo¿liwe, by taki dodatkowy skrêt pozwala³ uzyskaæ lepszy czas, to jednak jest to niespotykane podczas rzeczywistej jazdy po slalomach. Dlatego w strategii tej zlicza siê liczbê zmian kierunku jazdy na testowanym torze i porównuje j± z ilo¶ci± bramek wymuszaj±cych skrêt na trasie. Otrzymujemy zatem liczbê nadmiarowych zmian krawêdzi, które w ka¿dym przypadku powoduj± gorszy czas przejazdu ni¿ gdyby ich nie by³o. Aby to zatem zamodelowaæ, w tej strategii dodajemy do wyliczonego czasu przejazdu sta³± liczbê sekund kary za ka¿d± niepotrzebn± zmianê krawêdzi i to traktujemy jako warto¶æ funkcji celu algorytmu ewolucyjnego.
+\subsection{Folding@home}
+\label{sec:folfingathome}
+Projekt Folding@home wywodz±cy siê z Amerykañskiego Uniwersytetu Stanford by³ pierwszym projektem w modelu Volunteer Computing, w którym wziêto pod uwagê, ¿e potencja³ Volunteer Computing nie zamyka siê tylko na komputerach osobistych i wykorzystaniu jednostek CPU, ale tak¿e coraz bardziej rozwijanych jednostkach GPU, procesorach na PlayStation 3.
 
-%---------------------------------------------------------------------------
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{foldingStart}
+\caption{Przyjazny u¿ytkownikowi ekran powitalny interfejsu aplikacji \textit{Folding@home}}
+\label{fig:foldingStart}
+\end{figure}
 
-\section{Architektura systemu}
-\label{sec:architektura}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{foldingMonitor}
+\caption{Monitorowanie postêpu obliczeñ poprzez interfejs aplikacji\textit{Folding@home}}
+\label{fig:foldingMonitor}
+\end{figure}
 
-Wybór docelowej architektury dla naszego systemu zosta³ poprzedzony eksperymentowaniem z dwoma ró¿nymi, zgo³a odmiennymi podej¶ciami. Dziêki temu, zosta³y przeanalizowane mocne i s³abe punkty ka¿dej z nich, a ostatecznie wybrane rozwi±zanie spe³nia wszystkie potrzeby.
+Folding@home jest jednym z najwiêkszych systemów komputerowych na ¶wiecie. Jego moc obliczeniow± szacuje siê na oko³o 14 petaFLOSPów, czyli na wiêksz± warto¶æ ni¿ moc wszystkich projektów, które s± przetwarzane na wywodz±cej siê z Berkeley platformie BOINC. W 2007 r. zosta³ wpisany do ksiêgi rekordów Guinessa jako system rozproszony o najwiêkszej mocy obliczeniowej. Stan na czerwiec 2013 r. wskazuje prawie pó³ miliona aktywnych CPU oraz prawie 25 tysiêcy aktywnych GPU.
 
-\subsection{Architektura prototypowa}
+Folding@home jako pierwszy du¿y projekt wykorzysta³ te¿ model Message Passing Interface. Pojedynczy klienci dostaj± z serwera czê¶æ symulacji i po jej wykonaniu odsy³aj± j± z powrotem do serwera, w którym czê¶ci s± ³±czone i stwarzaj± ca³o¶ciow± symulacjê. Co ciekawe, ochotnicy bior±cy udzia³ w symulacjach, mog± ¶ledziæ swój wk³ad w projekt Folding@home poprzez stronê internetow±. 
 
-Pierwszym wybranym przez nas ¶rodowiskiem tworzenia systemu by³ jêzyk Python i dostêpne dla niego modu³y: VPython umo¿liwiaj±cy wizualizacjê w 2D i 3D oraz biblioteki numeryczne NumPy i SciPy wykorzystywane do rozwi±zywania równañ ró¿niczkowych. 
+Mo¿na zaobserwowaæ, ¿e techniki grywalizacyjne zaczê³y byæ coraz szerzej wprowadzane do projektów Volunteer Computing w celu utrzymania zainteresowania ochotników w braniu udzia³u w projekcie.
 
-Dobrze znany nam jêzyk pozwoli³ nam na szybkie prototypowanie i testowanie pierwszego fizycznego modelu narciarza. Wizualizacja by³a prosta w implementacji, a biblioteki numeryczne wystarczaj±co dobrze udokumentowane i powszechnie u¿ywane, co zapewnia³o ich stabilno¶æ i jako¶æ. Szybko ujawni³y siê jednak wady wybranego ¶rodowiska - uruchomienie naszego programu wymaga³o od u¿ytkownika instalacji z³o¿onego ¶rodowiska do obs³ugi jêzyka Python oraz graficznych i numerycznych bibliotek, co by³o istotn± barier±. Stanowi³o to powa¿ny problem, bior±c pod uwagê potencjaln± mo¿liwo¶æ rozpraszania obliczeñ. Zda³y¶my sobie sprawê, ¿e rozwi±zywany przez nas problem i otrzymywane przez nas wyniki s± atrakcyjne wizualnie i ludzie zwi±zani z narciarstwem z chêci± mog± wzi±æ udzia³ w obliczeniach i udostêpniæ nam zasoby obliczeniowe swoich komputerów. Wiedzia³y¶my, ¿e warunkiem koniecznym by zrealizowaæ tê wizjê jest ³atwo¶æ w do³±czaniu do obliczeñ, wizualizacji wyników i bezproblemowa konfiguracja. Bior±c to pod uwagê, zdecydowa³y¶my, ¿e potrzebujemy innego ¶rodowiska.
+Grywalizacja to wykorzystanie technik stosowanych do stymulowania zaanga¿owania graczy w grach (np. poprzez przyznawanie punktów czy odznak), aby wp³ywaæ na zachowanie ludzi w sytuacjach nie zwi±zanych z grami.
 
-\subsection{Architektura docelowa}
+Folding@home wprowadza elementy grywalizacyjne poprzez zastosowanie systemu punktowego. Osoby udostêpniaj±ce swoje zasoby dostaj± punkty za ka¿de wykonane zadanie, dodatkowe punkty mo¿na zdobywaæ za szybkie wykonanie pewnych zadañ, które s± szczególnie wymagaj±ce obliczeniowo albo maj± wiêkszy priorytet ze wzglêdu na warto¶æ naukow±. Dziêki w³±czeniu do programu pod jednym loginem wielu swoich maszyn, mo¿na gromadziæ wiêcej punktów. Ogólnym za³o¿eniem systemu punktowego jest motywowanie ochotników do coraz wiêkszego zaanga¿owania i w³±czania znajomych do wspólnej zabawy ³±czonej z grywalizacj±. Statystyki, zarówno poszczególnych dru¿yn, jak i indywidualnych osób s± widoczne na stronie g³ównej projektu.
 
-Potrzeba ³atwo¶ci do³±czania do obliczeñ sk³oni³a nas do stworzenia systemu, w którym klientami obliczeniowymi s± przegl±darki internetowe. Klienci chc±cy pod³±czyæ siê do obliczeñ wchodz± na dobrze znany adres internetowy sk±d serwowana jest strona g³ówna i skrypty, które dokonuj± obliczeñ. Na ¿±danie klienta, dostaje on ze zdalnego serwisu egzemplarz problemu, który jest nastêpnie lokalnie przetwarzany i wizualizowany klientowi na bie¿±co. Po skoñczonym obliczeniu, rozwi±zanie jest umieszczane na serwerze, a klient mo¿e przej¶æ do obliczania kolejnego lub jeszcze raz tego samego problemu.
+Oprogramowanie Folding@Home jest przyjazne. ¦ci±gniêcie i instalacja nie powoduje ¿adnych niepokoj±cych ostrze¿eñ ze strony systemu operacyjnego. Interfejs kliencki jest interfejsem webowym, daj±cym warstwê komunikacji z uruchomion± na lokalnej maszynie aplikacj± klienck± wykonuj±c± obliczenia. Twórcy platformy staraj± siê u³atwiæ rozprzestrzenianie siê informacji o mo¿liwo¶ci w³±czania siê do naukowego projektu daj±c mo¿liwo¶æ udostêpniania informacji o programie poprzez portale spo³eczno¶ciowe takie jak Facebook czy Twitter.
 
-Architektura naszego systemu sk³ada siê z dwóch g³ównych, niezale¿nych czê¶ci sk³adowych. Pierwsz± z czê¶ci jest aplikacja kliencka przeprowadzaj±ca obliczenia i wizualizacjê oraz komunikuj±ca siê z serwerem zarz±dzaj±cym obliczeniami. Drugim jest aplikacja \textit{lekkiego} serwera http, jako warstwa wystawiaj±ca REST API. Warstw± persystentn± jest dokumentowa, nierelacyjna baza danych CouchDB. Schemat architektury prezentuje rysunek \ref{fig:architektureSimple}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=360px]{architekture-simple}
-\caption{Uproszczony schemat architektury docelowej}
-\label{fig:architektureSimple}
+\includegraphics[width=0.4\textwidth]{foldingShare}
+\caption{Zachêcanie do udostêpniania informacji o programie \textit{Folding@home} w sieciach spo³eczno¶ciowych}
+\label{fig:foldingShare}
 \end{figure}
 
-
-\subsection{Aplikacja kliencka}
-
-Aplikacja kliencka to aplikacja webowa stworzona przy u¿yciu frameworku Chaplin, wprowadzaj±cego dobre praktyki w strukturyzowaniu aplikacji Java Script'owych wykorzystuj±cych bibliotekê Backbone.js. Aplikacja w ca³o¶ci napisana jest w jêzyku Coffee Script. Jest to jêzyk programowania ze sk³adni± podobn± do sk³adni Python'a, kompiluj±cy siê do Java Script'u. Powsta³y po kompilacji kod Java Script jest czytelny i przyjazny do debugowania. Programuj±c w Coffee Script mo¿na u¿ywaæ wszystkich bibliotek i modu³ów napisanych w Java Script, co daje wiele mo¿liwo¶ci z powodu szerokiego zakresu dostêpnych bibliotek w tym jêzyku. Zdecydowa³y¶my siê u¿ywaæ tego jêzyka przede wszystkim z uwagi na sk³adniê przypominaj±c± dobrze znany nam jêzyk Python, wiêksz± przejrzysto¶æ i czytelno¶æ kodu ni¿ Java Script, jednocze¶nie zachowuj±c szerokie mo¿liwo¶ci tego jêzyka.
-
-Aplikacja ma zasadniczo trzy warstwy:
-\begin{itemize}
-\item warstwê prezentacyjn± i wizualizacyjn± dla rozwi±zywanego problemu,
-\item warstwê komunikacji z serwerem,
-\item warstwê obliczeniow±.
-\end{itemize}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=360px]{diagramClientLayers}
-\caption{Uproszczony diagram sekwencji pomiêdzy poszczególnymi warstwami aplikacji klienckiej. Warstwa obliczeniowa przekazuje do warstwy prezentacji wiele tymczasowych rozwi±zañ oraz, po zakoñczeniu pe³nego cyklu obliczeñ, finalne, najlepsze rozwi±zanie, które nastêpnie przekazywane jest na serwer.}
-\label{diagramClientLayers}
-\end{figure}
-
-Komunikacje pomiêdzy poszczególnymi warstwami aplikacji klienckiej w postaci diagramu sekwencji przedstawia Diagram \ref{diagramClientLayers} na stronie \pageref{diagramClientLayers}.
-
-\subsubsection{Warstwa prezentacji}
-
-Wizualizacja zaimplementowana jest na elemencie Canvas ze specyfikacji HTML5. Wykresy wizualizuj±ce przebieg obliczeñ stworzone s± przy u¿yciu biblioteki Highcharts. Warstwa spe³nia nastêpuj±ce funkcje:
-\begin{itemize}
-\item wyja¶nienie u¿ytkownikowi jaki problem jest rozwi±zywany oraz jak mo¿e pomóc,
-\item umo¿liwienie rozpoczêcia wziêcia udzia³u w obliczeniu,
-\item prezentowanie trasy narciarskiej (uk³adu bramek), pobranej z serwera do obliczeñ,
-\item wizualizacja na bie¿±co wyników obliczeñ w postaci rozwa¿anego jako najlepszy toru przejazdu,
-\item wizualizacja statystyk algorytmu obliczaj±cego w postaci wykresów.
-\end{itemize}
-
-\subsubsection{Warstwa komunikacyjna}
-
-Komunikacja z serwerem odbywa siê poprzez REST-owe API, wykorzystuj±ce JSON-owy format do wymiany danych. Warstwa spe³nia nastêpuj±ce funkcje:
-\begin{itemize}
-\item pobieranie instancji problemu do obliczenia,
-\item wysy³anie na serwer rozwi±zania zadanego problemu,
-\item pobierania z serwera informacji o obecnie najlepszym rozwi±zaniu tego problemu.
-\end{itemize}
-
-\subsubsection{Warstwa obliczeniowa}
-
-Zastosowanie w naszej architekturze Web Worker'ów do wykonywania obliczeñ jest dobrze uzasadnione, bior±c pod uwagê ich specyfikacjê, opisan± szerzej w rozdziale \ref{webWorkers}. Obliczenia trasy przejazdu nawet dla toru z kilkoma bramkami zajmuje co najmniej kilka sekund. Worker na bie¿±co, w trakcie trwania obliczeñ, przekazuje do g³ównego procesu obs³uguj±cego UI strony, kolejne rozwa¿ane trasy. Proces UI rysuje na elemencie Canvas na bie¿±co otrzymywan± trasê.
-
-\subsection{Aplikacja serwerowa}
-
-Aplikacja jest lekkim serwerem Http napisanym w ¶rodowisku Node.js. U¿ytym jêzykiem programowania, podobnie jak w aplikacji klienckiej, jest Coffee Script. Serwer wystawia REST-owe API, u¿ywaj±c do wymiany danych JSON-owego formatu serializacji. Serwer komunikuje siê z dokumentow± baz± danych CouchDB. Podstawowymi funkcjami serwera s±:
-
-\begin{itemize}
-\item umo¿liwienie dodania instancji problemu obliczeniowego do bazy danych,
-\item zwracanie na ¿±danie problemu obliczeniowego do rozwi±zania,
-\item zwracania informacji o obecnych dostêpnych rozwi±zaniach ka¿dego z problemów obliczeniowych.
-\end{itemize} 
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=360px]{diagramClientServerDb}
-\caption{Uproszczony diagram sekwencji pomiêdzy poszczególnymi komponentami systemu oraz warstw± persystencji}
-\label{diagramClientServerDb}
-\end{figure}
-
-Diagram \ref{diagramClientServerDb} na stronie \pageref{diagramClientServerDb} pokazuje sekwencjê komunikacji pomiêdzy komponentami systemu oraz warstw± persystencji.
-
-\subsection{Interfejs systemu udostêpniony u¿ytkownikowi}
-
-Efektem widocznym dla koñcowego u¿ytkownika powsta³ej na potrzeby tej pracy aplikacji jest strona www, dostêpna pod adresem URL - \textit{http://giant-client.herokuapp.com/}. Na stronie, poza krótkim wyt³umaczeniem celu projektu i sposobu w jaki ka¿dy odwiedzaj±cy mo¿e pomóc w obliczeniach, znajduje siê jedno wyra¼ne tzw. ``call to action'' - du¿y przycisk zachêcaj±cy do rozpoczêcia obliczeñ.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=400px]{interfejs-1}
-\caption{Strona g³ówna zachêcaj±c± do uruchomienia obliczeñ}
-\label{fig:interfejs-1}
-\end{figure}
-
-Po uruchomieniu obliczeñ osoba odwiedzaj±ca stronê dostaje na bie¿±co informacje zwrotne dotycz±ce efektów jej wspó³pracy. Na stronie:
-
-\begin{itemize}
-\item rysowana jest ca³y czas aktualnie rozwa¿ana jako najlepsza trasa przejazdu,
-\item wy¶wietla siê obliczony czas przejazdu po aktualnie rozwa¿anym torze przejazdu,
-\item wy¶wietla siê najlepszy, dotychczas znaleziony, czas przejazdu dla aktualnie rozwa¿anej konfiguracji trasy,
-\item rysowane s± wykresy przedstawiaj±ce statystyki algorytmu ewolucyjnego (aktualny Fitness populacji - najlepszy, najgorszy oraz ¶rednia dla wszystkich osobników).
-\end{itemize}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=500px]{interfejs-2}
-\caption{Aplikacja w trakcie prowadzenia obliczeñ}
-\label{fig:interfejs-2}
-\end{figure}
