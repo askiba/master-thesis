@@ -1,12 +1,6 @@
 \chapter{Platformy Volunteer Computing}
 \label{cha:rozwiazania}
 
-W rozdziale tym przedstawimy istniej±ce rozwi±zania architektoniczne, które umo¿liwiaj± rozproszone obliczenia w modelu Volunteer Computing.
-
-%---------------------------------------------------------------------------
-\section{Wprowadzenie teoretyczne}
-\label{volunteerComputing}
-
 Volunteer Computing to model obliczeniowy, w którym zwykli ludzie czy te¿ organizacje, nazywani dalej ochotnikami, dobrowolnie udostêpniaj± swoje zasoby obliczeniowe, by uruchamiaæ na nich obliczenia zwi±zane z ró¿norakimi projektami. S± to przewa¿nie projekty naukowe, których celem jest rozwi±zanie problemów i zadañ matematycznych czy te¿ problemów dotykaj±cych ludzko¶æ, lub d±¿±cych do lepszego poznania ¶wiata i wszech¶wiata. Dziêki platformom u¿ywaj±cym modelu Volunteer Computing, ka¿dy cz³owiek mo¿e mieæ wk³ad w rozwi±zywanie tych problemów.
 
 Procesory w komputerach osobistych s± bezczynne przez oko³o 80\% czasu. Równocze¶nie wiele naukowych problemów zwi±zanych na przyk³ad z modelowaniem zmian klimatu potrzebuje ogromnych zasobów obliczeniowych. U¿ywanie do tego celu superkomputerów jest bardzo drogie. Po³±czenie tych faktów doprowadzi³o do stworzenia modelu, wykorzystuj±cego zasoby obliczeniowe ochotników, którzy chc± siê nimi ¶wiadomie dzieliæ. 
@@ -180,4 +174,3 @@ Web Workers definiuje API do tworzenia osobnych w±tków w tle. Workery wykorzystu
 Web Workery nie maj± dostêpu do struktury DOM, obiektu \textit{window} ani \textit{document}. Zewnêtrzne skrypty wykorzystywane przez workera musz± byæ serwowane z tej samej domeny co kod workera. Ograniczenia to nazywane jest fachowo \textit{Same-origin policy}.
 
 Wed³ug specyfikacji stworzonej przez WHATWG, Web Workery powinny byæ u¿ywane do zadañ trwaj±cych d³u¿szy czas, maj±cych du¿y narzut startowy i spory narzut pamiêciowy. Nie jest wiêc odpowiednim tworzenie bardzo wielu workerów zajmuj±cych siê obliczeniami trwaj±cymi marginalnie krótki czas, gdy¿ sam narzut na stworzenie przez przegl±darkê osobnego procesu mo¿e byæ zbyt du¿y, by uzasadniæ jego u¿ycie.
-
