@@ -1,243 +1,500 @@
 
-\chapter{Volunteer Computing - wyniki}
+\chapter{Wyniki optymalizacji toru przejazdu}
 \label{cha:wyniki}
 
-W rozdziale tym omówione zosta³y wyniki dotycz±ce zastosowanego rozwi±zania architektonicznego oraz skuteczno¶ci Volunteer Computing.
+W tym rozdziale zostan± pokazane wyniki jakie zosta³y otrzymane jako efekt dzia³ania algorytmu ewolucyjnego w celu znalezienia optymalnej trasy przejazdu. Zostanie sprawdzone jak poszczególne parametry algorytmu wp³ywaj± na czas jego dzia³ania oraz uzyskiwane wyniki. Spróbujemy tak¿e rozwi±zaæ problem dla trudniejszych przypadków: zwiêkszaj±c liczbê punktów, które stanowi± rozwi±zanie oraz optymalizuj±c trasê d³u¿szego slalomu. Nastêpnie zostanie przedstawione jak optymalizacja lokalna wp³ywa na czas wykonania programu.
 
-Aby zweryfikowaæ zaproponowane rozwi±zanie architektoniczne zaplanowany zosta³ szereg eksperymentów maj±cych na celu zbadanie:
-
+Je¿eli nie jest wskazane inaczej, w eksperymencie przyjmowane s± nastêpuj±ce warto¶ci sta³e:
 \begin{itemize}
-\item wydajno¶ci poszczególnych przegl±darek dla intensywnych obliczeñ (Chrome, Firefox, Internet Explorer) oraz znalezienie maksymalnej prêdko¶ci obliczeñ na jednej maszynie, poprzez znalezienie optymalnej konfiguracji - liczby uruchomionych na raz kart przegl±darki
-\item skuteczno¶ci rekrutowania ochotników do obliczeñ typu Volunteer Computing w przegl±darce poprzez internetowe media spo³eczno¶ciowe
+\item $\mu = 0.05$ - wspó³czynnik tarcia, typowa warto¶æ dla nasmarowanych nart
+\item $\rho = 1.17 \frac{kg}{m^3}$ - przybli¿ona warto¶æ gêsto¶ci powietrza dla temperatury $0^\circ C$
+i wilgotno¶ci 20\% na wysoko¶ci 800 m n.p.m
+\item $C = 0.6$ - wspó³czynnik oporu powietrza, typowe warto¶ci to 0.4 - 1
+\item $A = 0.2 m^2$ - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶ci narciarza
+\item $k = \frac{1}{2}C \rho A$ - wspó³czynnik oporu powietrza
+\end{itemize}
+Opis powy¿szych sta³ych mo¿na znale¼æ w rozdzia³ach \ref{sec:fizycznyModel} oraz \ref{sec:ewolucyjny}.
+
+W rozdziale zastosowano nastêpuj±ce oznaczenia:
+\begin{itemize}
+\item ES - strategia ewolucyjna (ang. \textit{Evolution Strategy}) - w tym przypadku ($\mu$ + $\lambda$)
+\item HC - Hill climbing
+\item PF - funkcja kary (ang. \textit{Punishment Function})
 \end{itemize}
 
-\section{Wydajno¶æ przegl±darek dla intensywnych obliczeñ}
-\label{sec:wydajnoscSilnikow}
-W celu zbadania wydajno¶ci silników \textit{JavaScript} dla rozwi±zywania naszego problemu zosta³ przeprowadzony nastêpuj±cy eksperyment. 
+W eksperymentach wszystkie wspó³rzêdne punktów s± w uk³adzie kartezjañskim, dwuwymiarowym, zorientowanym na p³aszczy¼nie stoku. O¶ x skierowana jest wzd³u¿ stoku, natomiast o¶ y w poprzek - szczegó³owy opis znajduje siê w rozdziale \ref{cha:rozwiazanie}.
+%---------------------------------------------------------------------------
 
-Niezmienne warunki przeprowadzanego eksperymentu:
+\section{Algorytm ewolucyjny}
+\label{sec:ewolucyjnyWyniki}
+Wiedz±c, ¿e za³o¿enia dotycz±ce modelu oraz sposób poruszania siê narciarza mo¿na uznaæ za poprawne i zbli¿one do tego co rzeczywi¶cie dzieje siê podczas jazdy na stoku, zostanie teraz przetestowane, jak sprawdza siê algorytm ewolucyjny do celów optymalizacji trasy slalomu.
+
+W poni¿szych eksperymentach wykorzystane zostanie nastêpuj±ce ustawienie bramek: (5,13), (0,26), (5,39), (4,44), (11,57), (0,70). Ustawienie to jest podobne do tych, które s± wybierane w rzeczywisto¶ci. Posiada tak¿e wertikal - figurê slalomow± - szerzej opisan± w sekcji \ref{sec:alpineSkiing}, czêsto stosowan± w slalomie, która ma wymuszaæ zmianê rytmu, a wiêc bêdzie dobrym sprawdzianem dla zastosowanego algorytmu.
+
+Zak³adamy, ¿e narciarz startuj±c ma prêdko¶æ pocz±tkow± $1\frac{m}{s}$. Wynika to z tego, ¿e przy starcie zawodnicy zaczynaj± od odepchniêcia siê kijami od ¶niegu nadaj±c sobie prêdko¶æ pocz±tkow±. Najwa¿niejsze jest to, ¿e warto¶æ ta bêdzie sta³a dla wszystkich eksperymentów.
+
+W eksperymencie \ref{sec:lamana} zosta³o stwierdzone, ¿e odleg³o¶ci w pionie pomiêdzy kolejnymi punktami wyznaczaj±cymi trasê powinna wynosiæ 2-4 m. Zatem przyjmijmy, ¿e bêd± to 3 m, co dla wy¿ej podanego slalomu daje nam nieca³e 30 punktów do optymalizacji.
+
+Warto¶ci parametrów algorytmu ewolucyjnego s± takie, jak wymienione wcze¶niej w rozdziale \ref{sec:ewolucyjnyRozw}. Wykorzystany zosta³ algorytmu $(\mu + \lambda)$, gdzie $\mu = 30$, a $\lambda = 100$. W ka¿dej iteracji najpierw krzy¿owane s± osobniki z populacji tymczasowej, losuj±c pary rodzicielskie, a w wyniku krzy¿owania powstaje znów 100 osobników. Nastêpnie mutacji podlegaj± wszystkie z tych osobników. Jedynym dodatkowym za³o¿eniem jest nie zmienianie pozycji punktów przejazdu przez bramki - narciarz ma przeje¿d¿aæ zawsze jak najbli¿ej bramki. Je¶li która¶ z warto¶ci lub zastosowanych algorytmów zmienia siê, jest to zaznaczone w eksperymencie.
+
+
+\subsubsection{Warunek zakoñczenia}
+Warunkiem stopu w zastosowanym algorytmie ewolucyjnym jest sprawdzenie, czy populacja, na której dzia³amy przesta³a byæ ju¿ zró¿nicowana. Dodatkowo, je¶li ró¿nica pomiêdzy najlepszym a najgorszym osobnikiem jest ma³a, czekamy przez okre¶lon± liczbê iteracji, aby sprawdziæ, czy uzyskujemy jeszcze jak±¶ poprawê najlepszego osobnika, ale wiêksz± ni¿ zadana granica. Je¶li taka sytuacja nie zachodzi, oznacza to, ¿e szanse na poprawê wyniku s± niewielkie i mo¿na zakoñczyæ dzia³anie algorytmu. W rozwi±zaniu tym istniej± jednak trzy parametry, których wp³yw na ostateczny wynik zosta³ zbadany w tym eksperymencie. 
+
+\paragraph{Eksperyment 1.} W pierwszym eksperymencie parametry zakoñczenia algorytmu wynosz±:
 \begin{itemize}
-\item ta sama maszyna - Procesor Intel Core i5-2410M, 2.3 GHz, 8 GB pamiêci RAM, System Windows 7 Home Premium,
-\item bardzo zbli¿one i zminimalizowane obci±¿enie procesora przez inne procesy,
-\item rozwi±zywana jest ta sama instancja problemu (ta sama konfiguracja slalomu),
-\item dana przegl±darka ma uruchomion± tylko jedn± instancjê (liczbê niezale¿nych okien),
-\item instancja uruchomionej przegl±darki ma otwart± tylko okre¶lon± liczbê zak³adek,
-\item wszystkie zak³adki prowadz± obliczenia.
+\item dla zró¿nicowania populacji przyjmujemy na pocz±tek warto¶æ 0.1, czyli 10\%, gdzie warto¶æ ta obliczana jest na podstawie najlepszej i najgorszej warto¶ci fitness w populacji, poprzez znalezienie ró¿nicy tych warto¶ci i podzielenie otrzymanej warto¶ci przez warto¶æ najlepsz± (aby uzyskaæ warto¶æ w \% mno¿ymy przez 100\%),
+\item zmiana najlepszego osobnika jest uznawana za wystarczaj±co du¿±, je¶li wyniesie przynajmniej 0.3 s,
+\item liczba iteracji, przez które czekamy na zmianê najlepszego osobnika, to na pocz±tek 7.
 \end{itemize}
 
-Zmienne warunki przeprowadzanego eksperymentu
-\begin{itemize}
-\item model przegl±darki:
-\begin{itemize}
-\item Internet Explorer v.10,
-\item Chrome v.29,
-\item Firefox v.23,
-\end{itemize}
+W zwi±zku z tym, ¿e zachowanie algorytmu jest niedeterministyczne, dla ka¿dego zestawu parametrów zosta³y przeprowadzone po trzy eksperymenty, aby mo¿na by³o u¶redniæ wyniki i porównaæ eksperymenty miêdzy sob±.
 
-\item docelowa liczba kart, w których równocze¶nie maj± byæ prowadzone obliczenia (1-15)
-\begin{itemize}
-\item 1
-\item 3
-\item 6
-\item 9
-\item 15
-\end{itemize}
+Poni¿ej (rysunki \ref{fig:w1s} oraz \ref{fig:w1w}) znajduj± siê wyniki wizualne przeprowadzonego eksperymentu. Na kolejnych obrazkach widoczne s± odpowiednio wszystkie trzy znalezione najlepsze trasy oraz wykresy zmian warto¶ci fitness odpowiednio: najlepszego osobnika w ka¿dej iteracji (kolor czerwony), najgorszego osobnika (kolor zielony) oraz ¶rednia warto¶æ fitness ca³ej populacji (kolor niebieski). Kolejno¶æ slalomów odpowiada kolejno¶ci wykresów.
 
-\end{itemize}
-
-Sposób przeprowadzania eksperymentu
-\begin{itemize}
-\item manualnie, wiêc z oko³o 1 sekundowym opó¼nieniem na ka¿d± zak³adkê przegl±darki, uruchomione s± obliczenia,
-\item na konsoli przegl±darki wypisywany jest czas po¶wiêcony na obliczenie kolejno znajdowanego rozwi±zania,
-\item notowane s± wyniki, gdy w sumie, licz±c wszystkie zak³adki przegl±darki, liczba obliczonych rozwi±zañ problemu (\textit{A}) wynosi co najmniej dziesiêæ,
-\item sumowany jest czas po¶wiêcony przez ka¿d± z zak³adek na obliczenia,
-\item od wyniku ka¿dej kolejnej zak³adki odejmowana jest jedna sekunda, razy numer zak³adki. Zak³adki s± numerowane od 0. Ma to na celu zminimalizowanie b³êdu wynikaj±cego z opó¼nienia uruchomienia obliczenia wynikaj±cego z manualnego uruchamiania,
-\item z powy¿szej sumy, wybierane jest maksimum - $T_{MAX}$. $T_{MAX}$ jest czasem w którym sumarycznie przegl±darki uzyska³y \textit{A} wyników,
-\item wyliczane jest tempo prowadzonych obliczeñ - liczbê sekund potrzebnych na rozwi±zanie jednego problemu:
-
-$P=\frac{T_{MAX}}{A}[\frac{s}{rozwiazanie}]$
-
-\end{itemize}
-
-\begin{table}[h]
-\caption{Niezale¿nie uruchomione obliczenia w ka¿dej z przegl±darek, prowadzone w jednej zak³adce.}
-\label{tab:jednaZakladka}
+\newpage
+\begin{figure}[H]
 \centering
-\begin{tabular}{|l|l|l|l|}
-\multicolumn{4}{c}{} \\ \hline
-                                                                                                                               & \textbf{Chrome}        & \textbf{Firefox}        & \textbf{IE}       \\ \hline
-Numer zak³adki                                                                                                                 & 0                      & 0                       & 0                 \\ \hline
-\multirow{10}{*}{\textbf{\begin{tabular}[l]{@{}l@{}}Czas rozwi±zania kolejnego \\problemu [s]\end{tabular}}}          & 50.67                  & 351.528                 & 125.749           \\ \cline{2-4} 
-                                                                                                                               & 59.671                 & 272.213                 & 137.551           \\ \cline{2-4} 
-                                                                                                                               & 48.118                 & 209.443                 & 153.626           \\ \cline{2-4} 
-                                                                                                                               & 47.877                 & 160.335                 & 163.051           \\ \cline{2-4} 
-                                                                                                                               & 64.928                 & 208.956                 & 178.417           \\ \cline{2-4} 
-                                                                                                                               & 50.003                 & 239.561                 & 152.229           \\ \cline{2-4} 
-                                                                                                                               & 44.629                 & 189.09                  & 124.884           \\ \cline{2-4} 
-                                                                                                                               & 53.924                 & 214.901                 & 123.323           \\ \cline{2-4} 
-                                                                                                                               & 80.939                 & 193.573                 & 105.364           \\ \cline{2-4} 
-                                                                                                                               & 50.685                 & 195.714                 & 90.609            \\ \hline
-\textbf{Suma czasów}                                                                                                           & 551.444                & 2235.314                & 1354.803          \\ \hline
-\textbf{\begin{tabular}[l]{@{}l@{}}Suma czasów z uwzglêdnieniem \\opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}}        & 551                    & 2235                    & 1355              \\ \hline
-\textbf{$T_{max} [s]$}                                                                                                           & 551                    & 2235                    & 1355              \\ \hline
-\textbf{A - Liczba obliczonych rozwi±zañ}                                                                                      
- & \multicolumn{3}{|c|}{10}                                 \\ \hline
-\textbf{P - Tempo [s/rozwi±zanie]}                                                                                             & 55.1                   & 223.5                   & 135.5             \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\caption{Uruchomienie obliczeñ w sze¶ciu zak³adkach przegl±darki Chrome równocze¶nie.}
-\label{tab:szescZakladekCh}
-\centering
-\begin{tabular}{|l|l|l|l|l|l|l|}
-\multicolumn{7}{c}{}                                                                                          \\ \hline
-\multicolumn{7}{|l|}{\textbf{Chrome}}                                                                                                                                                \\ \hline
-Numer zak³adki                                                                                                           & 0       & 1       & 2       & 3       & 4       & 5       \\ \hline
-\multirow{4}{*}{\textbf{\begin{tabular}[l]{@{}l@{}}Czas rozwi±zania kolejnego \\problemu [s]\end{tabular}}}     & 122.138 & 131.19  & 211.114 & 106.006 & 227.966 & 133.511 \\ \cline{2-7} 
-                                                                                                                         & 178.092 & 167.305 & 161.464 & 132.485 & 210.441 & 144.768 \\ \cline{2-7} 
-                                                                                                                         & 128.211 & 108.657 & 128.156 & 96.603  & 190.033 & 204.7   \\ \cline{2-7} 
-                                                                                                                         & 188.534 & 107.546 & 170.106 & 155.116 & 148.481 & 184.593 \\ \hline
-\textbf{Suma czasów}                                                                                                     & 616.975 & 514.698 & 670.84  & 670.84  & 490.21  & 667.572 \\ \hline
-\textbf{\begin{tabular}[l]{@{}l@{}}Suma czasów z uwzglêdnieniem \\opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}} & 617     & 514     & 669     & 668     & 486     & 663     \\ \hline
-\textbf{$T_{max} [s]$}                                                                                                     & \multicolumn{6}{|c|}{669}                                 \\ \hline
-\textbf{A - Liczba obliczonych rozwi±zañ}                                                                                 & \multicolumn{6}{|c|}{24}                                  \\ \hline
-\textbf{P - Tempo [s/rozwi±zanie]}                                                                                       & \multicolumn{6}{|c|}{27.9}                                \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\caption{Uruchomienie obliczeñ w sze¶ciu zak³adkach przegl±darki Firefox równocze¶nie.}
-\label{tab:szescZakladekFF}
-\centering
-\begin{tabular}{|l|l|l|l|l|l|l|}
-\multicolumn{7}{c}{}                                                                                                                                     \\ \hline
-\textbf{Firefox}                                                                                                                                              &          &          &          &          &          &          \\ \hline
-Numer zak³adki                                                                                                                                                & 0        & 1        & 2        & 3        & 4        & 5        \\ \hline
-\multirow{3}{*}{\textbf{\begin{tabular}[l]{@{}l@{}}Czas rozwi±zania kolejnego\\problemu [s]\end{tabular}}} & 971.73   & 876.713  & 870.914  & 987.587  & 622.23   & 959.31   \\ \cline{2-7} 
-                                                                                                                                                              & 707.105  & 1181.745 & 1167.395 & 987.172  & 787.954  & 716.807  \\ \cline{2-7} 
-                                                                                                                                                              & 471.037  &          &          &          & 608.404  &          \\ \hline
-\textbf{Suma czasów}                                                                                                                                          & 2149.872 & 2058.458 & 2038.309 & 1974.759 & 2018.588 & 1676.117 \\ \hline
-\textbf{\begin{tabular}[l]{@{}l@{}}Suma czasów z uwzglêdnieniem \\opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}}                                      & 2150     & 2057     & 2036     & 1972     & 2015     & 1671     \\ \hline
-\textbf{$T_{max} [s]$}                                                                                                                                          & \multicolumn{6}{|c|}{2150}                                      \\ \hline
-\textbf{A - Liczba obliczonych rozwi±zañ}                                                                                                                      & \multicolumn{6}{|c|}{14}                                        \\ \hline
-\textbf{P - Tempo [s/rozwi±zanie]}                                                                                                                            & \multicolumn{6}{|c|}{153.6}                                     \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\caption{Uruchomienie obliczeñ w sze¶ciu zak³adkach przegl±darki Internet Explorer równocze¶nie}
-\label{tab:szescZakladekIE}
-\centering
-\begin{tabular}{|l|l|l|l|l|l|l|}
-\multicolumn{7}{c}{}                                                                                            \\ \hline
-\multicolumn{7}{|l|}{\textbf{Internet Explorer}}                                                                                                                                       \\ \hline
-Numer zak³adki                                                                                                          & 0        & 1       & 2       & 3        & 4        & 5       \\ \hline
-\multirow{4}{*}{\textbf{\begin{tabular}[l]{@{}l@{}}Czas rozwi±zania kolejnego\\problemu [s]\end{tabular}}}     & 465.152  & 186.834 & 154.918 & 247.763  & 486.031  & 147.32  \\ \cline{2-7} 
-                                                                                                                        & 267.013  & 194.181 & 212.844 & 248.019  & 295.73   & 200.593 \\ \cline{2-7} 
-                                                                                                                        & 260.614  & 207.847 &         & 415.193  & 280.427  & 172.52  \\ \cline{2-7} 
-                                                                                                                        & 260.386  & 245.773 &         & 248.019  &          & 231.295 \\ \hline
-\textbf{Suma czasów}                                                                                                    & 1253.165 & 834.635 & 367.762 & 1158.994 & 1062.188 & 751.728 \\ \hline
-\textbf{\begin{tabular}[l]{@{}l@{}}Suma czasów z uwzglêdnieniem\\ opó¼nienia uruchomienia i zaokr±gleniem\end{tabular}} & 1253     & 834     & 366     & 1156     & 1058     & 747     \\ \hline
-\textbf{$T_{max} [s]$}                                                                                                    & \multicolumn{6}{|c|}{1253}                                   \\ \hline
-\textbf{A - Liczba obliczonych rozwi±zañ}                                                                                & \multicolumn{6}{|c|}{21}                                     \\ \hline
-\textbf{P - Tempo [s/rozwi±zanie]}                                                                                      & \multicolumn{6}{|c|}{59.7}                                   \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.9\textwidth]{wydajnoscZakladki}
-\caption{Porównanie wydajno¶ci ró¿nych modeli przegl±darek w rozwi±zywaniu problemu, przy uruchomieniu obliczeñ w kilku zak³adkach równocze¶nie.}
-\label{fig:wydajnoscZakladki}
-\end{figure}
-
-\paragraph{Wnioski}
-Eksperyment wykaza³, ¿e wydajno¶æ obliczeñ drastycznie ró¿ni siê w zale¿no¶ci od modelu przegl±darki, a wiêc od u¿ytego silnika JavaScript. Ca³o¶ciowe wyniki eksperymentu dobrze obrazuje wykres \ref{fig:wydajnoscZakladki} na stronie \pageref{fig:wydajnoscZakladki}. Najlepiej wypad³a przegl±darka Chrome, ponad dwa razy wolniejsza okaza³a siê najnowsza przegl±darka Internet Explorer, a ponad 4 razy gorsza przegl±darka Firefox. Ciekawe wyniki dotycz± wydajno¶ci dla obliczeñ prowadzonych w wielu kartach przegl±darki jednocze¶nie. Dla ka¿dej z przegl±darek, zdecydowanie wydajniej jest uruchamiaæ obliczenia w dwóch zamiast w jednej zak³adce jednocze¶nie. Równoleg³e obliczenia w dwóch oknach, prawie ¿e nie wp³ywaj± na spowolnienie obliczeñ w którym¶ z nich, przez co uzyskuje siê prawie dwukrotny skok w tempie rozwi±zywania problemów. Replikowanie obliczeñ na kolejne zak³adki nie przynosi ju¿ jednak istotnego przyspieszenia. W przypadku przegl±darki Chrome, najlepsze wyniki uzyskuje siê przy 9-14 otwartych równolegle zak³adkach. Przy 15 otwartych instancjach prowadz±cych obliczenia, wyniki zaczynaj± siê ju¿ pogarszaæ. W przypadku Internet Explorer'a, optymalna liczba zak³adek, to miêdzy 6 a 8. Przy 9 zak³adkach, tempo istotnie spad³o - bo prawie o 80 procent, w stosunku do 8 okien. Najgorzej poradzi³ sobie z równoleg³ym przetwarzaniem Firefox. Najbardziej optymaln± dla tego silnika konfiguracj± s± 4 zak³adki dokonuj±ce równolegle obliczeñ. Ju¿ przy 5, 6 zak³adkach ca³o¶ciowe tempo spada. Uruchomienie obliczeñ w 9 zak³adkach równocze¶nie okaza³o siê na testowej maszynie niemo¿liwe, gdy¿ powodowa³o awaryjne zakoñczenie dzia³ania programu Firefox. 
-
-Ciekawym wnioskiem jest te¿ fakt, ¿e przegl±darki przydzielaj± podobne zasoby do obliczeñ w tle, prowadzonych przez wiele kart równocze¶nie, i nie ma istotnego znaczenia, która z kart jest kart± otwart±. Obserwacjê tê ilustruj± zrzuty ekranu \ref{fig:taskManager4} i \ref{fig:taskManager15} na stronie \pageref{fig:taskManager4} z managera zadañ systemu podczas prowadzenia obliczeñ oraz wyniki w tabelach \ref{tab:szescZakladekCh}, \ref{tab:szescZakladekFF} i \ref{tab:szescZakladekIE} na stronie \pageref{tab:szescZakladekCh} na których widaæ, ¿e czas rozwi±zywania problemu jest zbli¿ony dla ka¿dej z kart.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.7\textwidth]{taskManager4}
-\caption{Podzia³ zu¿ycia procesora dla czterech zak³adek przegl±darki Chrome prowadz±cej obliczenia.}
-\label{fig:taskManager4}
+\includegraphics[scale=0.8]{wyniki/wynik1-s}
+\caption{Wyniki z kolejnych prób dla parametrów zakoñczenia: 10\%, 0.3 s i 7}
+\label{fig:w1s}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\textwidth]{taskManager15}
-\caption{Podzia³ zu¿ycia procesora dla piêtnastu zak³adek przegl±darki Chrome prowadz±cej obliczenia.}
-\label{fig:taskManager15}
+\includegraphics[scale=0.5]{wyniki/wynik1-w}
+\caption{Wykresy z kolejnych prób dla parametrów zakoñczenia: 10\%, 0.3 s i 7}
+\label{fig:w1w}
 \end{figure}
 
+\newpage
+Oto otrzymane czasy przejazdu dla kolejnych prób:
 
-\section{Skuteczno¶æ rekrutowania ochotników do obliczeñ w przegl±darkowym modelu Volunteer Computing}
-\label{skutecznoscRekrutacjiFacebook}
-Celem eksperymentu by³o sprawdzenie ile rozwi±zañ uda siê zebraæ udostêpniaj±c link prowadz±cy do strony internetowej, dziêki której mo¿na do³±czyæ do obliczeñ. Link zosta³ udostêpniony poprzez kilka internetowych kana³ów spo³eczno¶ciowych:
+\begin{table}[H]
+\caption{Czasy przejazdu dla kolejnych prób wraz z liczb± iteracji oraz czasem dzia³ania algorytmu}
+\centering
+\begin{tabular}{ | c | c | c | c |}
+  \hline                        
+  numer próby & czas przejazdu [s] & liczba iteracji & czas dzia³ania [s] \\ \hline  
+1 & 7.968 & 7 & 18 \\ \hline
+2 & 8.039 & 7 & 19 \\ \hline
+3 & 7.917 & 9 & 21 \\ \hline
+\end{tabular}
+\end{table}
 
-\begin{itemize}
-\item na prywatnej tablicy w serwisie Facebook (520 znajomych),
-\item na tablicy Studenckiego Klubu Narciarskiego FIRN AGH w serwisie Facebook (180 obserwuj±cych),
-\item w serwisie Wykop.pl,
-\item z prywatnego konta w serwisie Twitter  (120 obserwuj±cych).
-\end{itemize}
+Zatem ¶redni czas przejazdu w tych trzech próbach wyniós³ 7.975 s.
+
+Liczba iteracji w przypadku tych wyników wynios³a 7-9. Algorytm bardzo szybko dochodzi³ do rozwi±zania, a czas dzia³ania to tylko ok. 20 s. Nale¿y zwróciæ uwagê, ¿e bior±c pod uwagê rozproszony model prowadzenia obliczeñ, czas dzia³ania algorytmu mo¿e byæ znacz±co wyd³u¿any - tak by narzuty na komunikacjê i zarz±dzanie wysy³anymi zadaniami nie by³y znacz±c± czê¶ci± czasu wykonania. 
+
+Jednocze¶nie, co obserwujemy na rysunkach, wyniki nie s± satysfakcjonuj±ce - trasa przejazdu nie jest g³adka i z pewno¶ci± istnieje lepsze rozwi±zanie. Jednak skoro zosta³o wykonanych tylko kilka iteracji algorytmu, oznacza to, ¿e mo¿na spróbowaæ uzyskaæ lepsze wyniki poprzez wyd³u¿enie czasu dzia³ania algorytmu.
+
+\paragraph{Eksperyment 2.} W tym eksperymencie zosta³a wprowadzona zmiana w warto¶ci parametru oznaczaj±cego ró¿nicê w fitness najlepszego osobnika. Zamiast warto¶ci 0.3 s u¿yto 0.1 s. Sprawdzone zosta³o zarówno, czy czas dzia³ania algorytmu siê wyd³u¿a jak i czy uda siê przez to otrzymaæ lepszy wynik.
+
+Na rysunkach \ref{fig:w2s} oraz \ref{fig:w2w} a tak¿e w tabeli \ref{tab:tab2} zebrane s± wyniki eksperymentu.
+
+\begin{table}[H]
+\caption{Czasy przejazdu dla kolejnych prób wraz z liczb± iteracji oraz czasem dzia³ania algorytmu}
+\label{tab:tab2}
+\centering
+\begin{tabular}{ | c | c | c | c |}
+  \hline                        
+  numer próby & czas przejazdu [s] & liczba iteracji & czas dzia³ania [s] \\ \hline  
+1 & 7.916 & 15 & 49 \\ \hline
+2 & 7.809 & 14 & 46 \\ \hline
+3 & 7.777 & 16 & 51 \\ \hline
+\end{tabular}
+\end{table}
+
+¦rednia uzyskanych czasów przedstawionych w tabeli \ref{tab:tab2} wynosi: 7.834 s.
+
+\newpage
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.9]{wyniki/wynik2-s}
+\caption{Wyniki z kolejnych prób dla parametrów zakoñczenia: 10\%, 0.1 s i 7}
+\label{fig:w2s}
+\end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=220px]{real-time-ga}
-\caption{Zrzut ekranu z panelu Google Analitics pokazuj±cy aktualn± wówczas liczbê kontrybuuj±cych w obliczeniach ochotników oraz ¼ród³a z jakich trafili na stronê}
-\label{fig:real-time-ga}
+\includegraphics[scale=0.7]{wyniki/wynik2-w}
+\caption{Wykresy z kolejnych prób dla parametrów zakoñczenia: 10\%, 0.1 s i 7}
+\label{fig:w2w}
 \end{figure}
 
-Przez sze¶æ godzin od udostêpnienia linku, stronê odwiedzi³o 221 unikatowych odwiedzaj±cych podczas 259 wizyt. W tym czasie do naszej bazy danych wp³ynê³o ponad 2000 rozwi±zañ. W ci±gu kolejnych 24 godzin, do bazy sp³ynê³o jeszcze ponad 2500 rozwi±zañ, co pokazuje, ¿e czê¶æ ludzi raz zarekrutowanych do obliczeñ, zosta³a wierna eksperymentowi przez nastêpny dzieñ. Po tygodniu od akcji promuj±cej, w bazie by³o ponad 6 tysiêcy nowych rozwi±zañ.
+\newpage
+Wyniki poprawi³y siê, linia przejazdu jest du¿o g³adsza, a czasy poprawi³y siê o ok. 0.15 s, czyli o ok. 2\%. Jednak czas dzia³ania algorytmu wyd³u¿y³ siê do 45-50 s, a liczba iteracji wynios³a 14-16. Oczywi¶cie czas ten jest wci±¿ na tyle ma³y, ¿e mo¿emy wprowadzaæ dalsze zmiany, które wyd³u¿± czas dzia³ania i jednocze¶nie umo¿liwi± znalezienie lepszego rozwi±zania.
 
-Przy najbardziej efektywnym u¿yciu zasobów ¶redniej klasy komputera typu laptop (procesor Intel Core i5, 4 rdzenie), 6 h obliczeñ w najbardziej wydajnym modelu (równolegle uruchomione 9 zak³adek przegl±darki Chrome) przyniesie oko³o 900 rozwi±zañ (6 h = 21600 s; Tempo 23.9 s / 1 rozwi±zanie) Ten sam efekt uda³o siê uzyskaæ, dziêki zaprzêgniêciu do obliczeñ ochotników, w nieca³e 2 godziny. Nie jest to wielkie przyspieszenie, ale nale¿y zwróciæ uwagê, ¿e podjêcie obliczeñ by³o czysto dobrowolne, a osoby bior±ce w nich udzia³ nie by³y o to personalnie proszone, tylko same zdecydowa³y siê do³±czyæ do projektu.
+\paragraph{Eksperyment 3.} W takim razie zdecydowano zmieniæ równie¿ parametr dotycz±cy zró¿nicowania populacji - zamiast 10\%, w tym eksperymencie wynosi on 1\%.
 
-Ciekawym efektem by³o to, ¿e osoby bior±ce udzia³ w obliczeniach, poczu³y nutkê rywalizacji w celu osi±gniêcia przez swoj± maszynê najlepszego wyniku obliczeñ (tj. toru przejazdu, który narciarz pokonuje w najkrótszym czasie) i chêtnie chwali³y siê w serwisie spo³eczno¶ciowym Facebook osi±gniêtymi wynikami. Ochotnicy pozytywnie wypowiadali siê te¿ o tym, ¿e na bie¿±co mogli obserwowaæ postêp obliczeñ, a nawet aktualnie ewaluowan± trasê. Osoby, które nie by³y obeznane w temacie narciarstwa alpejskiego, prosi³y o wyt³umaczenie dlaczego konfiguracja slalomu wygl±da tak, a nie inaczej. Uda³o siê zatem zainteresowaæ samym problemem du¿± grupê ludzi, co jest sukcesem samym w sobie, osi±gniêtym w znacznym stopniu dziêki wyborze architektury, który przyczyni³ siê do ³atwej dostêpno¶ci platformy.
+Poni¿ej znajduj± siê zebrane wyniki w tabeli \ref{tab:tab3} oraz na rysunkach \ref{fig:w3s} oraz \ref{fig:w3w}.
 
-\section{Wnioski}
-\label{sec:podsumowanieWyniki}
+\begin{table}[H]
+\caption{Czasy przejazdu dla kolejnych prób wraz z liczb± iteracji oraz czasem dzia³ania algorytmu}
+\centering
+\label{tab:tab3}
+\begin{tabular}{ | c | c | c | c |}
+  \hline                        
+  numer próby & czas przejazdu [s] & liczba iteracji & czas dzia³ania [s] \\ \hline  
+1 & 7.818 & 17 & 55 \\ \hline
+2 & 7.822 & 14 & 45 \\ \hline
+3 & 7.817 & 14 & 47 \\ \hline
+\end{tabular}
+\end{table}
+
+¦rednia zmierzonych wyników wynosi: 7.819 s.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.9]{wyniki/wynik3-s}
+\caption{Wyniki dla kolejnych prób eksperymentu dla parametrów zakoñczenia: 1\%, 0.1 s i 7}
+\label{fig:w3s}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{wyniki/wynik3-w}
+\caption{Wykresy dla kolejnych prób eksperymentu dla parametrów zakoñczenia: 1\%, 0.1 s i 7}
+\label{fig:w3w}
+\end{figure}
+
+Jak widaæ wyniki s± niewiele lepsze ni¿ te poprzednie. Zatem ten warunek praktycznie nie zmieni³ zachowania. Pozosta³ natomiast jeszcze warunek liczby iteracji, przez które sprawdzane jest, czy poprawia siê fitness najlepszego osobnika.
+
+\paragraph{Eksperyment 4.} Zmieniamy teraz warto¶æ liczby iteracji, przez które czekamy na zmianê najlepszego osobnika z 7 na 10.
+
+\begin{table}[H]
+\caption{Czasy przejazdu dla kolejnych prób wraz z liczb± iteracji oraz czasem dzia³ania algorytmu}
+\centering
+\label{tab:tab4}
+\begin{tabular}{ | c | c | c | c |}
+  \hline                        
+  numer próby & czas przejazdu [s] & liczba iteracji & czas dzia³ania [s] \\ \hline  
+1 & 7.892 & 13 & 41 \\ \hline
+2 & 7.743 & 19 & 60 \\ \hline
+3 & 7.837 & 13 & 41 \\ \hline
+\end{tabular}
+\end{table}
+
+¦rednia wyników wynosi: 7.824 s. Warto zwróciæ uwagê, ¿e ¶rednio w ka¿dym eksperymencie wykonywanych jest 1950 symulacji. Zale¿y to od liczby osobników w populacji oraz populacji tymczasowej, a wiêc parametrów $\mu$ (30) i $\lambda$ (100), a tak¿e od liczby iteracji wykonywanych w ka¿dym eksperymencie (¶rednio: 15 iteracji, a zatem (30 + 100) * 15 = 1950).
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{wyniki/wynik4-w}
+\caption{Wykresy dla kolejnych prób eksperymentu dla parametrów zakoñczenia: 1\%, 0.1 s i 10}
+\label{fig:w4w}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.9]{wyniki/wynik4-s}
+\caption{Wyniki dla kolejnych prób eksperymentu dla parametrów zakoñczenia: 1\%, 0.1 s i 10}
+\label{fig:w4s}
+\end{figure}
+
+Jak widaæ, równie¿ zmiana tego parametru nie wnios³a poprawy, choæ uda³o siê otrzymaæ dotychczas najlepszy wynik - 7.743 s. Poniewa¿ algorytm ten jest niedeterministyczny, trudno oceniæ, jakie warto¶ci parametrów s± optymalne. Oczywi¶cie mo¿na dalej zmniejszaæ ich warto¶ci w poszukiwaniu lepszego wyniku.
+
+Warto jednak zauwa¿yæ, jaka jest charakterystyka trasy otrzymanej tu jako najlepsze rozwi±zanie (o numerze próby 2). Tor jazdy jest po prostu ³aman±, której wierzcho³ki znajduj± siê w miejscach bramek - pomiêdzy kolejnymi bramkami linie s± w³a¶ciwie odcinkami co powoduje konieczno¶æ wykonywania bardzo ostrych skrêtów. Ten problem zostanie rozwi±zany w dalszej czê¶ci, w rozdziale \ref{sec:wynikiStrategieKarania} opisuj±cym wyniki zastosowania funkcji kary.
+
+W trakcie szczegó³owej analizy wyników z kolejnych iteracji (widocznych na wykresach), ³atwo zauwa¿yæ, ¿e na pocz±tku poprawa wyników jest znacz±ca z ka¿d± iteracj±, a pod koniec zmiany s± ju¿ niewielkie. Mo¿na zatem pomy¶leæ o wprowadzeniu innego algorytmu, kiedy zmiany s± ju¿ s³abo widoczne, który skuteczniej znajdzie lepsze rozwi±zanie. Takim rozwi±zaniem jest na przyk³ad zastosowanie lokalnej optymalizacji. Wyniki tego podej¶cia opisane s± w sekcji \ref{sec:lokalnaWyniki}.
+
+Zanim przejdziemy jednak do wyników wprowadzenia lokalnej optymalizacji omówione zostan± eksperymenty sprawdzaj±ce ostatnie parametry algorytmu ewolucyjnego: $\mu$ i $\lambda$, a nastêpnie pokazane zostanie rozwi±zanie trudniejszego zadania, uzyskanego poprzez zwiêkszenie liczby punktów stanowi±cych rozwi±zanie.
+
+\subsubsection{Parametry $\mu$ i $\lambda$}
+Do tej pory pocz±tkowa populacja liczy³a 30 osobników, a populacja tymczasowa - 100. W literaturze najczê¶ciej wymienia siê warto¶ci oko³o 50 i 200 \cite{arabas}, warto zatem spróbowaæ zwiêkszyæ te parametry, by sprawdziæ wiêcej przypadków rozwi±zañ. Pozosta³e parametry pozostaj± jak w poprzednim eksperymencie.
+
+\paragraph{Eksperyment 1.}
+W tym eksperymencie zosta³o sprawdzone jak wp³ywa na wyniki zmiana powy¿szych parametrów, na pocz±tek dla warto¶ci odpowiednio 50 i 150.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.9]{wyniki/wynik5-s}
+\caption{Wyniki dla kolejnych prób eksperymentu dla parametrów $\mu=50$ i $\lambda=150$}
+\label{fig:w5s}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{wyniki/wynik5-w}
+\caption{Wykresy dla kolejnych prób eksperymentu dla parametrów $\mu=50$ i $\lambda=150$}
+\label{fig:w5w}
+\end{figure}
+
+\begin{table}[h]
+\caption{Czasy przejazdu dla kolejnych prób wraz z liczb± iteracji oraz czasem dzia³ania algorytmu ($\mu=50$ i $\lambda=150$)}
+\centering
+\label{tab:miLambda}
+\begin{tabular}{ | c | c | c | c |}
+  \hline                        
+  numer próby & czas przejazdu [s] & liczba iteracji & czas dzia³ania [s] \\ \hline  
+1 & 7.780 & 17 & 81 \\ \hline
+2 & 7.814 & 21 & 109 \\ \hline
+3 & 7.804 & 17 & 88 \\ \hline
+\end{tabular}
+\end{table}
+
+¦rednia wyników podanych w tabeli \ref{tab:miLambda} wynosi: 7.799 s. W tym przypadku ¶rednio w ka¿dym eksperymencie zosta³o wykonanych oko³o 3670 symulacji.
+
+Mo¿na siê by³o spodziewaæ poprawy wyników, jako, ¿e rozpatrywano naraz wiêcej osobników sprawdzaj±c wiêcej mo¿liwych rozwi±zañ, a wiêc zwiêkszaj±c prawdopodobieñstwo znalezienia lepszego rozwi±zania. Jednak poprawa jest niewielka, ale wa¿ne jest to, ¿e do tej pory nie uda³o nam siê uzyskaæ tak dobrego ¶redniego wyniku. To pokazuje, ¿e uda³o nam siê doprowadziæ do sytuacji, w której algorytm daje rzeczywi¶cie czê¶ciej lepsze wyniki, a uzyskane czasy s± zbli¿one do siebie.
+Takie wyniki zosta³y poniesione kosztem czasu wykonania algorytmu, który wzrós³ do ponad 80 s, a w jednym przypadku nawet 110 s.
 
 
-%---------------------------------------------------------------------------
+\paragraph{Eksperyment 2.}
+W kolejnym eksperymencie sprawdzono jak zmieni± siê wyniki je¶li warto¶ci $\mu$ i $\lambda$ wynios± odpowiednio 60 i 200.
 
-W tej sekcji zostan± wymienione wady i zalety zaproponowanego rozwi±zania opieraj±cego siê na modelu Volunteer Computing udostêpnianego za pomoc± przegl±darek internetowych (\textit{Web browser based volunteer computing}).
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{wyniki/wynik6-s}
+\caption{Wyniki dla kolejnych prób eksperymentu dla parametrów $\mu=60$ i $\lambda=200$}
+\label{fig:w6s}
+\end{figure}
 
-\paragraph{Zalety}
-\label{sec:zalety}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{wyniki/wynik6-w}
+\caption{Wykresy dla kolejnych prób eksperymentu dla parametrów $\mu=60$ i $\lambda=200$}
+\label{fig:w6w}
+\end{figure}
 
+\begin{table}[h]
+\caption{Czasy przejazdu dla kolejnych prób wraz z liczb± iteracji oraz czasem dzia³ania algorytmu ($\mu=60$ i $\lambda=200$)}
+\centering
+\begin{tabular}{ | c | c | c | c |}
+  \hline                        
+  numer próby & czas przejazdu [s] & liczba iteracji & czas dzia³ania [s] \\ \hline  
+1 & 7.729 & 19 & 127 \\ \hline
+2 & 7.783 & 15 & 118 \\ \hline
+3 & 7.774 & 20 & 170 \\ \hline
+\end{tabular}
+\end{table}
+
+¦rednia wyników wynosi: 7.762 s. ¦rednio w ka¿dym eksperymencie zosta³o wykonanych 4680 symulacji.
+
+W tym przypadku wszystkie otrzymane czasy s± mniejsze ni¿ 7.8 s, a otrzymane linie przejazdu wygl±daj± bardzo dobrze. Warto równie¿ zauwa¿yæ, ¿e w pierwszym przypadku otrzymano najlepszy czas - 7.729 s. Widzimy równie¿, ¿e zgodnie z oczekiwaniami, wyd³u¿y³ siê znów czas dzia³ania algorytmu. Minimalny czas to 118 s, czyli oko³o 2 minuty, a wykonanie trwa³o maksymalnie prawie 3 minuty. Takie czasy ju¿ mo¿na uznaæ za wystarczaj±ce, aby warto by³o rozsy³aæ obliczenia, by by³y wykonywane na innych wêz³ach obliczeniowych.
+
+Dla porównania przeanalizowano jak wp³ynê³y zmiany parametrów $\mu$ i $\lambda$ na uzyskiwane wyniki na podstawie danych z poprzednich eksperymentów. Uwzglêdniona jest tak¿e ¶rednia liczba symulacji koniecznych do osi±gniêcia wyniku dla ka¿dej pary ($\mu$ + $\lambda$).
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.7]{wyniki/miLambda}
+\caption{¦redni czas przejazdu z wykonanych prób dla ró¿nych parametrów $\mu$ i $\lambda$}
+\label{fig:w6wyk}
+\end{figure}
+
+Wykres \ref{fig:w6wyk} pokazuje jak zmieni³ siê ¶redni czas uzyskanych wyników odpowiednio dla kolejnych warto¶ci parametrów $\mu$ i $\lambda$. Widaæ, ¿e choæ poprawa jest niewielka, bo o oko³o 0.05 s, to jednak widoczny jest trend wskazuj±cy, ¿e zwiêkszenie populacji wp³ywa pozytywnie na znajdowane rozwi±zanie. Poprawa jest lepsza w drugiej czê¶ci wykresu, bior±c pod uwagê jak zmienia siê liczba symulacji koniecznych do osi±gniêcia wyniku, w porównaniu z popraw± uzyskanego ¶redniego czasu przejazdu.
+
+\subsubsection{Gêsto¶æ siatki}
+Aby uzyskaæ dok³adniejsze rozwi±zania mo¿na spróbowaæ zagê¶ciæ poziome linie wyznaczaj±ce ilo¶æ punktów stanowi±cych reprezentacjê trasy. Do tej pory linie te by³y w odleg³o¶ci 3 m. Po zmianie na 2 m czas dzia³ania algorytmu powinien siê znacznie wyd³u¿yæ ze wzglêdu na wiêksz± liczbê rozpatrywanych punktów rozwi±zania.
+
+W eksperymencie warto¶ci parametrów wynosz± dla warunku zakoñczenia: 
 \begin{itemize}
-\item ³atwa dostêpno¶æ,
-\begin{itemize}
-\item brak konieczno¶ci instalacji dodatkowego oprogramowania po stronie ochotników,
-\item brak bariery wej¶cia do u¿ywania nowego oprogramowania - wszystko dzieje siê w znanym ¶rodowisku przegl±darki i wygl±da jak standardowa strona internetowa,
-\item prostota promowania platformy w portalach spo³eczno¶ciowych,
+\item dla zró¿nicowania populacji przyjêto warto¶æ 0.01, czyli 1\%,
+\item zmiana najlepszego osobnika jest uznawana za wystarczaj±co du¿± je¶li wyniesie przynajmniej 0.05 s,
+\item liczba iteracji, przez które czekamy na zmianê najlepszego osobnika - 10.
 \end{itemize}
 
-\item prosta i szybka implementacja,
+Natomiast parametry $\mu$ i $\lambda$ przyjmijmy 30 i 100.
+
+Na rysunkach \ref{fig:w7s} oraz \ref{fig:w7w} przedstawione s± wyniki z trzech przeprowadzonych prób.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{wyniki/wynik7-w}
+\caption{Wykresy dla kolejnych prób eksperymentu dla zwiêkszonej gêsto¶ci siatki punktów rozwi±zania}
+\label{fig:w7w}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.8]{wyniki/wynik7-s}
+\caption{Wyniki dla kolejnych prób eksperymentu dla zwiêkszonej gêsto¶ci siatki punktów rozwi±zania}
+\label{fig:w7s}
+\end{figure}
+
+Czas wykonania wyd³u¿y³ siê do 100-150 s, a liczba iteracji zwiêkszy³a siê do ok. 20. Mimo zwiêkszenia dok³adno¶ci, wci±¿ istniej± na trasie zbyt ostre zmiany kierunku, które w rzeczywisto¶ci s± niemo¿liwe do wykonania bez dodatkowego czasu oraz zmniejszenia prêdko¶ci - obliczona trasa jest zbyt ``kanciasta''. Wydaje siê, ¿e taki sposób optymalizacji nie umo¿liwia nam znalezienia rzeczywi¶cie najszybszej trasy. Zachodzi zatem konieczno¶æ wprowadzenia mechanizmu, który wyeliminuje zbyt ostre zmiany kierunku np. poprzez uwzglêdnienie konieczno¶ci zmniejszenia prêdko¶ci w miejscach o zbyt du¿ym k±cie za³amania. Szczegó³owo mechanizm ten opisany jest w sekcji \ref{sec:karanie} na stronie \pageref{sec:karanie}.
+
+\subsubsection{D³uga trasa}
+\label{dlugaTrasa}
+Dotychczas rozpatrywany slalom by³ jedynie fragmentem standardowego slalomu, czas przejazdu wynosi³ mniej ni¿ 8 s. Pozostaje pytanie, czy dla wiêkszej liczby bramek algorytm nadal bêdzie w stanie znale¼æ rozwi±zanie zbli¿one do optymalnego oraz jak du¿o czasu bêdzie potrzebne do jego znalezienia. Mo¿liwe te¿, ¿e algorytm bêdzie potrzebowa³ zmiany parametrów, aby znale¼æ rozwi±zanie.
+
+W tym eksperymencie sprawdzone zosta³o jakie wyniki otrzymamy dla d³u¿szego slalomu: (19,10), (11,30), (20,50), (12,65), (0,80), (10,100), (3,120), (6,135)). Parametry $\mu$ i $\lambda$ pozosta³y ustawione na 30 i 100. Parametry zatrzymania algorytmu zosta³y ustawione tak, aby algorytm dzia³a³ d³u¿ej:
+
 \begin{itemize}
-\item ³atwa do zaimplementowania wizualizacja zjawisk/obliczeñ,
-\item wieloplatformowo¶æ.
+\item dla zró¿nicowania populacji przyjmujemy na warto¶æ 0.01, czyli 1\%,
+\item zmiana najlepszego osobnika jest uznawana za wystarczaj±co du¿± je¶li wyniesie przynajmniej 0.05 s,
+\item liczba iteracji, przez które czekamy na zmianê najlepszego osobnika - 10.
 \end{itemize}
-\end{itemize}
 
-Dziêki tym zaletom technicznym, zosta³y uwidocznione fakty przemawiaj±ce za stosowaniem zaproponowanego rozwi±zania do analogicznych obliczeñ. Jest to przede wszystkim propagowanie wiedzy o problemach naukowych - ³atwy dostêp i atrakcyjna wizualizacja, która pozwala na wyt³umaczenie istoty rozwi±zywanego problemu. 
+Kolejne punkty rozwi±zania znajduj± siê w odleg³o¶ci 3 m w pionie, co dla tej trasy daje 48 punktów do optymalizacji.
 
-\paragraph{Wady}
-\label{sec:wady}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.9]{wyniki/wynik8-ws}
+\caption{Uzyskany wynik wraz z wykresem dla eksperymentu na d³u¿szej trasie}
+\label{fig:w8ws}
+\end{figure}
 
+Otrzymany wynik to 11.087 s. Obliczenia trwa³y 170 s, a algorytm potrzebowa³ 23 iteracje do zakoñczenia obliczeñ. Znów mo¿na powiedzieæ, ¿e wynik jest dobry, jednak na pewno móg³by byæ lepszy - istnieje wiele ostrych zakrêtów, zw³aszcza w okolicach bramek, rozwi±zanie nie jest idealne.
+
+Warto zauwa¿yæ, ¿e wyd³u¿enie trasy nie spowodowa³o natomiast wiêkszych problemów je¶li chodzi o znalezienie trasy, mimo zastosowanych warunków zakoñczenia i zwiêkszenia liczby punktów z oko³o 30 na prawie 50.
+
+\section{Lokalna optymalizacja}
+\label{sec:lokalnaWyniki}
+Algorytm ewolucyjny ma problem ze znalezieniem lepszych rozwi±zañ, zw³aszcza kiedy dotychczas znalezione rozwi±zanie daje ju¿ dosyæ dobry wynik, ale wci±¿ mo¿na go³ym okiem zobaczyæ miejsca, które negatywnie wp³ywaj± na jako¶æ wyniku. Skoro algorytm nie radzi sobie bêd±c blisko rozwi±zania, mo¿na spróbowaæ zastosowaæ algorytm memetyczny - bazuj±c na rozwi±zaniu znalezionym przez algorytm ewolucyjny, dokonujemy dalszej optymalizacji wykorzystuj±c algorytm lokalnej optymalizacji. Mamy wtedy pewno¶æ, ¿e znajdziemy rozwi±zanie nie gorsze od tego, na którym bazujemy i dodatkowo, ¿e bêdzie ono najlepszym lokalnym rozwi±zaniem. Mo¿emy mieæ tak¿e nadziejê, ¿e bêdzie to równie¿ rozwi±zanie globalnie optymalne.
+
+\paragraph{Eksperyment 1.}
+Bazuj±c na eksperymencie ``D³uga trasa'' w sekcji \ref{sec:ewolucyjnyWyniki} porównano jak poprawi siê otrzymany wynik dodaj±c na koniec obliczeñ optymalizacjê lokaln± algorytmem Hill climbing. Wszystkie parametry oraz trasa przejazdu pozosta³y takie same jak w eksperymencie, do którego siê odwo³ujemy.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.7]{wyniki/wynik9-wyk}
+\caption{Wykres zmian czasu przejazdu w kolejnych iteracjach algorytmu HC}
+\label{fig:w9wyk}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.9]{wyniki/wynik9-ws}
+\caption{Porównanie wyników ES oraz HC wraz z wykresem dla eksperymentu na d³u¿szej trasie}
+\label{fig:w9ws}
+\end{figure}
+
+Na wykresie \ref{fig:w9ws} znajduje siê porównanie wyniku algorytmu ewolucyjnego oraz lokalnej optymalizacji. Czarna linia trasy jest rezultatem otrzymanym po dzia³aniu samego algorytmu ewolucyjnego, czas przejazdu po takiej trasie wynosi 11.06 s, a wiêc jest to czas zbli¿ony do otrzymanego w eksperymencie bazowym. Algorytm ewolucyjny dzia³a³ przez 21 iteracji.
+
+Czerwona linia stanowi trasê uzyskan± po zastosowaniu algorytmu optymalizacji lokalnej na trasie znalezionej przez algorytm ewolucyjny. Na wykresie \ref{fig:w9wyk} mo¿emy zobaczyæ jak dok³adnie zmienia³ siê czas przejazdu w ka¿dej iteracji algorytmu lokalnego. Iteracja numer 0 to wynik otrzymany przez algorytm genetyczny. Po 7 iteracjach otrzymali¶my wynik 10.825 s, co stanowi poprawê o 0.235 s, czyli ok. 2\%. Poprawa ta jest zdecydowanie zauwa¿alna tak¿e w kszta³cie slalomu i na pewno na tyle znacz±ca, ¿e decyduje o zwyciêstwie zawodnika.
+
+\paragraph{Eksperyment 2.}
+W eksperymencie pierwszym sprawdzili¶my dzia³anie algorytmu lokalnego dla domy¶lnie ustawionych parametrów. W zastosowanym algorytmie Hill Climbing istnieje mo¿liwo¶æ zmiany dwóch parametrów:
 
 \begin{itemize}
-\item brak mo¿liwo¶ci automatycznego uruchamiania i przerywania obliczeñ w zale¿no¶ci od aktualnego zu¿ycia procesora
-\item brak mo¿liwo¶ci programowania konfiguracji przeprowadzanych obliczeñ (np. równoczesnego uruchamiania obliczeñ w zadanej liczbie zak³adek przegl±darki),
-\item ma³o wydajna implementacja obliczeñ - implementacja w jêzyku JavaScript,
-\item niewielka ilo¶æ bibliotek numerycznych i naukowych do obliczeñ w ¶rodowisku JavaScript.
+\item rozmiaru kroku,
+\item tzw. przyspieszenia (ang. \textit{acceleration}).
 \end{itemize}
 
+Szczegó³owy opis parametrów mo¿na znale¼æ w podrozdziale \ref{sec:hill}. W domy¶lnym ustawieniu warto¶ci tych parametrów wynosz± odpowiednio 0.5 (odpowiadaj±ca 0.5 metra na rzeczywistej trasie) oraz 1.2 dla przyspieszenia. W przeprowadzonym eksperymencie poka¿emy jak te parametry wp³ywaj± na ostateczne rozwi±zanie. Na tym samym rezultacie dzia³ania algorytmu genetycznego uruchomiony zostanie trzy razy algorytm lokalnej optymalizacji, ale z zestawami parametrów przedstawionymi w tabeli \ref{tab:paramHill}.
 
-Zaproponowana przez nas platforma nie jest w tym momencie konkurencyjna dla obecnie funkcjonuj±cych systemów ze wzglêdu na wydajno¶æ i ograniczon± konfigurowalno¶æ. Jednak jej zdecydowanie pozytywnym aspektem, jest ma³a bariera wej¶cia dla ochotników chc±cych braæ udzia³ w obliczeniach, jak równie¿ sam u³atwiony proces rekrutowania ochotników do obliczeñ. Powy¿sze wp³ywa na to, i¿ mimo ¿e wydajno¶æ pojedynczego wêz³a jest znacz±co mniejsza w stosunku do wêz³ów obliczeniowych w tradycyjnych systemach opartych o instalowane na komputerach aplikacje, potencja³ na stworzenie du¿ej sieci jest bardzo du¿y.
+Jak zostanie pokazane w nastêpnym eksperymencie, stosowanie mechanizmu karania poprawia otrzymywane wyniki, wiêc ten sam eksperyment wykonamy tak¿e z zastosowaniem tego mechanizmu.
 
-Zaproponowana koncepcja jest ciekawym, komplementarnym do tradycyjnego podej¶cia rozwi±zaniem. Dziêki ³atwej dostêpno¶ci i braku bariery wej¶cia mo¿e mieæ dodatkowe zastosowanie chocia¿by do promowania koncepcji Volunteer Computing.
+\begin{table}[h]
+\caption{Warto¶ci parametrów algorytmu Hill climbing w kolejnych eksperymentach}
+\centering
+\label{tab:paramHill}
+\begin{tabular}{ | c | c | c |}
+  \hline                        
+  nr próby & wielko¶æ kroku [m] & przyspieszenie \\ \hline  
+  1 & 0.5 & 1.2 \\ \hline
+  2 & 0.3 & 1.2 \\ \hline
+  3 & 0.3 & 1.1 \\ \hline
+\end{tabular}
+\end{table}
 
-Rozwa¿my mo¿liwy scenariusz promowania idei Volunteer Computing na przyk³adzie projektu fightAIDS@home, którego celem jest znalezienie lekarstwa na AIDS. Aby przyst±piæ do obliczeñ nale¿y ¶ci±gn±æ specjaln± aplikacjê klienck±, analogiczn± do aplikacji opisywanych w rozdziale \ref{sec:BOINC} na stronie \pageref{sec:BOINC}. Dziêki niej mo¿emy nie tylko wspomagaæ projekt swoimi zasobami, ale równie¿ na bie¿±co ¶ledziæ wizualizowane w 3D postêpy obliczeñ. Najwiêkszym problemem jest w³a¶nie bariera wej¶cia. Proponujemy zatem, by stworzyæ prosty prototyp, który bêdzie symulowa³ przyst±pienie do obliczeñ za po¶rednictwem przegl±darki internetowej oraz wykonywa³ i wizualizowa³ - najprostsze choæby operacje w jakikolwiek sposób zwi±zane z projektem fightAIDS@home. Osoba, która trafi na stronê internetow± z takim ``lekkim'' klientem Volunteer Computing odczuje - choæby przez to, ¿e us³yszy, ¿e procesor jej PC-ta zacz±³ intensywnie pracowaæ - jak to jest wspomagaæ projekt swoimi zasobami w szczytnym celu. Taka osoba powinna dostaæ bardzo szybko informacjê zwrotn±, dotycz±c± postêpu i tego w jak niewielkim stopniu przyczyni³a siê do realizacji celu projektu. Nastêpnie powinna dostaæ zestawienie, jak du¿o bardziej mo¿e pomóc, ¶ci±gaj±c specjalistyczne oprogramowanie i do³±czaj±c do ju¿ prawdziwej wersji obliczeñ. Oczywi¶cie mo¿na sobie wyobraziæ, ¿e w tej wersji demonstracyjnej po stronie klienta nie s± wykonywane ¿adne konkretne obliczenia, a ca³o¶æ ma tylko za zadanie zachêciæ do ¶ci±gniêcia oprogramowania do prawdziwych obliczeñ.
+\newpage
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{wyniki/wynik11-ws1}
+\caption{Wyniki kolejnych prób eksperymentu z ró¿nymi warto¶ciami parametrów algorytmu HC}
+\label{fig:w11ws}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{wyniki/wynik11-ws2}
+\caption{Wyniki kolejnych prób eksperymentu z ró¿nymi warto¶ciami parametrów algorytmu HC z zastosowaniem PF}
+\label{fig:w11ws2}
+\end{figure}
+
+Rysunki \ref{fig:w11ws} i \ref{fig:w11ws2} pokazuje otrzymane trasy dla ró¿nych algorytmów i parametrów:
+\begin{itemize}
+\item trasa czarna - trasa uzyskana w wyniki dzia³ania algorytmu ewolucyjnego,
+\item trasa czerwona - optymalizacja lokalna z parametrami domy¶lnymi,
+\item trasa niebieska - optymalizacja lokalna z krokiem 0.3 m,
+\item trasa zielona - optymalizacja lokalna z krokiem 0.3 m oraz przyspieszeniem 1.1.
+\end{itemize}
+
+Trasy otrzymane w wyniku dzia³ania algorytmu optymalizacji lokalnej ró¿ni± siê miejscami od siebie, choæ w niewielkim stopniu. Ma³e zró¿nicowanie wynika z tego, ¿e pocz±tkowa trasa, któr± nale¿a³o zoptymalizowaæ by³a w ka¿dym przypadku taka sama. Algorytm Hill Climbing jest algorytmem deterministycznym, ale zmiana parametrów tego algorytmu wp³ywa na otrzymywany wynik koñcowy. W przypadku pierwszym, bez zastosowania mechanizmu karania zmiany s± minimalne, a otrzymywany wynik tak naprawdê mo¿na sprowadziæ do jazdy od bramki do bramki po liniach prostych. W drugim te¶cie wyniki ró¿ni± siê zw³aszcza w okolicach bramek, gdzie podejmowane s± decyzje o wcze¶niejszym lub pó¼niejszym skrêcie - to tam mo¿na najwiêcej zyskaæ lub straciæ.
+
+Przeanalizujmy teraz dok³adniej otrzymane wyniki zebrane w tabelach \ref{tab:paramHillTab} oraz \ref{tab:paramHillTabPunish}.
+
+Czas dzia³ania algorytmu ewolucyjnego w pierwszym przypadku to 181 s, w eksperymencie z karaniem 253 s. Czasy uzyskane w wyniku dzia³ania algorytmu ewolucyjnego w ka¿dej z prób wynosz± odpowiednio 10.974 s oraz 10.895 s.
+
+\begin{table}[h]
+\caption{Wyniki dla ró¿nych parametrów HC bez mechanizmu karania}
+\centering
+\label{tab:paramHillTab}
+\begin{tabular}{ | c | c | c |}
+  \hline                        
+  nr & otrzymany czas przejazdu [s] & liczba iteracji\\ \hline  
+  1 & 10.829 & 6 \\ \hline
+  2 & 10.819 & 8 \\ \hline
+  3 & 10.824 & 8 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\caption{Wyniki dla ró¿nych parametrów HC z PF}
+\centering
+\label{tab:paramHillTabPunish}
+\begin{tabular}{ | c | c | c |}
+  \hline                        
+  nr &  otrzymany czas przejazdu [s] & liczba iteracji\\ \hline  
+  1 & 11.036 & 11 \\ \hline
+  2 & 11.050 & 14 \\ \hline
+  3 & 11.024 & 10 \\ \hline
+\end{tabular}
+\end{table}
+
+W pierwszej czê¶ci eksperymentu najlepszy czas uzyskany zosta³ dla drugiego przypadku, a wiêc przy zmniejszeniu wy³±cznie kroku. Poprawa w stosunku do pozosta³ych przypadków to 0.005-0.01 s czyli mniej ni¿ 0.1\%, ale widzimy, ¿e nawet tak niewielkie zmiany na trasie przejazdu mog± wp³ywaæ na koñcowy wynik.
+
+Drugi przypadek jest trudniejszy do analizy, poniewa¿ wprowadzenie karania powoduje, ¿e nie jeste¶my w stanie przenie¶æ uzyskiwanych ocen do rzeczywisto¶ci. Wed³ug nich, znów najlepszy okazuje siê byæ zestaw parametrów z drugiego przypadku, kiedy jednak sprawdzimy w tabeli uzyskiwane czasy, widzimy, ¿e s± one gorsze ni¿ najlepszy uzyskany wynik z algorytmu ewolucyjnego, a w dodatku kolejno¶æ rezultatów nie pokrywa siê z kolejno¶ci± ocen - najlepszy czas uzyskany zosta³ w ostatnim przypadku.
+
+Uzasadnieniem tego zachowania jest fakt uwzglêdniania w karaniu zbyt ostrych zakrêtów, które fizycznie nie s± mo¿liwe do wykonania lub musia³yby zabraæ dodatkowy czas. W rzeczywisto¶ci wyniki z pierwszego eksperymentu s± niemo¿liwe do otrzymania - przy ka¿dej bramce musieliby¶my straciæ dodatkowy czas na przestawienie nart w odpowiednim kierunku, co jest niemo¿liwe bez utraty prêdko¶ci.
+
+\section{Strategie karania}
+\label{sec:wynikiStrategieKarania}
+
+Testowane zosta³y wszystkie opisane w rozdziale \ref{sec:karanie} na stronie \pageref{sec:karanie} strategie karania. Testy mia³y na celu zorientowanie siê czy wszystkie strategie bêd± przede wszystkim prowadziæ do poprawnego wyniku - tj. wizualnie poprawnej i p³ynnej trasy. Przy okazji sprawdzany by³ wp³yw kolejnych strategii karania na szybko¶æ zbie¿no¶ci algorytmu ewolucyjnego oraz lokalnej optymalizacji, a co za tym idzie do najszybszego znajdowania wyników. Dla ka¿dej testowanej strategii, ta sama strategia karania by³a u¿yta w algorytmie ewolucyjnym, jak i w lokalnej optymalizacji.
+
+\subsubsection{Poprawno¶æ strategii}
+\label{poprawnoscKarania}
+
+\begin{figure}[h]
+\centering
+\includegraphics[height=300px]{punish-test}
+\caption{Tor A przedstawia trasy obliczone przy u¿yciu strategii sumowania pochodnych, Tor B przy strategii zmniejszania wektorów, Tor C strategii karania za przekrawêdziowanie. Dla torów zarówno A, B i C  - czarny tor to wed³ug wprowadzonych wcze¶niej oznaczeñ ES + PF, czerwony tor to ES + HC + PF. Tor D przedstawia trasy bez zastosowania ¿adnej strategii karania  - czarny tor to ES, czerwony tor to ES + HC}
+\label{fig:punishment}
+\end{figure}
+
+Rysunek \ref{fig:punishment} przedstawia znalezione tory przejazdu przy zastosowaniu ka¿dej z tych strategii. Jak widaæ, mo¿na dostrzec znacz±c± ró¿nicê w torach znalezionych przez algorytm ewolucyjny (czarna linia) w zale¿no¶ci od wyboru strategii. W przypadku lokalnej optymalizacji ró¿nice s± ju¿ mniejsze, jednak pierwsze dwie strategie wypadaj± w tym przypadku lepiej ni¿ pozosta³e, zw³aszcza na pierwszym odcinku trasy.
+
+\subsubsection{Szybko¶æ obliczeñ}
+\label{szybkoscObliczenKaranie}
+
+Tabela \ref{tab:porownanieKarania} na stronie \pageref{tab:porownanieKarania} pokazuje ¶redni czas uzyskania wyniku dla ka¿dej ze strategii jak równie¿ dla braku zastosowania strategii. Najszybsz± zbie¿no¶æ maj± metody, które prowadz± do najgorszych jako¶ciowo rozwi±zañ (C i D z rysunku \ref{fig:punish}). Jak widaæ najszybsz± zbie¿no¶æ algorytmu ewolucyjnego uzyskuje siê dla karania poprzez zliczanie ilo¶ci przekrawêdziowañ. Ró¿nice pomiêdzy ¶rednimi szybko¶ciami s± znaczne, bo nawet czterokrotne. Zastosowanie strategii A prowadzi do uzyskania bardzo dobrego jako¶ciowo wyniku, dobrego do tego stopnia, ¿e lokalna optymalizacja nie wprowadza znacznej poprawy. Strategia B, nie do¶æ, ¿e prowadzi do bardzo dobrego wyniku jako¶ciowego, to zbiega siê do¶æ szybko w porównaniu ze strategi± A - o ponad 40\% szybciej.
+
+\begin{table}[h] 
+\caption{Porównanie d³ugo¶ci trwania obliczeñ instancji problemu dla u¿ytych ró¿nych strategii karania. Obliczenia prowadzone s± na maszynie o nastêpuj±cych parametrach: Procesor Intel Core i5-2410M, 2.3 GHz, 8 GB pamiêci RAM, System Windows 7 Home Premium, zminimalizowane obci±¿enie procesora przez inne procesy, obliczenia prowadzi jedna zak³adka przegl±darki Chrome}
+\centering
+\label{tab:porownanieKarania}
+\begin{tabular}{|c|l|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{}                                                                                         & \begin{tabular}[c]{@{}c@{}}Strategia 1 -\\sumowanie pochodnych\end{tabular} & \begin{tabular}[c]{@{}c@{}}Strategia 2 - \\ proporcjonalne \\ zmniejszanie\\  d³ugo¶ci wektora\end{tabular} & \begin{tabular}[c]{@{}c@{}}Strategia 3 - \\ zliczanie \\ przekrawêdziowania\end{tabular} & \begin{tabular}[c]{@{}c@{}}Strategia 4 - \\ brak karania\end{tabular} \\ \hline
+\multirow{5}{*}{\begin{tabular}[c]{@{}c@{}}Czas rozwi±zania \\ kolejnego problemu \\ w sekundach\end{tabular}} 
+& 91.272 &	48.241	& 18.798	& 31.264
+   \\ \cline{2-5}  
+\multicolumn{1}{|l|}{}                                                                                         
+& 66.032 &	44.404	& 17.888	& 37.16
+ \\ \cline{2-5} 
+\multicolumn{1}{|l|}{}                                                                                         & 117.033	& 54.362	& 20.441	& 27.404
+ \\ \cline{2-5} 
+\multicolumn{1}{|l|}{}                                                                                         & 87.8	& 59.479	& 19.971	& 18.545 \\ \cline{2-5} 
+\multicolumn{1}{|l|}{}                                                                                         & 68.612	& 42.383	& 21.276	& 25.054 \\ \cline{2-5} 
+                                                                         
+\multicolumn{1}{|l|}{\textbf{¦redni czas rozwi±zania}}                                                         & \textbf{86.1498}                                                                                                       & \textbf{49.7738}                                                                                              & \textbf{19.6748}                                                                          & \textbf{27.8854}                                                        \\ \hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Wybór strategii}
+\label{wyborStartegiiKarania}   
+Rozwa¿aj±c wszystkie strategie, zosta³o przyjête, ¿e najlepszym modelem jest model ze strategi± proporcjonalnego zmniejszania d³ugo¶ci wektora prêdko¶ci w zale¿no¶ci od k±tów pomiêdzy kolejnymi odcinkami ³amanej - czyli Strategia B. Czas obliczeñ dla tej strategii nie jest ani najwiêkszy ani najmniejszy. Ta w³a¶nie strategia, jako najlepiej obrazuj±ca rzeczywisto¶æ i pozwalaj±ca na otrzymywanie najlepszych wyników, zosta³a wybrana jako mechanizm karania dla innych eksperymentów, chyba, ¿e jest to zaznaczone inaczej.
+ 
