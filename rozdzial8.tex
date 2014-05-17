@@ -4,25 +4,8 @@
 
 W tym rozdziale zostan± pokazane wyniki jakie zosta³y otrzymane jako efekt dzia³ania algorytmu ewolucyjnego w celu znalezienia optymalnej trasy przejazdu. Zostanie sprawdzone jak poszczególne parametry algorytmu wp³ywaj± na czas jego dzia³ania oraz uzyskiwane wyniki. Spróbujemy tak¿e rozwi±zaæ problem dla trudniejszych przypadków: zwiêkszaj±c liczbê punktów, które stanowi± rozwi±zanie oraz optymalizuj±c trasê d³u¿szego slalomu. Nastêpnie zostanie przedstawione jak optymalizacja lokalna wp³ywa na czas wykonania programu.
 
-Je¿eli nie jest wskazane inaczej, w eksperymencie przyjmowane s± nastêpuj±ce warto¶ci sta³e:
-\begin{itemize}
-\item $\mu = 0.05$ - wspó³czynnik tarcia, typowa warto¶æ dla nasmarowanych nart
-\item $\rho = 1.17 \frac{kg}{m^3}$ - przybli¿ona warto¶æ gêsto¶ci powietrza dla temperatury $0^\circ C$
-i wilgotno¶ci 20\% na wysoko¶ci 800 m n.p.m
-\item $C = 0.6$ - wspó³czynnik oporu powietrza, typowe warto¶ci to 0.4 - 1
-\item $A = 0.2 m^2$ - frontalna powierzchnia narciarza w projekcji prostopad³ej do wektora prêdko¶ci narciarza
-\item $k = \frac{1}{2}C \rho A$ - wspó³czynnik oporu powietrza
-\end{itemize}
-Opis powy¿szych sta³ych mo¿na znale¼æ w rozdzia³ach \ref{sec:fizycznyModel} oraz \ref{sec:ewolucyjny}.
+We wstêpie do rozdzia³u \ref{cha:wynikiWeryfikacji} zosta³y opisane wszystkie oznaczenia i sta³e zastosowane w eksperymentach.
 
-W rozdziale zastosowano nastêpuj±ce oznaczenia:
-\begin{itemize}
-\item ES - strategia ewolucyjna (ang. \textit{Evolution Strategy}) - w tym przypadku ($\mu$ + $\lambda$)
-\item HC - Hill climbing
-\item PF - funkcja kary (ang. \textit{Punishment Function})
-\end{itemize}
-
-W eksperymentach wszystkie wspó³rzêdne punktów s± w uk³adzie kartezjañskim, dwuwymiarowym, zorientowanym na p³aszczy¼nie stoku. O¶ x skierowana jest wzd³u¿ stoku, natomiast o¶ y w poprzek - szczegó³owy opis znajduje siê w rozdziale \ref{cha:rozwiazanie}.
 %---------------------------------------------------------------------------
 
 \section{Algorytm ewolucyjny}
